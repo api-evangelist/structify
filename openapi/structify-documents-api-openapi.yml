@@ -1,0 +1,216 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: team@structify.ai
+    name: Structify Team
+  description: Every enterprise's data team.
+  license:
+    name: Discuss directly with founders for license.
+    url: https://structify.ai
+  title: Structify account documents API
+  version: 0.1.0
+servers:
+- description: Production server
+  url: https://api.structify.ai
+- description: Local server
+  url: http://localhost:8080
+security:
+- api_key: []
+- session_token: []
+tags:
+- name: documents
+paths:
+  /documents/delete:
+    delete:
+      operationId: documents_delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FilePath'
+        required: true
+      responses:
+        '200':
+          description: Document deleted successfully
+      summary: Delete a file from the database
+      tags:
+      - documents
+  /documents/download:
+    post:
+      operationId: documents_download
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FilePath'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DownloadResponse'
+          description: Document downloaded successfully
+        '400':
+          description: Failed to download document
+      summary: Download a file from the database
+      tags:
+      - documents
+  /documents/list:
+    get:
+      operationId: documents_list
+      parameters:
+      - in: query
+        name: dataset
+        required: false
+        schema:
+          nullable: true
+          type: string
+      - in: query
+        name: project_id
+        required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/ProjectId'
+          nullable: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/File'
+                type: array
+          description: Listed all files
+      summary: List all files for your user account in the database.
+      tags:
+      - documents
+  /documents/upload:
+    post:
+      operationId: documents_upload
+      parameters:
+      - in: query
+        name: dataset
+        required: false
+        schema:
+          nullable: true
+          type: string
+      - in: query
+        name: project_id
+        required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/ProjectId'
+          nullable: true
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserFileMultipart'
+        description: The form to add a new file.
+        required: true
+      responses:
+        '200':
+          description: Document added successfully
+      summary: Add a new file to the database
+      tags:
+      - documents
+components:
+  schemas:
+    UserId:
+      format: uuid
+      type: string
+    FileType:
+      enum:
+      - Text
+      - PDF
+      - SEC
+      type: string
+    JobId:
+      format: uuid
+      type: string
+    DownloadResponse:
+      properties:
+        content:
+          format: binary
+          type: string
+      required:
+      - content
+      type: object
+    File:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        created_from_job:
+          allOf:
+          - $ref: '#/components/schemas/JobId'
+          nullable: true
+        dataset_id:
+          allOf:
+          - $ref: '#/components/schemas/DatasetId'
+          nullable: true
+        file_bytes:
+          format: binary
+          type: string
+        file_type:
+          $ref: '#/components/schemas/FileType'
+        id:
+          $ref: '#/components/schemas/DocumentId'
+        name:
+          type: string
+        project_id:
+          allOf:
+          - $ref: '#/components/schemas/ProjectId'
+          nullable: true
+        user_id:
+          $ref: '#/components/schemas/UserId'
+      required:
+      - id
+      - name
+      - file_bytes
+      - file_type
+      - created_at
+      - user_id
+      type: object
+    UserFileMultipart:
+      properties:
+        content:
+          format: binary
+          type: string
+        file_type:
+          $ref: '#/components/schemas/FileType'
+        path:
+          format: binary
+          type: string
+      required:
+      - path
+      - file_type
+      - content
+      title: FileMultipart
+      type: object
+    ProjectId:
+      format: uuid
+      type: string
+    FilePath:
+      properties:
+        file_path:
+          description: The path of the file to delete
+          type: string
+      required:
+      - file_path
+      type: object
+    DocumentId:
+      format: uuid
+      type: string
+    DatasetId:
+      format: uuid
+      type: string
+  securitySchemes:
+    api_key:
+      in: header
+      name: api_key
+      type: apiKey
+    session_token:
+      scheme: bearer
+      type: http

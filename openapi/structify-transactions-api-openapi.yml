@@ -1,0 +1,148 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: team@structify.ai
+    name: Structify Team
+  description: Every enterprise's data team.
+  license:
+    name: Discuss directly with founders for license.
+    url: https://structify.ai
+  title: Structify account transactions API
+  version: 0.1.0
+servers:
+- description: Production server
+  url: https://api.structify.ai
+- description: Local server
+  url: http://localhost:8080
+security:
+- api_key: []
+- session_token: []
+tags:
+- name: transactions
+paths:
+  /user/transactions/stripe/create_portal_session:
+    post:
+      operationId: create_stripe_portal_session
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePortalRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSessionResponse'
+          description: ''
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - transactions
+  /user/transactions/stripe/create_session:
+    post:
+      operationId: create_stripe_session
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSessionRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSessionResponse'
+          description: ''
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - transactions
+  /user/transactions/stripe/create_subscription:
+    post:
+      operationId: create_stripe_subscription
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSubscriptionRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateSessionResponse'
+          description: ''
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - transactions
+components:
+  schemas:
+    CreatePortalRequest:
+      properties:
+        return_url:
+          type: string
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+      required:
+      - return_url
+      - team_id
+      type: object
+    CreateSessionRequest:
+      properties:
+        credits:
+          description: Amount in cents (i64)
+          format: int64
+          type: integer
+        origin:
+          type: string
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+      required:
+      - credits
+      - origin
+      - team_id
+      type: object
+    SubscriptionPlan:
+      enum:
+      - Pro
+      - Team
+      type: string
+    CreateSessionResponse:
+      properties:
+        url:
+          type: string
+      required:
+      - url
+      type: object
+    CreateSubscriptionRequest:
+      properties:
+        origin:
+          type: string
+        plan:
+          $ref: '#/components/schemas/SubscriptionPlan'
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+      required:
+      - origin
+      - plan
+      - team_id
+      type: object
+    TeamId:
+      format: uuid
+      type: string
+  securitySchemes:
+    api_key:
+      in: header
+      name: api_key
+      type: apiKey
+    session_token:
+      scheme: bearer
+      type: http

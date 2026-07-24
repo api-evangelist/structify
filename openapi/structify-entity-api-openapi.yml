@@ -1,0 +1,1437 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: team@structify.ai
+    name: Structify Team
+  description: Every enterprise's data team.
+  license:
+    name: Discuss directly with founders for license.
+    url: https://structify.ai
+  title: Structify account entity API
+  version: 0.1.0
+servers:
+- description: Production server
+  url: https://api.structify.ai
+- description: Local server
+  url: http://localhost:8080
+security:
+- api_key: []
+- session_token: []
+tags:
+- name: entity
+paths:
+  /entity/add:
+    post:
+      operationId: entity_add
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddParams'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/EntityId'
+                type: array
+          description: Added entity ids
+      summary: Add an entity (or entities) to a dataset given a graph representation of the entity (or entities).
+      tags:
+      - entity
+  /entity/add_batch:
+    post:
+      operationId: entity_add_batch
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddBatchParams'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/EntityId'
+                type: array
+          description: Added entity ids
+      summary: Add a batch of entities to a dataset given a list of graph representations of the entities.
+      tags:
+      - entity
+  /entity/add_relationship:
+    post:
+      operationId: entity_add_relationship
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddRelationshipParams'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KgRelationship'
+          description: Added relationship
+      summary: Add a relationship between two entities in a dataset
+      tags:
+      - entity
+  /entity/delete:
+    delete:
+      operationId: entity_delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteParams'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/EntityId'
+                type: array
+          description: Deleted entity ids
+      summary: Delete an entity manually
+      tags:
+      - entity
+  /entity/delete_relationship:
+    post:
+      operationId: entity_delete_relationship
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteRelationshipParams'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                default: null
+                nullable: true
+          description: deleted relationship
+      summary: delete a relationship between two entities in a dataset
+      tags:
+      - entity
+  /entity/derive:
+    post:
+      operationId: entity_derive
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeriveEntityParams'
+        required: true
+      responses:
+        '200':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Job ID
+      security:
+      - api_key: []
+      - session_token: []
+      summary: Derive a new property value based on existing source properties
+      tags:
+      - entity
+  /entity/derive_all:
+    post:
+      operationId: entity_derive_all
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeriveAllEntityParams'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/JobId'
+                type: array
+          description: Job IDs
+      security:
+      - api_key: []
+      - session_token: []
+      summary: Derive a new property value based on existing source properties for all entities in a table
+      tags:
+      - entity
+  /entity/get:
+    get:
+      operationId: entity_get
+      parameters:
+      - in: query
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/EntityId'
+      - in: query
+        name: resolve_id
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KgEntity'
+          description: Requested entity
+      summary: Get entity with a given id
+      tags:
+      - entity
+  /entity/get_local_subgraph:
+    get:
+      operationId: entity_get_local_subgraph
+      parameters:
+      - in: query
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/EntityId'
+      - in: query
+        name: radius
+        required: false
+        schema:
+          format: int32
+          minimum: 0
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetLocalSubgraphResponse'
+          description: Local subgraph of given radius
+      tags:
+      - entity
+  /entity/get_merges:
+    get:
+      operationId: entity_get_merges
+      parameters:
+      - in: query
+        name: entity_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/EntityId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/EntityMatch'
+                type: array
+          description: entity merges
+      summary: Get all historical merges for a given entity
+      tags:
+      - entity
+  /entity/get_source_entities:
+    get:
+      operationId: entity_get_source_entities
+      parameters:
+      - in: query
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/EntityId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSourceEntitiesResponse'
+          description: Source entities of given entity
+      tags:
+      - entity
+  /entity/list_jobs:
+    get:
+      operationId: entity_list_jobs
+      parameters:
+      - in: query
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/EntityId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Job'
+                type: array
+          description: Jobs for the given entity
+      summary: list jobs for a given entity
+      tags:
+      - entity
+  /entity/merge:
+    post:
+      operationId: entity_merge
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MergeParams'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MergeResponse'
+          description: merged entity
+      summary: merge an entity manually
+      tags:
+      - entity
+  /entity/search:
+    post:
+      operationId: entity_search
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchEntityParams'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/KgEntity'
+                type: array
+          description: Search results
+      security:
+      - api_key: []
+      - session_token: []
+      summary: Search for entities based on the given query
+      tags:
+      - entity
+  /entity/summarize:
+    post:
+      operationId: entity_summarize
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SummarizeEntityParams'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/KgEntity'
+                type: array
+          description: Search results
+      security:
+      - api_key: []
+      - session_token: []
+      summary: Search for entities based on the given query
+      tags:
+      - entity
+  /entity/trigger_merge:
+    post:
+      operationId: entity_triggermerge
+      parameters:
+      - in: query
+        name: entity_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/EntityId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KgEntity'
+          description: merged entity
+      summary: Trigger our merge process for a given entity
+      tags:
+      - entity
+  /entity/update:
+    post:
+      operationId: entity_update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateParams'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KgEntity'
+          description: updated entity id
+      summary: update an entity manually
+      tags:
+      - entity
+  /entity/upload:
+    post:
+      operationId: entity_upload
+      parameters:
+      - in: query
+        name: dataset
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: table_name
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: file_type
+        required: true
+        schema:
+          $ref: '#/components/schemas/FileType'
+      - in: query
+        name: clean
+        required: false
+        schema:
+          type: boolean
+      - in: query
+        name: ignore_columns
+        required: false
+        schema:
+          items:
+            type: string
+          nullable: true
+          type: array
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FileUpload'
+        description: CSV, JSON, or XLSX file to process
+        required: true
+      responses:
+        '200':
+          description: Entities added successfully from CSV, JSON, or XLSX. Headers are required for CSV & XLSX files.
+      summary: Add multiple entities to a dataset from a CSV file
+      tags:
+      - entity
+  /entity/upload_parquet:
+    post:
+      operationId: entity_upload_parquet
+      parameters:
+      - in: query
+        name: dataset
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: table_name
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: start_embedding
+        required: false
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/FileUpload'
+        description: Parquet file to process
+        required: true
+      responses:
+        '200':
+          description: Entities added successfully from Parquet file. Performs fast batch insert with original row index tracking.
+      summary: Add multiple entities to a dataset from a Parquet file with fast batch insert
+      tags:
+      - entity
+  /entity/verify:
+    post:
+      operationId: entity_verify
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyParams'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LLMKnowledgeGraph'
+          description: verified knowledge graph
+      summary: verify a kg against the dataset
+      tags:
+      - entity
+  /entity/view:
+    get:
+      operationId: entity_view
+      parameters:
+      - in: query
+        name: id
+        required: true
+        schema:
+          $ref: '#/components/schemas/EntityId'
+      - in: query
+        name: resolve_id
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityViewResponse'
+          description: Entity view with properties, sources, relationships, connected entities, and similar entities
+      tags:
+      - entity
+components:
+  schemas:
+    Address:
+      oneOf:
+      - properties:
+          components:
+            additionalProperties:
+              type: string
+            type: object
+          original_address:
+            type: string
+        required:
+        - original_address
+        - components
+        title: AddressObject
+        type: object
+      - description: 'Address string in formats: ''123 Main St, Springfield, IL 62701, USA'', ''1600 Amphitheatre Parkway, Mountain View, California 94043'', ''1600 Pennsylvania Ave NW, Washington, DC 20500'', ''NYC, NY'', ''Oahu, Hawaii'''
+        title: AddressString
+        type: string
+      title: AddressProperty
+    SourceId:
+      format: uuid
+      type: string
+    LLMEntity:
+      additionalProperties: false
+      properties:
+        id:
+          minimum: 0
+          type: integer
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/BasicPropValue'
+          type: object
+        type:
+          type: string
+      required:
+      - id
+      - type
+      - properties
+      type: object
+    AddRelationshipParams:
+      additionalProperties: false
+      properties:
+        dataset:
+          type: string
+        from_id:
+          $ref: '#/components/schemas/EntityId'
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/BasicPropValue'
+          type: object
+        relationship_type:
+          type: string
+        to_id:
+          $ref: '#/components/schemas/EntityId'
+      required:
+      - dataset
+      - from_id
+      - to_id
+      - relationship_type
+      type: object
+    PartialDate:
+      oneOf:
+      - properties:
+          day:
+            nullable: true
+            type: integer
+          month:
+            nullable: true
+            type: integer
+          original_string:
+            type: string
+          year:
+            type: integer
+        required:
+        - year
+        - original_string
+        title: PartialDateObject
+        type: object
+      - description: 'Date string in formats: ''YYYY'', ''YYYY-MM'', ''YYYY-MM-DD'', ''DD-MM-YYYY'', ''MM-DD-YYYY'', ''Jan 3, 2023'', ''3 Jan 2023'', ''2023 Apr 3'', etc.'
+        title: PartialDateString
+        type: string
+      title: PartialDateProperty
+    EntityId:
+      format: uuid
+      type: string
+    SourceEntityId:
+      format: uuid
+      type: string
+    KgRelationship:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        dataset_id:
+          $ref: '#/components/schemas/DatasetId'
+        from_id:
+          $ref: '#/components/schemas/EntityId'
+        id:
+          $ref: '#/components/schemas/RelationshipId'
+        label:
+          type: string
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/ComplexPropValue'
+          type: object
+        to_id:
+          $ref: '#/components/schemas/EntityId'
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - id
+      - from_id
+      - to_id
+      - label
+      - properties
+      - created_at
+      - updated_at
+      - dataset_id
+      title: Relationship
+      type: object
+    Money:
+      oneOf:
+      - description: 'Money string that includes currency and amount: $10k, £100.00, 1 million CAD, ¥1e8 etc.'
+        title: MoneyString
+        type: string
+      - properties:
+          amount:
+            type: number
+          currency_code:
+            enum:
+            - USD
+            - EUR
+            - GBP
+            - JPY
+            - CNY
+            - INR
+            - RUB
+            - CAD
+            - AUD
+            - CHF
+            - ILS
+            - NZD
+            - SGD
+            - HKD
+            - NOK
+            - SEK
+            - PLN
+            - TRY
+            - DKK
+            - MXN
+            - ZAR
+            - PHP
+            - VND
+            - THB
+            - BRL
+            - KRW
+            type: string
+          original_string:
+            type: string
+        required:
+        - currency_code
+        - amount
+        - original_string
+        title: MoneyObject
+        type: object
+      title: MoneyProperty
+    LLMRelationship:
+      additionalProperties: false
+      properties:
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/BasicPropValue'
+          type: object
+        source:
+          minimum: 0
+          type: integer
+        target:
+          minimum: 0
+          type: integer
+        type:
+          type: string
+      required:
+      - type
+      - source
+      - target
+      type: object
+    JobStatus:
+      enum:
+      - Queued
+      - Running
+      - Completed
+      - Failed
+      type: string
+    ManualSource:
+      oneOf:
+      - enum:
+        - None
+        type: string
+      - properties:
+          Web:
+            type: string
+        required:
+        - Web
+        type: object
+      - properties:
+          DocumentPage:
+            description: ''
+            items:
+              type: object
+            maxItems: 2
+            minItems: 2
+            type: array
+        required:
+        - DocumentPage
+        type: object
+      - properties:
+          SecFiling:
+            description: ''
+            items:
+              type: object
+            maxItems: 3
+            minItems: 3
+            type: array
+        required:
+        - SecFiling
+        type: object
+    WorkflowSessionNodeId:
+      format: uuid
+      type: string
+    EntityMatch:
+      properties:
+        baseline_cardinality:
+          format: int64
+          minimum: 0
+          type: integer
+        cardinality_override:
+          allOf:
+          - $ref: '#/components/schemas/CardinalityOverride'
+          nullable: true
+        entity_a:
+          $ref: '#/components/schemas/KgEntity'
+        entity_b:
+          $ref: '#/components/schemas/KgEntity'
+        matched_properties:
+          items:
+            $ref: '#/components/schemas/PropertyMatch'
+          type: array
+        p_match:
+          format: double
+          type: number
+        p_match_threshold:
+          format: double
+          type: number
+      required:
+      - baseline_cardinality
+      - p_match
+      - p_match_threshold
+      - matched_properties
+      - entity_a
+      - entity_b
+      type: object
+    PropertyMatch:
+      properties:
+        match_prob:
+          format: double
+          type: number
+        match_transfer_prob:
+          format: double
+          type: number
+        name:
+          type: string
+        property_cardinality:
+          format: int64
+          minimum: 0
+          type: integer
+        unique:
+          type: boolean
+      required:
+      - name
+      - match_prob
+      - property_cardinality
+      - match_transfer_prob
+      - unique
+      type: object
+    DeleteParams:
+      additionalProperties: false
+      properties:
+        dataset:
+          type: string
+        entity_id:
+          $ref: '#/components/schemas/EntityId'
+      required:
+      - dataset
+      - entity_id
+      type: object
+    CardinalityOverride:
+      properties:
+        cardinality:
+          format: int64
+          minimum: 0
+          type: integer
+        entity_id:
+          $ref: '#/components/schemas/EntityId'
+        relationship_name:
+          type: string
+      required:
+      - entity_id
+      - cardinality
+      - relationship_name
+      type: object
+    GetLocalSubgraphResponse:
+      properties:
+        neighbors:
+          items:
+            $ref: '#/components/schemas/KgEntity'
+          type: array
+        relationships:
+          items:
+            $ref: '#/components/schemas/KgRelationship'
+          type: array
+      required:
+      - neighbors
+      - relationships
+      type: object
+    SummarizeEntityParams:
+      additionalProperties: false
+      properties:
+        dataset:
+          type: string
+        entity_id:
+          $ref: '#/components/schemas/EntityId'
+        extra_instructions:
+          description: A list of instructions for each property to guide the summarization process
+          items:
+            type: string
+          nullable: true
+          type: array
+        properties:
+          items:
+            type: string
+          type: array
+      required:
+      - dataset
+      - entity_id
+      - properties
+      type: object
+    FileType:
+      enum:
+      - Text
+      - PDF
+      - SEC
+      type: string
+    JobId:
+      format: uuid
+      type: string
+    AddParams:
+      additionalProperties: false
+      properties:
+        dataset:
+          type: string
+        entity_graph:
+          $ref: '#/components/schemas/LLMKnowledgeGraph'
+        source:
+          $ref: '#/components/schemas/ManualSource'
+      required:
+      - dataset
+      - entity_graph
+      type: object
+    KgEntity:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        dataset_id:
+          $ref: '#/components/schemas/DatasetId'
+        id:
+          $ref: '#/components/schemas/EntityId'
+        job_id:
+          allOf:
+          - $ref: '#/components/schemas/JobId'
+          nullable: true
+        label:
+          type: string
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/ComplexPropValue'
+          type: object
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - id
+      - label
+      - created_at
+      - updated_at
+      - dataset_id
+      - properties
+      type: object
+    AddBatchParams:
+      additionalProperties: false
+      properties:
+        dataset:
+          type: string
+        entity_graphs:
+          items:
+            $ref: '#/components/schemas/LLMKnowledgeGraph'
+          type: array
+        skip_malformed_entities:
+          type: boolean
+        source:
+          $ref: '#/components/schemas/ManualSource'
+      required:
+      - dataset
+      - entity_graphs
+      type: object
+    MergeResponse:
+      properties:
+        match_object:
+          allOf:
+          - $ref: '#/components/schemas/EntityMatch'
+          nullable: true
+        merged_entity_id:
+          allOf:
+          - $ref: '#/components/schemas/EntityId'
+          nullable: true
+      type: object
+    SearchEntityParams:
+      additionalProperties: false
+      properties:
+        dataset:
+          type: string
+        query:
+          type: string
+        table_name:
+          type: string
+      required:
+      - dataset
+      - table_name
+      - query
+      type: object
+    MembershipId:
+      format: uuid
+      type: string
+    LLMImage:
+      properties:
+        flag_number:
+          minimum: 0
+          nullable: true
+          type: integer
+        image:
+          format: binary
+          nullable: true
+          type: string
+      type: object
+    UserId:
+      format: uuid
+      type: string
+    SourceLocation:
+      oneOf:
+      - properties:
+          Text:
+            properties:
+              byte_offset:
+                minimum: 0
+                type: integer
+            required:
+            - byte_offset
+            type: object
+        required:
+        - Text
+        type: object
+      - properties:
+          Visual:
+            properties:
+              x:
+                minimum: 0
+                type: integer
+              y:
+                minimum: 0
+                type: integer
+            required:
+            - x
+            - y
+            type: object
+        required:
+        - Visual
+        type: object
+      - properties:
+          Page:
+            properties:
+              page_number:
+                format: int32
+                minimum: 0
+                type: integer
+            required:
+            - page_number
+            type: object
+        required:
+        - Page
+        type: object
+    FileUpload:
+      properties:
+        content:
+          format: binary
+          type: string
+      required:
+      - content
+      type: object
+    Source:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        id:
+          $ref: '#/components/schemas/SourceId'
+        is_summary:
+          type: boolean
+        link:
+          allOf:
+          - $ref: '#/components/schemas/SourceLink'
+          nullable: true
+        location:
+          allOf:
+          - $ref: '#/components/schemas/SourceLocation'
+          nullable: true
+        scraper_id:
+          allOf:
+          - $ref: '#/components/schemas/ScraperId'
+          nullable: true
+        user_specified:
+          type: boolean
+      required:
+      - id
+      - user_specified
+      - is_summary
+      - created_at
+      type: object
+    Job:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        dataset_id:
+          allOf:
+          - $ref: '#/components/schemas/DatasetId'
+          nullable: true
+        exploration_run_id:
+          allOf:
+          - $ref: '#/components/schemas/ExplorationRunId'
+          nullable: true
+        id:
+          $ref: '#/components/schemas/JobId'
+        job_type:
+          $ref: '#/components/schemas/JobType'
+        max_errors:
+          format: int32
+          nullable: true
+          type: integer
+        max_execution_time_secs:
+          format: int32
+          nullable: true
+          type: integer
+        max_steps_without_save:
+          format: int32
+          type: integer
+        max_total_steps:
+          format: int32
+          nullable: true
+          type: integer
+        membership_id:
+          $ref: '#/components/schemas/MembershipId'
+        message:
+          description: A message about the status of the job at completion
+          nullable: true
+          type: string
+        node_id:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowSessionNodeId'
+          nullable: true
+        parameters:
+          description: Proto for JobInput
+          format: binary
+          nullable: true
+          type: string
+        reason:
+          description: A reason for the job's existence
+          nullable: true
+          type: string
+        run_started_time:
+          description: What time did the job start running?
+          format: date-time
+          nullable: true
+          type: string
+        run_time_milliseconds:
+          format: int64
+          nullable: true
+          type: integer
+        seeded_kg_search_term:
+          nullable: true
+          type: string
+        status:
+          $ref: '#/components/schemas/JobStatus'
+        updated_at:
+          format: date-time
+          type: string
+        use_proxy:
+          type: boolean
+        user_id:
+          $ref: '#/components/schemas/UserId'
+      required:
+      - id
+      - status
+      - created_at
+      - user_id
+      - membership_id
+      - job_type
+      - max_steps_without_save
+      - use_proxy
+      - updated_at
+      type: object
+    Url:
+      oneOf:
+      - description: Url string
+        title: UrlString
+        type: string
+      - properties:
+          original_string:
+            type: string
+          url:
+            type: string
+        required:
+        - url
+        - original_string
+        title: UrlObject
+        type: object
+      title: UrlProperty
+    DeriveAllEntityParams:
+      properties:
+        dataset:
+          type: string
+        derived_property:
+          type: string
+        instructions:
+          type: string
+        model:
+          nullable: true
+          type: string
+        node_id:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowSessionNodeId'
+          nullable: true
+        table_name:
+          type: string
+      required:
+      - dataset
+      - table_name
+      - derived_property
+      - instructions
+      type: object
+    DeleteRelationshipParams:
+      additionalProperties: false
+      properties:
+        dataset:
+          type: string
+        relationship_id:
+          $ref: '#/components/schemas/RelationshipId'
+      required:
+      - dataset
+      - relationship_id
+      type: object
+    EntityViewResponse:
+      properties:
+        connected_entities:
+          items:
+            $ref: '#/components/schemas/KgEntity'
+          type: array
+        entity:
+          $ref: '#/components/schemas/KgEntity'
+        last_updated:
+          type: string
+        relationships:
+          items:
+            $ref: '#/components/schemas/KgRelationship'
+          type: array
+        similar_entities:
+          items:
+            $ref: '#/components/schemas/KgEntity'
+          type: array
+        sources:
+          items:
+            $ref: '#/components/schemas/Source'
+          type: array
+      required:
+      - entity
+      - sources
+      - relationships
+      - connected_entities
+      - similar_entities
+      - last_updated
+      type: object
+    LLMKnowledgeGraph:
+      additionalProperties: false
+      description: 'Knowledge graph info structured to deserialize and display
+
+        in the same format that the LLM outputs.
+
+        Also the first representation of an LLM output in the pipeline from raw tool output to being merged into a DB'
+      properties:
+        entities:
+          items:
+            $ref: '#/components/schemas/LLMEntity'
+          type: array
+        relationships:
+          items:
+            $ref: '#/components/schemas/LLMRelationship'
+          type: array
+      required:
+      - entities
+      type: object
+    JobType:
+      enum:
+      - Web
+      - Pdf
+      - Derive
+      - Scrape
+      - Match
+      - ConnectorExplore
+      - DatahubIngestion
+      type: string
+    UpdateParams:
+      additionalProperties: false
+      properties:
+        dataset:
+          type: string
+        entity_id:
+          $ref: '#/components/schemas/EntityId'
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/BasicPropValue'
+          type: object
+        source:
+          $ref: '#/components/schemas/ManualSource'
+      required:
+      - dataset
+      - entity_id
+      - properties
+      type: object
+    ComplexPropValue:
+      oneOf:
+      - type: string
+      - format: int64
+        type: integer
+      - type: boolean
+      - format: double
+        type: number
+      - $ref: '#/components/schemas/PartialDate'
+      - $ref: '#/components/schemas/Url'
+      - $ref: '#/components/schemas/Money'
+      - $ref: '#/components/schemas/LLMImage'
+      - $ref: '#/components/schemas/PersonName'
+      - $ref: '#/components/schemas/Address'
+    ScraperId:
+      format: uuid
+      type: string
+    PersonName:
+      properties:
+        name:
+          type: string
+      required:
+      - name
+      type: object
+    DeriveEntityParams:
+      additionalProperties: false
+      properties:
+        dataset:
+          type: string
+        derived_property:
+          type: string
+        entity_id:
+          $ref: '#/components/schemas/EntityId'
+        instructions:
+          type: string
+        model:
+          nullable: true
+          type: string
+        node_id:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowSessionNodeId'
+          nullable: true
+      required:
+      - dataset
+      - entity_id
+      - derived_property
+      - instructions
+      type: object
+    MergeParams:
+      additionalProperties: false
+      properties:
+        debug:
+          type: boolean
+        entity_1_id:
+          $ref: '#/components/schemas/EntityId'
+        entity_2_id:
+          $ref: '#/components/schemas/EntityId'
+      required:
+      - entity_1_id
+      - entity_2_id
+      type: object
+    BasicPropValue:
+      oneOf:
+      - type: string
+      - format: int64
+        type: integer
+      - type: boolean
+      - format: double
+        type: number
+    ExplorationRunId:
+      format: uuid
+      type: string
+    RelationshipId:
+      format: uuid
+      type: string
+    VerifyParams:
+      additionalProperties: false
+      properties:
+        dataset:
+          type: string
+        entity_graph:
+          $ref: '#/components/schemas/LLMKnowledgeGraph'
+        fix:
+          description: Whether to apply fixes to the dataset
+          type: boolean
+      required:
+      - dataset
+      - entity_graph
+      type: object
+    DatasetId:
+      format: uuid
+      type: string
+    GetSourceEntitiesResponse:
+      properties:
+        source_entities:
+          items:
+            items:
+              allOf:
+              - $ref: '#/components/schemas/SourceEntity'
+              - $ref: '#/components/schemas/Source'
+            type: array
+          type: array
+      required:
+      - source_entities
+      type: object
+    SourceLink:
+      oneOf:
+      - properties:
+          Web:
+            properties:
+              url:
+                type: string
+            required:
+            - url
+            type: object
+        required:
+        - Web
+        type: object
+      - properties:
+          Document:
+            properties:
+              name:
+                type: string
+            required:
+            - name
+            type: object
+        required:
+        - Document
+        type: object
+      - properties:
+          SecFiling:
+            properties:
+              accession_number:
+                type: string
+              cik_number:
+                type: string
+            required:
+            - accession_number
+            - cik_number
+            type: object
+        required:
+        - SecFiling
+        type: object
+    SourceEntity:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        id:
+          $ref: '#/components/schemas/SourceEntityId'
+        job_id:
+          allOf:
+          - $ref: '#/components/schemas/JobId'
+          nullable: true
+        kg_entity_id:
+          allOf:
+          - $ref: '#/components/schemas/EntityId'
+          nullable: true
+        label:
+          type: string
+        llm_id:
+          format: int32
+          type: integer
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/ComplexPropValue'
+          type: object
+        source_id:
+          $ref: '#/components/schemas/SourceId'
+      required:
+      - id
+      - label
+      - llm_id
+      - created_at
+      - properties
+      - source_id
+      type: object
+  securitySchemes:
+    api_key:
+      in: header
+      name: api_key
+      type: apiKey
+    session_token:
+      scheme: bearer
+      type: http

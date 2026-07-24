@@ -1,0 +1,122 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: team@structify.ai
+    name: Structify Team
+  description: Every enterprise's data team.
+  license:
+    name: Discuss directly with founders for license.
+    url: https://structify.ai
+  title: Structify account webhook API
+  version: 0.1.0
+servers:
+- description: Production server
+  url: https://api.structify.ai
+- description: Local server
+  url: http://localhost:8080
+security:
+- api_key: []
+- session_token: []
+tags:
+- name: webhook
+paths:
+  /webhook/trigger:
+    post:
+      operationId: webhook_trigger
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WebhookTriggerRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebhookTriggerResponse'
+          description: Successfully triggered workflow execution
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized - invalid API key
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden - user does not have write access to chat session
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Chat session not found or no workflow commits
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      tags:
+      - webhook
+components:
+  schemas:
+    WebhookTriggerRequest:
+      properties:
+        workflow_parameters:
+          additionalProperties:
+            additionalProperties: true
+            type: object
+            x-stainless-empty-object: true
+          type: object
+        workflow_schedule_id:
+          $ref: '#/components/schemas/WorkflowScheduleId'
+      required:
+      - workflow_schedule_id
+      type: object
+    WorkflowScheduleId:
+      format: uuid
+      type: string
+    ErrorResponse:
+      description: Standard error response
+      properties:
+        error:
+          type: string
+      required:
+      - error
+      type: object
+    WebhookTriggerResponse:
+      properties:
+        message:
+          type: string
+        sandbox_id:
+          nullable: true
+          type: string
+        success:
+          type: boolean
+        tunnel_url:
+          nullable: true
+          type: string
+      required:
+      - success
+      - message
+      type: object
+  securitySchemes:
+    api_key:
+      in: header
+      name: api_key
+      type: apiKey
+    session_token:
+      scheme: bearer
+      type: http

@@ -1,0 +1,388 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: team@structify.ai
+    name: Structify Team
+  description: Every enterprise's data team.
+  license:
+    name: Discuss directly with founders for license.
+    url: https://structify.ai
+  title: Structify account wiki API
+  version: 0.1.0
+servers:
+- description: Production server
+  url: https://api.structify.ai
+- description: Local server
+  url: http://localhost:8080
+security:
+- api_key: []
+- session_token: []
+tags:
+- description: Team wiki page management endpoints
+  name: wiki
+paths:
+  /team/{team_id}/wiki:
+    get:
+      operationId: list_wiki_pages
+      parameters:
+      - in: path
+        name: team_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/TeamId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/WikiPage'
+                type: array
+          description: List of all wiki pages for the team
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden - user does not have access to team
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - wiki
+    post:
+      operationId: create_wiki_page
+      parameters:
+      - in: path
+        name: team_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/TeamId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWikiPageRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WikiPage'
+          description: Wiki page created successfully
+        '400':
+          description: Invalid request data
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden - user does not have access to team
+        '500':
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - wiki
+  /team/{team_id}/wiki/{slug}:
+    delete:
+      operationId: delete_wiki_page
+      parameters:
+      - in: path
+        name: team_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/TeamId'
+      - in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Wiki page deleted successfully
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden - user does not have access to team
+        '404':
+          description: Wiki page not found
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - wiki
+    get:
+      operationId: get_wiki_page
+      parameters:
+      - in: path
+        name: team_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/TeamId'
+      - in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WikiPageWithReferences'
+          description: Wiki page with resolved references
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden - user does not have access to team
+        '404':
+          description: Wiki page not found
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - wiki
+    put:
+      operationId: update_wiki_page
+      parameters:
+      - in: path
+        name: team_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/TeamId'
+      - in: path
+        name: slug
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateWikiPageRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WikiPage'
+          description: Wiki page updated successfully
+        '400':
+          description: Invalid request data
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden - user does not have access to team
+        '404':
+          description: Wiki page not found
+        '409':
+          description: Conflict - page was modified since base_version
+        '500':
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - wiki
+components:
+  schemas:
+    CreateWikiPageRequest:
+      properties:
+        markdown:
+          type: string
+        slug:
+          type: string
+        title:
+          type: string
+      required:
+      - title
+      - slug
+      - markdown
+      type: object
+    ConnectorId:
+      format: uuid
+      type: string
+    UpdateWikiPageRequest:
+      properties:
+        base_version:
+          format: int32
+          nullable: true
+          type: integer
+        markdown:
+          type: string
+        title:
+          nullable: true
+          type: string
+      required:
+      - markdown
+      type: object
+    ConnectorColumnId:
+      format: uuid
+      type: string
+    ReferenceIdConnector:
+      properties:
+        id:
+          $ref: '#/components/schemas/ConnectorId'
+      required:
+      - id
+      type: object
+    ReferenceIdSchema:
+      properties:
+        id:
+          $ref: '#/components/schemas/ConnectorSchemaId'
+      required:
+      - id
+      type: object
+    TeamId:
+      format: uuid
+      type: string
+    ReferenceIdColumn:
+      properties:
+        id:
+          $ref: '#/components/schemas/ConnectorColumnId'
+      required:
+      - id
+      type: object
+    ConnectorDatabaseId:
+      format: uuid
+      type: string
+    ReferenceId:
+      discriminator:
+        propertyName: reference_type
+      oneOf:
+      - allOf:
+        - $ref: '#/components/schemas/ReferenceIdConnector'
+        - properties:
+            reference_type:
+              enum:
+              - connector
+              type: string
+          required:
+          - reference_type
+          type: object
+      - allOf:
+        - $ref: '#/components/schemas/ReferenceIdDatabase'
+        - properties:
+            reference_type:
+              enum:
+              - database
+              type: string
+          required:
+          - reference_type
+          type: object
+      - allOf:
+        - $ref: '#/components/schemas/ReferenceIdSchema'
+        - properties:
+            reference_type:
+              enum:
+              - schema
+              type: string
+          required:
+          - reference_type
+          type: object
+      - allOf:
+        - $ref: '#/components/schemas/ReferenceIdTable'
+        - properties:
+            reference_type:
+              enum:
+              - table
+              type: string
+          required:
+          - reference_type
+          type: object
+      - allOf:
+        - $ref: '#/components/schemas/ReferenceIdColumn'
+        - properties:
+            reference_type:
+              enum:
+              - column
+              type: string
+          required:
+          - reference_type
+          type: object
+    ConnectorSchemaId:
+      format: uuid
+      type: string
+    WikiConnectorReference:
+      properties:
+        is_deleted:
+          type: boolean
+        name:
+          type: string
+        path:
+          items:
+            type: string
+          type: array
+        reference_id:
+          $ref: '#/components/schemas/ReferenceId'
+      required:
+      - reference_id
+      - name
+      - is_deleted
+      - path
+      type: object
+    ReferenceIdDatabase:
+      properties:
+        id:
+          $ref: '#/components/schemas/ConnectorDatabaseId'
+      required:
+      - id
+      type: object
+    ReferenceIdTable:
+      properties:
+        id:
+          $ref: '#/components/schemas/ConnectorTableId'
+      required:
+      - id
+      type: object
+    ConnectorTableId:
+      format: uuid
+      type: string
+    WikiPageWithReferences:
+      allOf:
+      - $ref: '#/components/schemas/WikiPage'
+      - properties:
+          references:
+            items:
+              $ref: '#/components/schemas/WikiConnectorReference'
+            type: array
+        required:
+        - references
+        type: object
+    WikiPage:
+      properties:
+        created_at:
+          type: string
+        id:
+          type: string
+        markdown:
+          type: string
+        slug:
+          type: string
+        team_id:
+          type: string
+        title:
+          type: string
+        updated_at:
+          type: string
+        version:
+          format: int32
+          type: integer
+      required:
+      - id
+      - team_id
+      - slug
+      - title
+      - markdown
+      - created_at
+      - updated_at
+      - version
+      type: object
+  securitySchemes:
+    api_key:
+      in: header
+      name: api_key
+      type: apiKey
+    session_token:
+      scheme: bearer
+      type: http

@@ -1,0 +1,144 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: team@structify.ai
+    name: Structify Team
+  description: Every enterprise's data team.
+  license:
+    name: Discuss directly with founders for license.
+    url: https://structify.ai
+  title: Structify account chat_templates API
+  version: 0.1.0
+servers:
+- description: Production server
+  url: https://api.structify.ai
+- description: Local server
+  url: http://localhost:8080
+security:
+- api_key: []
+- session_token: []
+tags:
+- name: chat_templates
+paths:
+  /chat/templates:
+    get:
+      operationId: list_chat_templates
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ChatTemplate'
+                type: array
+          description: Chat templates retrieved
+        '500':
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      summary: List active chat templates for the /chat page
+      tags:
+      - chat_templates
+  /chat/templates/{template_id}:
+    get:
+      operationId: get_chat_template
+      parameters:
+      - description: The chat template ID
+        in: path
+        name: template_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatTemplate'
+          description: Chat template retrieved
+        '404':
+          description: Chat template not found
+        '500':
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - chat_templates
+components:
+  schemas:
+    UserId:
+      format: uuid
+      type: string
+    ChatTemplate:
+      properties:
+        chat_session_id:
+          $ref: '#/components/schemas/ChatSessionId'
+        created_at:
+          format: date-time
+          type: string
+        created_by:
+          $ref: '#/components/schemas/UserId'
+        description:
+          type: string
+        display_order:
+          format: int32
+          type: integer
+        id:
+          $ref: '#/components/schemas/ChatTemplateId'
+        image_url:
+          type: string
+        is_active:
+          type: boolean
+        questions:
+          items:
+            $ref: '#/components/schemas/TemplateQuestion'
+          type: array
+        title:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+        updated_by:
+          $ref: '#/components/schemas/UserId'
+      required:
+      - id
+      - chat_session_id
+      - title
+      - description
+      - image_url
+      - display_order
+      - is_active
+      - created_by
+      - updated_by
+      - created_at
+      - updated_at
+      - questions
+      type: object
+    ChatSessionId:
+      format: uuid
+      type: string
+    ChatTemplateId:
+      format: uuid
+      type: string
+    TemplateQuestion:
+      properties:
+        options:
+          items:
+            type: string
+          nullable: true
+          type: array
+        prompt:
+          type: string
+      required:
+      - prompt
+      type: object
+  securitySchemes:
+    api_key:
+      in: header
+      name: api_key
+      type: apiKey
+    session_token:
+      scheme: bearer
+      type: http

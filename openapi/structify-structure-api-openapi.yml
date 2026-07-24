@@ -1,0 +1,606 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: team@structify.ai
+    name: Structify Team
+  description: Every enterprise's data team.
+  license:
+    name: Discuss directly with founders for license.
+    url: https://structify.ai
+  title: Structify account structure API
+  version: 0.1.0
+servers:
+- description: Production server
+  url: https://api.structify.ai
+- description: Local server
+  url: http://localhost:8080
+security:
+- api_key: []
+- session_token: []
+tags:
+- name: structure
+paths:
+  /jobs/status_aggregated:
+    post:
+      description: 'Returns counts of jobs by status (completed, running, failed, queued).
+
+        Exactly one of job_ids or dataset_name must be provided.
+
+        This endpoint can handle large numbers of job IDs since it returns aggregated data instead of individual job details.'
+      operationId: jobs_status_aggregated
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AggregatedJobRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobCount'
+          description: Aggregated status counts for specified jobs.
+        '400':
+          description: Bad request - exactly one of job_ids or dataset_name must be provided.
+      security:
+      - api_key: []
+      - session_token: []
+      summary: Get aggregated status counts for multiple jobs.
+      tags:
+      - structure
+  /structure/enhance_property:
+    post:
+      description: Returns a job id that can be waited on until the request is finished.
+      operationId: structure_enhance_property
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnhancePropertyParams'
+        required: true
+      responses:
+        '200':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: The job id.
+      security:
+      - session_token: []
+      - api_key: []
+      summary: enhance_property a given entity by searching specifically for a certain missing property.
+      tags:
+      - structure
+  /structure/enhance_relationship:
+    post:
+      description: Returns a job id that can be waited on until the request is finished.
+      operationId: structure_enhance_relationship
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnhanceRelationshipParams'
+        required: true
+      responses:
+        '200':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: The job id.
+      security:
+      - session_token: []
+      - api_key: []
+      summary: Enhance relationships between entities by searching for missing connections.
+      tags:
+      - structure
+  /structure/find_relationship:
+    post:
+      operationId: structure_find_relationship
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FindRelationshipParams'
+        required: true
+      responses:
+        '200':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: The job id.
+      security:
+      - session_token: []
+      - api_key: []
+      summary: Attempt to find the given relation between two entities.
+      tags:
+      - structure
+  /structure/is_complete:
+    post:
+      operationId: structure_is_complete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                type: string
+              type: array
+        required: true
+      responses:
+        '200':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: All tasks finished.
+      security:
+      - api_key: []
+      - session_token: []
+      summary: Wait for all specified async tasks to be completed.
+      tags:
+      - structure
+  /structure/job_status:
+    post:
+      description: If only dataset_name is provided, up to 1000 of the most recent jobs for that dataset will be returned.
+      operationId: structure_job_status
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JobRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/JobNotification'
+                type: array
+          description: Status of all specified jobs.
+      security:
+      - api_key: []
+      - session_token: []
+      summary: Get status for specified jobs with detailed information similar to websocket endpoint.
+      tags:
+      - structure
+  /structure/pdf:
+    post:
+      description: 'For single mode, creates one job for the entire PDF.
+
+        For batch mode, creates one job per PDF page.'
+      operationId: structure_pdf
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StructurePdfRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/StructurePdfResponse'
+          description: List of created job IDs
+      security:
+      - api_key: []
+      - session_token: []
+      summary: Structure a PDF document into the given dataset.
+      tags:
+      - structure
+  /structure/run_async:
+    post:
+      description: Returns a token that can be waited on until the request is finished.
+      operationId: structure_run_async
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RunRequestParams'
+        required: true
+      responses:
+        '200':
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: The job id.
+      security:
+      - api_key: []
+      - session_token: []
+      summary: Structure an unstructured data source into the given dataset in an async fashion.
+      tags:
+      - structure
+components:
+  schemas:
+    LLMEntity:
+      additionalProperties: false
+      properties:
+        id:
+          minimum: 0
+          type: integer
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/BasicPropValue'
+          type: object
+        type:
+          type: string
+      required:
+      - id
+      - type
+      - properties
+      type: object
+    PDFIngestor:
+      additionalProperties: false
+      description: Ingest all pages of a PDF and process them independently.
+      properties:
+        page:
+          format: int32
+          minimum: 0
+          nullable: true
+          type: integer
+        path:
+          type: string
+      required:
+      - path
+      type: object
+    RunRequestParams:
+      additionalProperties: false
+      properties:
+        dataset:
+          type: string
+        instructions:
+          nullable: true
+          type: string
+        model:
+          nullable: true
+          type: string
+        node_id:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowSessionNodeId'
+          nullable: true
+        save_requirement:
+          items:
+            $ref: '#/components/schemas/SaveRequirement'
+          type: array
+        seeded_entity:
+          $ref: '#/components/schemas/LLMKnowledgeGraph'
+        source:
+          $ref: '#/components/schemas/Input'
+      required:
+      - source
+      - dataset
+      type: object
+    EntityId:
+      format: uuid
+      type: string
+    StructurePdfRequest:
+      additionalProperties: false
+      properties:
+        dataset:
+          type: string
+        instructions:
+          nullable: true
+          type: string
+        model:
+          nullable: true
+          type: string
+        node_id:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowSessionNodeId'
+          nullable: true
+        pages:
+          items:
+            format: int32
+            minimum: 0
+            type: integer
+          nullable: true
+          type: array
+        path:
+          type: string
+      required:
+      - path
+      - dataset
+      type: object
+    EnhanceRelationshipArgs:
+      allOf:
+      - $ref: '#/components/schemas/WebSearch'
+      - properties:
+          allow_extra_entities:
+            type: boolean
+          entity_id:
+            $ref: '#/components/schemas/EntityId'
+          relationship_name:
+            type: string
+        required:
+        - entity_id
+        - relationship_name
+        type: object
+    LLMRelationship:
+      additionalProperties: false
+      properties:
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/BasicPropValue'
+          type: object
+        source:
+          minimum: 0
+          type: integer
+        target:
+          minimum: 0
+          type: integer
+        type:
+          type: string
+      required:
+      - type
+      - source
+      - target
+      type: object
+    JobStatus:
+      enum:
+      - Queued
+      - Running
+      - Completed
+      - Failed
+      type: string
+    EnhanceRelationshipParams:
+      allOf:
+      - $ref: '#/components/schemas/EnhanceRelationshipArgs'
+      - properties:
+          node_id:
+            allOf:
+            - $ref: '#/components/schemas/WorkflowSessionNodeId'
+            nullable: true
+        type: object
+    WorkflowSessionNodeId:
+      format: uuid
+      type: string
+    EnhancePropertyParams:
+      allOf:
+      - $ref: '#/components/schemas/EnhancePropertyArgs'
+      - properties:
+          node_id:
+            allOf:
+            - $ref: '#/components/schemas/WorkflowSessionNodeId'
+            nullable: true
+        type: object
+    JobRequest:
+      properties:
+        dataset_name:
+          nullable: true
+          type: string
+        job_ids:
+          items:
+            $ref: '#/components/schemas/JobId'
+          nullable: true
+          type: array
+      type: object
+    JobId:
+      format: uuid
+      type: string
+    FindRelationshipParams:
+      allOf:
+      - $ref: '#/components/schemas/FindRelationshipArgs'
+      - type: object
+    JobNotification:
+      properties:
+        dataset_name:
+          type: string
+        job_id:
+          $ref: '#/components/schemas/JobId'
+        status:
+          allOf:
+          - $ref: '#/components/schemas/JobStatus'
+          nullable: true
+        target:
+          allOf:
+          - $ref: '#/components/schemas/JobTarget'
+          nullable: true
+      required:
+      - dataset_name
+      - job_id
+      type: object
+    FindRelationshipArgs:
+      allOf:
+      - $ref: '#/components/schemas/WebSearch'
+      - properties:
+          allow_extra_entities:
+            type: boolean
+          from_id:
+            $ref: '#/components/schemas/EntityId'
+          relationship_name:
+            type: string
+          to_id:
+            $ref: '#/components/schemas/EntityId'
+        required:
+        - from_id
+        - to_id
+        - relationship_name
+        type: object
+    JobTarget:
+      properties:
+        entity_id:
+          $ref: '#/components/schemas/EntityId'
+        property_names:
+          items:
+            type: string
+          nullable: true
+          type: array
+        relationship_name:
+          nullable: true
+          type: string
+      required:
+      - entity_id
+      type: object
+    WebSearch:
+      properties:
+        banned_domains:
+          items:
+            type: string
+          type: array
+        starting_searches:
+          items:
+            type: string
+          type: array
+        starting_urls:
+          items:
+            type: string
+          type: array
+      type: object
+    LLMKnowledgeGraph:
+      additionalProperties: false
+      description: 'Knowledge graph info structured to deserialize and display
+
+        in the same format that the LLM outputs.
+
+        Also the first representation of an LLM output in the pipeline from raw tool output to being merged into a DB'
+      properties:
+        entities:
+          items:
+            $ref: '#/components/schemas/LLMEntity'
+          type: array
+        relationships:
+          items:
+            $ref: '#/components/schemas/LLMRelationship'
+          type: array
+      required:
+      - entities
+      type: object
+    SaveRequirement:
+      description: It's an OR statement across these.
+      oneOf:
+      - $ref: '#/components/schemas/RequiredRelationship'
+      - $ref: '#/components/schemas/RequiredEntity'
+      - $ref: '#/components/schemas/RequiredProperty'
+    Input:
+      oneOf:
+      - properties:
+          PDF:
+            $ref: '#/components/schemas/PDFIngestor'
+        required:
+        - PDF
+        type: object
+      - properties:
+          Web:
+            $ref: '#/components/schemas/WebSearch'
+        required:
+        - Web
+        type: object
+    EnhancePropertyArgs:
+      allOf:
+      - $ref: '#/components/schemas/WebSearch'
+      - properties:
+          allow_extra_entities:
+            type: boolean
+          entity_id:
+            $ref: '#/components/schemas/EntityId'
+          property_name:
+            type: string
+        required:
+        - entity_id
+        - property_name
+        type: object
+    RequiredProperty:
+      additionalProperties: false
+      properties:
+        property_names:
+          description: If there are multiple properties, it can match just one of them
+          items:
+            type: string
+          type: array
+        table_name:
+          description: The table name of the entity to update
+          type: string
+      required:
+      - table_name
+      - property_names
+      type: object
+    BasicPropValue:
+      oneOf:
+      - type: string
+      - format: int64
+        type: integer
+      - type: boolean
+      - format: double
+        type: number
+    AggregatedJobRequest:
+      properties:
+        dataset_name:
+          nullable: true
+          type: string
+        job_ids:
+          items:
+            $ref: '#/components/schemas/JobId'
+          nullable: true
+          type: array
+        node_id:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowSessionNodeId'
+          nullable: true
+      type: object
+    RequiredEntity:
+      additionalProperties: false
+      properties:
+        entity_id:
+          allOf:
+          - $ref: '#/components/schemas/EntityId'
+          nullable: true
+        seeded_entity_id:
+          description: The integer id corresponding to an entity in the seeded entity graph (different from the global dataset entity id)
+          minimum: 0
+          type: integer
+      required:
+      - seeded_entity_id
+      type: object
+    RequiredRelationship:
+      additionalProperties: false
+      properties:
+        relationship_name:
+          type: string
+      required:
+      - relationship_name
+      type: object
+    JobCount:
+      properties:
+        completed:
+          format: int64
+          type: integer
+        failed:
+          format: int64
+          type: integer
+        queued:
+          format: int64
+          type: integer
+        running:
+          format: int64
+          type: integer
+        total:
+          format: int64
+          type: integer
+      required:
+      - total
+      - completed
+      - failed
+      - running
+      - queued
+      type: object
+    StructurePdfResponse:
+      properties:
+        job_ids:
+          items:
+            $ref: '#/components/schemas/JobId'
+          type: array
+      required:
+      - job_ids
+      type: object
+  securitySchemes:
+    api_key:
+      in: header
+      name: api_key
+      type: apiKey
+    session_token:
+      scheme: bearer
+      type: http

@@ -1,0 +1,124 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: team@structify.ai
+    name: Structify Team
+  description: Every enterprise's data team.
+  license:
+    name: Discuss directly with founders for license.
+    url: https://structify.ai
+  title: Structify account usage API
+  version: 0.1.0
+servers:
+- description: Production server
+  url: https://api.structify.ai
+- description: Local server
+  url: http://localhost:8080
+security:
+- api_key: []
+- session_token: []
+tags:
+- name: usage
+paths:
+  /user/transactions/list:
+    get:
+      operationId: user_transactions
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Transaction'
+                type: array
+          description: Got the transactions
+      tags:
+      - usage
+  /user/usage:
+    get:
+      operationId: user_usage
+      parameters:
+      - in: query
+        name: dataset
+        required: false
+        schema:
+          nullable: true
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsageStatistics'
+          description: Responded with user statstics
+      security:
+      - session_token: []
+      - api_key: []
+      summary: Returns usage statistics for the user.
+      tags:
+      - usage
+components:
+  schemas:
+    CreditGrantId:
+      format: uuid
+      type: string
+    JobId:
+      format: uuid
+      type: string
+    Transaction:
+      description: Represents a transaction in our database.
+      properties:
+        amount:
+          format: int64
+          type: integer
+        credit_grant_id:
+          allOf:
+          - $ref: '#/components/schemas/CreditGrantId'
+          nullable: true
+        id:
+          $ref: '#/components/schemas/TransactionId'
+        job_id:
+          allOf:
+          - $ref: '#/components/schemas/JobId'
+          nullable: true
+        membership_id:
+          $ref: '#/components/schemas/MembershipId'
+        timestamp:
+          format: date-time
+          type: string
+      required:
+      - id
+      - amount
+      - timestamp
+      - membership_id
+      type: object
+    TransactionId:
+      format: uuid
+      type: string
+    UsageStatistics:
+      properties:
+        credits_used:
+          format: int64
+          type: integer
+        num_entities:
+          minimum: 0
+          type: integer
+        num_relationships:
+          minimum: 0
+          type: integer
+      required:
+      - num_entities
+      - num_relationships
+      - credits_used
+      type: object
+    MembershipId:
+      format: uuid
+      type: string
+  securitySchemes:
+    api_key:
+      in: header
+      name: api_key
+      type: apiKey
+    session_token:
+      scheme: bearer
+      type: http

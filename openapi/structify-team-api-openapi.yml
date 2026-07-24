@@ -1,0 +1,1027 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: team@structify.ai
+    name: Structify Team
+  description: Every enterprise's data team.
+  license:
+    name: Discuss directly with founders for license.
+    url: https://structify.ai
+  title: Structify account team API
+  version: 0.1.0
+servers:
+- description: Production server
+  url: https://api.structify.ai
+- description: Local server
+  url: http://localhost:8080
+security:
+- api_key: []
+- session_token: []
+tags:
+- description: Team management endpoints
+  name: team
+paths:
+  /team/create:
+    post:
+      operationId: team_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateTeamRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateTeamResponse'
+          description: Team created successfully
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - team
+  /team/invitations/accept:
+    post:
+      operationId: team_accept_invitation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AcceptInvitationRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AcceptInvitationResponse'
+          description: Invitation accepted successfully
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid or expired invitation
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invitation not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - team
+  /team/invitations/details/{token}:
+    get:
+      operationId: team_invitation_details
+      parameters:
+      - description: Invitation token
+        in: path
+        name: token
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InvitationDetailsResponse'
+          description: Invitation details retrieved successfully
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid or expired invitation
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invitation not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      tags:
+      - team
+  /team/list:
+    get:
+      operationId: team_list
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTeamsResponse'
+          description: Teams retrieved successfully
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - team
+  /team/{team_id}:
+    get:
+      operationId: team_get
+      parameters:
+      - description: Team ID
+        in: path
+        name: team_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/TeamId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetTeamResponse'
+          description: Team retrieved successfully
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden - user not member of team
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Team not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - team
+    put:
+      operationId: team_update
+      parameters:
+      - description: Team ID
+        in: path
+        name: team_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/TeamId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateTeamRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateTeamResponse'
+          description: Team updated successfully
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden - user not admin/owner of team
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Team not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - team
+  /team/{team_id}/credits/usage:
+    get:
+      operationId: team_credits_usage
+      parameters:
+      - description: Team ID
+        in: path
+        name: team_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/TeamId'
+      - description: Start time inclusive (UTC)
+        in: query
+        name: start
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: End time exclusive (UTC)
+        in: query
+        name: end
+        required: true
+        schema:
+          format: date-time
+          type: string
+      - description: hour | day | week | month
+        in: query
+        name: granularity
+        required: true
+        schema:
+          $ref: '#/components/schemas/Granularity'
+      - description: Optional token ID to filter by
+        in: query
+        name: token
+        required: false
+        schema:
+          nullable: true
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreditsUsageResponse'
+          description: Credits usage by job_type
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden - user not member of team
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - team
+  /team/{team_id}/invitations:
+    delete:
+      operationId: team_cancel_invitation
+      parameters:
+      - description: Team ID
+        in: path
+        name: team_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/TeamId'
+      - in: query
+        name: email
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Invitation cancelled successfully
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden - user not admin/owner of team
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Pending invitation not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - team
+  /team/{team_id}/members:
+    get:
+      operationId: team_list_members
+      parameters:
+      - description: Team ID
+        in: path
+        name: team_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/TeamId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListMembersResponse'
+          description: Members retrieved successfully
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden - user not member of team
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Team not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - team
+    post:
+      operationId: team_add_member
+      parameters:
+      - description: Team ID
+        in: path
+        name: team_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/TeamId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddMemberRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddMemberResponse'
+          description: Member added successfully
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden - user not admin/owner of team
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Team not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - team
+  /team/{team_id}/members/{user_id}:
+    delete:
+      operationId: team_remove_member
+      parameters:
+      - description: Team ID
+        in: path
+        name: team_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/TeamId'
+      - description: User ID to remove
+        in: path
+        name: user_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RemoveMemberResponse'
+          description: Member removed successfully
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden - user not admin/owner of team
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Team or member not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - team
+  /team/{team_id}/members/{user_id}/role:
+    patch:
+      operationId: team_update_member_role
+      parameters:
+      - description: Team ID
+        in: path
+        name: team_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/TeamId'
+      - description: User ID whose role to update
+        in: path
+        name: user_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMemberRoleRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateMemberRoleResponse'
+          description: Member role updated successfully
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden - user not admin/owner of team or trying to modify own role
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Team or member not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - team
+  /team/{team_id}/select:
+    post:
+      operationId: team_select
+      parameters:
+      - description: Team ID to select as the user's active team
+        in: path
+        name: team_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/TeamId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SelectTeamResponse'
+          description: Team selected successfully
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden - user not a member of team
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Team not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - team
+components:
+  schemas:
+    TeamRole:
+      enum:
+      - read_only
+      - member
+      - admin
+      - owner
+      type: string
+    AddMemberRequest:
+      properties:
+        email:
+          type: string
+        role:
+          $ref: '#/components/schemas/TeamRole'
+      required:
+      - email
+      - role
+      type: object
+    DaytonaCredentials:
+      properties:
+        api_key:
+          nullable: true
+          type: string
+        api_url:
+          nullable: true
+          type: string
+      type: object
+    ListTeamsResponse:
+      properties:
+        teams:
+          items:
+            $ref: '#/components/schemas/TeamWithRole'
+          type: array
+      required:
+      - teams
+      type: object
+    RemoveMemberResponse:
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      type: object
+    CreditsUsageTimeseriesPoint:
+      properties:
+        bucket_start:
+          format: date-time
+          type: string
+        groups:
+          additionalProperties:
+            format: int64
+            type: integer
+          type: object
+      required:
+      - bucket_start
+      - groups
+      type: object
+    TeamSubscriptionStatus:
+      properties:
+        has_active_subscription:
+          type: boolean
+        is_trial:
+          type: boolean
+        payment_provider:
+          nullable: true
+          type: string
+        remaining_credits:
+          format: int64
+          type: integer
+        subscription_tier:
+          $ref: '#/components/schemas/SubscriptionTier'
+        trial_expires_at:
+          format: date-time
+          nullable: true
+          type: string
+      required:
+      - subscription_tier
+      - is_trial
+      - has_active_subscription
+      - remaining_credits
+      type: object
+    UpdateTeamResponse:
+      properties:
+        team:
+          $ref: '#/components/schemas/Team'
+      required:
+      - team
+      type: object
+    CreateTeamRequest:
+      properties:
+        description:
+          nullable: true
+          type: string
+        name:
+          type: string
+      required:
+      - name
+      type: object
+    InvitationDetailsResponse:
+      properties:
+        invitee_email:
+          type: string
+        team_name:
+          type: string
+        user_exists:
+          type: boolean
+      required:
+      - team_name
+      - invitee_email
+      - user_exists
+      type: object
+    TeamMember:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        email:
+          type: string
+        pending:
+          type: boolean
+        role:
+          $ref: '#/components/schemas/TeamRole'
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+        user_id:
+          allOf:
+          - $ref: '#/components/schemas/UserId'
+          nullable: true
+      required:
+      - team_id
+      - role
+      - created_at
+      - email
+      - pending
+      type: object
+    MembershipId:
+      format: uuid
+      type: string
+    UserId:
+      format: uuid
+      type: string
+    CreateTeamResponse:
+      properties:
+        team:
+          $ref: '#/components/schemas/Team'
+      required:
+      - team
+      type: object
+    AcceptInvitationResponse:
+      properties:
+        success:
+          type: boolean
+        team_id:
+          type: string
+        team_name:
+          type: string
+      required:
+      - success
+      - team_id
+      - team_name
+      type: object
+    GetTeamResponse:
+      properties:
+        max_seats:
+          format: int32
+          type: integer
+        subscription_status:
+          $ref: '#/components/schemas/TeamSubscriptionStatus'
+        team:
+          $ref: '#/components/schemas/Team'
+      required:
+      - team
+      - subscription_status
+      - max_seats
+      type: object
+    Membership:
+      description: Contains membership information and API token value
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        id:
+          $ref: '#/components/schemas/MembershipId'
+        invitation_expires_at:
+          format: date-time
+          nullable: true
+          type: string
+        invitation_token:
+          format: uuid
+          nullable: true
+          type: string
+        invited_at:
+          format: date-time
+          nullable: true
+          type: string
+        invited_by_user_id:
+          allOf:
+          - $ref: '#/components/schemas/UserId'
+          nullable: true
+        invitee_email:
+          nullable: true
+          type: string
+        pending:
+          type: boolean
+        role:
+          $ref: '#/components/schemas/TeamRole'
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+        user_id:
+          allOf:
+          - $ref: '#/components/schemas/UserId'
+          nullable: true
+        value:
+          format: binary
+          type: string
+      required:
+      - id
+      - value
+      - created_at
+      - team_id
+      - role
+      - pending
+      type: object
+    SelectTeamResponse:
+      properties:
+        refresh_token:
+          type: string
+        session_token:
+          type: string
+        success:
+          type: boolean
+      required:
+      - success
+      - session_token
+      - refresh_token
+      type: object
+    Granularity:
+      enum:
+      - hour
+      - day
+      - week
+      - month
+      type: string
+    ErrorResponse:
+      description: Standard error response
+      properties:
+        error:
+          type: string
+      required:
+      - error
+      type: object
+    AddMemberResponse:
+      properties:
+        invitation_sent:
+          type: boolean
+        membership:
+          $ref: '#/components/schemas/Membership'
+      required:
+      - membership
+      - invitation_sent
+      type: object
+    UpdateMemberRoleRequest:
+      properties:
+        role:
+          $ref: '#/components/schemas/TeamRole'
+      required:
+      - role
+      type: object
+    WorkflowBucket:
+      properties:
+        bucket_url:
+          type: string
+        gcp_credentials_json:
+          nullable: true
+          type: string
+      required:
+      - bucket_url
+      type: object
+    UpdateTeamRequest:
+      properties:
+        daytona_credentials:
+          allOf:
+          - $ref: '#/components/schemas/DaytonaCredentials'
+          nullable: true
+        description:
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+        sandbox_provider:
+          allOf:
+          - $ref: '#/components/schemas/SandboxProvider'
+          nullable: true
+        slack_bot_token:
+          nullable: true
+          type: string
+        slack_team_icon:
+          nullable: true
+          type: string
+        slack_team_id:
+          nullable: true
+          type: string
+        slack_team_name:
+          nullable: true
+          type: string
+        teams_app_id:
+          nullable: true
+          type: string
+        teams_app_password:
+          nullable: true
+          type: string
+        teams_tenant_id:
+          nullable: true
+          type: string
+        workflow_bucket:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowBucket'
+          nullable: true
+      type: object
+    CreditsUsageResponse:
+      properties:
+        timeseries:
+          items:
+            $ref: '#/components/schemas/CreditsUsageTimeseriesPoint'
+          type: array
+        total_credits_added:
+          format: int64
+          type: integer
+        total_spent:
+          format: int64
+          type: integer
+      required:
+      - total_spent
+      - total_credits_added
+      - timeseries
+      type: object
+    AcceptInvitationRequest:
+      properties:
+        token:
+          format: uuid
+          type: string
+      required:
+      - token
+      type: object
+    TeamWithRole:
+      allOf:
+      - $ref: '#/components/schemas/Team'
+      - properties:
+          max_seats:
+            format: int32
+            type: integer
+          role:
+            $ref: '#/components/schemas/TeamRole'
+          subscription_status:
+            $ref: '#/components/schemas/TeamSubscriptionStatus'
+        required:
+        - role
+        - subscription_status
+        - max_seats
+        type: object
+    SubscriptionTier:
+      description: Represents the different subscription tiers available
+      enum:
+      - free
+      - free_trial
+      - pro
+      - team
+      - enterprise
+      type: string
+    Team:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        daytona_credentials:
+          allOf:
+          - $ref: '#/components/schemas/DaytonaCredentials'
+          nullable: true
+        description:
+          nullable: true
+          type: string
+        id:
+          $ref: '#/components/schemas/TeamId'
+        name:
+          type: string
+        sandbox_provider:
+          nullable: true
+          type: string
+        seats_override:
+          format: int32
+          nullable: true
+          type: integer
+        slack_team_icon:
+          nullable: true
+          type: string
+        slack_team_id:
+          nullable: true
+          type: string
+        slack_team_name:
+          nullable: true
+          type: string
+        teams_app_id:
+          nullable: true
+          type: string
+        teams_service_url:
+          nullable: true
+          type: string
+        teams_tenant_id:
+          nullable: true
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+        workflow_bucket:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowBucket'
+          nullable: true
+      required:
+      - id
+      - name
+      - created_at
+      - updated_at
+      type: object
+    UpdateMemberRoleResponse:
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      type: object
+    SandboxProvider:
+      enum:
+      - modal
+      - daytona
+      type: string
+    ListMembersResponse:
+      properties:
+        members:
+          items:
+            $ref: '#/components/schemas/TeamMember'
+          type: array
+      required:
+      - members
+      type: object
+    TeamId:
+      format: uuid
+      type: string
+  securitySchemes:
+    api_key:
+      in: header
+      name: api_key
+      type: apiKey
+    session_token:
+      scheme: bearer
+      type: http

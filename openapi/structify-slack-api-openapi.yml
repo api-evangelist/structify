@@ -1,0 +1,194 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: team@structify.ai
+    name: Structify Team
+  description: Every enterprise's data team.
+  license:
+    name: Discuss directly with founders for license.
+    url: https://structify.ai
+  title: Structify account slack API
+  version: 0.1.0
+servers:
+- description: Production server
+  url: https://api.structify.ai
+- description: Local server
+  url: http://localhost:8080
+security:
+- api_key: []
+- session_token: []
+tags:
+- name: slack
+paths:
+  /slack/events:
+    post:
+      description: 'This endpoint receives events from Slack when users mention @structify.
+
+        It handles URL verification challenges and app mention events.
+
+        Requires proper authentication via StructifyUser - no fake users created.'
+      operationId: slack_events
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SlackEventPayload'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SlackApiResponse'
+          description: Event processed successfully
+      summary: Handles Slack Events API webhooks for app mentions
+      tags:
+      - slack
+components:
+  schemas:
+    SlackChallengeResponse:
+      properties:
+        challenge:
+          type: string
+      required:
+      - challenge
+      type: object
+    SlackEvent:
+      discriminator:
+        propertyName: type
+      oneOf:
+      - properties:
+          channel:
+            type: string
+          channel_type:
+            nullable: true
+            type: string
+          client_msg_id:
+            nullable: true
+            type: string
+          event_ts:
+            nullable: true
+            type: string
+          files:
+            items:
+              $ref: '#/components/schemas/SlackFile'
+            nullable: true
+            type: array
+          team:
+            nullable: true
+            type: string
+          text:
+            type: string
+          thread_ts:
+            nullable: true
+            type: string
+          ts:
+            type: string
+          type:
+            enum:
+            - app_mention
+            type: string
+          user:
+            type: string
+        required:
+        - user
+        - text
+        - ts
+        - channel
+        - type
+        type: object
+    SlackApiResponse:
+      oneOf:
+      - $ref: '#/components/schemas/SlackChallengeResponse'
+      - $ref: '#/components/schemas/SlackEventResponse'
+    SlackFile:
+      properties:
+        filetype:
+          nullable: true
+          type: string
+        id:
+          type: string
+        mimetype:
+          nullable: true
+          type: string
+        name:
+          type: string
+        url_private:
+          nullable: true
+          type: string
+        url_private_download:
+          nullable: true
+          type: string
+      required:
+      - id
+      - name
+      type: object
+    SlackEventPayload:
+      discriminator:
+        propertyName: type
+      oneOf:
+      - properties:
+          challenge:
+            type: string
+          token:
+            nullable: true
+            type: string
+          type:
+            enum:
+            - url_verification
+            type: string
+        required:
+        - challenge
+        - type
+        type: object
+      - properties:
+          api_app_id:
+            nullable: true
+            type: string
+          authed_users:
+            items:
+              type: string
+            nullable: true
+            type: array
+          event:
+            $ref: '#/components/schemas/SlackEvent'
+          event_context:
+            nullable: true
+            type: string
+          event_id:
+            type: string
+          event_time:
+            format: int64
+            minimum: 0
+            nullable: true
+            type: integer
+          team_id:
+            type: string
+          type:
+            enum:
+            - event_callback
+            type: string
+        required:
+        - team_id
+        - event
+        - event_id
+        - type
+        type: object
+    SlackEventResponse:
+      properties:
+        message:
+          nullable: true
+          type: string
+        ok:
+          type: boolean
+      required:
+      - ok
+      type: object
+  securitySchemes:
+    api_key:
+      in: header
+      name: api_key
+      type: apiKey
+    session_token:
+      scheme: bearer
+      type: http

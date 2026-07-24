@@ -1,0 +1,131 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: team@structify.ai
+    name: Structify Team
+  description: Every enterprise's data team.
+  license:
+    name: Discuss directly with founders for license.
+    url: https://structify.ai
+  title: Structify account Nango API
+  version: 0.1.0
+servers:
+- description: Production server
+  url: https://api.structify.ai
+- description: Local server
+  url: http://localhost:8080
+security:
+- api_key: []
+- session_token: []
+tags:
+- name: Nango
+paths:
+  /nango/integrations:
+    get:
+      operationId: list_integrations
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  description: A Nango integration (OAuth provider configuration)
+                  properties:
+                    created_at:
+                      format: date-time
+                      type: string
+                    display_name:
+                      nullable: true
+                      type: string
+                    logo:
+                      nullable: true
+                      type: string
+                    provider:
+                      type: string
+                    unique_key:
+                      type: string
+                    updated_at:
+                      format: date-time
+                      type: string
+                  required:
+                  - unique_key
+                  - provider
+                  - created_at
+                  - updated_at
+                  type: object
+                type: array
+          description: List of Nango integrations
+        '500':
+          description: Failed to fetch Nango integrations
+      security:
+      - api_key: []
+      - bearer_token: []
+      tags:
+      - Nango
+  /nango/session:
+    post:
+      operationId: nango_create_session
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateNangoSessionRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                description: A Nango connect session for the frontend SDK
+                properties:
+                  expires_at:
+                    format: date-time
+                    type: string
+                  token:
+                    type: string
+                required:
+                - token
+                - expires_at
+                type: object
+          description: Nango connect session created successfully
+        '400':
+          description: Bad request - auth method not found or not OAuth
+        '500':
+          description: Failed to create Nango session
+      security:
+      - api_key: []
+      - bearer_token: []
+      tags:
+      - Nango
+components:
+  schemas:
+    ConnectorAuthMethodScopeId:
+      format: uuid
+      type: string
+    CreateNangoSessionRequest:
+      description: Request body for creating a Nango session with optional scope selection
+      properties:
+        connector_auth_method_id:
+          $ref: '#/components/schemas/ConnectorAuthMethodId'
+        selected_scope_ids:
+          description: 'Specific scope IDs to use. If not provided, defaults to required + recommended scopes.
+
+            If the auth method has no scopes in the database, Nango''s default scopes are used.'
+          items:
+            $ref: '#/components/schemas/ConnectorAuthMethodScopeId'
+          nullable: true
+          type: array
+      required:
+      - connector_auth_method_id
+      type: object
+    ConnectorAuthMethodId:
+      format: uuid
+      type: string
+  securitySchemes:
+    api_key:
+      in: header
+      name: api_key
+      type: apiKey
+    session_token:
+      scheme: bearer
+      type: http

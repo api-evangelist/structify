@@ -1,0 +1,207 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: team@structify.ai
+    name: Structify Team
+  description: Every enterprise's data team.
+  license:
+    name: Discuss directly with founders for license.
+    url: https://structify.ai
+  title: Structify account workflow API
+  version: 0.1.0
+servers:
+- description: Production server
+  url: https://api.structify.ai
+- description: Local server
+  url: http://localhost:8080
+security:
+- api_key: []
+- session_token: []
+tags:
+- name: workflow
+paths:
+  /sessions/node/{node_id}/logs:
+    get:
+      operationId: get_node_logs
+      parameters:
+      - description: Workflow session node ID
+        in: path
+        name: node_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/WorkflowSessionNodeId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetNodeLogsResponse'
+          description: Node logs retrieved successfully
+        '404':
+          description: Node not found
+        '500':
+          description: Internal server error
+      summary: Get terminal logs for a workflow node
+      tags:
+      - workflow
+  /workflow/run:
+    post:
+      operationId: run_workflow
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RunWorkflowRequest'
+        required: true
+      responses:
+        '200':
+          description: Successfully started workflow
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden - user does not have write access to chat session
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Chat session not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - workflow
+  /workflow/stop:
+    post:
+      operationId: stop_workflow
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StopWorkflowRequest'
+        required: true
+      responses:
+        '200':
+          description: Successfully stopped workflow
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden - user does not have write access to workflow session
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Workflow session not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - workflow
+components:
+  schemas:
+    WorkflowNodeLogId:
+      format: uuid
+      type: string
+    WorkflowNodeLog:
+      properties:
+        content:
+          type: string
+        id:
+          $ref: '#/components/schemas/WorkflowNodeLogId'
+        is_stderr:
+          type: boolean
+        node_id:
+          $ref: '#/components/schemas/WorkflowSessionNodeId'
+        timestamp:
+          format: date-time
+          type: string
+      required:
+      - id
+      - node_id
+      - timestamp
+      - is_stderr
+      - content
+      type: object
+    WorkflowSessionId:
+      format: uuid
+      type: string
+    ChatSessionId:
+      format: uuid
+      type: string
+    ErrorResponse:
+      description: Standard error response
+      properties:
+        error:
+          type: string
+      required:
+      - error
+      type: object
+    RunWorkflowRequest:
+      properties:
+        chat_session_id:
+          $ref: '#/components/schemas/ChatSessionId'
+        edited_node_name:
+          nullable: true
+          type: string
+        use_node_cache:
+          type: boolean
+      required:
+      - chat_session_id
+      - use_node_cache
+      type: object
+    StopWorkflowRequest:
+      properties:
+        workflow_session_id:
+          $ref: '#/components/schemas/WorkflowSessionId'
+      required:
+      - workflow_session_id
+      type: object
+    WorkflowSessionNodeId:
+      format: uuid
+      type: string
+    GetNodeLogsResponse:
+      properties:
+        logs:
+          items:
+            $ref: '#/components/schemas/WorkflowNodeLog'
+          type: array
+      required:
+      - logs
+      type: object
+  securitySchemes:
+    api_key:
+      in: header
+      name: api_key
+      type: apiKey
+    session_token:
+      scheme: bearer
+      type: http

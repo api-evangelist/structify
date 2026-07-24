@@ -1,0 +1,58 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: team@structify.ai
+    name: Structify Team
+  description: Every enterprise's data team.
+  license:
+    name: Discuss directly with founders for license.
+    url: https://structify.ai
+  title: Structify account server API
+  version: 0.1.0
+servers:
+- description: Production server
+  url: https://api.structify.ai
+- description: Local server
+  url: http://localhost:8080
+security:
+- api_key: []
+- session_token: []
+tags:
+- name: server
+paths:
+  /server/version:
+    get:
+      description: Gets the version of the API server.
+      operationId: server_version
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                Report:
+                  summary: An example of the server version
+                  value:
+                    version: 0.1.0
+              schema:
+                $ref: '#/components/schemas/ServerInformation'
+          description: ''
+      summary: Version
+      tags:
+      - server
+components:
+  schemas:
+    ServerInformation:
+      properties:
+        version:
+          type: string
+      required:
+      - version
+      type: object
+  securitySchemes:
+    api_key:
+      in: header
+      name: api_key
+      type: apiKey
+    session_token:
+      scheme: bearer
+      type: http

@@ -1,0 +1,401 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: team@structify.ai
+    name: Structify Team
+  description: Every enterprise's data team.
+  license:
+    name: Discuss directly with founders for license.
+    url: https://structify.ai
+  title: Structify account project API
+  version: 0.1.0
+servers:
+- description: Production server
+  url: https://api.structify.ai
+- description: Local server
+  url: http://localhost:8080
+security:
+- api_key: []
+- session_token: []
+tags:
+- description: Project management endpoints
+  name: project
+paths:
+  /team/{team_id}/project/{project_id}:
+    delete:
+      operationId: project_delete
+      parameters:
+      - description: Team ID
+        in: path
+        name: team_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/TeamId'
+      - description: Project ID
+        in: path
+        name: project_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ProjectId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteProjectResponse'
+          description: Project deleted successfully
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden - user does not have permission to delete project
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Project not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - project
+    get:
+      operationId: project_get
+      parameters:
+      - description: Team ID
+        in: path
+        name: team_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/TeamId'
+      - description: Project ID
+        in: path
+        name: project_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ProjectId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjectWithMembers'
+          description: Project retrieved successfully
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden - user does not have access to project
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Project not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - project
+    patch:
+      operationId: project_update
+      parameters:
+      - description: Team ID
+        in: path
+        name: team_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/TeamId'
+      - description: Project ID
+        in: path
+        name: project_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ProjectId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateProjectRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: Project updated successfully
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden - user does not have write access to project's team
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Project not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - project
+  /team/{team_id}/projects:
+    get:
+      operationId: project_list
+      parameters:
+      - description: Team ID
+        in: path
+        name: team_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/TeamId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListProjectsResponse'
+          description: Projects retrieved successfully
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden - user not member of team
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Team not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - project
+    post:
+      operationId: project_create
+      parameters:
+      - description: Team ID
+        in: path
+        name: team_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/TeamId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateProjectRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+          description: Project created successfully
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden - user does not have write access to team
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Team not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - project
+components:
+  schemas:
+    ProjectVisibility:
+      enum:
+      - private
+      - shared_with_team
+      type: string
+    DeleteProjectResponse:
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      type: object
+    UserId:
+      format: uuid
+      type: string
+    TeamId:
+      format: uuid
+      type: string
+    ProjectCollaboratorInput:
+      properties:
+        email:
+          type: string
+        role:
+          $ref: '#/components/schemas/ChatSessionRole'
+      required:
+      - email
+      - role
+      type: object
+    ProjectId:
+      format: uuid
+      type: string
+    ListProjectsResponse:
+      properties:
+        projects:
+          items:
+            $ref: '#/components/schemas/Project'
+          type: array
+      required:
+      - projects
+      type: object
+    CreateProjectRequest:
+      properties:
+        description:
+          nullable: true
+          type: string
+        name:
+          type: string
+      required:
+      - name
+      type: object
+    ProjectMember:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        email:
+          type: string
+        role:
+          $ref: '#/components/schemas/ChatSessionRole'
+        updated_at:
+          format: date-time
+          type: string
+        user_id:
+          $ref: '#/components/schemas/UserId'
+      required:
+      - user_id
+      - email
+      - role
+      - created_at
+      - updated_at
+      type: object
+    ErrorResponse:
+      description: Standard error response
+      properties:
+        error:
+          type: string
+      required:
+      - error
+      type: object
+    UpdateProjectRequest:
+      properties:
+        collaborators:
+          items:
+            $ref: '#/components/schemas/ProjectCollaboratorInput'
+          nullable: true
+          type: array
+        description:
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+        visibility:
+          allOf:
+          - $ref: '#/components/schemas/ProjectVisibility'
+          nullable: true
+      type: object
+    Project:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        description:
+          nullable: true
+          type: string
+        id:
+          $ref: '#/components/schemas/ProjectId'
+        name:
+          type: string
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+        updated_at:
+          format: date-time
+          type: string
+        visibility:
+          $ref: '#/components/schemas/ProjectVisibility'
+      required:
+      - id
+      - name
+      - team_id
+      - created_at
+      - updated_at
+      - visibility
+      type: object
+    ProjectWithMembers:
+      allOf:
+      - $ref: '#/components/schemas/Project'
+      - properties:
+          members:
+            items:
+              $ref: '#/components/schemas/ProjectMember'
+            type: array
+        required:
+        - members
+        type: object
+    ChatSessionRole:
+      enum:
+      - viewer
+      - editor
+      - owner
+      type: string
+  securitySchemes:
+    api_key:
+      in: header
+      name: api_key
+      type: apiKey
+    session_token:
+      scheme: bearer
+      type: http

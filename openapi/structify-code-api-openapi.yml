@@ -1,0 +1,259 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: team@structify.ai
+    name: Structify Team
+  description: Every enterprise's data team.
+  license:
+    name: Discuss directly with founders for license.
+    url: https://structify.ai
+  title: Structify account code API
+  version: 0.1.0
+servers:
+- description: Production server
+  url: https://api.structify.ai
+- description: Local server
+  url: http://localhost:8080
+security:
+- api_key: []
+- session_token: []
+tags:
+- description: Code generation endpoints
+  name: code
+paths:
+  /code/apply-manual-edit/{chat_id}:
+    post:
+      operationId: apply_manual_edit
+      parameters:
+      - in: path
+        name: chat_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChatSessionId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApplyManualEditRequest'
+        required: true
+      responses:
+        '200':
+          description: Manual edit applied successfully
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Chat session not found
+        '500':
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - code
+  /code/generate-code:
+    post:
+      description: 'Events are streamed via WebSocket connection. This endpoint returns immediately
+
+        after starting the generation process.
+
+        '
+      operationId: generate_code
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateCodeRequest'
+        required: true
+      responses:
+        '200':
+          description: Code generation started successfully
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized - user is not authenticated
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden - user does not have write access to chat session
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Chat session not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - session_token: []
+      - api_key: []
+      summary: Generates code based on the provided prompt.
+      tags:
+      - code
+  /code/interrupt-generation:
+    post:
+      description: 'This sets an interrupt flag that will cause the generation to stop gracefully
+
+        at the next checkpoint (before publishing the next event).
+
+        '
+      operationId: interrupt_generation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InterruptGenerationRequest'
+        required: true
+      responses:
+        '200':
+          description: Interrupt signal sent successfully
+      security:
+      - api_key: []
+      - session_token: []
+      summary: Interrupts an ongoing code generation for the specified chat session.
+      tags:
+      - code
+components:
+  schemas:
+    ConnectorId:
+      format: uuid
+      type: string
+    InterruptGenerationRequest:
+      properties:
+        chatSessionId:
+          $ref: '#/components/schemas/ChatSessionId'
+      required:
+      - chatSessionId
+      type: object
+    ApplyManualEditRequest:
+      properties:
+        code:
+          type: string
+        filename:
+          type: string
+      required:
+      - filename
+      - code
+      type: object
+    GenerateCodeRequest:
+      properties:
+        assistantMessageId:
+          format: uuid
+          nullable: true
+          type: string
+        chatSessionId:
+          $ref: '#/components/schemas/ChatSessionId'
+        config:
+          allOf:
+          - $ref: '#/components/schemas/ChatSessionConfig'
+          nullable: true
+        connectorIds:
+          items:
+            $ref: '#/components/schemas/ConnectorId'
+          type: array
+        filePaths:
+          items:
+            type: string
+          type: array
+        overridePreviousMessageId:
+          allOf:
+          - $ref: '#/components/schemas/ChatMessageId'
+          nullable: true
+        prompt:
+          type: string
+        triggerWorkflowExecution:
+          type: boolean
+        userMessageId:
+          format: uuid
+          nullable: true
+          type: string
+      required:
+      - prompt
+      - chatSessionId
+      type: object
+    ChatSessionConfig:
+      description: Configuration for chat session with system prompt and LLM key
+      properties:
+        llm_key:
+          allOf:
+          - $ref: '#/components/schemas/LLMKey'
+          nullable: true
+        max_steps:
+          format: int32
+          minimum: 0
+          nullable: true
+          type: integer
+        reminder_message:
+          nullable: true
+          type: string
+        system_prompt:
+          nullable: true
+          type: string
+      type: object
+    LLMKey:
+      description: 'LLM model keys available in the system. Format: <provider>.<model-name>'
+      enum:
+      - vllm.gpt-5-mini-2025-08-07
+      - vllm.gpt-4.1-mini-2025-04-14
+      - vllm.gpt-5-nano-2025-08-07
+      - vllm.gpt-5-2025-08-07
+      - vllm.ft:gpt-4o-2024-08-06:structify::ADrF00Gq
+      - vllm.ft:gpt-4o-mini-2024-07-18:structify::ABCLHTsN
+      - vllm.action
+      - vllm.dora
+      - vllm.boring_dora
+      - vllm.claude-3-7-sonnet-20250219
+      - vllm.claude-sonnet-4-20250514
+      - vllm.qwen-3-coder-480b
+      - test_llm.test
+      - bedrock.claude-sonnet-4-bedrock
+      - bedrock.claude-sonnet-4-5-bedrock
+      - bedrock.claude-opus-4-5-bedrock
+      - bedrock.claude-opus-4-6-bedrock
+      - bedrock.claude-haiku-4-5-bedrock
+      - gemini.gemini-2.5-pro
+      - gemini.gemini-2.5-flash
+      - gemini.gemini-3-flash-preview
+      - gemini.gemini-3.1-flash-lite-preview
+      - vertex_anthropic.claude-sonnet-4-5-vertex
+      - vertex_anthropic.claude-opus-4-5-vertex
+      type: string
+    ChatSessionId:
+      format: uuid
+      type: string
+    ErrorResponse:
+      description: Standard error response
+      properties:
+        error:
+          type: string
+      required:
+      - error
+      type: object
+    ChatMessageId:
+      format: uuid
+      type: string
+  securitySchemes:
+    api_key:
+      in: header
+      name: api_key
+      type: apiKey
+    session_token:
+      scheme: bearer
+      type: http

@@ -1,0 +1,380 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: team@structify.ai
+    name: Structify Team
+  description: Every enterprise's data team.
+  license:
+    name: Discuss directly with founders for license.
+    url: https://structify.ai
+  title: Structify account sandbox API
+  version: 0.1.0
+servers:
+- description: Production server
+  url: https://api.structify.ai
+- description: Local server
+  url: http://localhost:8080
+security:
+- api_key: []
+- session_token: []
+tags:
+- description: Sandbox management endpoints
+  name: sandbox
+paths:
+  /sandbox/list/{chat_id}:
+    get:
+      operationId: sandbox_list
+      parameters:
+      - description: Chat ID
+        in: path
+        name: chat_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChatSessionId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Sandbox'
+                type: array
+          description: Sandboxes retrieved successfully
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden - user not member of project
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Chat session not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - sandbox
+  /sandbox/live/{chat_id}:
+    post:
+      operationId: sandbox_get_live
+      parameters:
+      - description: Chat ID
+        in: path
+        name: chat_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChatSessionId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetSandboxRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sandbox'
+          description: Live sandbox retrieved or created successfully
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden - user not member of project
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Chat session not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - sandbox
+  /sandbox/{sandbox_id}/metrics:
+    get:
+      operationId: sandbox_get_metrics
+      parameters:
+      - description: Sandbox ID
+        in: path
+        name: sandbox_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/SandboxId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SandboxMetricsResponse'
+          description: Sandbox metrics
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Sandbox not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - sandbox
+  /sandbox/{sandbox_id}/status:
+    patch:
+      operationId: sandbox_update_status
+      parameters:
+      - description: Sandbox ID
+        in: path
+        name: sandbox_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/SandboxId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSandboxStatusRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sandbox'
+          description: Sandbox status updated successfully
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden - user not member of project
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Sandbox not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - sandbox
+components:
+  schemas:
+    SandboxId:
+      format: uuid
+      type: string
+    SandboxStatus:
+      enum:
+      - alive
+      - paused
+      - terminated
+      type: string
+    SandboxMetricsSandbox:
+      properties:
+        remaining_seconds:
+          format: int64
+          type: integer
+        start_time:
+          format: double
+          type: number
+        total_timeout_seconds:
+          format: int64
+          type: integer
+        uptime_seconds:
+          format: int64
+          type: integer
+      required:
+      - start_time
+      - uptime_seconds
+      - remaining_seconds
+      - total_timeout_seconds
+      type: object
+    SandboxMetricsProcess:
+      properties:
+        cpu_percent:
+          format: double
+          type: number
+        memory_mb:
+          format: double
+          type: number
+      required:
+      - memory_mb
+      - cpu_percent
+      type: object
+    ExplorationRunId:
+      format: uuid
+      type: string
+    UpdateSandboxStatusRequest:
+      properties:
+        status:
+          type: string
+      required:
+      - status
+      type: object
+    ChatSessionId:
+      format: uuid
+      type: string
+    Sandbox:
+      properties:
+        api_url:
+          nullable: true
+          type: string
+        chat_session_id:
+          allOf:
+          - $ref: '#/components/schemas/ChatSessionId'
+          nullable: true
+        created_at:
+          format: date-time
+          type: string
+        exploration_run_id:
+          allOf:
+          - $ref: '#/components/schemas/ExplorationRunId'
+          nullable: true
+        id:
+          $ref: '#/components/schemas/SandboxId'
+        latest_node:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowSessionNodeId'
+          nullable: true
+        provider:
+          $ref: '#/components/schemas/SandboxProvider'
+        provider_id:
+          type: string
+        resumed_at:
+          format: date-time
+          nullable: true
+          type: string
+        session_id:
+          allOf:
+          - $ref: '#/components/schemas/UserSessionId'
+          nullable: true
+        status:
+          $ref: '#/components/schemas/SandboxStatus'
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+        tunnel_url:
+          nullable: true
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - id
+      - team_id
+      - provider_id
+      - status
+      - created_at
+      - updated_at
+      - provider
+      type: object
+    SandboxProvider:
+      enum:
+      - modal
+      - daytona
+      type: string
+    ErrorResponse:
+      description: Standard error response
+      properties:
+        error:
+          type: string
+      required:
+      - error
+      type: object
+    UserSessionId:
+      format: uuid
+      type: string
+    SandboxMetricsResponse:
+      properties:
+        cpu_percent:
+          format: double
+          type: number
+        memory:
+          $ref: '#/components/schemas/SandboxMetricsMemory'
+        process:
+          $ref: '#/components/schemas/SandboxMetricsProcess'
+        sandbox:
+          $ref: '#/components/schemas/SandboxMetricsSandbox'
+      required:
+      - cpu_percent
+      - memory
+      - process
+      - sandbox
+      type: object
+    GetSandboxRequest:
+      properties:
+        modal_control_service_url_override:
+          description: Override URL for the modal control service (for testing/development)
+          nullable: true
+          type: string
+      type: object
+    WorkflowSessionNodeId:
+      format: uuid
+      type: string
+    SandboxMetricsMemory:
+      properties:
+        available_mb:
+          format: double
+          type: number
+        percent:
+          format: double
+          type: number
+        total_mb:
+          format: double
+          type: number
+        used_mb:
+          format: double
+          type: number
+      required:
+      - used_mb
+      - total_mb
+      - percent
+      - available_mb
+      type: object
+    TeamId:
+      format: uuid
+      type: string
+  securitySchemes:
+    api_key:
+      in: header
+      name: api_key
+      type: apiKey
+    session_token:
+      scheme: bearer
+      type: http

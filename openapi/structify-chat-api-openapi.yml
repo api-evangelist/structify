@@ -1,0 +1,4453 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: team@structify.ai
+    name: Structify Team
+  description: Every enterprise's data team.
+  license:
+    name: Discuss directly with founders for license.
+    url: https://structify.ai
+  title: Structify account chat API
+  version: 0.1.0
+servers:
+- description: Production server
+  url: https://api.structify.ai
+- description: Local server
+  url: http://localhost:8080
+security:
+- api_key: []
+- session_token: []
+tags:
+- description: Chat session management endpoints
+  name: chat
+paths:
+  /chat/add_code/{chat_id}:
+    post:
+      operationId: chat_add_code
+      parameters:
+      - in: path
+        name: chat_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChatSessionId'
+      - in: query
+        name: run_workflow
+        required: false
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CodeAddForm'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CodeAddResponse'
+          description: Files uploaded successfully
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Chat session not found
+        '500':
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - chat
+  /chat/copy:
+    post:
+      operationId: chat_copy_session
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CopyChatSessionRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatSessionWithMessages'
+          description: Chat session copied successfully
+        '500':
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      summary: Copy a chat session with its workflows and git files
+      tags:
+      - chat
+  /chat/files/load:
+    post:
+      operationId: chat_load_files
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoadFilesRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoadFilesResponse'
+          description: Files loaded successfully
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Repository or commit not found
+        '500':
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      summary: Load files from a chat session's git repository
+      tags:
+      - chat
+  /chat/input-files/delete/{chat_id}:
+    post:
+      operationId: delete_input_files
+      parameters:
+      - in: path
+        name: chat_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChatSessionId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InputFilesDeleteRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InputFilesDeleteResponse'
+          description: Files deleted successfully
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Chat session not found
+        '500':
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      summary: Delete input files from a chat session
+      tags:
+      - chat
+  /chat/input-files/download-all/{chat_id}:
+    get:
+      description: 'Pass `since` query param (RFC 3339 timestamp) to only get files created/updated after that time.
+
+        The response includes `latest_timestamp` which can be passed as `since` on the next call.'
+      operationId: download_all_input_files
+      parameters:
+      - in: path
+        name: chat_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChatSessionId'
+      - in: query
+        name: since
+        required: false
+        schema:
+          format: date-time
+          nullable: true
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InputFilesDownloadAllResponse'
+          description: All files as base64 JSON
+        '401':
+          description: Unauthorized
+        '404':
+          description: Chat session not found
+        '500':
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      summary: Download all input files for a chat session as base64-encoded JSON.
+      tags:
+      - chat
+  /chat/input-files/download/{chat_id}/{filename}:
+    get:
+      operationId: download_input_file
+      parameters:
+      - in: path
+        name: chat_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChatSessionId'
+      - in: path
+        name: filename
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/octet-stream:
+              schema:
+                format: binary
+                type: string
+          description: File content
+        '401':
+          description: Unauthorized
+        '404':
+          description: File not found
+        '500':
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      summary: Download a single input file by chat ID and filename
+      tags:
+      - chat
+  /chat/input-files/list/{chat_id}:
+    get:
+      operationId: list_input_files
+      parameters:
+      - in: path
+        name: chat_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChatSessionId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ChatInputFile'
+                type: array
+          description: Files listed successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Chat session not found
+        '500':
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      summary: List input files for a chat session
+      tags:
+      - chat
+  /chat/input-files/upload/{chat_id}:
+    post:
+      operationId: upload_input_files
+      parameters:
+      - in: path
+        name: chat_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChatSessionId'
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/InputFilesUploadForm'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InputFilesUploadResponse'
+          description: File uploaded successfully
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '404':
+          description: Chat session not found
+        '413':
+          description: Payload too large
+        '500':
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      summary: Upload an input file to a chat session's bucket storage
+      tags:
+      - chat
+  /chat/sessions:
+    get:
+      operationId: chat_list_sessions
+      parameters:
+      - description: Team ID to filter chat sessions
+        in: query
+        name: team_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/TeamId'
+      - description: Project ID to filter chat sessions
+        in: query
+        name: project_id
+        required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/ProjectId'
+          nullable: true
+      - description: Connector ID to filter chat sessions that use this connector
+        in: query
+        name: connector_id
+        required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/ConnectorId'
+          nullable: true
+      - description: Tab filter for chat sessions
+        in: query
+        name: tab
+        required: false
+        schema:
+          allOf:
+          - $ref: '#/components/schemas/ChatSessionTab'
+          nullable: true
+      - description: 'Number of sessions to skip (default: 0)'
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int64
+          nullable: true
+          type: integer
+      - description: 'Maximum number of sessions to return (default: 50)'
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int64
+          nullable: true
+          type: integer
+      - description: Search query to filter sessions by name (case-insensitive)
+        in: query
+        name: search
+        required: false
+        schema:
+          nullable: true
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListChatSessionsResponse'
+          description: Chat sessions retrieved successfully
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      summary: List all chat sessions for the authenticated user within a specific team and project.
+      tags:
+      - chat
+    post:
+      operationId: chat_create_session
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateChatSessionRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateChatSessionResponse'
+          description: Chat session created successfully
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden - user does not have write access to team
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Project not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      summary: Create a new chat session with an initial message
+      tags:
+      - chat
+  /chat/sessions/{chat_id}/admin/issue_found:
+    post:
+      operationId: admin_issue_found
+      parameters:
+      - description: Chat session ID
+        in: path
+        name: chat_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChatSessionId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AdminIssueFoundRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminIssueFoundResponse'
+          description: Admin issue message created
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Chat session not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      summary: Add an IssueFound tool call as an admin-only auto-review message
+      tags:
+      - chat
+  /chat/sessions/{chat_id}/admin_override:
+    post:
+      operationId: chat_grant_admin_override
+      parameters:
+      - description: The chat ID
+        in: path
+        name: chat_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChatSessionId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GrantAdminAccessRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminGrantAccessResponse'
+          description: Temporary admin access granted
+        '400':
+          description: Bad request
+        '403':
+          description: Forbidden
+        '404':
+          description: Chat not found or access denied
+        '500':
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      summary: Grant temporary admin override access for the calling admin to a chat session
+      tags:
+      - chat
+  /chat/sessions/{chat_id}/collaborators:
+    get:
+      operationId: chat_list_collaborators
+      parameters:
+      - description: The chat session ID
+        in: path
+        name: chat_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChatSessionId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListCollaboratorsResponse'
+          description: List of collaborators retrieved successfully
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid session ID format
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Chat session not found or access denied
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      summary: List all users who have access to a chat session
+      tags:
+      - chat
+    post:
+      operationId: chat_add_collaborator
+      parameters:
+      - description: The chat ID
+        in: path
+        name: chat_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChatSessionId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddCollaboratorRequest'
+        required: true
+      responses:
+        '201':
+          description: Collaborator added successfully
+        '400':
+          description: Bad request
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - chat
+  /chat/sessions/{chat_id}/collaborators/{user_id}:
+    delete:
+      operationId: chat_remove_collaborator
+      parameters:
+      - description: The chat ID
+        in: path
+        name: chat_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChatSessionId'
+      - description: The user ID to remove
+        in: path
+        name: user_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/UserId'
+      responses:
+        '204':
+          description: Collaborator removed successfully
+        '400':
+          description: Bad request
+        '404':
+          description: Not found
+        '500':
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - chat
+  /chat/sessions/{chat_id}/commits/{commit_hash}:
+    get:
+      operationId: get_git_commit
+      parameters:
+      - description: The chat session ID
+        in: path
+        name: chat_id
+        required: true
+        schema:
+          type: string
+      - description: The git commit hash
+        in: path
+        name: commit_hash
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetGitCommitByHashResponse'
+          description: Git commit retrieved successfully
+        '400':
+          description: Invalid session ID or commit hash format
+        '404':
+          description: Chat session or commit not found
+        '500':
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      summary: Get a specific git commit by its hash for a chat session
+      tags:
+      - chat
+  /chat/sessions/{chat_id}/dashboards:
+    get:
+      operationId: list_dashboards
+      parameters:
+      - description: The chat session ID
+        in: path
+        name: chat_id
+        required: true
+        schema:
+          type: string
+      - description: Optional commit hash. If omitted, uses the chat session latest commit.
+        in: query
+        name: commit_hash
+        required: false
+        schema:
+          nullable: true
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListDashboardsResponse'
+          description: Dashboards retrieved successfully
+        '400':
+          description: Invalid chat session ID format
+        '404':
+          description: Chat session not found or commit not found
+        '500':
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      summary: List dashboard specs for a chat session at a specific commit hash.
+      tags:
+      - chat
+  /chat/sessions/{session_id}:
+    delete:
+      operationId: chat_delete_session
+      parameters:
+      - description: The chat session ID
+        in: path
+        name: session_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+          description: Chat session deleted successfully
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid session ID format
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden - user does not have write access to chat session
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Chat session not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      summary: Delete a chat session
+      tags:
+      - chat
+    get:
+      operationId: chat_get_session
+      parameters:
+      - description: The chat session ID
+        in: path
+        name: session_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetChatSessionResponse'
+          description: Chat session retrieved successfully
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid session ID format
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Chat session not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      summary: Get a chat session with all its messages
+      tags:
+      - chat
+    patch:
+      operationId: update_chat_session
+      parameters:
+      - description: Chat session ID to update
+        in: path
+        name: session_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChatSessionId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateChatSessionRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatSession'
+          description: Successfully updated chat session
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden - user does not have write access to chat session
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Session not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - chat
+  /chat/sessions/{session_id}/commits:
+    get:
+      operationId: chat_list_git_commits
+      parameters:
+      - description: The chat session ID
+        in: path
+        name: session_id
+        required: true
+        schema:
+          type: string
+      - description: Number of commits to skip (for pagination)
+        in: query
+        name: offset
+        required: false
+        schema:
+          format: int64
+          nullable: true
+          type: integer
+      - description: Maximum number of commits to return (defaults to 50)
+        in: query
+        name: limit
+        required: false
+        schema:
+          format: int64
+          nullable: true
+          type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetGitCommitsResponse'
+          description: Git commits listed successfully
+        '400':
+          description: Invalid session ID format
+        '404':
+          description: Chat session not found
+        '500':
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      summary: List git commits for a chat session
+      tags:
+      - chat
+    post:
+      operationId: chat_add_git_commit
+      parameters:
+      - description: The chat session ID
+        in: path
+        name: session_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChatSessionId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddGitCommitRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddGitCommitResponse'
+          description: Git commit added successfully
+      security:
+      - api_key: []
+      - session_token: []
+      summary: Add a git commit to a chat session
+      tags:
+      - chat
+  /chat/sessions/{session_id}/compress:
+    post:
+      operationId: chat_compress
+      parameters:
+      - description: The chat session ID
+        in: path
+        name: session_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChatSessionId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CompressChatResponse'
+          description: Chat compression started
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - chat
+  /chat/sessions/{session_id}/dependencies:
+    get:
+      operationId: chat_get_dependencies
+      parameters:
+      - description: The chat session ID
+        in: path
+        name: session_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDependenciesResponse'
+          description: Dependencies retrieved successfully
+        '400':
+          description: Invalid session ID format
+        '404':
+          description: Chat session not found
+        '500':
+          description: Internal server error
+      security:
+      - api_key: []
+      summary: Get all dependencies for a chat session
+      tags:
+      - chat
+  /chat/sessions/{session_id}/favorite:
+    patch:
+      operationId: update_chat_session_favorite
+      parameters:
+      - description: Chat session ID to update
+        in: path
+        name: session_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChatSessionId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateChatSessionFavoriteRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatSession'
+          description: Successfully updated chat session favorite
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Bad request
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden - user does not have view access to chat session
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Session not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      tags:
+      - chat
+  /chat/sessions/{session_id}/make-permanent:
+    patch:
+      operationId: chat_make_session_permanent
+      parameters:
+      - description: The chat session ID
+        in: path
+        name: session_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Chat session made permanent successfully
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid session ID format
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Access denied - only owners can make sessions permanent
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Chat session not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      summary: Make an ephemeral chat session permanent
+      tags:
+      - chat
+  /chat/sessions/{session_id}/nodes/by_code_hash:
+    post:
+      operationId: chat_copy_node_output_by_code_hash
+      parameters:
+      - description: Id of the chat session to search in.
+        in: path
+        name: session_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChatSessionId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GetNodeByCodeHashRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CopyNodeOutputByCodeHashResponse'
+          description: Successfully retrieved latest node id with matching code hash and copied output to the provided new node if supplied.
+        '400':
+          description: Invalid request.
+      tags:
+      - chat
+  /chat/sessions/{session_id}/revert:
+    post:
+      operationId: chat_revert_to_commit
+      parameters:
+      - description: The chat session ID
+        in: path
+        name: session_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChatSessionId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RevertToCommitRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RevertToCommitApiResponse'
+          description: Successfully reverted to commit
+        '400':
+          description: Invalid request or commit hash
+        '403':
+          description: 'Access denied: insufficient permissions'
+        '404':
+          description: Session or commit not found
+      security:
+      - api_key: []
+      - session_token: []
+      summary: Revert a chat session to a specific commit
+      tags:
+      - chat
+  /chat/sessions/{session_id}/timeline:
+    get:
+      operationId: chat_get_session_timeline
+      parameters:
+      - description: The chat session ID
+        in: path
+        name: session_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChatSessionId'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetSessionTimelineResponse'
+          description: Session timeline retrieved successfully
+        '400':
+          description: Invalid session ID format
+        '404':
+          description: Chat session not found
+        '500':
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      summary: Get chronological timeline of messages and commits for a chat session
+      tags:
+      - chat
+  /chat/sessions/{session_id}/visibility:
+    put:
+      operationId: chat_update_visibility
+      parameters:
+      - description: The chat session ID
+        in: path
+        name: session_id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateVisibilityRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateVisibilityResponse'
+          description: Visibility updated successfully
+        '400':
+          description: Invalid session ID format
+        '403':
+          description: Only the owner of this chat can change sharing settings
+        '404':
+          description: Chat session not found
+        '500':
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      summary: Update visibility of a chat session
+      tags:
+      - chat
+  /chat/ws:
+    get:
+      operationId: chat_ws
+      parameters:
+      - description: Chat session ID to subscribe to
+        in: query
+        name: chat_session_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChatSessionId'
+      - description: API key for authentication
+        in: query
+        name: api_key
+        required: false
+        schema:
+          nullable: true
+          type: string
+      - description: Session token for authentication
+        in: query
+        name: session_token
+        required: false
+        schema:
+          nullable: true
+          type: string
+      responses:
+        '101':
+          description: WebSocket connection established
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+      security:
+      - api_key: []
+      - session_token: []
+      summary: WebSocket endpoint for chat session events
+      tags:
+      - chat
+  /chat/{chat_session_id}/partial-chats:
+    get:
+      operationId: get_partial_chats
+      parameters:
+      - description: Chat session ID to get partial chats for
+        in: path
+        name: chat_session_id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PartialChatWithMetadata'
+                type: array
+          description: Partial chats retrieved successfully
+        '403':
+          description: Access denied
+        '404':
+          description: Chat session not found
+      summary: Get all partial chats for a chat session
+      tags:
+      - chat
+  /chat/{chat_session_id}/simulate-prompt:
+    post:
+      description: any messages to the database.
+      operationId: simulate_chat_prompt
+      parameters:
+      - description: Chat session ID
+        in: path
+        name: chat_session_id
+        required: true
+        schema:
+          $ref: '#/components/schemas/ChatSessionId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SimulatePromptRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SimulatePromptResponse'
+          description: Prompt simulation completed
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Unauthorized
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Forbidden
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Chat session not found
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Internal server error
+      security:
+      - api_key: []
+      - session_token: []
+      summary: Generate a one-off assistant response from an edited prompt without persisting
+      tags:
+      - chat
+components:
+  schemas:
+    PinPreviousToolInput:
+      properties:
+        path:
+          type: string
+      required:
+      - path
+      type: object
+    RunPythonInput:
+      properties:
+        code:
+          type: string
+        connector:
+          nullable: true
+          type: string
+        timeout_seconds:
+          format: int64
+          minimum: 0
+          nullable: true
+          type: integer
+        working_dir:
+          nullable: true
+          type: string
+      required:
+      - code
+      type: object
+    TableDescriptor:
+      additionalProperties: false
+      description: The full definition of what a schema is - without duplicate information.
+      properties:
+        description:
+          type: string
+        expected_cardinality:
+          description: 'Expected number of unique values in the complete dataset.
+
+
+            This is used for our probabilistic merge strategy.'
+          format: int64
+          minimum: 0
+          nullable: true
+          type: integer
+        name:
+          description: Organized in a name, description format.
+          type: string
+        primary_column:
+          nullable: true
+          type: string
+        properties:
+          description: Organized in a name, description format.
+          items:
+            $ref: '#/components/schemas/PropertyDescriptor'
+          type: array
+      required:
+      - name
+      - description
+      - properties
+      type: object
+    ScraperMeta:
+      properties:
+        html_content:
+          type: string
+        url:
+          type: string
+      required:
+      - html_content
+      - url
+      type: object
+    SimulatePromptRequest:
+      properties:
+        chat_prompt:
+          $ref: '#/components/schemas/ChatPrompt'
+      required:
+      - chat_prompt
+      type: object
+    GetGitCommitsResponse:
+      description: Response structure for getting git commits
+      properties:
+        commits:
+          description: List of git commits for the session
+          items:
+            $ref: '#/components/schemas/GitCommit'
+          type: array
+      required:
+      - commits
+      type: object
+    ProjectId:
+      format: uuid
+      type: string
+    ChatEvent:
+      description: Events in a chat session timeline, including messages and unified tool calls/results
+      oneOf:
+      - properties:
+          TextMessage:
+            properties:
+              message:
+                type: string
+            required:
+            - message
+            type: object
+        required:
+        - TextMessage
+        type: object
+      - properties:
+          Thinking:
+            properties:
+              block_id:
+                format: int64
+                minimum: 0
+                type: integer
+              complete:
+                type: boolean
+              content:
+                type: string
+            required:
+            - content
+            - complete
+            - block_id
+            type: object
+        required:
+        - Thinking
+        type: object
+      - properties:
+          File:
+            description: 'The file event can''t be serialized to the database safely without the content.
+
+              When streaming, we start with the path only, then add the content as we go.'
+            properties:
+              block_id:
+                format: int64
+                minimum: 0
+                type: integer
+              complete:
+                type: boolean
+              content:
+                nullable: true
+                type: string
+              path:
+                type: string
+            required:
+            - path
+            - complete
+            - block_id
+            type: object
+        required:
+        - File
+        type: object
+      - properties:
+          Action:
+            properties:
+              actions:
+                items:
+                  $ref: '#/components/schemas/ActionDef'
+                type: array
+              block_id:
+                format: int64
+                minimum: 0
+                type: integer
+              complete:
+                type: boolean
+            required:
+            - actions
+            - complete
+            - block_id
+            type: object
+        required:
+        - Action
+        type: object
+      - properties:
+          Connector:
+            properties:
+              description:
+                nullable: true
+                type: string
+              env_vars:
+                items:
+                  type: string
+                type: array
+              name:
+                type: string
+            required:
+            - name
+            - env_vars
+            type: object
+        required:
+        - Connector
+        type: object
+      - properties:
+          ToolCall:
+            properties:
+              block_id:
+                format: int64
+                minimum: 0
+                type: integer
+              complete:
+                type: boolean
+              invocation:
+                $ref: '#/components/schemas/ToolInvocation'
+              tool_result:
+                $ref: '#/components/schemas/ToolResult'
+            required:
+            - invocation
+            - tool_result
+            - block_id
+            - complete
+            type: object
+        required:
+        - ToolCall
+        type: object
+      - properties:
+          Question:
+            properties:
+              block_id:
+                format: int64
+                minimum: 0
+                type: integer
+              complete:
+                type: boolean
+              content:
+                type: string
+              options:
+                items:
+                  type: string
+                type: array
+            required:
+            - content
+            - complete
+            - options
+            - block_id
+            type: object
+        required:
+        - Question
+        type: object
+      - properties:
+          InternalError:
+            properties:
+              error_kind:
+                $ref: '#/components/schemas/InternalErrorKind'
+              message:
+                type: string
+            required:
+            - message
+            type: object
+        required:
+        - InternalError
+        type: object
+      - properties:
+          ReviewRequest:
+            properties:
+              node_summaries:
+                items:
+                  $ref: '#/components/schemas/NodeSummary'
+                type: array
+            required:
+            - node_summaries
+            type: object
+        required:
+        - ReviewRequest
+        type: object
+      - properties:
+          AttachedFile:
+            properties:
+              image_bytes:
+                format: binary
+                nullable: true
+                type: string
+              path:
+                type: string
+            required:
+            - path
+            type: object
+        required:
+        - AttachedFile
+        type: object
+      - properties:
+          ConnectorRequest:
+            properties:
+              connector_id:
+                $ref: '#/components/schemas/ConnectorId'
+            required:
+            - connector_id
+            type: object
+        required:
+        - ConnectorRequest
+        type: object
+      - properties:
+          UserInterrupted:
+            type: object
+        required:
+        - UserInterrupted
+        type: object
+      - properties:
+          IssueFound:
+            properties:
+              admin_override:
+                type: boolean
+              description:
+                type: string
+              title:
+                type: string
+            required:
+            - title
+            - description
+            - admin_override
+            type: object
+        required:
+        - IssueFound
+        type: object
+    ReasoningEffort:
+      enum:
+      - low
+      - medium
+      - high
+      - minimal
+      type: string
+    GrantAdminAccessRequest:
+      properties:
+        duration_hours:
+          description: Duration in hours for the temporary access
+          format: int64
+          type: integer
+        role:
+          $ref: '#/components/schemas/ChatSessionRole'
+      required:
+      - role
+      - duration_hours
+      type: object
+    ChatSessionWithEvents:
+      properties:
+        commits:
+          items:
+            $ref: '#/components/schemas/GitCommit'
+          type: array
+        created_at:
+          format: date-time
+          type: string
+        ephemeral:
+          type: boolean
+        git_application_token:
+          type: string
+        id:
+          $ref: '#/components/schemas/ChatSessionId'
+        instantiated_from_template_id:
+          allOf:
+          - $ref: '#/components/schemas/ChatTemplateId'
+          nullable: true
+        is_favorite:
+          type: boolean
+        latest_workflow_session_id:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowSessionId'
+          nullable: true
+        message_head:
+          allOf:
+          - $ref: '#/components/schemas/ChatMessageId'
+          nullable: true
+        messages:
+          items:
+            $ref: '#/components/schemas/ChatEventWithRole'
+          type: array
+        name:
+          nullable: true
+          type: string
+        project_id:
+          allOf:
+          - $ref: '#/components/schemas/ProjectId'
+          nullable: true
+        slack_channel_id:
+          nullable: true
+          type: string
+        slack_team_id:
+          nullable: true
+          type: string
+        slack_thread_ts:
+          nullable: true
+          type: string
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+        teams_channel_id:
+          nullable: true
+          type: string
+        teams_conversation_id:
+          nullable: true
+          type: string
+        teams_tenant_id:
+          nullable: true
+          type: string
+        title:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+        user_message_needed:
+          type: boolean
+        user_role:
+          $ref: '#/components/schemas/ChatSessionRole'
+        visibility:
+          $ref: '#/components/schemas/ChatVisibility'
+        workflow_schedule_id:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowScheduleId'
+          nullable: true
+        workflow_sessions:
+          items:
+            $ref: '#/components/schemas/WorkflowSession'
+          type: array
+      required:
+      - id
+      - title
+      - messages
+      - commits
+      - created_at
+      - updated_at
+      - git_application_token
+      - user_role
+      - visibility
+      - is_favorite
+      - team_id
+      - ephemeral
+      - user_message_needed
+      - workflow_sessions
+      type: object
+    MergeStrategy:
+      oneOf:
+      - description: 'Property with unique 1:1 correspondence to its parent.
+
+
+          Merge based on this property 100% of the time'
+        enum:
+        - Unique
+        type: string
+      - properties:
+          Probabilistic:
+            $ref: '#/components/schemas/MergeConfig'
+        required:
+        - Probabilistic
+        type: object
+      - enum:
+        - NoSignal
+        type: string
+    DecodingParams:
+      properties:
+        parameters:
+          items:
+            $ref: '#/components/schemas/DecodingParamEnum'
+          type: array
+      required:
+      - parameters
+      type: object
+    CreateChatSessionResponse:
+      description: Response for creating a chat session
+      properties:
+        session:
+          $ref: '#/components/schemas/ChatSessionWithMessages'
+      required:
+      - session
+      type: object
+    VizQuery:
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+        sql:
+          type: string
+      required:
+      - id
+      - sql
+      type: object
+    ChatMessage:
+      properties:
+        chat_session_id:
+          $ref: '#/components/schemas/ChatSessionId'
+        content:
+          type: string
+        content_proto:
+          format: binary
+          nullable: true
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        git_hash:
+          nullable: true
+          type: string
+        id:
+          $ref: '#/components/schemas/ChatMessageId'
+        previous_message_id:
+          allOf:
+          - $ref: '#/components/schemas/ChatMessageId'
+          nullable: true
+        role:
+          type: string
+        slack_channel_id:
+          nullable: true
+          type: string
+        slack_message_ts:
+          nullable: true
+          type: string
+        slack_thread_ts:
+          nullable: true
+          type: string
+        stream_chunks:
+          items:
+            $ref: '#/components/schemas/StreamChunkEntry'
+          nullable: true
+          type: array
+        teams_channel_id:
+          nullable: true
+          type: string
+        teams_conversation_id:
+          nullable: true
+          type: string
+        teams_message_id:
+          nullable: true
+          type: string
+        timestamp:
+          format: date-time
+          type: string
+      required:
+      - id
+      - chat_session_id
+      - role
+      - content
+      - timestamp
+      - created_at
+      type: object
+    ApplyPatchEdit:
+      properties:
+        new_string:
+          type: string
+        old_string:
+          type: string
+      required:
+      - old_string
+      - new_string
+      type: object
+    DecodingParamEnum:
+      oneOf:
+      - properties:
+          MaxTokens:
+            minimum: 0
+            type: integer
+        required:
+        - MaxTokens
+        type: object
+      - properties:
+          MaxCompletionTokens:
+            minimum: 0
+            type: integer
+        required:
+        - MaxCompletionTokens
+        type: object
+      - properties:
+          TopP:
+            format: float
+            type: number
+        required:
+        - TopP
+        type: object
+      - properties:
+          RepeatWindow:
+            minimum: 0
+            type: integer
+        required:
+        - RepeatWindow
+        type: object
+      - properties:
+          RepeatPenalty:
+            format: float
+            type: number
+        required:
+        - RepeatPenalty
+        type: object
+      - properties:
+          Temperature:
+            format: float
+            type: number
+        required:
+        - Temperature
+        type: object
+      - properties:
+          StopTokens:
+            items:
+              type: string
+            type: array
+        required:
+        - StopTokens
+        type: object
+      - properties:
+          LogitBias:
+            additionalProperties:
+              format: float
+              type: number
+            type: object
+        required:
+        - LogitBias
+        type: object
+      - properties:
+          Functions:
+            items:
+              additionalProperties: true
+              type: object
+              x-stainless-empty-object: true
+            type: array
+        required:
+        - Functions
+        type: object
+      - properties:
+          JsonValidator:
+            additionalProperties: true
+            type: object
+            x-stainless-empty-object: true
+        required:
+        - JsonValidator
+        type: object
+      - properties:
+          RegexValidator:
+            type: string
+        required:
+        - RegexValidator
+        type: object
+      - properties:
+          ContextFreeGrammar:
+            type: string
+        required:
+        - ContextFreeGrammar
+        type: object
+      - properties:
+          NumBeams:
+            minimum: 0
+            type: integer
+        required:
+        - NumBeams
+        type: object
+      - properties:
+          Crop:
+            type: boolean
+        required:
+        - Crop
+        type: object
+      - properties:
+          Thinking:
+            description: Thinking tokens for Claude 3.7. Contains the budget in tokens for thinking.
+            minimum: 0
+            type: integer
+        required:
+        - Thinking
+        type: object
+      - properties:
+          Verbosity:
+            $ref: '#/components/schemas/Verbosity'
+        required:
+        - Verbosity
+        type: object
+      - properties:
+          ReasoningEffort:
+            $ref: '#/components/schemas/ReasoningEffort'
+        required:
+        - ReasoningEffort
+        type: object
+    SearchConnectorTypesInput:
+      properties:
+        query:
+          nullable: true
+          type: string
+      type: object
+    AdminGrantAccessResponse:
+      description: Response for granting temporary admin access
+      properties:
+        expires_at:
+          format: date-time
+          type: string
+        role:
+          $ref: '#/components/schemas/ChatSessionRole'
+      required:
+      - role
+      - expires_at
+      type: object
+    GitCommit:
+      properties:
+        chat_session_id:
+          $ref: '#/components/schemas/ChatSessionId'
+        commit_hash:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        id:
+          format: uuid
+          type: string
+      required:
+      - id
+      - chat_session_id
+      - commit_hash
+      - created_at
+      type: object
+    ChatEventWithRole:
+      description: Model-layer message representation - streamlined for LLM transmission
+      properties:
+        content:
+          $ref: '#/components/schemas/ChatEvent'
+        git_hash:
+          nullable: true
+          type: string
+        message_id:
+          $ref: '#/components/schemas/ChatMessageId'
+        previous_message_id:
+          allOf:
+          - $ref: '#/components/schemas/ChatMessageId'
+          nullable: true
+        role:
+          $ref: '#/components/schemas/SpeakerTag'
+        timestamp:
+          format: date-time
+          type: string
+      required:
+      - message_id
+      - role
+      - content
+      - timestamp
+      type: object
+    ToolInvocation:
+      discriminator:
+        propertyName: name
+      oneOf:
+      - properties:
+          input:
+            $ref: '#/components/schemas/WebSearchInput'
+          name:
+            enum:
+            - WebSearch
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/WebNavigateInput'
+          name:
+            enum:
+            - WebNavigate
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/ViewPageInput'
+          name:
+            enum:
+            - ViewPage
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/SaveInput'
+          name:
+            enum:
+            - Save
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/SaveEntitiesInput'
+          name:
+            enum:
+            - SaveEntities
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/ExitInput'
+          name:
+            enum:
+            - Exit
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/ApiExecuteInput'
+          name:
+            enum:
+            - ApiExecute
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/JavascriptInput'
+          name:
+            enum:
+            - Javascript
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/NavigateToIFrameInput'
+          name:
+            enum:
+            - NavigateToIFrame
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/InfiniteScrollInput'
+          name:
+            enum:
+            - InfiniteScroll
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/InspectStepInput'
+          name:
+            enum:
+            - InspectStep
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/ReadNodeLogsInput'
+          name:
+            enum:
+            - ReadNodeLogs
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/DeleteFileInput'
+          name:
+            enum:
+            - DeleteFile
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/MoveFileInput'
+          name:
+            enum:
+            - MoveFile
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/ApplyPatchInput'
+          name:
+            enum:
+            - ApplyPatch
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/RunBashInput'
+          name:
+            enum:
+            - RunBash
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/RunPythonInput'
+          name:
+            enum:
+            - RunPython
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/IssueFoundInput'
+          name:
+            enum:
+            - IssueFound
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/SaveDatabaseInput'
+          name:
+            enum:
+            - SaveDatabase
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/SaveSchemaInput'
+          name:
+            enum:
+            - SaveSchema
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/SaveTableInput'
+          name:
+            enum:
+            - SaveTable
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/SaveColumnInput'
+          name:
+            enum:
+            - SaveColumn
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/SaveApiResourceInput'
+          name:
+            enum:
+            - SaveApiResource
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/SaveMemoryInput'
+          name:
+            enum:
+            - SaveMemory
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/SearchConnectorTablesInput'
+          name:
+            enum:
+            - SearchConnectorTables
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/RequestClarificationInput'
+          name:
+            enum:
+            - RequestClarification
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/AddDependencyInput'
+          name:
+            enum:
+            - AddDependency
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/SelectDataInput'
+          name:
+            enum:
+            - SelectData
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/CreateConnectorInput'
+          name:
+            enum:
+            - CreateConnector
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/SearchConnectorTypesInput'
+          name:
+            enum:
+            - SearchConnectorTypes
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/PinPreviousToolInput'
+          name:
+            enum:
+            - PinPreviousTool
+            type: string
+        required:
+        - name
+        - input
+        type: object
+      - properties:
+          input:
+            $ref: '#/components/schemas/RunPipelineInput'
+          name:
+            enum:
+            - RunPipeline
+            type: string
+        required:
+        - name
+        - input
+        type: object
+    GetDependenciesResponse:
+      description: Response structure for getting chat dependencies
+      properties:
+        dependencies:
+          description: List of dependencies for the chat session
+          items:
+            $ref: '#/components/schemas/ChatDependency'
+          type: array
+      required:
+      - dependencies
+      type: object
+    UserId:
+      format: uuid
+      type: string
+    ApiExecuteInput:
+      properties:
+        code:
+          type: string
+      required:
+      - code
+      type: object
+    ToolResult:
+      oneOf:
+      - enum:
+        - Pending
+        type: string
+      - enum:
+        - NoResult
+        type: string
+      - properties:
+          Error:
+            type: string
+        required:
+        - Error
+        type: object
+      - properties:
+          Text:
+            type: string
+        required:
+        - Text
+        type: object
+      - properties:
+          CodeExecution:
+            $ref: '#/components/schemas/CodeExecutionResult'
+        required:
+        - CodeExecution
+        type: object
+      - properties:
+          WebMarkdown:
+            type: string
+        required:
+        - WebMarkdown
+        type: object
+      - properties:
+          WebSearch:
+            items:
+              $ref: '#/components/schemas/DocSnippet'
+            type: array
+        required:
+        - WebSearch
+        type: object
+      - properties:
+          ConnectorSearch:
+            items:
+              $ref: '#/components/schemas/ConnectorTableResult'
+            type: array
+        required:
+        - ConnectorSearch
+        type: object
+      - properties:
+          NodeLogs:
+            items:
+              type: string
+            type: array
+        required:
+        - NodeLogs
+        type: object
+      - enum:
+        - Completed
+        type: string
+      - properties:
+          Image:
+            $ref: '#/components/schemas/ImageResult'
+        required:
+        - Image
+        type: object
+      - properties:
+          Pinned:
+            type: string
+        required:
+        - Pinned
+        type: object
+    ErrorResponse:
+      description: Standard error response
+      properties:
+        error:
+          type: string
+      required:
+      - error
+      type: object
+    VizParam:
+      discriminator:
+        propertyName: type
+      oneOf:
+      - properties:
+          control:
+            $ref: '#/components/schemas/VizStringControl'
+          type:
+            enum:
+            - string
+            type: string
+          value:
+            type: string
+        required:
+        - value
+        - type
+        type: object
+      - properties:
+          control:
+            $ref: '#/components/schemas/VizNumberControl'
+          type:
+            enum:
+            - number
+            type: string
+          value:
+            format: double
+            type: number
+        required:
+        - value
+        - type
+        type: object
+      - properties:
+          control:
+            $ref: '#/components/schemas/VizBooleanControl'
+          type:
+            enum:
+            - boolean
+            type: string
+          value:
+            type: boolean
+        required:
+        - value
+        - type
+        type: object
+      - properties:
+          control:
+            $ref: '#/components/schemas/VizDateControl'
+          type:
+            enum:
+            - date
+            type: string
+          value:
+            type: string
+        required:
+        - value
+        - type
+        type: object
+    NavigateToIFrameInput:
+      properties:
+        index:
+          format: int32
+          minimum: 0
+          type: integer
+      required:
+      - index
+      type: object
+    SaveMemoryInput:
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      required:
+      - key
+      - value
+      type: object
+    UpdateChatSessionRequest:
+      properties:
+        message_head:
+          allOf:
+          - $ref: '#/components/schemas/ChatMessageId'
+          nullable: true
+        name:
+          nullable: true
+          type: string
+        project_id:
+          allOf:
+          - $ref: '#/components/schemas/ProjectId'
+          nullable: true
+        skip_confirmations:
+          nullable: true
+          type: boolean
+      type: object
+    SaveSchemaInput:
+      properties:
+        description:
+          nullable: true
+          type: string
+        name:
+          type: string
+        notes:
+          nullable: true
+          type: string
+      required:
+      - name
+      type: object
+    RequiredEntity:
+      additionalProperties: false
+      properties:
+        entity_id:
+          allOf:
+          - $ref: '#/components/schemas/EntityId'
+          nullable: true
+        seeded_entity_id:
+          description: The integer id corresponding to an entity in the seeded entity graph (different from the global dataset entity id)
+          minimum: 0
+          type: integer
+      required:
+      - seeded_entity_id
+      type: object
+    DashboardSpec:
+      additionalProperties: false
+      properties:
+        dataset:
+          type: string
+        description:
+          type: string
+        figures:
+          items:
+            $ref: '#/components/schemas/VizFigure'
+          type: array
+        params:
+          additionalProperties:
+            $ref: '#/components/schemas/VizParam'
+          type: object
+        queries:
+          items:
+            $ref: '#/components/schemas/VizQuery'
+          type: array
+        title:
+          type: string
+        version:
+          type: string
+      required:
+      - version
+      - title
+      - description
+      - dataset
+      - params
+      - queries
+      - figures
+      type: object
+    CodeAddResponse:
+      properties:
+        commit_hash:
+          type: string
+        files_uploaded:
+          minimum: 0
+          type: integer
+        message:
+          $ref: '#/components/schemas/ChatMessage'
+      required:
+      - message
+      - commit_hash
+      - files_uploaded
+      type: object
+    ChatSessionConfig:
+      description: Configuration for chat session with system prompt and LLM key
+      properties:
+        llm_key:
+          allOf:
+          - $ref: '#/components/schemas/LLMKey'
+          nullable: true
+        max_steps:
+          format: int32
+          minimum: 0
+          nullable: true
+          type: integer
+        reminder_message:
+          nullable: true
+          type: string
+        system_prompt:
+          nullable: true
+          type: string
+      type: object
+    ActionDef:
+      description: Action definition
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+      required:
+      - name
+      - description
+      type: object
+    ListDashboardsResponse:
+      properties:
+        commit_hash:
+          description: Commit hash used to load dashboard specs.
+          type: string
+        dashboards:
+          description: All dashboard specs in src/visualizations/*.viz.json.
+          items:
+            $ref: '#/components/schemas/DashboardItem'
+          type: array
+      required:
+      - commit_hash
+      - dashboards
+      type: object
+    ConnectorColumnResult:
+      properties:
+        name:
+          type: string
+        notes:
+          nullable: true
+          type: string
+        type:
+          type: string
+      required:
+      - name
+      - type
+      type: object
+    LLMKey:
+      description: 'LLM model keys available in the system. Format: <provider>.<model-name>'
+      enum:
+      - vllm.gpt-5-mini-2025-08-07
+      - vllm.gpt-4.1-mini-2025-04-14
+      - vllm.gpt-5-nano-2025-08-07
+      - vllm.gpt-5-2025-08-07
+      - vllm.ft:gpt-4o-2024-08-06:structify::ADrF00Gq
+      - vllm.ft:gpt-4o-mini-2024-07-18:structify::ABCLHTsN
+      - vllm.action
+      - vllm.dora
+      - vllm.boring_dora
+      - vllm.claude-3-7-sonnet-20250219
+      - vllm.claude-sonnet-4-20250514
+      - vllm.qwen-3-coder-480b
+      - test_llm.test
+      - bedrock.claude-sonnet-4-bedrock
+      - bedrock.claude-sonnet-4-5-bedrock
+      - bedrock.claude-opus-4-5-bedrock
+      - bedrock.claude-opus-4-6-bedrock
+      - bedrock.claude-haiku-4-5-bedrock
+      - gemini.gemini-2.5-pro
+      - gemini.gemini-2.5-flash
+      - gemini.gemini-3-flash-preview
+      - gemini.gemini-3.1-flash-lite-preview
+      - vertex_anthropic.claude-sonnet-4-5-vertex
+      - vertex_anthropic.claude-opus-4-5-vertex
+      type: string
+    MessageContent:
+      oneOf:
+      - properties:
+          Text:
+            type: string
+        required:
+        - Text
+        type: object
+      - properties:
+          Image:
+            format: binary
+            type: string
+        required:
+        - Image
+        type: object
+    AdminIssueFoundResponse:
+      properties:
+        message_id:
+          format: uuid
+          type: string
+      required:
+      - message_id
+      type: object
+    RequestClarificationInput:
+      properties:
+        column_name:
+          nullable: true
+          type: string
+        question:
+          type: string
+        table_name:
+          type: string
+      required:
+      - table_name
+      - question
+      type: object
+    LLMEntity:
+      additionalProperties: false
+      properties:
+        id:
+          minimum: 0
+          type: integer
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/BasicPropValue'
+          type: object
+        type:
+          type: string
+      required:
+      - id
+      - type
+      - properties
+      type: object
+    LoadFilesRequest:
+      properties:
+        chat_id:
+          $ref: '#/components/schemas/ChatSessionId'
+        commit_hash:
+          nullable: true
+          type: string
+      required:
+      - chat_id
+      type: object
+    CodeExecutionResult:
+      properties:
+        return_code:
+          format: int32
+          type: integer
+        stderr:
+          type: string
+        stdout:
+          type: string
+      required:
+      - stdout
+      - stderr
+      - return_code
+      type: object
+    AddCollaboratorRequest:
+      properties:
+        email:
+          type: string
+        role:
+          $ref: '#/components/schemas/ChatSessionRole'
+      required:
+      - email
+      - role
+      type: object
+    GetGitCommitByHashResponse:
+      description: Response structure for getting a git commit by hash
+      properties:
+        commit:
+          $ref: '#/components/schemas/GitCommit'
+      required:
+      - commit
+      type: object
+    VizBooleanControlType:
+      enum:
+      - checkbox
+      type: string
+    InfiniteScrollInput:
+      type: object
+    DashboardItem:
+      properties:
+        file_name:
+          description: File path relative to repository root.
+          type: string
+        spec:
+          $ref: '#/components/schemas/DashboardSpec'
+      required:
+      - file_name
+      - spec
+      type: object
+    ConnectorId:
+      format: uuid
+      type: string
+    SaveTableInput:
+      properties:
+        description:
+          nullable: true
+          type: string
+        name:
+          type: string
+        notes:
+          nullable: true
+          type: string
+      required:
+      - name
+      type: object
+    PartialChatWithMetadata:
+      properties:
+        chat_prompt:
+          $ref: '#/components/schemas/ChatPrompt'
+        created_at:
+          format: date-time
+          type: string
+        message_id:
+          allOf:
+          - $ref: '#/components/schemas/ChatMessageId'
+          nullable: true
+      required:
+      - created_at
+      - chat_prompt
+      type: object
+    ChatCollaborator:
+      description: DTO for chat collaborator with user email information
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        email:
+          type: string
+        role:
+          $ref: '#/components/schemas/ChatSessionRole'
+        updated_at:
+          format: date-time
+          type: string
+        user_id:
+          $ref: '#/components/schemas/UserId'
+      required:
+      - user_id
+      - email
+      - role
+      - created_at
+      - updated_at
+      type: object
+    InputFilesDeleteResponse:
+      properties:
+        files_deleted:
+          minimum: 0
+          type: integer
+      required:
+      - files_deleted
+      type: object
+    ChatSessionTab:
+      description: Tab filter for chat session listing
+      enum:
+      - my_chats
+      - favorites
+      - shared
+      - team
+      - recents
+      - from_messaging
+      type: string
+    TextMeta:
+      properties:
+        text:
+          type: string
+      required:
+      - text
+      type: object
+    ListCollaboratorsResponse:
+      description: Response for listing collaborators
+      properties:
+        users:
+          items:
+            $ref: '#/components/schemas/ChatCollaborator'
+          type: array
+      required:
+      - users
+      type: object
+    ChatTabCounts:
+      description: Per-tab counts for chat session listing
+      properties:
+        favorites:
+          format: int64
+          type: integer
+        from_messaging:
+          format: int64
+          type: integer
+        my_chats:
+          format: int64
+          type: integer
+        recents:
+          format: int64
+          type: integer
+        shared:
+          format: int64
+          type: integer
+        team:
+          format: int64
+          type: integer
+      required:
+      - my_chats
+      - favorites
+      - shared
+      - team
+      - recents
+      - from_messaging
+      type: object
+    AddGitCommitRequest:
+      description: Request structure for adding a git commit to a chat session
+      properties:
+        commit_hash:
+          description: The git commit hash (must be 40 characters)
+          type: string
+      required:
+      - commit_hash
+      type: object
+    InternalErrorKind:
+      description: 'Categorizes the kind of internal error that occurred during LLM generation.
+
+        This allows the frontend to render appropriate error messages without regex matching.'
+      enum:
+      - unknown
+      - context_limit
+      - rate_limited
+      - timeout
+      - connection_error
+      type: string
+    RevertToCommitApiResponse:
+      description: Response structure for reverting to a git commit
+      properties:
+        commit_hash:
+          description: The commit hash that was reverted to
+          type: string
+        reverted_at:
+          description: Timestamp when the revert occurred
+          format: date-time
+          type: string
+      required:
+      - commit_hash
+      - reverted_at
+      type: object
+    DeleteResponse:
+      description: Success response for delete operations
+      properties:
+        message:
+          type: string
+        success:
+          type: boolean
+      required:
+      - success
+      - message
+      type: object
+    LLMKnowledgeGraph:
+      additionalProperties: false
+      description: 'Knowledge graph info structured to deserialize and display
+
+        in the same format that the LLM outputs.
+
+        Also the first representation of an LLM output in the pipeline from raw tool output to being merged into a DB'
+      properties:
+        entities:
+          items:
+            $ref: '#/components/schemas/LLMEntity'
+          type: array
+        relationships:
+          items:
+            $ref: '#/components/schemas/LLMRelationship'
+          type: array
+      required:
+      - entities
+      type: object
+    WebNavigateInput:
+      properties:
+        output_format:
+          allOf:
+          - $ref: '#/components/schemas/WebNavigateOutput'
+          nullable: true
+        url:
+          type: string
+      required:
+      - url
+      type: object
+    CreateChatSessionRequest:
+      properties:
+        config:
+          allOf:
+          - $ref: '#/components/schemas/ChatSessionConfig'
+          nullable: true
+        ephemeral:
+          nullable: true
+          type: boolean
+        project_id:
+          allOf:
+          - $ref: '#/components/schemas/ProjectId'
+          nullable: true
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+      required:
+      - team_id
+      type: object
+    ListChatSessionsResponse:
+      description: Response for listing chat sessions
+      properties:
+        sessions:
+          items:
+            $ref: '#/components/schemas/ChatSessionSummary'
+          type: array
+        tab_counts:
+          $ref: '#/components/schemas/ChatTabCounts'
+        total_count:
+          description: Total number of chat sessions matching the query (for pagination)
+          format: int64
+          type: integer
+      required:
+      - sessions
+      - total_count
+      - tab_counts
+      type: object
+    ChatMessageId:
+      format: uuid
+      type: string
+    SaveApiResourceInput:
+      properties:
+        description:
+          nullable: true
+          type: string
+        endpoint:
+          type: string
+        name:
+          type: string
+        notes:
+          nullable: true
+          type: string
+      required:
+      - name
+      - endpoint
+      type: object
+    RevertToCommitRequest:
+      description: Request structure for reverting to a git commit
+      properties:
+        commit_hash:
+          description: The git commit hash to revert to (must be 40 characters)
+          type: string
+      required:
+      - commit_hash
+      type: object
+    BasicPropValue:
+      oneOf:
+      - type: string
+      - format: int64
+        type: integer
+      - type: boolean
+      - format: double
+        type: number
+    ChatSessionSummary:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        has_workflow_schedule:
+          type: boolean
+        id:
+          $ref: '#/components/schemas/ChatSessionId'
+        is_favorite:
+          type: boolean
+        name:
+          nullable: true
+          type: string
+        owner_email:
+          nullable: true
+          type: string
+        project_id:
+          allOf:
+          - $ref: '#/components/schemas/ProjectId'
+          nullable: true
+        slack_channel_id:
+          nullable: true
+          type: string
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+        teams_channel_id:
+          nullable: true
+          type: string
+        teams_conversation_id:
+          nullable: true
+          type: string
+        title:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+        user_role:
+          $ref: '#/components/schemas/ChatSessionRole'
+        visibility:
+          $ref: '#/components/schemas/ChatVisibility'
+      required:
+      - id
+      - title
+      - created_at
+      - updated_at
+      - user_role
+      - visibility
+      - is_favorite
+      - team_id
+      - has_workflow_schedule
+      type: object
+    RequiredProperty:
+      additionalProperties: false
+      properties:
+        property_names:
+          description: If there are multiple properties, it can match just one of them
+          items:
+            type: string
+          type: array
+        table_name:
+          description: The table name of the entity to update
+          type: string
+      required:
+      - table_name
+      - property_names
+      type: object
+    SaveEntitiesInput:
+      properties:
+        entities:
+          items:
+            additionalProperties:
+              additionalProperties: true
+              type: object
+              x-stainless-empty-object: true
+            type: object
+          type: array
+        reason:
+          type: string
+        sources:
+          items:
+            type: string
+          type: array
+      required:
+      - entities
+      - sources
+      - reason
+      type: object
+    RunBashInput:
+      properties:
+        command:
+          type: string
+        connector:
+          nullable: true
+          type: string
+        working_dir:
+          nullable: true
+          type: string
+      required:
+      - command
+      type: object
+    VizDateControl:
+      additionalProperties: false
+      properties:
+        label:
+          type: string
+        type:
+          $ref: '#/components/schemas/VizDateControlType'
+      required:
+      - type
+      - label
+      type: object
+    UpdateVisibilityRequest:
+      properties:
+        visibility:
+          $ref: '#/components/schemas/ChatVisibility'
+      required:
+      - visibility
+      type: object
+    ChatSessionId:
+      format: uuid
+      type: string
+    InspectStepInput:
+      properties:
+        step_name:
+          type: string
+      required:
+      - step_name
+      type: object
+    ReadNodeLogsInput:
+      properties:
+        log_type:
+          nullable: true
+          type: string
+        node_function_name:
+          type: string
+      required:
+      - node_function_name
+      type: object
+    GetNodeByCodeHashRequest:
+      properties:
+        code_md5_hash:
+          type: string
+        new_node_id:
+          $ref: '#/components/schemas/WorkflowSessionNodeId'
+      required:
+      - code_md5_hash
+      - new_node_id
+      type: object
+    GetSessionTimelineResponse:
+      description: Response structure for getting session timeline
+      properties:
+        timeline:
+          description: Chronologically sorted list of messages and commits
+          items:
+            $ref: '#/components/schemas/TimelineItem'
+          type: array
+      required:
+      - timeline
+      type: object
+    WorkflowScheduleId:
+      format: uuid
+      type: string
+    DeleteFileInput:
+      properties:
+        file:
+          type: string
+      required:
+      - file
+      type: object
+    SaveDatabaseInput:
+      properties:
+        description:
+          nullable: true
+          type: string
+        name:
+          type: string
+        notes:
+          nullable: true
+          type: string
+      required:
+      - name
+      type: object
+    ComparisonStrategy:
+      enum:
+      - Default
+      - EnforceUniqueness
+      type: string
+    ChatTemplateId:
+      format: uuid
+      type: string
+    ImageResult:
+      properties:
+        image_bytes:
+          format: binary
+          type: string
+        ocr_text:
+          nullable: true
+          type: string
+      required:
+      - image_bytes
+      type: object
+    ChatInputFile:
+      properties:
+        chat_session_id:
+          $ref: '#/components/schemas/ChatSessionId'
+        content_type:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        file_size:
+          format: int64
+          type: integer
+        filename:
+          type: string
+      required:
+      - chat_session_id
+      - filename
+      - file_size
+      - content_type
+      - created_at
+      type: object
+    VizBooleanControl:
+      additionalProperties: false
+      properties:
+        label:
+          type: string
+        type:
+          $ref: '#/components/schemas/VizBooleanControlType'
+      required:
+      - type
+      - label
+      type: object
+    VizFigureDefinition:
+      additionalProperties: false
+      properties:
+        expression:
+          type: string
+        kind:
+          $ref: '#/components/schemas/VizFigureKind'
+      required:
+      - kind
+      - expression
+      type: object
+    LLMRelationship:
+      additionalProperties: false
+      properties:
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/BasicPropValue'
+          type: object
+        source:
+          minimum: 0
+          type: integer
+        target:
+          minimum: 0
+          type: integer
+        type:
+          type: string
+      required:
+      - type
+      - source
+      - target
+      type: object
+    AddDependencyInput:
+      properties:
+        package_name:
+          type: string
+        version_spec:
+          nullable: true
+          type: string
+      required:
+      - package_name
+      type: object
+    SearchConnectorTablesInput:
+      properties:
+        query:
+          type: string
+        wiki_tag:
+          nullable: true
+          type: string
+      required:
+      - query
+      type: object
+    VizControlOption:
+      additionalProperties: false
+      properties:
+        label:
+          type: string
+        value:
+          type: string
+      required:
+      - label
+      - value
+      type: object
+    ImageMeta:
+      properties:
+        document_name:
+          nullable: true
+          type: string
+        document_page:
+          format: int32
+          minimum: 0
+          nullable: true
+          type: integer
+        image:
+          nullable: true
+          type: string
+        ocr_content:
+          nullable: true
+          type: string
+      required:
+      - image
+      type: object
+    UpdateChatSessionFavoriteRequest:
+      properties:
+        is_favorite:
+          type: boolean
+      required:
+      - is_favorite
+      type: object
+    RunPipelineInput:
+      properties:
+        rerun_all_steps:
+          type: boolean
+      type: object
+    AddGitCommitResponse:
+      description: Response structure for adding a git commit
+      properties:
+        commit:
+          $ref: '#/components/schemas/GitCommit'
+      required:
+      - commit
+      type: object
+    NodeSummary:
+      properties:
+        data_preview:
+          nullable: true
+          type: string
+        image:
+          format: binary
+          nullable: true
+          type: string
+        in_dashboard:
+          type: boolean
+        name:
+          type: string
+      required:
+      - name
+      - in_dashboard
+      type: object
+    Flag:
+      properties:
+        ariaLabel:
+          type: string
+        height:
+          format: double
+          type: number
+        href:
+          nullable: true
+          type: string
+        isInteractive:
+          nullable: true
+          type: boolean
+        number:
+          description: The number by which the flag is referred in image, prompt, and tool calls.
+          minimum: 0
+          nullable: true
+          type: integer
+        text:
+          type: string
+        type:
+          type: string
+        width:
+          description: 'The serde default here is to give us backwards compatibility
+
+            it''s fine for these to be anything as long as the image isn''t
+
+            given since it won''t regenerate.'
+          format: double
+          type: number
+        x:
+          format: double
+          type: number
+        y:
+          format: double
+          type: number
+      required:
+      - x
+      - y
+      - type
+      - ariaLabel
+      type: object
+    PromptMeta:
+      description: All metadata required to generate a prompt for the LLM
+      properties:
+        dataset_descriptor:
+          $ref: '#/components/schemas/DatasetDescriptor'
+        extracted_entities:
+          items:
+            $ref: '#/components/schemas/LLMKnowledgeGraph'
+          type: array
+        extraction_criteria:
+          items:
+            $ref: '#/components/schemas/SaveRequirement'
+          type: array
+        formatter_specific:
+          $ref: '#/components/schemas/FormatterMeta'
+        qa_potentially_sus_response:
+          nullable: true
+          type: string
+      required:
+      - dataset_descriptor
+      - extracted_entities
+      - extraction_criteria
+      - formatter_specific
+      type: object
+    VizFigure:
+      additionalProperties: false
+      properties:
+        description:
+          type: string
+        figure:
+          $ref: '#/components/schemas/VizFigureDefinition'
+        id:
+          type: string
+        span:
+          format: int32
+          type: integer
+        title:
+          type: string
+      required:
+      - id
+      - figure
+      type: object
+    WebNavigateOutput:
+      enum:
+      - Text
+      - Visual
+      type: string
+    RelationshipMergeStrategy:
+      oneOf:
+      - $ref: '#/components/schemas/RelationshipMergeProbability'
+    VizNumberControlType:
+      enum:
+      - range
+      type: string
+    ChatSessionWithMessages:
+      properties:
+        commits:
+          items:
+            $ref: '#/components/schemas/GitCommit'
+          type: array
+        created_at:
+          format: date-time
+          type: string
+        ephemeral:
+          type: boolean
+        git_application_token:
+          type: string
+        id:
+          $ref: '#/components/schemas/ChatSessionId'
+        instantiated_from_template_id:
+          allOf:
+          - $ref: '#/components/schemas/ChatTemplateId'
+          nullable: true
+        is_favorite:
+          type: boolean
+        latest_workflow_session_id:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowSessionId'
+          nullable: true
+        message_head:
+          allOf:
+          - $ref: '#/components/schemas/ChatMessageId'
+          nullable: true
+        messages:
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+          type: array
+        name:
+          nullable: true
+          type: string
+        project_id:
+          allOf:
+          - $ref: '#/components/schemas/ProjectId'
+          nullable: true
+        skip_confirmations:
+          type: boolean
+        slack_channel_id:
+          nullable: true
+          type: string
+        slack_team_id:
+          nullable: true
+          type: string
+        slack_thread_ts:
+          nullable: true
+          type: string
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+        teams_channel_id:
+          nullable: true
+          type: string
+        teams_conversation_id:
+          nullable: true
+          type: string
+        teams_tenant_id:
+          nullable: true
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+        user_message_needed:
+          type: boolean
+        user_role:
+          $ref: '#/components/schemas/ChatSessionRole'
+        visibility:
+          $ref: '#/components/schemas/ChatVisibility'
+      required:
+      - id
+      - messages
+      - commits
+      - created_at
+      - updated_at
+      - git_application_token
+      - user_role
+      - visibility
+      - is_favorite
+      - team_id
+      - ephemeral
+      - user_message_needed
+      - skip_confirmations
+      type: object
+    FormatterMeta:
+      oneOf:
+      - properties:
+          ImageMeta:
+            $ref: '#/components/schemas/ImageMeta'
+        required:
+        - ImageMeta
+        type: object
+      - properties:
+          WebMeta:
+            $ref: '#/components/schemas/WebMeta'
+        required:
+        - WebMeta
+        type: object
+      - properties:
+          TextMeta:
+            $ref: '#/components/schemas/TextMeta'
+        required:
+        - TextMeta
+        type: object
+      - properties:
+          ScraperMeta:
+            $ref: '#/components/schemas/ScraperMeta'
+        required:
+        - ScraperMeta
+        type: object
+    DocSnippet:
+      properties:
+        snippet:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+      required:
+      - title
+      - url
+      - snippet
+      type: object
+    SelectDataInput:
+      properties:
+        node_ids:
+          items:
+            type: string
+          type: array
+      required:
+      - node_ids
+      type: object
+    SaveColumnInput:
+      properties:
+        column_name:
+          type: string
+        column_type:
+          type: string
+        notes:
+          nullable: true
+          type: string
+      required:
+      - column_name
+      - column_type
+      type: object
+    SpeakerTag:
+      enum:
+      - user
+      - system
+      - assistant
+      type: string
+    InputFilesUploadForm:
+      properties:
+        content:
+          format: binary
+          type: string
+        content_type:
+          type: string
+        file_name:
+          type: string
+      required:
+      - file_name
+      - content_type
+      - content
+      type: object
+    TimelineItem:
+      discriminator:
+        propertyName: type
+      oneOf:
+      - allOf:
+        - $ref: '#/components/schemas/ChatMessage'
+        - properties:
+            type:
+              enum:
+              - Message
+              type: string
+          required:
+          - type
+          type: object
+      - allOf:
+        - $ref: '#/components/schemas/GitCommit'
+        - properties:
+            type:
+              enum:
+              - GitCommit
+              type: string
+          required:
+          - type
+          type: object
+    ChatVisibility:
+      enum:
+      - private
+      - shared_with_team
+      - shared_with_team_view
+      - public
+      type: string
+    WebMeta:
+      properties:
+        flags:
+          items:
+            $ref: '#/components/schemas/Flag'
+          type: array
+        ocr_content:
+          nullable: true
+          type: string
+        screenshot:
+          format: binary
+          nullable: true
+          type: string
+        url:
+          type: string
+      required:
+      - url
+      - flags
+      type: object
+    VizFigureKind:
+      enum:
+      - js
+      - vega-lite
+      - data-table
+      type: string
+    TeamId:
+      format: uuid
+      type: string
+    ChatPrompt:
+      properties:
+        decoding_params:
+          $ref: '#/components/schemas/DecodingParams'
+        messages:
+          items:
+            $ref: '#/components/schemas/Message'
+          type: array
+        metadata:
+          $ref: '#/components/schemas/PromptMeta'
+      required:
+      - metadata
+      - messages
+      - decoding_params
+      type: object
+    EntityId:
+      format: uuid
+      type: string
+    WorkflowSession:
+      properties:
+        aborted:
+          type: boolean
+        chat_session_id:
+          $ref: '#/components/schemas/ChatSessionId'
+        created_at:
+          format: date-time
+          nullable: true
+          type: string
+        dag_ready:
+          type: boolean
+        dag_ready_at:
+          format: date-time
+          nullable: true
+          type: string
+        dashboard_layout_proto:
+          format: binary
+          nullable: true
+          type: string
+        error_message:
+          nullable: true
+          type: string
+        error_traceback:
+          nullable: true
+          type: string
+        id:
+          $ref: '#/components/schemas/WorkflowSessionId'
+        parent_chat_message_id:
+          allOf:
+          - $ref: '#/components/schemas/ChatMessageId'
+          nullable: true
+        updated_at:
+          format: date-time
+          type: string
+        workflow_schedule_id:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowScheduleId'
+          nullable: true
+      required:
+      - id
+      - chat_session_id
+      - updated_at
+      - dag_ready
+      - aborted
+      type: object
+    CompressChatResponse:
+      properties:
+        status:
+          type: string
+      required:
+      - status
+      type: object
+    VizDateControlType:
+      enum:
+      - date
+      type: string
+    InputFilesUploadResponse:
+      properties:
+        file:
+          $ref: '#/components/schemas/ChatInputFile'
+      required:
+      - file
+      type: object
+    PropertyType:
+      oneOf:
+      - enum:
+        - String
+        type: string
+      - enum:
+        - Boolean
+        type: string
+      - properties:
+          Enum:
+            items:
+              type: string
+            type: array
+        required:
+        - Enum
+        type: object
+      - enum:
+        - Integer
+        type: string
+      - enum:
+        - Float
+        type: string
+      - enum:
+        - Date
+        type: string
+      - enum:
+        - URL
+        type: string
+      - enum:
+        - Money
+        type: string
+      - enum:
+        - Image
+        type: string
+      - enum:
+        - PersonName
+        type: string
+      - enum:
+        - Address
+        type: string
+    Message:
+      description: Our generic definition of a message to a chat agent.
+      properties:
+        content:
+          description: 'We want this to be a vec of contents so we can accurately
+
+            capture an interleaving of images and text.
+
+
+            This is meant to be a completely raw, unprocessed representation
+
+            of the text. Don''t take stuff out.'
+          items:
+            $ref: '#/components/schemas/MessageContent'
+          type: array
+        role:
+          $ref: '#/components/schemas/SpeakerTag'
+      required:
+      - role
+      - content
+      type: object
+    RelationshipMergeProbability:
+      properties:
+        source_cardinality_given_target_match:
+          description: 'Describes the expected cardinality of the source table when a match is found in the target table
+
+
+            For example, if we have a source company and a target funding round, we expect the source company
+
+            to appear in multiple funding rounds, but not *too* many.
+
+            So if we have a funding round match, the expected number of unique companies is relatively small.
+
+            This is an estimate of that number.'
+          format: int64
+          minimum: 0
+          nullable: true
+          type: integer
+        target_cardinality_given_source_match:
+          description: 'Describes the expected cardinality of the target table when a match is found in the source table
+
+
+            For example, if we have a source company and a target funding round, we usually expect
+
+            some number of funding rounds to be associated with a single company but not *too* many.
+
+            So if we have a company match, the expected number of unique funding rounds is relatively small.
+
+            This is an estimate of that number.'
+          format: int64
+          minimum: 0
+          nullable: true
+          type: integer
+      type: object
+    WorkflowSessionNodeId:
+      format: uuid
+      type: string
+    SimulatePromptResponse:
+      properties:
+        response:
+          type: string
+      required:
+      - response
+      type: object
+    UpdateVisibilityResponse:
+      properties:
+        visibility:
+          $ref: '#/components/schemas/ChatVisibility'
+      required:
+      - visibility
+      type: object
+    IssueFoundInput:
+      properties:
+        admin_override:
+          type: boolean
+        description:
+          type: string
+        title:
+          type: string
+      required:
+      - title
+      - description
+      - admin_override
+      type: object
+    ApplyPatchInput:
+      properties:
+        apply_all:
+          type: boolean
+        edits:
+          items:
+            $ref: '#/components/schemas/ApplyPatchEdit'
+          type: array
+        file:
+          type: string
+      required:
+      - file
+      - edits
+      - apply_all
+      type: object
+    CopyChatSessionRequest:
+      properties:
+        copy_inputs:
+          type: boolean
+        copy_name:
+          type: string
+        project_id:
+          allOf:
+          - $ref: '#/components/schemas/ProjectId'
+          nullable: true
+        source_chat_id:
+          $ref: '#/components/schemas/ChatSessionId'
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+        template_id:
+          allOf:
+          - $ref: '#/components/schemas/ChatTemplateId'
+          nullable: true
+      required:
+      - source_chat_id
+      - copy_name
+      - team_id
+      type: object
+    CopyNodeOutputByCodeHashResponse:
+      properties:
+        cached_node_id:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowSessionNodeId'
+          nullable: true
+      type: object
+    MoveFileInput:
+      properties:
+        file:
+          type: string
+        new_path:
+          type: string
+      required:
+      - file
+      - new_path
+      type: object
+    VizStringControl:
+      additionalProperties: false
+      properties:
+        label:
+          type: string
+        options:
+          items:
+            $ref: '#/components/schemas/VizControlOption'
+          type: array
+        type:
+          $ref: '#/components/schemas/VizStringControlType'
+      required:
+      - type
+      - label
+      - options
+      type: object
+    WebSearchInput:
+      properties:
+        query:
+          type: string
+      required:
+      - query
+      type: object
+    ChatSessionRole:
+      enum:
+      - viewer
+      - editor
+      - owner
+      type: string
+    Verbosity:
+      enum:
+      - low
+      - medium
+      - high
+      type: string
+    VizStringControlType:
+      enum:
+      - dropdown
+      type: string
+    ViewPageInput:
+      properties:
+        page_number:
+          format: int32
+          minimum: 0
+          type: integer
+      required:
+      - page_number
+      type: object
+    SaveRequirement:
+      description: It's an OR statement across these.
+      oneOf:
+      - $ref: '#/components/schemas/RequiredRelationship'
+      - $ref: '#/components/schemas/RequiredEntity'
+      - $ref: '#/components/schemas/RequiredProperty'
+    ChatDependency:
+      description: A chat session dependency
+      properties:
+        package_name:
+          description: Name of the Python package
+          type: string
+        version_spec:
+          description: Optional version specifier (e.g., ">=1.0.0", "==2.0.0")
+          nullable: true
+          type: string
+      required:
+      - package_name
+      type: object
+    StreamChunkEntry:
+      description: Entry for stream chunk logging - stored as JSONB array on chat_message
+      properties:
+        chunk_type:
+          type: string
+        content:
+          type: string
+      required:
+      - chunk_type
+      - content
+      type: object
+    DatasetDescriptor:
+      additionalProperties: false
+      description: 'A dataset is where you put multiple referential schemas.
+
+
+        A dataset is a complete namespace where all references between schemas
+
+        are held within the dataset.'
+      properties:
+        description:
+          type: string
+        llm_override_field:
+          nullable: true
+          type: string
+        name:
+          type: string
+        relationships:
+          items:
+            $ref: '#/components/schemas/RelationshipDescriptor'
+          type: array
+        tables:
+          items:
+            $ref: '#/components/schemas/TableDescriptor'
+          type: array
+      required:
+      - name
+      - description
+      - tables
+      - relationships
+      type: object
+    ChatSession:
+      properties:
+        config_proto:
+          format: binary
+          nullable: true
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        ephemeral:
+          type: boolean
+        git_application_token:
+          type: string
+        id:
+          $ref: '#/components/schemas/ChatSessionId'
+        instantiated_from_template_id:
+          allOf:
+          - $ref: '#/components/schemas/ChatTemplateId'
+          nullable: true
+        message_head:
+          allOf:
+          - $ref: '#/components/schemas/ChatMessageId'
+          nullable: true
+        name:
+          nullable: true
+          type: string
+        project_id:
+          allOf:
+          - $ref: '#/components/schemas/ProjectId'
+          nullable: true
+        review_required:
+          type: boolean
+        skip_confirmations:
+          type: boolean
+        slack_channel_id:
+          nullable: true
+          type: string
+        slack_completion_notified:
+          type: boolean
+        slack_team_id:
+          nullable: true
+          type: string
+        slack_thread_ts:
+          nullable: true
+          type: string
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+        teams_channel_id:
+          nullable: true
+          type: string
+        teams_completion_notified:
+          type: boolean
+        teams_conversation_id:
+          nullable: true
+          type: string
+        teams_tenant_id:
+          nullable: true
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+        user_message_needed:
+          type: boolean
+        visibility:
+          $ref: '#/components/schemas/ChatVisibility'
+      required:
+      - id
+      - created_at
+      - updated_at
+      - git_application_token
+      - visibility
+      - ephemeral
+      - slack_completion_notified
+      - team_id
+      - review_required
+      - user_message_needed
+      - skip_confirmations
+      - teams_completion_notified
+      type: object
+    RelationshipDescriptor:
+      additionalProperties: false
+      properties:
+        description:
+          type: string
+        merge_strategy:
+          allOf:
+          - $ref: '#/components/schemas/RelationshipMergeStrategy'
+          nullable: true
+        name:
+          type: string
+        properties:
+          items:
+            $ref: '#/components/schemas/PropertyDescriptor'
+          type: array
+        source_table:
+          type: string
+        target_table:
+          type: string
+      required:
+      - name
+      - description
+      - source_table
+      - target_table
+      type: object
+    SaveInput:
+      properties:
+        knowledge_graph:
+          $ref: '#/components/schemas/LLMKnowledgeGraph'
+        reason:
+          type: string
+        sources:
+          items:
+            type: string
+          type: array
+      required:
+      - knowledge_graph
+      - sources
+      - reason
+      type: object
+    JavascriptInput:
+      properties:
+        code:
+          type: string
+      required:
+      - code
+      type: object
+    AdminIssueFoundRequest:
+      properties:
+        message:
+          type: string
+        title:
+          type: string
+      required:
+      - title
+      - message
+      type: object
+    InputFilesDownloadAllResponse:
+      properties:
+        files:
+          additionalProperties:
+            type: string
+          type: object
+        latest_timestamp:
+          format: date-time
+          nullable: true
+          type: string
+      required:
+      - files
+      type: object
+    CreateConnectorInput:
+      properties:
+        connector_type:
+          type: string
+        description:
+          nullable: true
+          type: string
+        name:
+          type: string
+        secrets:
+          items:
+            type: string
+          type: array
+      required:
+      - name
+      - connector_type
+      type: object
+    GetChatSessionResponse:
+      description: Response for getting a chat session
+      properties:
+        session:
+          $ref: '#/components/schemas/ChatSessionWithEvents'
+      required:
+      - session
+      type: object
+    ExitInput:
+      properties:
+        reason:
+          type: string
+      required:
+      - reason
+      type: object
+    RequiredRelationship:
+      additionalProperties: false
+      properties:
+        relationship_name:
+          type: string
+      required:
+      - relationship_name
+      type: object
+    LoadFilesResponse:
+      properties:
+        commit_hash:
+          type: string
+        files:
+          additionalProperties:
+            type: string
+          type: object
+      required:
+      - files
+      - commit_hash
+      type: object
+    ConnectorTableResult:
+      properties:
+        columns:
+          items:
+            $ref: '#/components/schemas/ConnectorColumnResult'
+          type: array
+        database:
+          type: string
+        description:
+          nullable: true
+          type: string
+        notes:
+          nullable: true
+          type: string
+        schema:
+          type: string
+        table_name:
+          type: string
+      required:
+      - schema
+      - database
+      - table_name
+      - columns
+      type: object
+    VizNumberControl:
+      additionalProperties: false
+      properties:
+        label:
+          type: string
+        max:
+          format: double
+          type: number
+        min:
+          format: double
+          type: number
+        step:
+          format: double
+          type: number
+        type:
+          $ref: '#/components/schemas/VizNumberControlType'
+      required:
+      - type
+      - label
+      - min
+      - max
+      type: object
+    WorkflowSessionId:
+      format: uuid
+      type: string
+    MergeConfig:
+      description: The configuration for a probabilistic merge strategy
+      properties:
+        baseline_cardinality:
+          description: 'The number of unique values that are expected to be present in the complete dataset
+
+
+            This is used for merging to determine how significant a match is. (i.e. if there are
+
+            only 2 possible values, a match gives less confidence than if there are 100)'
+          format: int64
+          minimum: 0
+          type: integer
+        comparison_strategy:
+          $ref: '#/components/schemas/ComparisonStrategy'
+        match_transfer_probability:
+          description: 'The estimated probability that, given an entity match, the properties also match
+
+
+            For a person''s full name, this would be quite high. For a person''s job title, it
+
+            would be lower because people can have multiple job titles over time or at different
+
+            companies at the same time.'
+          format: float
+          type: number
+      required:
+      - baseline_cardinality
+      - match_transfer_probability
+      type: object
+    CodeAddForm:
+      properties:
+        files:
+          items:
+            format: binary
+            type: string
+          type: array
+      required:
+      - files
+      type: object
+    PropertyDescriptor:
+      additionalProperties: false
+      properties:
+        description:
+          type: string
+        merge_strategy:
+          $ref: '#/components/schemas/MergeStrategy'
+        name:
+          type: string
+        prop_type:
+          $ref: '#/components/schemas/PropertyType'
+      required:
+      - name
+      - description
+      type: object
+    InputFilesDeleteRequest:
+      properties:
+        filenames:
+          items:
+            type: string
+          type: array
+      required:
+      - filenames
+      type: object
+  securitySchemes:
+    api_key:
+      in: header
+      name: api_key
+      type: apiKey
+    session_token:
+      scheme: bearer
+      type: http
