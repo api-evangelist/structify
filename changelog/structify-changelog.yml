@@ -1,0 +1,28 @@
+generated: '2026-07-21'
+method: searched
+source: https://github.com/StructifyAI/structify-python/blob/main/CHANGELOG.md
+scheme: semver
+current_version: 1.183.0
+note: >-
+  Structify tracks releases through its auto-generated SDK changelogs (the REST
+  backend itself is unversioned). Entries below are the recent window from the
+  Python SDK changelog; most releases are "Update from Structify backend
+  changes" regenerations of the OpenAPI-derived client.
+entries:
+- version: 1.183.0
+  date: '2026-02-11'
+  breaking: false
+  highlights:
+  - Update from Structify backend changes (11 commits)
+  - 'internal: bump dependencies'
+- version: 1.182.0
+  date: '2026-02-06'
+  breaking: false
+  highlights:
+  - Update from Structify backend changes (11 commits)
+  - 'Bug fix: cumsum tqdm bug'
+- version: 1.181.0
+  date: '2026-01-30'
+  breaking: false
+  highlights:
+  - Update from Structify backend changes

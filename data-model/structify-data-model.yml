@@ -1,0 +1,116 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/structify-openapi-original.json
+note: >-
+  Entity-relationship graph derived from OpenAPI component schemas and their
+  *_id / *_ids reference fields. Structify's core domain is a knowledge graph:
+  Datasets contain Entities (nodes) connected by typed Relationships, populated
+  by Jobs that pull from Connectors and Documents, orchestrated in Chat/Workflow
+  Sessions, all scoped to Teams and Projects.
+entities:
+- name: Team
+  description: Top-level tenant that owns projects, connectors, datasets and members.
+- name: Project
+  description: Grouping of work within a team.
+  relationships:
+  - belongs_to: Team
+    via: team_id
+- name: User
+  description: An account principal; can belong to teams.
+  relationships:
+  - has_one: Team
+    via: last_selected_team_id
+- name: Dataset
+  description: Container for structured data with a schema of entity types and relationships.
+- name: Entity
+  description: A record (node) in a dataset, typed by a table.
+  relationships:
+  - belongs_to: Dataset
+    via: dataset_id
+- name: Job
+  description: Asynchronous processing task (structuring, scraping, enrichment).
+  relationships:
+  - belongs_to: Dataset
+    via: dataset_id
+  - has_one: Node
+    via: node_id
+  - has_one: User
+    via: user_id
+- name: JobEvent
+  description: Event emitted during a job's execution.
+  relationships:
+  - belongs_to: Job
+    via: job_id
+- name: Connector
+  description: A configured data source (HubSpot, Stripe, Snowflake, Postgres, etc.).
+  relationships:
+  - belongs_to: Team
+    via: team_id
+  - has_one: User
+    via: owner_user_id
+- name: Secret
+  description: Stored credential/secret for a connector.
+  relationships:
+  - belongs_to: Connector
+    via: connector_id
+- name: ChatSession
+  description: A conversational workspace that drives dataset/workflow building.
+  relationships:
+  - belongs_to: Project
+    via: project_id
+  - belongs_to: Team
+    via: team_id
+- name: ChatMessage
+  description: A message within a chat session.
+  relationships:
+  - belongs_to: ChatSession
+    via: chat_session_id
+  - has_one: ChatMessage
+    via: previous_message_id
+- name: WorkflowSession
+  description: An execution of a workflow DAG derived from a chat session.
+  relationships:
+  - belongs_to: ChatSession
+    via: chat_session_id
+  - has_one: WorkflowSchedule
+    via: workflow_schedule_id
+- name: WorkflowSessionNode
+  description: A node in a workflow DAG.
+  relationships:
+  - belongs_to: WorkflowSession
+    via: session_id
+  - has_one: Connector
+    via: connector_id
+- name: WorkflowSessionEdge
+  description: A directed edge connecting workflow nodes.
+  relationships:
+  - belongs_to: WorkflowSession
+    via: session_id
+  - has_one: WorkflowSessionNode
+    via: source_node_id
+  - has_one: WorkflowSessionNode
+    via: target_node_id
+- name: Source
+  description: Provenance record for scraped/extracted data.
+  relationships:
+  - has_one: Scraper
+    via: scraper_id
+- name: SourceEntity
+  description: Links a source to a derived knowledge-graph entity.
+  relationships:
+  - belongs_to: Source
+    via: source_id
+  - has_one: Job
+    via: job_id
+  - has_one: Entity
+    via: kg_entity_id
+- name: Transaction
+  description: Usage/billing transaction (credits).
+  relationships:
+  - has_one: Job
+    via: job_id
+- name: WikiPage
+  description: Team knowledge/wiki page.
+  relationships:
+  - belongs_to: Team
+    via: team_id

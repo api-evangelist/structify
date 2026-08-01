@@ -1,0 +1,21 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.structify.ai/concepts/api-overview
+signaling:
+  documented: true
+  headers: []
+  note: >-
+    Rate limits are documented per plan in the API Overview. The docs advise
+    implementing exponential backoff on rate-limit errors. No specific
+    rate-limit response headers are documented.
+rate_limits:
+- plan: Free
+  limit_count: 60
+  interval: minute
+  unit: requests
+  concurrent_jobs: 2
+- plan: Pro
+  limit_count: 600
+  interval: minute
+  unit: requests
+  concurrent_jobs: 10

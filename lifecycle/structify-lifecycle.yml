@@ -1,0 +1,21 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.structify.ai/api-reference/introduction
+versioning:
+  scheme: sdk-semver
+  current: structifyai 1.183.0 (python) / 1.173.0 (node)
+  note: >-
+    REST paths on api.structify.ai are unversioned; the OpenAPI info.version is
+    0.1.0. Client SDKs carry the effective version via semver, released roughly
+    in lockstep with backend changes.
+  docs: https://docs.structify.ai/api-reference/introduction
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No published deprecation policy; no operations marked deprecated in the OpenAPI.
+sla:
+  url: null
+  uptime_target: null
+status_page: https://structify.statuspage.io/
+changelog: https://github.com/StructifyAI/structify-python/blob/main/CHANGELOG.md
+deprecated_operations: []

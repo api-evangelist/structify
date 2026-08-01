@@ -1,9 +1,29 @@
 aid: structify
 name: Structify
-description: 'Structify is a company surfaced as a portfolio company of 8vc, bain-capital-ventures and
-  added to the API Evangelist network as a stub for enrichment. Sector: ai. This profile is a lead awaiting
-  the enrichment pipeline.'
+description: >-
+  Structify is an AI data platform that turns scattered, unstructured, and
+  siloed sources into a living, structured knowledge graph. It connects to
+  thousands of systems (HubSpot, Stripe, Snowflake, Postgres, and more), scrapes
+  websites and PDFs, and organizes the results into datasets of typed entities
+  and relationships that teams query in natural language and push back into their
+  tools. The platform exposes a RESTful API (OpenAPI 3.0, 281 operations) plus
+  official Python and JavaScript SDKs, covering datasets, entities, connectors,
+  documents, jobs, chat/workflow sessions, and teams, with asynchronous jobs and
+  real-time WebSocket updates. Backed by 8VC and Bain Capital Ventures.
 url: https://raw.githubusercontent.com/api-evangelist/structify/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://www.structify.ai/assets/site/structify-homepage-hero.png
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
@@ -13,16 +33,467 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
-- Ai
-apis: []
+- AI
+- Data
+- Web Scraping
+- Data Extraction
+- Knowledge Graph
+- ETL
+- Data Enrichment
+apis:
+- aid: structify:structify-account-api
+  name: Structify account API
+  description: All the accessible information about your account through our API
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - account
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-account-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-admin-api
+  name: Structify admin API
+  description: Admin endpoints
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - admin
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-admin-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-chat-api
+  name: Structify chat API
+  description: Chat session management endpoints
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - chat
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-chat-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-chat-templates-api
+  name: Structify chat_templates API
+  description: The chat_templates API from Structify — 2 operation(s) for chat_templates.
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - chat_templates
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-chat-templates-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-code-api
+  name: Structify code API
+  description: Code generation endpoints
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - code
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-code-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-connector-catalog-api
+  name: Structify connector_catalog API
+  description: The connector_catalog API from Structify — 3 operation(s) for connector_catalog.
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - connector_catalog
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-connector-catalog-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-connectors-api
+  name: Structify connectors API
+  description: The connectors API from Structify — 24 operation(s) for connectors.
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - connectors
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-connectors-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-dataset-api
+  name: Structify dataset API
+  description: Dataset management endpoints
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - dataset
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-dataset-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-documents-api
+  name: Structify documents API
+  description: The documents API from Structify — 4 operation(s) for documents.
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - documents
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-documents-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-entity-api
+  name: Structify entity API
+  description: The entity API from Structify — 21 operation(s) for entity.
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - entity
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-entity-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-jobs-api
+  name: Structify jobs API
+  description: The jobs API from Structify — 5 operation(s) for jobs.
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-jobs-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-match-api
+  name: Structify match API
+  description: The match API from Structify — 2 operation(s) for match.
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - match
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-match-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-nango-api
+  name: Structify Nango API
+  description: The Nango API from Structify — 2 operation(s) for nango.
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - Nango
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-nango-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-project-api
+  name: Structify project API
+  description: Project management endpoints
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - project
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-project-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-public-sessions-api
+  name: Structify public_sessions API
+  description: The public_sessions API from Structify — 2 operation(s) for public_sessions.
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - public_sessions
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-public-sessions-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-sandbox-api
+  name: Structify sandbox API
+  description: Sandbox management endpoints
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - sandbox
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-sandbox-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-scrape-api
+  name: Structify scrape API
+  description: The scrape API from Structify — 2 operation(s) for scrape.
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - scrape
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-scrape-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-server-api
+  name: Structify server API
+  description: The server API from Structify — 1 operation(s) for server.
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - server
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-server-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-sessions-api
+  name: Structify sessions API
+  description: The sessions API from Structify — 16 operation(s) for sessions.
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - sessions
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-sessions-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-slack-api
+  name: Structify slack API
+  description: The slack API from Structify — 1 operation(s) for slack.
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - slack
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-slack-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-source-api
+  name: Structify source API
+  description: The source API from Structify — 3 operation(s) for source.
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - source
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-source-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-structure-api
+  name: Structify structure API
+  description: The structure API from Structify — 8 operation(s) for structure.
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - structure
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-structure-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-team-api
+  name: Structify team API
+  description: Team management endpoints
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - team
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-team-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-teams-api
+  name: Structify teams API
+  description: The teams API from Structify — 2 operation(s) for teams.
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - teams
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-teams-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-transactions-api
+  name: Structify transactions API
+  description: The transactions API from Structify — 3 operation(s) for transactions.
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-transactions-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-usage-api
+  name: Structify usage API
+  description: The usage API from Structify — 2 operation(s) for usage.
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - usage
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-usage-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-user-api
+  name: Structify user API
+  description: The user API from Structify — 2 operation(s) for user.
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - user
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-user-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-webhook-api
+  name: Structify webhook API
+  description: The webhook API from Structify — 1 operation(s) for webhook.
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - webhook
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-webhook-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-whitelabel-api
+  name: Structify whitelabel API
+  description: Whitelabeled service proxy endpoints
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - whitelabel
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-whitelabel-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-wiki-api
+  name: Structify wiki API
+  description: Team wiki page management endpoints
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - wiki
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-wiki-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-workflow-api
+  name: Structify workflow API
+  description: The workflow API from Structify — 3 operation(s) for workflow.
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - workflow
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-workflow-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
+- aid: structify:structify-workflow-schedule-api
+  name: Structify workflow_schedule API
+  description: The workflow_schedule API from Structify — 6 operation(s) for workflow_schedule.
+  humanURL: https://docs.structify.ai/api-reference/introduction
+  baseURL: https://api.structify.ai
+  tags:
+  - workflow_schedule
+  properties:
+  - type: OpenAPI
+    url: openapi/structify-workflow-schedule-api-openapi.yml
+  - type: DataModel
+    url: data-model/structify-data-model.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DeveloperPortal
+  url: https://docs.structify.ai
+- type: Documentation
+  url: https://docs.structify.ai/introduction
+- type: APIReference
+  url: https://docs.structify.ai/api-reference/introduction
+- type: GettingStarted
+  url: https://docs.structify.ai/api-reference/quickstart
+- type: Blog
+  url: https://structify.ai/blog
+- type: GitHubOrganization
+  url: https://github.com/StructifyAI
+- type: SignUp
+  url: https://app.structify.ai/signup
+- type: Login
+  url: https://app.structify.ai/login
+- type: TermsOfService
+  url: https://structify.ai/terms
+- type: PrivacyPolicy
+  url: https://structify.ai/privacy
+- type: StatusPage
+  url: https://structify.statuspage.io/
+- type: Authentication
+  url: authentication/structify-authentication.yml
+- type: Packages
+  url: packages/structify-packages.yml
+- type: SDKs
+  url: packages/structify-packages.yml
+- type: LLMsTxt
+  url: llms/structify-llms.txt
+- type: Conventions
+  url: conventions/structify-conventions.yml
+- type: RateLimits
+  url: rate-limits/structify-rate-limits.yml
+- type: ErrorCatalog
+  url: errors/structify-error-codes.yml
+- type: Lifecycle
+  url: lifecycle/structify-lifecycle.yml
+- type: ChangeLog
+  url: changelog/structify-changelog.yml
+- type: Conformance
+  url: conformance/structify-conformance.yml
+- type: Compliance
+  url: https://www.structify.ai/security
+- type: TrustCenter
+  url: security/structify-trust-center.yml
+- type: DomainSecurity
+  url: security/structify-domain-security.yml
+- type: MCPServer
+  url: mcp/structify-mcp.yml
+- type: Webhooks
+  url: asyncapi/structify-events-webhooks.yml
+- type: AgenticAccess
+  url: agentic-access/structify-agentic-access.yml
+- type: AgentSkill
+  url: skills/_index.yml
 - type: Website
   url: https://structify.ai
+x-enrichment:
+  date: '2026-07-21'
+  status: enriched
+  artifacts_added: 18
+  pass: local-v1

@@ -1,0 +1,12 @@
+generated: '2026-07-21'
+method: generated
+source: openapi/structify-openapi-original.json
+skills:
+- file: structify-scrape-to-dataset.md
+  name: Scrape the web into a structured dataset
+  api: openapi/structify-openapi-original.json
+  operations: [dataset_create, scrape, get_job, entity_search, dataset_export_csv]
+- file: structify-build-knowledge-graph.md
+  name: Build a knowledge graph of entities and relationships
+  api: openapi/structify-openapi-original.json
+  operations: [dataset_create, entity_add, entity_add_batch, entity_add_relationship, entity_search]

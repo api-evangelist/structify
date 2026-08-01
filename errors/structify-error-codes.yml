@@ -1,0 +1,49 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/structify-openapi-original.json
+format: http-status-json
+envelope:
+  content_type: application/json
+  note: >-
+    Errors are returned as application/json across the API (not RFC 9457
+    problem+json). Codes below are derived from the OpenAPI 4xx/5xx responses,
+    aggregated across 281 operations, with the most common documented
+    descriptions.
+error_codes:
+- status: 400
+  title: Bad request
+  occurrences: 79
+  meaning: Invalid request payload or parameters.
+  remediation: Validate the request body/params against the OpenAPI schema.
+- status: 401
+  title: Unauthorized
+  occurrences: 49
+  meaning: Missing or invalid api_key / session token.
+  remediation: Provide a valid api_key header or Bearer session token.
+- status: 403
+  title: Forbidden
+  occurrences: 75
+  meaning: Access denied for the authenticated principal (e.g. not a team admin).
+  remediation: Ensure the caller has the required role/team membership.
+- status: 404
+  title: Not found
+  occurrences: 125
+  meaning: >-
+    Referenced resource does not exist (chat session, connector, dataset, job,
+    entity, etc.).
+  remediation: Verify the resource id exists and is visible to the caller.
+- status: 409
+  title: Conflict
+  occurrences: 1
+  meaning: Resource was modified since base_version (optimistic concurrency).
+  remediation: Re-fetch, rebase on the latest version, and retry.
+- status: 413
+  title: Payload too large
+  occurrences: 1
+  meaning: Uploaded payload exceeds size limits.
+  remediation: Reduce payload size or use chunked/batch upload.
+- status: 500
+  title: Internal server error
+  occurrences: 86
+  meaning: Server-side failure, including upstream request failures.
+  remediation: Retry with exponential backoff; contact support if persistent.

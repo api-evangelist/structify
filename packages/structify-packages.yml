@@ -1,0 +1,26 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.structify.ai/sdks/python/installation
+packages:
+- language: python
+  registry: pypi
+  name: structifyai
+  url: https://pypi.org/project/structifyai/
+  install: pip install structifyai
+  version: 1.183.0
+  repository: https://github.com/StructifyAI/structify-python
+  official: true
+- language: javascript
+  registry: npm
+  name: structifyai
+  url: https://www.npmjs.com/package/structifyai
+  install: npm install structifyai
+  version: 1.173.0
+  repository: https://github.com/StructifyAI/structify-node
+  official: true
+notes: >-
+  Official first-party SDKs generated from the Structify OpenAPI. The docs also
+  reference an import path of `@structify/prospero`, but the published npm
+  package is `structifyai` (repo StructifyAI/structify-node). The unrelated PyPI
+  package `structify` (atul-bhouraskar, "Simplify binary structures") is NOT
+  first-party and is excluded.

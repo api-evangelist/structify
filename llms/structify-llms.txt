@@ -1,0 +1,32 @@
+# Structify
+
+## Docs
+
+- [Authentication](https://docs.structify.ai/api-reference/authentication.md): Authenticate with the Structify API
+- [Installation](https://docs.structify.ai/api-reference/installation.md): Set up Structify for development or production
+- [API Introduction](https://docs.structify.ai/api-reference/introduction.md): RESTful API and WebSocket endpoints for Structify
+- [Quickstart](https://docs.structify.ai/api-reference/quickstart.md): Create your first dataset in three easy steps
+- [App Navigation](https://docs.structify.ai/app-navigation.md): Details of where to find different options and features in a chat session
+- [API Overview](https://docs.structify.ai/concepts/api-overview.md): Core concepts of the Structify API!
+- [What is a connector?](https://docs.structify.ai/connector-info.md): Detailed information on what a connector is
+- [Debugging](https://docs.structify.ai/debugging.md): A page for some debugging tips and tricks, as well as some common error modalities
+- [Deployment Information](https://docs.structify.ai/deployment-info.md): Detailed information on what deployment is
+- [Company Intelligence](https://docs.structify.ai/examples/company-intelligence.md): Build a dataset of companies, investors, and founders
+- [Welcome to Structify](https://docs.structify.ai/introduction.md): Your data, your way, your timeline
+- [Quickstart](https://docs.structify.ai/pipeline-quickstart.md): Follow along to set up your first (of many) Structify pipelines
+- [Prompting Guidelines](https://docs.structify.ai/prompting.md): Guidance on how to prompt Structify for best results
+- [Schema Design Guide](https://docs.structify.ai/schema-cookbook/schema-guidance.md): Best practices for designing effective dataset schemas
+- [Python SDK Installation](https://docs.structify.ai/sdks/python/installation.md): Install and configure the Structify Python SDK
+- [Hotkeys and Nice-To-Knows](https://docs.structify.ai/shortcuts-hotkeys.md): Repository of hot keys and quality-of-life product features!
+- [Using Structify's AI Extraction and Scraping](https://docs.structify.ai/structify-calls.md): Prompting guidance on what to say to get the results you want from Structify
+- [Template Library Overview](https://docs.structify.ai/template-library/overview.md): Introduction to our template library, including explanations and how-tos
+- [GTM Ops -- Campaign Performance Monitoring](https://docs.structify.ai/template-library/templates/campaign-performance.md): Track expenditure and ROI, by platform and specific creator, for social media campaigns. ROI is tracked by conversion metrics, and also is linked with enagement.
+- [Strategy & Sales Ops -- Conference Intelligence](https://docs.structify.ai/template-library/templates/conference-intel.md): A template that shows how to use Structify for a simple but powerful web scraping use case
+- [PMs and CX Managers -- Customer Health](https://docs.structify.ai/template-library/templates/customer-health.md): An explanation of the customer health template, perfect for businesses that know what matters: customers loving the product they make
+- [Strategy & PMs - Feature Usage](https://docs.structify.ai/template-library/templates/feature-usage.md): An explanation of the feature usage template: perfect for Strategy Operations personnel and PMs who lead teams building mission-critical features
+- [Revenue Operations -- CRM Deals Data and Easy Money ](https://docs.structify.ai/template-library/templates/rev-ops.md): An explanation of the rev ops template, perfect for revenue masterminds tired of manual work and being held back by clunky CRM interfaces
+- [Navigate our Site](https://docs.structify.ai/website-navigation.md): See this page for advice on where to find things in our site
+
+## OpenAPI Specs
+
+- [openapi](https://docs.structify.ai/openapi.json)

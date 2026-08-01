@@ -1,0 +1,16 @@
+generated: '2026-07-21'
+method: searched
+probe: true
+source: https://www.structify.ai/security
+url: https://www.structify.ai/security
+certifications:
+- SOC 2
+- HIPAA
+evidence:
+- source: https://www.structify.ai/security
+  keywords:
+  - soc 2
+  - soc2
+  - hipaa
+  - trust center
+  - compliance certification

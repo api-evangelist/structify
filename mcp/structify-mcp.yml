@@ -1,0 +1,43 @@
+generated: '2026-07-21'
+method: derived
+status: candidate
+source: openapi/structify-openapi-original.json
+note: >-
+  No official hosted/remote Structify MCP server was found (no entry in the MCP
+  registry, npm @modelcontextprotocol, or the docs). The following is a
+  candidate tool set derived from marquee OpenAPI operations, one tool per
+  operationId, to seed an MCP server. Not published by Structify.
+server:
+  name: structify
+  transport: http
+tools:
+- name: create_dataset
+  description: Create a dataset (schema container).
+  source_operation: openapi/structify-openapi-original.json#dataset_create
+- name: get_dataset_info
+  description: Get dataset metadata and schema.
+  source_operation: openapi/structify-openapi-original.json#dataset_info
+- name: add_entity
+  description: Add an entity (node) to a dataset table.
+  source_operation: openapi/structify-openapi-original.json#entity_add
+- name: search_entities
+  description: Search entities in a dataset.
+  source_operation: openapi/structify-openapi-original.json#entity_search
+- name: add_relationship
+  description: Create a typed relationship between two entities.
+  source_operation: openapi/structify-openapi-original.json#entity_add_relationship
+- name: scrape
+  description: Run a web/PDF scrape into structured data.
+  source_operation: openapi/structify-openapi-original.json#scrape
+- name: run_workflow
+  description: Run a workflow/pipeline.
+  source_operation: openapi/structify-openapi-original.json#run_workflow
+- name: get_job
+  description: Get the status/result of an asynchronous job.
+  source_operation: openapi/structify-openapi-original.json#get_job
+- name: list_connectors
+  description: List configured data connectors.
+  source_operation: openapi/structify-openapi-original.json#list_connectors
+- name: export_dataset_csv
+  description: Export a dataset to CSV.
+  source_operation: openapi/structify-openapi-original.json#dataset_export_csv

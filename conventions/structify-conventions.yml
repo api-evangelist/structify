@@ -1,0 +1,54 @@
+generated: '2026-07-21'
+method: searched
+source: https://docs.structify.ai/concepts/api-overview
+summary: >-
+  Cross-cutting request/response semantics for the Structify REST API, harvested
+  from the API Overview docs and derived from the OpenAPI. RESTful JSON over
+  HTTPS with an api_key header or a session bearer token; many operations are
+  asynchronous and return a job that is polled or observed over WebSocket.
+authentication:
+  style: api-key-header-or-bearer
+  api_key_header: api_key
+  bearer: session_token
+  env_var: STRUCTIFY_API_TOKEN
+  docs: https://docs.structify.ai/api-reference/authentication
+  see: authentication/structify-authentication.yml
+idempotency:
+  supported: false
+  note: >-
+    No Idempotency-Key header or idempotent-retry contract is documented or
+    present in the OpenAPI. Retries of non-GET operations are not guaranteed
+    safe.
+pagination:
+  style: limit-offset
+  params:
+  - limit
+  - offset
+  example: client.jobs.list(limit=10, offset=20)
+async_jobs:
+  model: >-
+    Long-running operations (document structuring, scraping, enrichment) return
+    a job; poll GET /jobs/{job_id} for status (e.g. status == "completed") or
+    subscribe to job events.
+  status_operation: get_job
+error_envelope:
+  content_type: application/json
+  note: >-
+    Errors return application/json (not application/problem+json / RFC 9457).
+    See errors/structify-error-codes.yml.
+  see: errors/structify-error-codes.yml
+realtime:
+  websocket: true
+  note: >-
+    Real-time job/node updates are available via WebSocket (client.websocket());
+    event types include job.completed. Job and node event streams are also
+    exposed over GET /jobs/{job_id}/events and GET /sessions/nodes/{node_id}/events.
+  see: asyncapi/structify-events-webhooks.yml
+versioning:
+  scheme: sdk-semver
+  note: >-
+    The REST paths are unversioned on host api.structify.ai; the client SDKs are
+    versioned with semver (structifyai 1.183.0 python / 1.173.0 node).
+  see: lifecycle/structify-lifecycle.yml
+rate_limiting:
+  see: rate-limits/structify-rate-limits.yml

@@ -1,0 +1,27 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/structify-openapi-original.json
+standards:
+- id: openapi-3.0
+  conforms: true
+  evidence: Publishes OpenAPI 3.0.3 at docs.structify.ai/openapi.json (248 paths, 281 operations).
+- id: rest
+  conforms: true
+  evidence: RESTful JSON API over HTTPS.
+- id: oauth2
+  conforms: false
+  evidence: No oauth2 security schemes; auth is api_key header + http bearer session token.
+- id: oidc
+  conforms: false
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: Error responses use application/json, not application/problem+json.
+- id: soc2
+  conforms: true
+  evidence: SOC 2 stated on https://www.structify.ai/security (see security/structify-trust-center.yml).
+- id: hipaa
+  conforms: true
+  evidence: HIPAA stated on https://www.structify.ai/security.
+- id: pagination-limit-offset
+  conforms: true
+  evidence: List operations use limit/offset parameters.

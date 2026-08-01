@@ -1,0 +1,21 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Structify
+  version: 1.0.0
+extends: openapi/structify-openapi-original.json
+actions:
+- target: $.info
+  update:
+    x-apievangelist-enriched: '2026-07-21'
+    x-apievangelist-provider: structify
+    x-apievangelist-docs: https://docs.structify.ai
+    x-apievangelist-artifacts:
+      authentication: authentication/structify-authentication.yml
+      conventions: conventions/structify-conventions.yml
+      errors: errors/structify-error-codes.yml
+      data-model: data-model/structify-data-model.yml
+      rate-limits: rate-limits/structify-rate-limits.yml
+- target: $.info
+  update:
+    x-apievangelist-auth: api_key header or session bearer token (STRUCTIFY_API_TOKEN)
+    x-apievangelist-status-page: https://structify.statuspage.io/

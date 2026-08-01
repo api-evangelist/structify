@@ -1,0 +1,35 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/structify-openapi-original.json
+spec_type: Webhooks
+summary: >-
+  Structify does not publish an AsyncAPI document, but it does expose a real
+  event surface: an inbound webhook trigger, job/node event streams, and a
+  WebSocket channel for real-time job/node updates. Captured here as a webhook /
+  event catalog.
+websocket:
+  supported: true
+  note: >-
+    Real-time updates via client.websocket(); event types include job.completed.
+    Documented in the API Overview.
+  docs: https://docs.structify.ai/concepts/api-overview
+webhooks:
+- name: webhook_trigger
+  direction: inbound
+  method: POST
+  path: /webhook/trigger
+  description: Trigger a Structify workflow/pipeline via an inbound webhook.
+- name: slack_events
+  direction: inbound
+  method: POST
+  path: /slack/events
+  description: Slack events subscription endpoint (Slack integration).
+event_streams:
+- name: get_job_events
+  method: GET
+  path: /jobs/{job_id}/events
+  description: Stream of events for a job.
+- name: get_node_events
+  method: GET
+  path: /sessions/nodes/{node_id}/events
+  description: Stream of events for a workflow node.
