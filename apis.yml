@@ -434,6 +434,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/structify-openapi-overlay.yaml
 - type: DeveloperPortal
   url: https://docs.structify.ai
 - type: Documentation
