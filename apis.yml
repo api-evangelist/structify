@@ -33,7 +33,7 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-21'
+modified: '2026-08-14'
 tags:
 - Company
 - AI
@@ -492,10 +492,20 @@ common:
   url: agentic-access/structify-agentic-access.yml
 - type: AgentSkill
   url: skills/_index.yml
+- type: AgentCard
+  url: a2a/structify-a2a.yml
+- type: ToolCrosswalk
+  url: mcp/structify-tool-crosswalk.yml
+- type: WellKnown
+  url: well-known/structify-well-known.yml
+- type: Plans
+  url: plans/structify-plans-pricing.yml
+- type: Support
+  url: mailto:team@structify.ai
 - type: Website
   url: https://structify.ai
 x-enrichment:
-  date: '2026-07-21'
+  date: '2026-08-14'
   status: enriched
-  artifacts_added: 18
+  artifacts_added: 9
   pass: local-v1
