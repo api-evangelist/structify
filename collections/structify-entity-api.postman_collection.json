@@ -1,0 +1,2222 @@
+{
+  "item": [
+    {
+      "id": "74e21796-c833-416d-9926-067028b071bb",
+      "name": "entity",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d13e0102-1136-4e31-9c61-39d750fc867e",
+          "name": "Add an entity (or entities) to a dataset given a graph representation of the entity (or entities).",
+          "request": {
+            "name": "Add an entity (or entities) to a dataset given a graph representation of the entity (or entities).",
+            "description": {},
+            "url": {
+              "path": [
+                "entity",
+                "add"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataset\": \"<string>\",\n  \"entity_graph\": {\n    \"entities\": [\n      {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"properties\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\",\n          \"key_3\": \"<string>\"\n        }\n      },\n      {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"properties\": {\n          \"key_0\": \"<string>\"\n        }\n      }\n    ],\n    \"relationships\": [\n      {\n        \"type\": \"<string>\",\n        \"source\": \"<integer>\",\n        \"target\": \"<integer>\",\n        \"properties\": {\n          \"key_0\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"source\": \"<integer>\",\n        \"target\": \"<integer>\",\n        \"properties\": {\n          \"key_0\": \"<string>\"\n        }\n      }\n    ]\n  },\n  \"source\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "69cba9d3-dbc5-440d-9796-6341126d9512",
+              "name": "Added entity ids",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataset\": \"<string>\",\n  \"entity_graph\": {\n    \"entities\": [\n      {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"properties\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        }\n      },\n      {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"properties\": {\n          \"key_0\": \"<string>\"\n        }\n      }\n    ],\n    \"relationships\": [\n      {\n        \"type\": \"<string>\",\n        \"source\": \"<integer>\",\n        \"target\": \"<integer>\",\n        \"properties\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"source\": \"<integer>\",\n        \"target\": \"<integer>\",\n        \"properties\": {\n          \"key_0\": \"<string>\"\n        }\n      }\n    ]\n  },\n  \"source\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"4881ffbf-40b0-450d-301f-86669101fc56\",\n  \"229be6c6-2836-dde9-3f07-3c2b1360b7f0\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e990798e-c0c0-408a-9bb5-ad273fe1a4da",
+          "name": "Add a batch of entities to a dataset given a list of graph representations of the entities.",
+          "request": {
+            "name": "Add a batch of entities to a dataset given a list of graph representations of the entities.",
+            "description": {},
+            "url": {
+              "path": [
+                "entity",
+                "add_batch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataset\": \"<string>\",\n  \"entity_graphs\": [\n    {\n      \"entities\": [\n        {\n          \"id\": \"<integer>\",\n          \"type\": \"<string>\",\n          \"properties\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"type\": \"<string>\",\n          \"properties\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"relationships\": [\n        {\n          \"type\": \"<string>\",\n          \"source\": \"<integer>\",\n          \"target\": \"<integer>\",\n          \"properties\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"type\": \"<string>\",\n          \"source\": \"<integer>\",\n          \"target\": \"<integer>\",\n          \"properties\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    },\n    {\n      \"entities\": [\n        {\n          \"id\": \"<integer>\",\n          \"type\": \"<string>\",\n          \"properties\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"type\": \"<string>\",\n          \"properties\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"relationships\": [\n        {\n          \"type\": \"<string>\",\n          \"source\": \"<integer>\",\n          \"target\": \"<integer>\",\n          \"properties\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"type\": \"<string>\",\n          \"source\": \"<integer>\",\n          \"target\": \"<integer>\",\n          \"properties\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    }\n  ],\n  \"skip_malformed_entities\": \"<boolean>\",\n  \"source\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "04164bb6-8db6-4fc7-b37c-0c917b197e8b",
+              "name": "Added entity ids",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity",
+                    "add_batch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataset\": \"<string>\",\n  \"entity_graphs\": [\n    {\n      \"entities\": [\n        {\n          \"id\": \"<integer>\",\n          \"type\": \"<string>\",\n          \"properties\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"type\": \"<string>\",\n          \"properties\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"relationships\": [\n        {\n          \"type\": \"<string>\",\n          \"source\": \"<integer>\",\n          \"target\": \"<integer>\",\n          \"properties\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_3\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_4\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"type\": \"<string>\",\n          \"source\": \"<integer>\",\n          \"target\": \"<integer>\",\n          \"properties\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    },\n    {\n      \"entities\": [\n        {\n          \"id\": \"<integer>\",\n          \"type\": \"<string>\",\n          \"properties\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"id\": \"<integer>\",\n          \"type\": \"<string>\",\n          \"properties\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"relationships\": [\n        {\n          \"type\": \"<string>\",\n          \"source\": \"<integer>\",\n          \"target\": \"<integer>\",\n          \"properties\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"type\": \"<string>\",\n          \"source\": \"<integer>\",\n          \"target\": \"<integer>\",\n          \"properties\": {\n            \"key_0\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"key_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ]\n    }\n  ],\n  \"skip_malformed_entities\": \"<boolean>\",\n  \"source\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"4881ffbf-40b0-450d-301f-86669101fc56\",\n  \"229be6c6-2836-dde9-3f07-3c2b1360b7f0\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5f8273b7-105b-49c5-a412-cb09ccb0674f",
+          "name": "Add a relationship between two entities in a dataset",
+          "request": {
+            "name": "Add a relationship between two entities in a dataset",
+            "description": {},
+            "url": {
+              "path": [
+                "entity",
+                "add_relationship"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataset\": \"<string>\",\n  \"from_id\": \"<uuid>\",\n  \"to_id\": \"<uuid>\",\n  \"relationship_type\": \"<string>\",\n  \"properties\": {\n    \"key_0\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5d9f305e-e2c3-44cd-ac26-4fd7e3babced",
+              "name": "Added relationship",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity",
+                    "add_relationship"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataset\": \"<string>\",\n  \"from_id\": \"<uuid>\",\n  \"to_id\": \"<uuid>\",\n  \"relationship_type\": \"<string>\",\n  \"properties\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"aa4bd15a-98bf-7764-1303-9595b717ba1a\",\n  \"from_id\": \"<uuid>\",\n  \"to_id\": \"<uuid>\",\n  \"label\": \"string\",\n  \"properties\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\"\n  },\n  \"created_at\": \"1978-06-12T16:24:40.109Z\",\n  \"updated_at\": \"1954-07-19T00:32:34.411Z\",\n  \"dataset_id\": \"6151234c-915f-d598-1b02-9ecc9646de92\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "02350d70-36f9-4fb6-92f1-03b2a20354fa",
+          "name": "Delete an entity manually",
+          "request": {
+            "name": "Delete an entity manually",
+            "description": {},
+            "url": {
+              "path": [
+                "entity",
+                "delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataset\": \"<string>\",\n  \"entity_id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "af2cfae1-a880-45dd-abd8-5f42c68edba6",
+              "name": "Deleted entity ids",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataset\": \"<string>\",\n  \"entity_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"<uuid>\",\n  \"<uuid>\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "77545814-423f-4461-85df-f5356e11b271",
+          "name": "delete a relationship between two entities in a dataset",
+          "request": {
+            "name": "delete a relationship between two entities in a dataset",
+            "description": {},
+            "url": {
+              "path": [
+                "entity",
+                "delete_relationship"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataset\": \"<string>\",\n  \"relationship_id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2773f6d3-2c41-4808-89ba-81dfb8d10ad6",
+              "name": "deleted relationship",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity",
+                    "delete_relationship"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataset\": \"<string>\",\n  \"relationship_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "null",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "009c36df-51c5-4be6-a3ac-4fdc745f3e0e",
+          "name": "Derive a new property value based on existing source properties",
+          "request": {
+            "name": "Derive a new property value based on existing source properties",
+            "description": {},
+            "url": {
+              "path": [
+                "entity",
+                "derive"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataset\": \"<string>\",\n  \"entity_id\": \"<uuid>\",\n  \"derived_property\": \"<string>\",\n  \"instructions\": \"<string>\",\n  \"model\": \"<string>\",\n  \"node_id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2c614d73-8e33-44e4-a9e4-7bcf0860a97c",
+              "name": "Job ID",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity",
+                    "derive"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataset\": \"<string>\",\n  \"entity_id\": \"<uuid>\",\n  \"derived_property\": \"<string>\",\n  \"instructions\": \"<string>\",\n  \"model\": \"<string>\",\n  \"node_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "85353e1b-2386-4661-b278-dfbaf2148d0b",
+          "name": "Derive a new property value based on existing source properties for all entities in a table",
+          "request": {
+            "name": "Derive a new property value based on existing source properties for all entities in a table",
+            "description": {},
+            "url": {
+              "path": [
+                "entity",
+                "derive_all"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataset\": \"<string>\",\n  \"table_name\": \"<string>\",\n  \"derived_property\": \"<string>\",\n  \"instructions\": \"<string>\",\n  \"model\": \"<string>\",\n  \"node_id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f112fba3-0ee2-4e77-a499-3db2092ba78a",
+              "name": "Job IDs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity",
+                    "derive_all"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataset\": \"<string>\",\n  \"table_name\": \"<string>\",\n  \"derived_property\": \"<string>\",\n  \"instructions\": \"<string>\",\n  \"model\": \"<string>\",\n  \"node_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"4881ffbf-40b0-450d-301f-86669101fc56\",\n  \"229be6c6-2836-dde9-3f07-3c2b1360b7f0\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "822ec490-4dbf-4db3-ae71-cc7f2a855ba7",
+          "name": "Get entity with a given id",
+          "request": {
+            "name": "Get entity with a given id",
+            "description": {},
+            "url": {
+              "path": [
+                "entity",
+                "get"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<uuid>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "resolve_id",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9990871c-8883-4633-b18d-b79b5b8bd2ed",
+              "name": "Requested entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "resolve_id",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<uuid>\",\n  \"label\": \"string\",\n  \"created_at\": \"1991-01-02T21:28:26.732Z\",\n  \"updated_at\": \"1962-07-04T19:18:57.884Z\",\n  \"dataset_id\": \"76bdd977-b518-dd9e-27a1-4da41b57bf19\",\n  \"properties\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\",\n    \"key_3\": \"string\"\n  },\n  \"job_id\": \"6d8d3880-3882-bade-2068-71a81199d600\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "df376199-6867-45ff-88dc-47a446d7d6f1",
+          "name": "entity get local subgraph",
+          "request": {
+            "name": "entity get local subgraph",
+            "description": {},
+            "url": {
+              "path": [
+                "entity",
+                "get_local_subgraph"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<uuid>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "radius",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1d23249b-d405-4a64-a42a-97e2db6a0459",
+              "name": "Local subgraph of given radius",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity",
+                    "get_local_subgraph"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "radius",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"neighbors\": [\n    {\n      \"id\": \"<uuid>\",\n      \"label\": \"string\",\n      \"created_at\": \"1946-08-18T23:58:36.806Z\",\n      \"updated_at\": \"1991-03-05T07:41:10.528Z\",\n      \"dataset_id\": \"6c9ca94a-f05c-f03b-f8e7-d61b471b3ed2\",\n      \"properties\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"job_id\": \"ae066165-ecde-021d-85f6-a5905a7409d7\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"label\": \"string\",\n      \"created_at\": \"1972-10-26T03:12:02.211Z\",\n      \"updated_at\": \"1947-11-09T08:38:31.863Z\",\n      \"dataset_id\": \"dca8f860-d57e-789d-db82-578e53a2e882\",\n      \"properties\": {\n        \"key_0\": \"string\"\n      },\n      \"job_id\": \"749cd8f5-ceaf-d2ab-4bc5-312550c2fb77\"\n    }\n  ],\n  \"relationships\": [\n    {\n      \"id\": \"<uuid>\",\n      \"from_id\": \"<uuid>\",\n      \"to_id\": \"<uuid>\",\n      \"label\": \"string\",\n      \"properties\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"created_at\": \"1987-06-07T07:16:36.758Z\",\n      \"updated_at\": \"1960-06-28T14:53:39.241Z\",\n      \"dataset_id\": \"0bbacec2-4781-5852-a5ae-5a461fc900b4\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"from_id\": \"<uuid>\",\n      \"to_id\": \"<uuid>\",\n      \"label\": \"string\",\n      \"properties\": {\n        \"key_0\": \"string\"\n      },\n      \"created_at\": \"1988-06-13T02:22:41.274Z\",\n      \"updated_at\": \"1952-10-06T03:55:43.498Z\",\n      \"dataset_id\": \"224d17ee-6b71-9d88-a0c7-de73e22c61e5\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "24b1bd8f-adb7-4a2c-b612-a135a3e43500",
+          "name": "Get all historical merges for a given entity",
+          "request": {
+            "name": "Get all historical merges for a given entity",
+            "description": {},
+            "url": {
+              "path": [
+                "entity",
+                "get_merges"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "entity_id",
+                  "value": "<uuid>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a7aaa75d-7cd7-4438-b8fa-76ace01e606e",
+              "name": "entity merges",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity",
+                    "get_merges"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "entity_id",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"baseline_cardinality\": 6657,\n    \"p_match\": 1014.4024187781254,\n    \"p_match_threshold\": 3343.1994862610472,\n    \"matched_properties\": [\n      {\n        \"name\": \"string\",\n        \"match_prob\": 9303.625884156727,\n        \"property_cardinality\": 8878,\n        \"match_transfer_prob\": 6604.723197369573,\n        \"unique\": true\n      },\n      {\n        \"name\": \"string\",\n        \"match_prob\": 2873.7807912279677,\n        \"property_cardinality\": 213,\n        \"match_transfer_prob\": 6275.416289669016,\n        \"unique\": false\n      }\n    ],\n    \"entity_a\": {\n      \"id\": \"<uuid>\",\n      \"label\": \"string\",\n      \"created_at\": \"2024-02-23T20:03:57.470Z\",\n      \"updated_at\": \"1965-12-08T07:44:07.226Z\",\n      \"dataset_id\": \"ad36d518-1290-70ed-a23b-e4da4055facc\",\n      \"properties\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"job_id\": \"9ef28bc7-2731-fb1f-7751-ed734d42b607\"\n    },\n    \"entity_b\": {\n      \"id\": \"<uuid>\",\n      \"label\": \"string\",\n      \"created_at\": \"1954-08-05T03:58:45.824Z\",\n      \"updated_at\": \"1986-01-14T23:20:40.906Z\",\n      \"dataset_id\": \"db3e1a98-d9de-4785-b218-8731aba84986\",\n      \"properties\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"job_id\": \"0515ab64-4be6-95e3-8f95-748679c8f1f7\"\n    },\n    \"cardinality_override\": {\n      \"entity_id\": \"<uuid>\",\n      \"cardinality\": 2199,\n      \"relationship_name\": \"string\"\n    }\n  },\n  {\n    \"baseline_cardinality\": 9194,\n    \"p_match\": 366.2621119391851,\n    \"p_match_threshold\": 497.542187667378,\n    \"matched_properties\": [\n      {\n        \"name\": \"string\",\n        \"match_prob\": 6918.077298502035,\n        \"property_cardinality\": 8764,\n        \"match_transfer_prob\": 5904.9480477468305,\n        \"unique\": true\n      },\n      {\n        \"name\": \"string\",\n        \"match_prob\": 8900.72269022669,\n        \"property_cardinality\": 9571,\n        \"match_transfer_prob\": 8203.3837211652,\n        \"unique\": false\n      }\n    ],\n    \"entity_a\": {\n      \"id\": \"<uuid>\",\n      \"label\": \"string\",\n      \"created_at\": \"1985-04-02T10:14:12.691Z\",\n      \"updated_at\": \"1959-06-14T07:58:26.236Z\",\n      \"dataset_id\": \"09931f3d-137c-a465-ba5a-bdf83191738e\",\n      \"properties\": {\n        \"key_0\": \"string\"\n      },\n      \"job_id\": \"e739675e-3c3f-59e1-8ccc-23a57a84ffc0\"\n    },\n    \"entity_b\": {\n      \"id\": \"<uuid>\",\n      \"label\": \"string\",\n      \"created_at\": \"1974-03-30T16:03:14.268Z\",\n      \"updated_at\": \"1967-04-17T05:34:42.805Z\",\n      \"dataset_id\": \"621a22c2-2eb2-0b3c-425f-d12b8645577f\",\n      \"properties\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\"\n      },\n      \"job_id\": \"64a676c6-fb0c-aa8b-f41b-636fb3cc4472\"\n    },\n    \"cardinality_override\": {\n      \"entity_id\": \"<uuid>\",\n      \"cardinality\": 198,\n      \"relationship_name\": \"string\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d440fe92-3a8a-4ca0-b053-2c38214e7ff4",
+          "name": "entity get source entities",
+          "request": {
+            "name": "entity get source entities",
+            "description": {},
+            "url": {
+              "path": [
+                "entity",
+                "get_source_entities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<uuid>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "487843e0-60db-401b-86c0-3119b0a733f7",
+              "name": "Source entities of given entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity",
+                    "get_source_entities"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"source_entities\": [\n    [\n      {\n        \"created_at\": \"2020-10-23T11:04:33.604Z\",\n        \"id\": \"71585ba7-9efd-8eea-50db-b6bf1effd616\",\n        \"is_summary\": true,\n        \"label\": \"string\",\n        \"llm_id\": 6987,\n        \"properties\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"source_id\": \"b69eca62-0971-4b75-713c-666c420c83e4\",\n        \"user_specified\": false,\n        \"job_id\": \"06b3afb4-a599-6102-fccd-d07288d676fc\",\n        \"kg_entity_id\": \"<uuid>\",\n        \"link\": {\n          \"Web\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"location\": {\n          \"Text\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"scraper_id\": \"45d8b0a9-e3fa-114c-cce4-692edb2f2b20\"\n      },\n      {\n        \"created_at\": \"2018-03-20T01:01:34.012Z\",\n        \"id\": \"98b5dddb-d8ac-0798-6a6a-62e124603df6\",\n        \"is_summary\": false,\n        \"label\": \"string\",\n        \"llm_id\": 8670,\n        \"properties\": {\n          \"key_0\": \"string\"\n        },\n        \"source_id\": \"a2b0d053-c4d0-a32e-2487-6eb6cd02e1de\",\n        \"user_specified\": false,\n        \"job_id\": \"d9fe5788-91c6-85a3-1e6a-68a1605fcba5\",\n        \"kg_entity_id\": \"<uuid>\",\n        \"link\": {\n          \"Web\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"location\": {\n          \"Text\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"scraper_id\": \"4f4d350a-8607-15ea-9e5f-c4266ae3608f\"\n      }\n    ],\n    [\n      {\n        \"created_at\": \"2021-11-03T09:52:03.948Z\",\n        \"id\": \"dbf626d7-4a81-c22f-dea2-c3a1b8ba1c65\",\n        \"is_summary\": true,\n        \"label\": \"string\",\n        \"llm_id\": 5076,\n        \"properties\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"source_id\": \"ebe097c6-5fc9-b820-9a23-924f17ae9d4b\",\n        \"user_specified\": true,\n        \"job_id\": \"2fda21ec-87ae-83c9-4098-29551a13d314\",\n        \"kg_entity_id\": \"<uuid>\",\n        \"link\": {\n          \"Web\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"location\": {\n          \"Text\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"scraper_id\": \"66be020a-06d6-645e-53b5-e05edc928b82\"\n      },\n      {\n        \"created_at\": \"1985-08-21T23:04:38.273Z\",\n        \"id\": \"16778aa2-13e1-7144-c9e9-f85762e0e275\",\n        \"is_summary\": true,\n        \"label\": \"string\",\n        \"llm_id\": 5513,\n        \"properties\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        },\n        \"source_id\": \"6dd98155-c779-feaa-a018-9a1c27e3a3e7\",\n        \"user_specified\": false,\n        \"job_id\": \"36717470-6e90-b1ee-1242-0a409b2d8406\",\n        \"kg_entity_id\": \"<uuid>\",\n        \"link\": {\n          \"Web\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"location\": {\n          \"Text\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"scraper_id\": \"debb1bd8-c6a1-5478-a6b9-4839296e0f19\"\n      }\n    ]\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "682e5377-bfb1-48f5-ab55-0ad7ac589163",
+          "name": "list jobs for a given entity",
+          "request": {
+            "name": "list jobs for a given entity",
+            "description": {},
+            "url": {
+              "path": [
+                "entity",
+                "list_jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<uuid>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a694d191-2611-4713-9bd4-701fd54e1228",
+              "name": "Jobs for the given entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity",
+                    "list_jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"08a513d4-8869-066f-32c7-076d22559460\",\n    \"status\": \"Completed\",\n    \"created_at\": \"1997-07-27T03:16:33.372Z\",\n    \"user_id\": \"a6752ce4-1eff-dd80-e856-1084a3b75844\",\n    \"membership_id\": \"b73ffd81-3b88-d0ce-9f0a-674cfa7cec78\",\n    \"job_type\": \"Match\",\n    \"max_steps_without_save\": 9568,\n    \"use_proxy\": false,\n    \"updated_at\": \"1983-10-03T17:03:17.541Z\",\n    \"dataset_id\": \"543d0042-c691-8c50-1c3a-b2a4916a5569\",\n    \"exploration_run_id\": \"a333dc17-1df8-c512-fb7b-e20ba971692a\",\n    \"max_errors\": 4841,\n    \"max_execution_time_secs\": 3630,\n    \"max_total_steps\": 8514,\n    \"message\": \"string\",\n    \"node_id\": \"<uuid>\",\n    \"parameters\": \"string\",\n    \"reason\": \"string\",\n    \"run_started_time\": \"2003-06-03T12:50:50.046Z\",\n    \"run_time_milliseconds\": 1394,\n    \"seeded_kg_search_term\": \"string\"\n  },\n  {\n    \"id\": \"35474fbc-ce27-17fa-6ad7-2758cacba168\",\n    \"status\": \"Running\",\n    \"created_at\": \"1947-12-23T02:08:05.306Z\",\n    \"user_id\": \"caf03e4b-227e-aa81-3e35-e893b983e6fd\",\n    \"membership_id\": \"da07be95-f048-a5a1-970a-b46c59506ff2\",\n    \"job_type\": \"Scrape\",\n    \"max_steps_without_save\": 4657,\n    \"use_proxy\": true,\n    \"updated_at\": \"1974-06-16T04:06:32.949Z\",\n    \"dataset_id\": \"52b876e4-2fea-3663-cb54-99170738e18b\",\n    \"exploration_run_id\": \"baf29be7-7533-e2d6-99af-3ff0df3b9aba\",\n    \"max_errors\": 8547,\n    \"max_execution_time_secs\": 2682,\n    \"max_total_steps\": 718,\n    \"message\": \"string\",\n    \"node_id\": \"<uuid>\",\n    \"parameters\": \"string\",\n    \"reason\": \"string\",\n    \"run_started_time\": \"1992-06-26T23:26:58.443Z\",\n    \"run_time_milliseconds\": 3475,\n    \"seeded_kg_search_term\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "171636ea-429b-4f3c-aa85-b848cecfc71f",
+          "name": "merge an entity manually",
+          "request": {
+            "name": "merge an entity manually",
+            "description": {},
+            "url": {
+              "path": [
+                "entity",
+                "merge"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entity_1_id\": \"<uuid>\",\n  \"entity_2_id\": \"<uuid>\",\n  \"debug\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "410deea2-ec5b-40c4-b86e-cb47b33f47a1",
+              "name": "merged entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity",
+                    "merge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entity_1_id\": \"<uuid>\",\n  \"entity_2_id\": \"<uuid>\",\n  \"debug\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"match_object\": {\n    \"baseline_cardinality\": 2568,\n    \"p_match\": 8775.104752601697,\n    \"p_match_threshold\": 9140.368565867604,\n    \"matched_properties\": [\n      {\n        \"name\": \"string\",\n        \"match_prob\": 5419.507290730252,\n        \"property_cardinality\": 8191,\n        \"match_transfer_prob\": 455.82090770552196,\n        \"unique\": true\n      },\n      {\n        \"name\": \"string\",\n        \"match_prob\": 9240.504920669897,\n        \"property_cardinality\": 7580,\n        \"match_transfer_prob\": 7509.296003242091,\n        \"unique\": true\n      }\n    ],\n    \"entity_a\": {\n      \"id\": \"<uuid>\",\n      \"label\": \"string\",\n      \"created_at\": \"2000-02-10T02:32:00.157Z\",\n      \"updated_at\": \"2006-04-30T18:00:36.395Z\",\n      \"dataset_id\": \"a56781f1-303e-4fbe-5a0d-e66b464fb7d3\",\n      \"properties\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"job_id\": \"68372ac1-1a3b-f1f5-b510-b0b4ef1573c5\"\n    },\n    \"entity_b\": {\n      \"id\": \"<uuid>\",\n      \"label\": \"string\",\n      \"created_at\": \"1976-03-03T15:35:20.587Z\",\n      \"updated_at\": \"1959-02-03T14:28:19.941Z\",\n      \"dataset_id\": \"04b04034-4d78-b314-6cc1-529a6294acd4\",\n      \"properties\": {\n        \"key_0\": \"string\"\n      },\n      \"job_id\": \"2b9871a4-96b1-cff0-be6f-406ff2a33573\"\n    },\n    \"cardinality_override\": {\n      \"entity_id\": \"<uuid>\",\n      \"cardinality\": 7286,\n      \"relationship_name\": \"string\"\n    }\n  },\n  \"merged_entity_id\": \"<uuid>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ec0f439-cdf9-4859-9699-759591803dbf",
+          "name": "Search for entities based on the given query",
+          "request": {
+            "name": "Search for entities based on the given query",
+            "description": {},
+            "url": {
+              "path": [
+                "entity",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataset\": \"<string>\",\n  \"table_name\": \"<string>\",\n  \"query\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1a0c07af-c6fe-45ce-a7f5-3a34d0ad48f6",
+              "name": "Search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataset\": \"<string>\",\n  \"table_name\": \"<string>\",\n  \"query\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"label\": \"string\",\n    \"created_at\": \"1947-07-15T00:55:20.706Z\",\n    \"updated_at\": \"1972-01-28T16:14:24.846Z\",\n    \"dataset_id\": \"53005353-a5c9-372b-ab4b-4041cd46a1f8\",\n    \"properties\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"job_id\": \"d5722c43-956e-199c-87dd-844013b461ac\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"label\": \"string\",\n    \"created_at\": \"1952-02-25T00:21:16.598Z\",\n    \"updated_at\": \"2017-03-28T10:51:58.037Z\",\n    \"dataset_id\": \"33956f6c-3463-90e2-ad3b-a2fbbeb2f7f9\",\n    \"properties\": {\n      \"key_0\": \"string\"\n    },\n    \"job_id\": \"fe565611-aae5-6784-10db-9864b06004e1\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9df3c175-9941-45e6-948d-d091b60708ac",
+          "name": "Search for entities based on the given query",
+          "request": {
+            "name": "Search for entities based on the given query",
+            "description": {},
+            "url": {
+              "path": [
+                "entity",
+                "summarize"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataset\": \"<string>\",\n  \"entity_id\": \"<uuid>\",\n  \"properties\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"extra_instructions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5aa454b0-8fff-42cc-9a17-32ad25be12e4",
+              "name": "Search results",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity",
+                    "summarize"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataset\": \"<string>\",\n  \"entity_id\": \"<uuid>\",\n  \"properties\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"extra_instructions\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"label\": \"string\",\n    \"created_at\": \"1947-07-15T00:55:20.706Z\",\n    \"updated_at\": \"1972-01-28T16:14:24.846Z\",\n    \"dataset_id\": \"53005353-a5c9-372b-ab4b-4041cd46a1f8\",\n    \"properties\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"job_id\": \"d5722c43-956e-199c-87dd-844013b461ac\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"label\": \"string\",\n    \"created_at\": \"1952-02-25T00:21:16.598Z\",\n    \"updated_at\": \"2017-03-28T10:51:58.037Z\",\n    \"dataset_id\": \"33956f6c-3463-90e2-ad3b-a2fbbeb2f7f9\",\n    \"properties\": {\n      \"key_0\": \"string\"\n    },\n    \"job_id\": \"fe565611-aae5-6784-10db-9864b06004e1\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "76387bab-dc1c-4b32-96e2-949d7631acd2",
+          "name": "Trigger our merge process for a given entity",
+          "request": {
+            "name": "Trigger our merge process for a given entity",
+            "description": {},
+            "url": {
+              "path": [
+                "entity",
+                "trigger_merge"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "entity_id",
+                  "value": "<uuid>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6ed819cb-8a5e-4ca0-9ff6-2414ed5c03d4",
+              "name": "merged entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity",
+                    "trigger_merge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "entity_id",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<uuid>\",\n  \"label\": \"string\",\n  \"created_at\": \"1991-01-02T21:28:26.732Z\",\n  \"updated_at\": \"1962-07-04T19:18:57.884Z\",\n  \"dataset_id\": \"76bdd977-b518-dd9e-27a1-4da41b57bf19\",\n  \"properties\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\",\n    \"key_3\": \"string\"\n  },\n  \"job_id\": \"6d8d3880-3882-bade-2068-71a81199d600\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "eb61bb04-b713-4662-b5fe-8c2ac0070aaa",
+          "name": "update an entity manually",
+          "request": {
+            "name": "update an entity manually",
+            "description": {},
+            "url": {
+              "path": [
+                "entity",
+                "update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataset\": \"<string>\",\n  \"entity_id\": \"<uuid>\",\n  \"properties\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  },\n  \"source\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "44365747-4ad6-4480-983c-b339d56c931a",
+              "name": "updated entity id",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataset\": \"<string>\",\n  \"entity_id\": \"<uuid>\",\n  \"properties\": {\n    \"key_0\": \"<string>\"\n  },\n  \"source\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<uuid>\",\n  \"label\": \"string\",\n  \"created_at\": \"1991-01-02T21:28:26.732Z\",\n  \"updated_at\": \"1962-07-04T19:18:57.884Z\",\n  \"dataset_id\": \"76bdd977-b518-dd9e-27a1-4da41b57bf19\",\n  \"properties\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\",\n    \"key_3\": \"string\"\n  },\n  \"job_id\": \"6d8d3880-3882-bade-2068-71a81199d600\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "638f86f6-5dec-4e65-8e0d-cb3aa65c0f96",
+          "name": "Add multiple entities to a dataset from a CSV file",
+          "request": {
+            "name": "Add multiple entities to a dataset from a CSV file",
+            "description": {},
+            "url": {
+              "path": [
+                "entity",
+                "upload"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dataset",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "table_name",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "file_type",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "clean",
+                  "value": "<boolean>"
+                },
+                {
+                  "disabled": false,
+                  "key": "ignore_columns",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "ignore_columns",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "content",
+                  "type": "file",
+                  "description": "(Required) "
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6f96f217-51c5-4f08-936e-dd324817d605",
+              "name": "Entities added successfully from CSV, JSON, or XLSX. Headers are required for CSV & XLSX files.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity",
+                    "upload"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dataset",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "table_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "file_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "clean",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "ignore_columns",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ignore_columns",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "content",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "20f62625-e281-4065-9de1-ba1d9a848f36",
+          "name": "Add multiple entities to a dataset from a Parquet file with fast batch insert",
+          "request": {
+            "name": "Add multiple entities to a dataset from a Parquet file with fast batch insert",
+            "description": {},
+            "url": {
+              "path": [
+                "entity",
+                "upload_parquet"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dataset",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "table_name",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "start_embedding",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "content",
+                  "value": "<binary>",
+                  "type": "text",
+                  "description": "(Required) "
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "492bc7aa-3fe7-44e9-a108-ece741a8fa7b",
+              "name": "Entities added successfully from Parquet file. Performs fast batch insert with original row index tracking.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity",
+                    "upload_parquet"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dataset",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "table_name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "start_embedding",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "content",
+                      "value": "<binary>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b70a2e52-8c90-47bb-9cba-e0a9c703d38b",
+          "name": "verify a kg against the dataset",
+          "request": {
+            "name": "verify a kg against the dataset",
+            "description": {},
+            "url": {
+              "path": [
+                "entity",
+                "verify"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataset\": \"<string>\",\n  \"entity_graph\": {\n    \"entities\": [\n      {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"properties\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        }\n      },\n      {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"properties\": {\n          \"key_0\": \"<string>\"\n        }\n      }\n    ],\n    \"relationships\": [\n      {\n        \"type\": \"<string>\",\n        \"source\": \"<integer>\",\n        \"target\": \"<integer>\",\n        \"properties\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"source\": \"<integer>\",\n        \"target\": \"<integer>\",\n        \"properties\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      }\n    ]\n  },\n  \"fix\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fd83317b-a5c8-4ca4-ae63-e36ddf4ef9ce",
+              "name": "verified knowledge graph",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity",
+                    "verify"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataset\": \"<string>\",\n  \"entity_graph\": {\n    \"entities\": [\n      {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"properties\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        }\n      },\n      {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"properties\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      }\n    ],\n    \"relationships\": [\n      {\n        \"type\": \"<string>\",\n        \"source\": \"<integer>\",\n        \"target\": \"<integer>\",\n        \"properties\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"source\": \"<integer>\",\n        \"target\": \"<integer>\",\n        \"properties\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\",\n          \"key_3\": \"<string>\"\n        }\n      }\n    ]\n  },\n  \"fix\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entities\": [\n    {\n      \"id\": \"<integer>\",\n      \"type\": \"<string>\",\n      \"properties\": {\n        \"key_0\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<integer>\",\n      \"type\": \"<string>\",\n      \"properties\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\"\n      }\n    }\n  ],\n  \"relationships\": [\n    {\n      \"type\": \"<string>\",\n      \"source\": \"<integer>\",\n      \"target\": \"<integer>\",\n      \"properties\": {\n        \"key_0\": \"<string>\",\n        \"key_1\": \"<string>\",\n        \"key_2\": \"<string>\",\n        \"key_3\": \"<string>\"\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"source\": \"<integer>\",\n      \"target\": \"<integer>\",\n      \"properties\": {\n        \"key_0\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "db680950-dcf7-4bc4-9583-0af318cc5675",
+          "name": "entity view",
+          "request": {
+            "name": "entity view",
+            "description": {},
+            "url": {
+              "path": [
+                "entity",
+                "view"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<uuid>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "resolve_id",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "38d4ed23-ed38-45fc-b8e9-e7563999c07c",
+              "name": "Entity view with properties, sources, relationships, connected entities, and similar entities",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity",
+                    "view"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "resolve_id",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entity\": {\n    \"id\": \"<uuid>\",\n    \"label\": \"string\",\n    \"created_at\": \"1948-08-18T20:58:04.185Z\",\n    \"updated_at\": \"2026-03-25T22:49:19.774Z\",\n    \"dataset_id\": \"fb59e63f-15a0-3cfe-d768-1945b7f0ddf2\",\n    \"properties\": {\n      \"key_0\": \"string\",\n      \"key_1\": \"string\"\n    },\n    \"job_id\": \"f91c3b55-d228-d176-0c0c-b0df2b2362bd\"\n  },\n  \"sources\": [\n    {\n      \"id\": \"d095b0fd-7bd8-3048-84f4-284c9d421d18\",\n      \"user_specified\": true,\n      \"is_summary\": true,\n      \"created_at\": \"1959-10-26T22:27:07.994Z\",\n      \"link\": {\n        \"Web\": {\n          \"url\": \"string\"\n        }\n      },\n      \"location\": {\n        \"Text\": {\n          \"byte_offset\": 3441\n        }\n      },\n      \"scraper_id\": \"87872210-3870-810b-4483-4e11f620239a\"\n    },\n    {\n      \"id\": \"0ffe7b22-9f31-6621-72a7-bb147de6551f\",\n      \"user_specified\": true,\n      \"is_summary\": true,\n      \"created_at\": \"1971-06-07T11:24:39.056Z\",\n      \"link\": {\n        \"Web\": {\n          \"url\": \"string\"\n        }\n      },\n      \"location\": {\n        \"Text\": {\n          \"byte_offset\": 3496\n        }\n      },\n      \"scraper_id\": \"141173c9-36ac-2be2-c165-961e23b89566\"\n    }\n  ],\n  \"relationships\": [\n    {\n      \"id\": \"<uuid>\",\n      \"from_id\": \"<uuid>\",\n      \"to_id\": \"<uuid>\",\n      \"label\": \"string\",\n      \"properties\": {\n        \"key_0\": \"string\"\n      },\n      \"created_at\": \"2025-09-11T20:25:19.689Z\",\n      \"updated_at\": \"1978-09-16T02:42:43.007Z\",\n      \"dataset_id\": \"5ae6eb29-8254-01b7-939b-2d50e1eb002d\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"from_id\": \"<uuid>\",\n      \"to_id\": \"<uuid>\",\n      \"label\": \"string\",\n      \"properties\": {\n        \"key_0\": \"string\"\n      },\n      \"created_at\": \"2015-09-06T05:46:05.855Z\",\n      \"updated_at\": \"1972-10-17T13:19:01.110Z\",\n      \"dataset_id\": \"8a62d811-f9a5-b1a5-b6f3-d0ccd36d95b3\"\n    }\n  ],\n  \"connected_entities\": [\n    {\n      \"id\": \"<uuid>\",\n      \"label\": \"string\",\n      \"created_at\": \"1958-08-29T07:39:48.345Z\",\n      \"updated_at\": \"1984-10-07T05:12:36.195Z\",\n      \"dataset_id\": \"07af47a7-0579-e73f-2869-aa88cf150fe1\",\n      \"properties\": {\n        \"key_0\": \"string\"\n      },\n      \"job_id\": \"437ab316-ca8e-790b-fef0-49a3c9117d42\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"label\": \"string\",\n      \"created_at\": \"2018-11-30T22:20:28.958Z\",\n      \"updated_at\": \"1978-07-16T09:32:26.068Z\",\n      \"dataset_id\": \"86be94fa-23bc-2c8d-6ecb-63a26642c100\",\n      \"properties\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\"\n      },\n      \"job_id\": \"607d4631-952c-cbaf-51a8-1134ca9491fc\"\n    }\n  ],\n  \"similar_entities\": [\n    {\n      \"id\": \"<uuid>\",\n      \"label\": \"string\",\n      \"created_at\": \"1996-03-08T01:56:45.780Z\",\n      \"updated_at\": \"1985-12-06T01:48:12.794Z\",\n      \"dataset_id\": \"57dc176e-d24c-18f1-afb3-956f5cac7595\",\n      \"properties\": {\n        \"key_0\": \"string\"\n      },\n      \"job_id\": \"c4688fb0-1be3-3a9b-935a-5e9aef29f861\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"label\": \"string\",\n      \"created_at\": \"2002-03-18T07:48:05.369Z\",\n      \"updated_at\": \"2005-09-22T04:58:37.267Z\",\n      \"dataset_id\": \"0ffe8e36-bc94-a852-6481-c866b317b363\",\n      \"properties\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\"\n      },\n      \"job_id\": \"5c192b94-f91b-36ad-f7ec-99e20d419a8b\"\n    }\n  ],\n  \"last_updated\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.structify.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d04dbe5a-79ce-4674-abc3-97437189ec87",
+    "name": "Structify account entity API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Every enterprise's data team.\n\nContact Support:\n Name: Structify Team\n Email: team@structify.ai",
+      "type": "text/plain"
+    }
+  }
+}

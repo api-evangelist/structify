@@ -1,0 +1,932 @@
+{
+  "item": [
+    {
+      "id": "3e48d4e0-3ddc-4b8e-8df8-8fe529ed6a1b",
+      "name": "code",
+      "description": {
+        "content": "Code generation endpoints",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4cc0a365-a364-43f9-97e3-b08fb22913fd",
+          "name": "apply manual edit",
+          "request": {
+            "name": "apply manual edit",
+            "description": {},
+            "url": {
+              "path": [
+                "code",
+                "apply-manual-edit",
+                ":chat_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "chat_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filename\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "34488241-67d7-4c41-ae41-e6b1079be07a",
+              "name": "Manual edit applied successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "code",
+                    "apply-manual-edit",
+                    ":chat_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "chat_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f2809438-1aea-4dc1-8863-f9e671e22c83",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "code",
+                    "apply-manual-edit",
+                    ":chat_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "chat_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "93fc22ee-6b7c-470e-8dd1-c9c2f1f385ca",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "code",
+                    "apply-manual-edit",
+                    ":chat_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "chat_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "26a230d6-7df4-496d-bee8-396b3d552560",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "code",
+                    "apply-manual-edit",
+                    ":chat_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "chat_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c9d35e74-6a63-4542-8b45-3a1c65386a62",
+              "name": "Chat session not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "code",
+                    "apply-manual-edit",
+                    ":chat_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "chat_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "27251ff7-0f06-4e38-b10b-f859de930323",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "code",
+                    "apply-manual-edit",
+                    ":chat_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "chat_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filename\": \"<string>\",\n  \"code\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ccfa7479-9771-4ed9-8a1c-bc7e051d4334",
+          "name": "Generates code based on the provided prompt.",
+          "request": {
+            "name": "Generates code based on the provided prompt.",
+            "description": {
+              "content": "Events are streamed via WebSocket connection. This endpoint returns immediately\nafter starting the generation process.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "code",
+                "generate-code"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"prompt\": \"<string>\",\n  \"chatSessionId\": \"<uuid>\",\n  \"assistantMessageId\": \"<uuid>\",\n  \"config\": {\n    \"llm_key\": \"<string>\",\n    \"max_steps\": \"<integer>\",\n    \"reminder_message\": \"<string>\",\n    \"system_prompt\": \"<string>\"\n  },\n  \"connectorIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"filePaths\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"overridePreviousMessageId\": \"<uuid>\",\n  \"triggerWorkflowExecution\": \"<boolean>\",\n  \"userMessageId\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "66951b4a-d1f2-4054-8702-10c21e5a643f",
+              "name": "Code generation started successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "code",
+                    "generate-code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"chatSessionId\": \"<uuid>\",\n  \"assistantMessageId\": \"<uuid>\",\n  \"config\": {\n    \"llm_key\": \"<string>\",\n    \"max_steps\": \"<integer>\",\n    \"reminder_message\": \"<string>\",\n    \"system_prompt\": \"<string>\"\n  },\n  \"connectorIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"filePaths\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"overridePreviousMessageId\": \"<uuid>\",\n  \"triggerWorkflowExecution\": \"<boolean>\",\n  \"userMessageId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "26ffc981-a234-450c-971f-c540ccdc1a6b",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "code",
+                    "generate-code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"chatSessionId\": \"<uuid>\",\n  \"assistantMessageId\": \"<uuid>\",\n  \"config\": {\n    \"llm_key\": \"<string>\",\n    \"max_steps\": \"<integer>\",\n    \"reminder_message\": \"<string>\",\n    \"system_prompt\": \"<string>\"\n  },\n  \"connectorIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"filePaths\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"overridePreviousMessageId\": \"<uuid>\",\n  \"triggerWorkflowExecution\": \"<boolean>\",\n  \"userMessageId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "597e59c2-c9a0-4032-a83e-4ad59b81bd6f",
+              "name": "Unauthorized - user is not authenticated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "code",
+                    "generate-code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"chatSessionId\": \"<uuid>\",\n  \"assistantMessageId\": \"<uuid>\",\n  \"config\": {\n    \"llm_key\": \"<string>\",\n    \"max_steps\": \"<integer>\",\n    \"reminder_message\": \"<string>\",\n    \"system_prompt\": \"<string>\"\n  },\n  \"connectorIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"filePaths\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"overridePreviousMessageId\": \"<uuid>\",\n  \"triggerWorkflowExecution\": \"<boolean>\",\n  \"userMessageId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2744896-cd83-4b37-98e0-3bbd14960617",
+              "name": "Forbidden - user does not have write access to chat session",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "code",
+                    "generate-code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"chatSessionId\": \"<uuid>\",\n  \"assistantMessageId\": \"<uuid>\",\n  \"config\": {\n    \"llm_key\": \"<string>\",\n    \"max_steps\": \"<integer>\",\n    \"reminder_message\": \"<string>\",\n    \"system_prompt\": \"<string>\"\n  },\n  \"connectorIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"filePaths\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"overridePreviousMessageId\": \"<uuid>\",\n  \"triggerWorkflowExecution\": \"<boolean>\",\n  \"userMessageId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "556082b8-932d-4acb-a07f-cfab78376769",
+              "name": "Chat session not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "code",
+                    "generate-code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"chatSessionId\": \"<uuid>\",\n  \"assistantMessageId\": \"<uuid>\",\n  \"config\": {\n    \"llm_key\": \"<string>\",\n    \"max_steps\": \"<integer>\",\n    \"reminder_message\": \"<string>\",\n    \"system_prompt\": \"<string>\"\n  },\n  \"connectorIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"filePaths\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"overridePreviousMessageId\": \"<uuid>\",\n  \"triggerWorkflowExecution\": \"<boolean>\",\n  \"userMessageId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7ce835b0-c41e-4b97-828f-6005400ac050",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "code",
+                    "generate-code"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"prompt\": \"<string>\",\n  \"chatSessionId\": \"<uuid>\",\n  \"assistantMessageId\": \"<uuid>\",\n  \"config\": {\n    \"llm_key\": \"<string>\",\n    \"max_steps\": \"<integer>\",\n    \"reminder_message\": \"<string>\",\n    \"system_prompt\": \"<string>\"\n  },\n  \"connectorIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"filePaths\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"overridePreviousMessageId\": \"<uuid>\",\n  \"triggerWorkflowExecution\": \"<boolean>\",\n  \"userMessageId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "40cea016-e47b-470c-83e5-e0f0015e50dd",
+          "name": "Interrupts an ongoing code generation for the specified chat session.",
+          "request": {
+            "name": "Interrupts an ongoing code generation for the specified chat session.",
+            "description": {
+              "content": "This sets an interrupt flag that will cause the generation to stop gracefully\nat the next checkpoint (before publishing the next event).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "code",
+                "interrupt-generation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"chatSessionId\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3e017f13-0bd9-4a22-a8c6-322a7502fc76",
+              "name": "Interrupt signal sent successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "code",
+                    "interrupt-generation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"chatSessionId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.structify.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9118e038-3481-4406-b1cd-361ffb9a883a",
+    "name": "Structify account code API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Every enterprise's data team.\n\nContact Support:\n Name: Structify Team\n Email: team@structify.ai",
+      "type": "text/plain"
+    }
+  }
+}

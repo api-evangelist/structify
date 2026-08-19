@@ -1,0 +1,944 @@
+generated: '2026-08-14'
+method: derived
+source: >-
+  mcp/structify-mcp-tools.json (live tools/list from https://docs.structify.ai/mcp,
+  probed 2026-08-14) bound against
+  openapi/_original/structify-openapi-original.json (OpenAPI 3.0.3, 248 paths,
+  281 operations)
+summary: >-
+  This crosswalk records a total divergence, not an overlap. Structify's live
+  MCP server operates on the DOCUMENTATION plane — its three tools search, read
+  and file feedback on docs.structify.ai. The REST API operates on the DATA
+  plane — 281 operations over datasets, entities, connectors, jobs, sessions and
+  teams. There is not one binding between them: every MCP tool is mcp_only and
+  every REST operation is rest_only. An agent that connects to Structify's MCP
+  server can learn how Structify works but cannot do anything in Structify.
+surfaces:
+  openapi:
+    file: openapi/_original/structify-openapi-original.json
+    refined: openapi/structify-*-api-openapi.yml
+    base_url: https://api.structify.ai
+    operations: 281
+    gated: false
+    note: >-
+      The spec is public and unauthenticated to read; calling the operations
+      requires an api_key header or a bearer session token.
+  mcp:
+    url: https://docs.structify.ai/mcp
+    gated: false
+    auth: none
+    tools: 3
+    plane: documentation
+  graphql:
+    present: false
+    note: No /graphql surface was found on any Structify host.
+coverage:
+  mcp_tools: 3
+  rest_operations: 281
+  bound: 0
+  mcp_only: 3
+  rest_only: 281
+  rest_coverage_pct: 0.0
+  note: >-
+    0 of 281 REST operations are reachable from the published MCP server. This
+    is the single most consequential fact in this repo's agent-readiness
+    profile: the MCP pointer is real and the endpoint answers, but it exposes no
+    product capability.
+crosswalk: []
+mcp_only:
+- tool: search_structify
+  reason: >-
+    Documentation search over the Structify knowledge base. No REST operation
+    backs it; there is no public search endpoint over docs content in the
+    OpenAPI.
+- tool: query_docs_filesystem_structify
+  reason: >-
+    Read-only shell over a virtualized in-memory filesystem of documentation
+    pages and OpenAPI specs. A docs-retrieval primitive with no REST analogue.
+- tool: submit_feedback
+  reason: >-
+    Files documentation feedback with the docs team. No REST operation accepts
+    documentation feedback; the OpenAPI has no feedback surface.
+rest_only_summary:
+  Nango: 2
+  account: 10
+  admin: 55
+  chat: 33
+  chat_templates: 2
+  code: 3
+  connector_catalog: 3
+  connectors: 29
+  dataset: 25
+  documents: 4
+  entity: 21
+  jobs: 5
+  match: 2
+  project: 5
+  public_sessions: 2
+  sandbox: 4
+  scrape: 2
+  server: 1
+  sessions: 19
+  slack: 1
+  source: 3
+  structure: 8
+  team: 13
+  teams: 2
+  transactions: 3
+  usage: 2
+  user: 2
+  webhook: 1
+  whitelabel: 3
+  wiki: 5
+  workflow: 3
+  workflow_schedule: 8
+rest_only_note: >-
+  All 281 operations below are unreachable from the MCP server. They are listed
+  in full so the gap is auditable per operation rather than asserted in
+  aggregate. The derived candidate tool set in mcp/structify-mcp.yml
+  (candidate_tools) names ten of these as the marquee set an API-plane MCP
+  server would most plausibly expose first.
+rest_only:
+- operationId: list_integrations
+  tag: Nango
+  http: GET /nango/integrations
+- operationId: nango_create_session
+  tag: Nango
+  http: POST /nango/session
+- operationId: api_keys_create
+  tag: account
+  http: POST /user/api_keys
+- operationId: api_keys_get
+  tag: account
+  http: GET /user/api_keys/{id}
+- operationId: api_keys_list
+  tag: account
+  http: GET /user/api_keys
+- operationId: api_keys_revoke
+  tag: account
+  http: DELETE /user/api_keys/{id}
+- operationId: get_onboarding_answers
+  tag: account
+  http: GET /user/onboarding/answers
+- operationId: refresh_session
+  tag: account
+  http: POST /user/refresh
+- operationId: save_onboarding_answers
+  tag: account
+  http: PUT /user/onboarding/answers
+- operationId: submit_survey
+  tag: account
+  http: POST /user/survey/submit
+- operationId: user_info
+  tag: account
+  http: GET /user/info
+- operationId: user_jwt_to_api_token
+  tag: account
+  http: POST /user/jwt_to_api_token/{jwt}
+- operationId: admin_batch_create_connector_auth_method_scopes
+  tag: admin
+  http: POST /admin/connector-catalog/scopes/batch
+- operationId: admin_batch_create_connector_credential_fields
+  tag: admin
+  http: POST /admin/connector-catalog/credential-fields/batch
+- operationId: admin_clone_connectors
+  tag: admin
+  http: POST /admin/connector/clone
+- operationId: admin_create_chat_template
+  tag: admin
+  http: POST /admin/chat/templates
+- operationId: admin_create_connector_auth_method
+  tag: admin
+  http: POST /admin/connector-catalog/auth-methods
+- operationId: admin_create_connector_auth_method_scope
+  tag: admin
+  http: POST /admin/connector-catalog/scopes
+- operationId: admin_create_connector_catalog
+  tag: admin
+  http: POST /admin/connector-catalog
+- operationId: admin_create_connector_credential_field
+  tag: admin
+  http: POST /admin/connector-catalog/credential-fields
+- operationId: admin_create_functional_test
+  tag: admin
+  http: POST /admin/functional_tests/create
+- operationId: admin_dataset_get_by_id
+  tag: admin
+  http: GET /admin/dataset/get_by_id
+- operationId: admin_delete_connector_auth_method_scope
+  tag: admin
+  http: DELETE /admin/connector-catalog/scopes/{id}
+- operationId: admin_delete_connector_catalog
+  tag: admin
+  http: DELETE /admin/connector-catalog/{id}
+- operationId: admin_delete_connector_credential_field
+  tag: admin
+  http: DELETE /admin/connector-catalog/credential-fields/{id}
+- operationId: admin_get_functional_test_results
+  tag: admin
+  http: GET /admin/functional_tests/results
+- operationId: admin_get_job_concurrency_limits
+  tag: admin
+  http: GET /admin/jobs/concurrency_limits
+- operationId: admin_get_running_job_stats
+  tag: admin
+  http: GET /admin/jobs/running_stats
+- operationId: admin_get_system_prompt
+  tag: admin
+  http: GET /admin/functional_tests/system_prompt
+- operationId: admin_impersonate_user
+  tag: admin
+  http: POST /admin/users/impersonate
+- operationId: admin_jobs_delete
+  tag: admin
+  http: POST /admin/jobs/delete
+- operationId: admin_jobs_list
+  tag: admin
+  http: GET /admin/jobs/list
+- operationId: admin_kill_jobs_by_user
+  tag: admin
+  http: POST /admin/jobs/kill_by_user
+- operationId: admin_link_chat_to_functional_test
+  tag: admin
+  http: POST /admin/functional_tests/link
+- operationId: admin_list_chat_templates
+  tag: admin
+  http: GET /admin/chat/templates
+- operationId: admin_list_connector_auth_method_scopes
+  tag: admin
+  http: GET /admin/connector-catalog/scopes
+- operationId: admin_list_functional_tests
+  tag: admin
+  http: GET /admin/functional_tests/list
+- operationId: admin_list_nango_pending
+  tag: admin
+  http: GET /admin/connector-catalog/nango-pending
+- operationId: admin_list_team_connectors
+  tag: admin
+  http: GET /admin/connector/team/{team_id}
+- operationId: admin_redis_flush
+  tag: admin
+  http: POST /admin/redis/flush
+- operationId: admin_report_critical
+  tag: admin
+  http: POST /admin/critical
+- operationId: admin_sandbox_create_job
+  tag: admin
+  http: POST /admin/sandbox/create_job
+- operationId: admin_sandbox_list
+  tag: admin
+  http: GET /admin/sandbox/list
+- operationId: admin_sandbox_terminate
+  tag: admin
+  http: POST /admin/sandbox/{sandbox_id}/terminate
+- operationId: admin_set_connector_datahub_config
+  tag: admin
+  http: POST /admin/connector/datahub-config
+- operationId: admin_team_add_member
+  tag: admin
+  http: POST /admin/team/add_member
+- operationId: admin_team_cancel_subscription
+  tag: admin
+  http: POST /admin/team/cancel_subscription
+- operationId: admin_team_create_subscription
+  tag: admin
+  http: POST /admin/team/create_subscription
+- operationId: admin_team_expire_grants
+  tag: admin
+  http: POST /admin/team/expire_grants
+- operationId: admin_team_extend_trial
+  tag: admin
+  http: POST /admin/team/extend_trial
+- operationId: admin_team_get
+  tag: admin
+  http: GET /admin/team/get/{team_id}
+- operationId: admin_team_grant_credits
+  tag: admin
+  http: POST /admin/team/grant_credits
+- operationId: admin_team_list
+  tag: admin
+  http: GET /admin/team/list
+- operationId: admin_team_list_members
+  tag: admin
+  http: GET /admin/team/{team_id}/members
+- operationId: admin_team_remove_member
+  tag: admin
+  http: POST /admin/team/remove_member
+- operationId: admin_team_update_seats_override
+  tag: admin
+  http: POST /admin/team/update_seats_override
+- operationId: admin_update_chat_template
+  tag: admin
+  http: PATCH /admin/chat/templates/{template_id}
+- operationId: admin_update_connector_auth_method
+  tag: admin
+  http: PATCH /admin/connector-catalog/auth-methods/{id}
+- operationId: admin_update_connector_auth_method_scope
+  tag: admin
+  http: PATCH /admin/connector-catalog/scopes/{id}
+- operationId: admin_update_connector_catalog
+  tag: admin
+  http: PATCH /admin/connector-catalog/{id}
+- operationId: admin_update_connector_credential_field
+  tag: admin
+  http: PATCH /admin/connector-catalog/credential-fields/{id}
+- operationId: admin_update_functional_test_results
+  tag: admin
+  http: PUT /admin/functional_tests/update_results
+- operationId: admin_update_job_concurrency_limits
+  tag: admin
+  http: PUT /admin/jobs/concurrency_limits
+- operationId: admin_upload_connector_logo
+  tag: admin
+  http: PUT /admin/connector-catalog/{slug}/logo
+- operationId: admin_user_create
+  tag: admin
+  http: POST /admin/users/create
+- operationId: admin_user_list
+  tag: admin
+  http: GET /admin/users/list
+- operationId: admin_user_stats
+  tag: admin
+  http: POST /admin/users/get_stats
+- operationId: admin_issue_found
+  tag: chat
+  http: POST /chat/sessions/{chat_id}/admin/issue_found
+- operationId: chat_add_code
+  tag: chat
+  http: POST /chat/add_code/{chat_id}
+- operationId: chat_add_collaborator
+  tag: chat
+  http: POST /chat/sessions/{chat_id}/collaborators
+- operationId: chat_add_git_commit
+  tag: chat
+  http: POST /chat/sessions/{session_id}/commits
+- operationId: chat_compress
+  tag: chat
+  http: POST /chat/sessions/{session_id}/compress
+- operationId: chat_copy_node_output_by_code_hash
+  tag: chat
+  http: POST /chat/sessions/{session_id}/nodes/by_code_hash
+- operationId: chat_copy_session
+  tag: chat
+  http: POST /chat/copy
+- operationId: chat_create_session
+  tag: chat
+  http: POST /chat/sessions
+- operationId: chat_delete_session
+  tag: chat
+  http: DELETE /chat/sessions/{session_id}
+- operationId: chat_get_dependencies
+  tag: chat
+  http: GET /chat/sessions/{session_id}/dependencies
+- operationId: chat_get_session
+  tag: chat
+  http: GET /chat/sessions/{session_id}
+- operationId: chat_get_session_timeline
+  tag: chat
+  http: GET /chat/sessions/{session_id}/timeline
+- operationId: chat_grant_admin_override
+  tag: chat
+  http: POST /chat/sessions/{chat_id}/admin_override
+- operationId: chat_list_collaborators
+  tag: chat
+  http: GET /chat/sessions/{chat_id}/collaborators
+- operationId: chat_list_git_commits
+  tag: chat
+  http: GET /chat/sessions/{session_id}/commits
+- operationId: chat_list_sessions
+  tag: chat
+  http: GET /chat/sessions
+- operationId: chat_load_files
+  tag: chat
+  http: POST /chat/files/load
+- operationId: chat_make_session_permanent
+  tag: chat
+  http: PATCH /chat/sessions/{session_id}/make-permanent
+- operationId: chat_remove_collaborator
+  tag: chat
+  http: DELETE /chat/sessions/{chat_id}/collaborators/{user_id}
+- operationId: chat_revert_to_commit
+  tag: chat
+  http: POST /chat/sessions/{session_id}/revert
+- operationId: chat_update_visibility
+  tag: chat
+  http: PUT /chat/sessions/{session_id}/visibility
+- operationId: chat_ws
+  tag: chat
+  http: GET /chat/ws
+- operationId: delete_input_files
+  tag: chat
+  http: POST /chat/input-files/delete/{chat_id}
+- operationId: download_all_input_files
+  tag: chat
+  http: GET /chat/input-files/download-all/{chat_id}
+- operationId: download_input_file
+  tag: chat
+  http: GET /chat/input-files/download/{chat_id}/{filename}
+- operationId: get_git_commit
+  tag: chat
+  http: GET /chat/sessions/{chat_id}/commits/{commit_hash}
+- operationId: get_partial_chats
+  tag: chat
+  http: GET /chat/{chat_session_id}/partial-chats
+- operationId: list_dashboards
+  tag: chat
+  http: GET /chat/sessions/{chat_id}/dashboards
+- operationId: list_input_files
+  tag: chat
+  http: GET /chat/input-files/list/{chat_id}
+- operationId: simulate_chat_prompt
+  tag: chat
+  http: POST /chat/{chat_session_id}/simulate-prompt
+- operationId: update_chat_session
+  tag: chat
+  http: PATCH /chat/sessions/{session_id}
+- operationId: update_chat_session_favorite
+  tag: chat
+  http: PATCH /chat/sessions/{session_id}/favorite
+- operationId: upload_input_files
+  tag: chat
+  http: POST /chat/input-files/upload/{chat_id}
+- operationId: get_chat_template
+  tag: chat_templates
+  http: GET /chat/templates/{template_id}
+- operationId: list_chat_templates
+  tag: chat_templates
+  http: GET /chat/templates
+- operationId: apply_manual_edit
+  tag: code
+  http: POST /code/apply-manual-edit/{chat_id}
+- operationId: generate_code
+  tag: code
+  http: POST /code/generate-code
+- operationId: interrupt_generation
+  tag: code
+  http: POST /code/interrupt-generation
+- operationId: get_connector_catalog
+  tag: connector_catalog
+  http: GET /connector-catalog/{slug}
+- operationId: get_connector_logo
+  tag: connector_catalog
+  http: GET /connector-catalog/{slug}/logo
+- operationId: list_connector_catalog
+  tag: connector_catalog
+  http: GET /connector-catalog
+- operationId: add_connector_schema_object
+  tag: connectors
+  http: POST /connectors/{connector_id}/schema_object
+- operationId: connectors_download_datahub_artifact
+  tag: connectors
+  http: GET /internal/connectors/{connector_id}/datahub-artifacts/{kind}
+- operationId: connectors_upload_datahub_artifact
+  tag: connectors
+  http: PUT /internal/connectors/{connector_id}/datahub-artifacts/{kind}
+- operationId: create_connector
+  tag: connectors
+  http: POST /connectors
+- operationId: create_connector_secret
+  tag: connectors
+  http: POST /connectors/{connector_id}/secrets
+- operationId: delete_connector
+  tag: connectors
+  http: DELETE /connectors/{connector_id}
+- operationId: delete_connector_schema_object
+  tag: connectors
+  http: DELETE /connectors/{connector_id}/schema_object
+- operationId: delete_connector_secret
+  tag: connectors
+  http: DELETE /connectors/{connector_id}/secrets/{secret_name}
+- operationId: explore_connector
+  tag: connectors
+  http: POST /connectors/{connector_id}/explore
+- operationId: get_active_exploration_run
+  tag: connectors
+  http: GET /connectors/{connector_id}/explore/active-run
+- operationId: get_connector
+  tag: connectors
+  http: GET /connectors/{connector_id}
+- operationId: get_connector_clarification_requests
+  tag: connectors
+  http: GET /connectors/{connector_id}/clarification-requests
+- operationId: get_connector_exploration_runs
+  tag: connectors
+  http: GET /connectors/{connector_id}/explore/runs
+- operationId: get_connector_explorer_chat
+  tag: connectors
+  http: GET /connectors/{connector_id}/explore/chat
+- operationId: get_connector_store
+  tag: connectors
+  http: GET /connectors/{connector_id}/store
+- operationId: get_connector_table_path
+  tag: connectors
+  http: GET /connectors/tables/{table_id}/path
+- operationId: get_exploration_run_progress
+  tag: connectors
+  http: GET /connectors/{connector_id}/explore/runs/{run_id}/progress
+- operationId: get_table_lineage
+  tag: connectors
+  http: GET /connectors/tables/{table_id}/lineage
+- operationId: list_connector_stores
+  tag: connectors
+  http: GET /connectors/stores
+- operationId: list_connector_summaries
+  tag: connectors
+  http: POST /connectors/summaries
+- operationId: list_connector_tables
+  tag: connectors
+  http: GET /connectors/{connector_id}/tables
+- operationId: list_connectors
+  tag: connectors
+  http: GET /connectors
+- operationId: list_connectors_with_snippets
+  tag: connectors
+  http: GET /connectors/with-snippets
+- operationId: resolve_clarification
+  tag: connectors
+  http: PATCH /connectors/clarification-requests/{clarification_id}/resolve
+- operationId: search_tables
+  tag: connectors
+  http: GET /connectors/search-tables
+- operationId: update_column
+  tag: connectors
+  http: PATCH /connectors/columns/{column_id}
+- operationId: update_connector
+  tag: connectors
+  http: PATCH /connectors/{connector_id}
+- operationId: update_table
+  tag: connectors
+  http: PATCH /connectors/tables/{table_id}
+- operationId: upsert_connector_type_snippet
+  tag: connectors
+  http: PUT /connector-type-snippets/{connector_type}
+- operationId: dataset_add_property
+  tag: dataset
+  http: POST /dataset/add_property
+- operationId: dataset_count_missing_embeddings
+  tag: dataset
+  http: GET /dataset/count_missing_embeddings
+- operationId: dataset_create
+  tag: dataset
+  http: POST /dataset/create
+- operationId: dataset_delete
+  tag: dataset
+  http: DELETE /dataset/delete
+- operationId: dataset_enrichment_progress
+  tag: dataset
+  http: GET /dataset/enrichment_progress
+- operationId: dataset_entity_ws
+  tag: dataset
+  http: GET /dataset/entity_ws
+- operationId: dataset_evaluate_delete
+  tag: dataset
+  http: DELETE /dataset/evaluate/delete
+- operationId: dataset_evaluate_get
+  tag: dataset
+  http: GET /dataset/evaluate/get
+- operationId: dataset_evaluate_list
+  tag: dataset
+  http: GET /dataset/evaluate/list
+- operationId: dataset_evaluate_run
+  tag: dataset
+  http: POST /dataset/evaluate/run
+- operationId: dataset_evaluate_status
+  tag: dataset
+  http: GET /dataset/evaluate/status
+- operationId: dataset_export_csv
+  tag: dataset
+  http: GET /dataset/export_to_csv
+- operationId: dataset_export_excel
+  tag: dataset
+  http: GET /dataset/export_to_excel
+- operationId: dataset_info
+  tag: dataset
+  http: GET /dataset/info
+- operationId: dataset_job_ws
+  tag: dataset
+  http: GET /dataset/job_ws
+- operationId: dataset_list
+  tag: dataset
+  http: GET /dataset/list
+- operationId: dataset_match
+  tag: dataset
+  http: POST /dataset/match
+- operationId: dataset_remove_property
+  tag: dataset
+  http: POST /dataset/remove_property
+- operationId: dataset_reorder_properties
+  tag: dataset
+  http: POST /dataset/reorder_properties
+- operationId: dataset_set_primary_column
+  tag: dataset
+  http: POST /dataset/set_primary_column
+- operationId: dataset_update_property
+  tag: dataset
+  http: POST /dataset/update_property
+- operationId: dataset_update_relationship
+  tag: dataset
+  http: POST /dataset/update_relationship
+- operationId: dataset_view
+  tag: dataset
+  http: GET /dataset/view_table
+- operationId: dataset_view_relationships
+  tag: dataset
+  http: GET /dataset/view_relationships
+- operationId: dataset_view_tables_with_relationships
+  tag: dataset
+  http: GET /dataset/view_tables_with_relationships
+- operationId: documents_delete
+  tag: documents
+  http: DELETE /documents/delete
+- operationId: documents_download
+  tag: documents
+  http: POST /documents/download
+- operationId: documents_list
+  tag: documents
+  http: GET /documents/list
+- operationId: documents_upload
+  tag: documents
+  http: POST /documents/upload
+- operationId: entity_add
+  tag: entity
+  http: POST /entity/add
+- operationId: entity_add_batch
+  tag: entity
+  http: POST /entity/add_batch
+- operationId: entity_add_relationship
+  tag: entity
+  http: POST /entity/add_relationship
+- operationId: entity_delete
+  tag: entity
+  http: DELETE /entity/delete
+- operationId: entity_delete_relationship
+  tag: entity
+  http: POST /entity/delete_relationship
+- operationId: entity_derive
+  tag: entity
+  http: POST /entity/derive
+- operationId: entity_derive_all
+  tag: entity
+  http: POST /entity/derive_all
+- operationId: entity_get
+  tag: entity
+  http: GET /entity/get
+- operationId: entity_get_local_subgraph
+  tag: entity
+  http: GET /entity/get_local_subgraph
+- operationId: entity_get_merges
+  tag: entity
+  http: GET /entity/get_merges
+- operationId: entity_get_source_entities
+  tag: entity
+  http: GET /entity/get_source_entities
+- operationId: entity_list_jobs
+  tag: entity
+  http: GET /entity/list_jobs
+- operationId: entity_merge
+  tag: entity
+  http: POST /entity/merge
+- operationId: entity_search
+  tag: entity
+  http: POST /entity/search
+- operationId: entity_summarize
+  tag: entity
+  http: POST /entity/summarize
+- operationId: entity_triggermerge
+  tag: entity
+  http: POST /entity/trigger_merge
+- operationId: entity_update
+  tag: entity
+  http: POST /entity/update
+- operationId: entity_upload
+  tag: entity
+  http: POST /entity/upload
+- operationId: entity_upload_parquet
+  tag: entity
+  http: POST /entity/upload_parquet
+- operationId: entity_verify
+  tag: entity
+  http: POST /entity/verify
+- operationId: entity_view
+  tag: entity
+  http: GET /entity/view
+- operationId: cancel_job
+  tag: jobs
+  http: POST /jobs/cancel/{uuid}
+- operationId: get_job
+  tag: jobs
+  http: GET /jobs/get/{job_id}
+- operationId: get_job_events
+  tag: jobs
+  http: GET /jobs/{job_id}/events
+- operationId: jobs_list
+  tag: jobs
+  http: GET /jobs/list
+- operationId: schedule_job
+  tag: jobs
+  http: POST /jobs/schedule
+- operationId: create_match_jobs
+  tag: match
+  http: POST /match/create_jobs
+- operationId: list_match_results
+  tag: match
+  http: GET /match/list_results
+- operationId: project_create
+  tag: project
+  http: POST /team/{team_id}/projects
+- operationId: project_delete
+  tag: project
+  http: DELETE /team/{team_id}/project/{project_id}
+- operationId: project_get
+  tag: project
+  http: GET /team/{team_id}/project/{project_id}
+- operationId: project_list
+  tag: project
+  http: GET /team/{team_id}/projects
+- operationId: project_update
+  tag: project
+  http: PATCH /team/{team_id}/project/{project_id}
+- operationId: get_public_latest_workflow
+  tag: public_sessions
+  http: GET /public/chat/{chat_session_id}/latest-workflow
+- operationId: get_public_node_output_data
+  tag: public_sessions
+  http: GET /public/nodes/{node_id}/output_data
+- operationId: sandbox_get_live
+  tag: sandbox
+  http: POST /sandbox/live/{chat_id}
+- operationId: sandbox_get_metrics
+  tag: sandbox
+  http: GET /sandbox/{sandbox_id}/metrics
+- operationId: sandbox_list
+  tag: sandbox
+  http: GET /sandbox/list/{chat_id}
+- operationId: sandbox_update_status
+  tag: sandbox
+  http: PATCH /sandbox/{sandbox_id}/status
+- operationId: scrape
+  tag: scrape
+  http: POST /scrape
+- operationId: scrape_list
+  tag: scrape
+  http: POST /scrape/list
+- operationId: server_version
+  tag: server
+  http: GET /server/version
+- operationId: confirm_node
+  tag: sessions
+  http: POST /sessions/nodes/{node_id}/confirm
+- operationId: create_session
+  tag: sessions
+  http: POST /sessions
+- operationId: edit_workflow_node_output
+  tag: sessions
+  http: POST /sessions/nodes/{node_id}/edit_output
+- operationId: estimate_cost
+  tag: sessions
+  http: POST /sessions/estimate_cost
+- operationId: finalize_dag
+  tag: sessions
+  http: POST /sessions/{session_id}/dag_ready
+- operationId: get_node
+  tag: sessions
+  http: GET /sessions/nodes/{node_id}
+- operationId: get_node_events
+  tag: sessions
+  http: GET /sessions/nodes/{node_id}/events
+- operationId: get_workflow_dag
+  tag: sessions
+  http: GET /sessions/{session_id}/dag
+- operationId: get_workflow_node_output_data
+  tag: sessions
+  http: GET /sessions/nodes/{node_id}/output_data
+- operationId: get_workflow_node_progress
+  tag: sessions
+  http: GET /sessions/nodes/{node_id}/progress
+- operationId: kill_all_jobs_for_workflow
+  tag: sessions
+  http: POST /sessions/{session_id}/kill_jobs
+- operationId: mark_workflow_session_errored
+  tag: sessions
+  http: PATCH /sessions/{session_id}/error
+- operationId: request_node_confirmation
+  tag: sessions
+  http: POST /sessions/nodes/{node_id}/request_confirmation
+- operationId: trigger_workflow_review
+  tag: sessions
+  http: POST /sessions/{session_id}/trigger_review
+- operationId: update_workflow_node
+  tag: sessions
+  http: PATCH /sessions/nodes/{node_id}
+- operationId: update_workflow_node_progress
+  tag: sessions
+  http: PATCH /sessions/nodes/{node_id}/progress
+- operationId: upload_dashboard_layout
+  tag: sessions
+  http: POST /sessions/{session_id}/dashboard_layout
+- operationId: upload_node_visualization_output
+  tag: sessions
+  http: POST /sessions/nodes/{node_id}/visualization_output
+- operationId: upload_workflow_node_output_data
+  tag: sessions
+  http: POST /sessions/nodes/{node_id}/output_data
+- operationId: slack_events
+  tag: slack
+  http: POST /slack/events
+- operationId: delete_source_entity
+  tag: source
+  http: DELETE /source/entity
+- operationId: delete_source_relationship
+  tag: source
+  http: DELETE /source/relationship
+- operationId: source_get_sources
+  tag: source
+  http: GET /source/get_sources
+- operationId: jobs_status_aggregated
+  tag: structure
+  http: POST /jobs/status_aggregated
+- operationId: structure_enhance_property
+  tag: structure
+  http: POST /structure/enhance_property
+- operationId: structure_enhance_relationship
+  tag: structure
+  http: POST /structure/enhance_relationship
+- operationId: structure_find_relationship
+  tag: structure
+  http: POST /structure/find_relationship
+- operationId: structure_is_complete
+  tag: structure
+  http: POST /structure/is_complete
+- operationId: structure_job_status
+  tag: structure
+  http: POST /structure/job_status
+- operationId: structure_pdf
+  tag: structure
+  http: POST /structure/pdf
+- operationId: structure_run_async
+  tag: structure
+  http: POST /structure/run_async
+- operationId: team_accept_invitation
+  tag: team
+  http: POST /team/invitations/accept
+- operationId: team_add_member
+  tag: team
+  http: POST /team/{team_id}/members
+- operationId: team_cancel_invitation
+  tag: team
+  http: DELETE /team/{team_id}/invitations
+- operationId: team_create
+  tag: team
+  http: POST /team/create
+- operationId: team_credits_usage
+  tag: team
+  http: GET /team/{team_id}/credits/usage
+- operationId: team_get
+  tag: team
+  http: GET /team/{team_id}
+- operationId: team_invitation_details
+  tag: team
+  http: GET /team/invitations/details/{token}
+- operationId: team_list
+  tag: team
+  http: GET /team/list
+- operationId: team_list_members
+  tag: team
+  http: GET /team/{team_id}/members
+- operationId: team_remove_member
+  tag: team
+  http: DELETE /team/{team_id}/members/{user_id}
+- operationId: team_select
+  tag: team
+  http: POST /team/{team_id}/select
+- operationId: team_update
+  tag: team
+  http: PUT /team/{team_id}
+- operationId: team_update_member_role
+  tag: team
+  http: PATCH /team/{team_id}/members/{user_id}/role
+- operationId: download_teams_file
+  tag: teams
+  http: GET /teams/files/{token}
+- operationId: teams_messages
+  tag: teams
+  http: POST /teams/messages
+- operationId: create_stripe_portal_session
+  tag: transactions
+  http: POST /user/transactions/stripe/create_portal_session
+- operationId: create_stripe_session
+  tag: transactions
+  http: POST /user/transactions/stripe/create_session
+- operationId: create_stripe_subscription
+  tag: transactions
+  http: POST /user/transactions/stripe/create_subscription
+- operationId: user_transactions
+  tag: usage
+  http: GET /user/transactions/list
+- operationId: user_usage
+  tag: usage
+  http: GET /user/usage
+- operationId: user_enrich
+  tag: user
+  http: POST /user/enrich
+- operationId: user_update
+  tag: user
+  http: PUT /user/update
+- operationId: webhook_trigger
+  tag: webhook
+  http: POST /webhook/trigger
+- operationId: whitelabel_estimate_cost
+  tag: whitelabel
+  http: GET /whitelabel/{service}/estimate-cost/{path}
+- operationId: whitelabel_proxy_get
+  tag: whitelabel
+  http: GET /whitelabel/{service}/{path}
+- operationId: whitelabel_proxy_post
+  tag: whitelabel
+  http: POST /whitelabel/{service}/{path}
+- operationId: create_wiki_page
+  tag: wiki
+  http: POST /team/{team_id}/wiki
+- operationId: delete_wiki_page
+  tag: wiki
+  http: DELETE /team/{team_id}/wiki/{slug}
+- operationId: get_wiki_page
+  tag: wiki
+  http: GET /team/{team_id}/wiki/{slug}
+- operationId: list_wiki_pages
+  tag: wiki
+  http: GET /team/{team_id}/wiki
+- operationId: update_wiki_page
+  tag: wiki
+  http: PUT /team/{team_id}/wiki/{slug}
+- operationId: get_node_logs
+  tag: workflow
+  http: GET /sessions/node/{node_id}/logs
+- operationId: run_workflow
+  tag: workflow
+  http: POST /workflow/run
+- operationId: stop_workflow
+  tag: workflow
+  http: POST /workflow/stop
+- operationId: create_workflow_schedule
+  tag: workflow_schedule
+  http: POST /workflow-schedule/{chat_session_id}
+- operationId: delete_workflow_schedule
+  tag: workflow_schedule
+  http: DELETE /workflow-schedule/{schedule_id}
+- operationId: get_workflow_schedule_sessions
+  tag: workflow_schedule
+  http: POST /workflow-schedule/{schedule_id}/sessions
+- operationId: get_workflow_schedules_for_chat
+  tag: workflow_schedule
+  http: GET /workflow-schedule/{chat_session_id}
+- operationId: get_workflow_schedules_for_user
+  tag: workflow_schedule
+  http: GET /workflow-schedule
+- operationId: pause_workflow_schedule
+  tag: workflow_schedule
+  http: PATCH /workflow-schedule/{schedule_id}/pause
+- operationId: run_workflow_schedule
+  tag: workflow_schedule
+  http: POST /workflow-schedule/{schedule_id}/run
+- operationId: update_workflow_schedule
+  tag: workflow_schedule
+  http: PUT /workflow-schedule/{schedule_id}

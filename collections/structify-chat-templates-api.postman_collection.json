@@ -1,0 +1,391 @@
+{
+  "item": [
+    {
+      "id": "7ed72798-8dee-4ea4-bd20-33e126855611",
+      "name": "chat_templates",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c0316837-7f22-4d7c-adce-940a9636ef57",
+          "name": "List active chat templates for the /chat page",
+          "request": {
+            "name": "List active chat templates for the /chat page",
+            "description": {},
+            "url": {
+              "path": [
+                "chat",
+                "templates"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b96fb592-0681-41d3-87c8-a287505ae207",
+              "name": "Chat templates retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chat",
+                    "templates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"e9effa3c-9a89-1e92-0769-b50ff37fe567\",\n    \"chat_session_id\": \"3b7c63ca-4ca7-41cc-5ad0-3f2afe43efc1\",\n    \"title\": \"string\",\n    \"description\": \"string\",\n    \"image_url\": \"string\",\n    \"display_order\": 6908,\n    \"is_active\": true,\n    \"created_by\": \"75637ca6-5961-ab46-8665-d0154daf0235\",\n    \"updated_by\": \"ec146bf2-2428-0ffe-08bf-71f894762c03\",\n    \"created_at\": \"1971-09-24T19:54:37.261Z\",\n    \"updated_at\": \"2000-01-14T12:16:09.409Z\",\n    \"questions\": [\n      {\n        \"prompt\": \"string\",\n        \"options\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"prompt\": \"string\",\n        \"options\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ]\n  },\n  {\n    \"id\": \"089829aa-0e96-cd48-1eb3-2fc27c6b24e2\",\n    \"chat_session_id\": \"e2503cab-6399-fe4c-a083-013e17cc7253\",\n    \"title\": \"string\",\n    \"description\": \"string\",\n    \"image_url\": \"string\",\n    \"display_order\": 9398,\n    \"is_active\": true,\n    \"created_by\": \"01bf2631-caf3-b497-a510-9814d0da7362\",\n    \"updated_by\": \"979360e6-587d-0a9d-cb44-40eda5f8a3e1\",\n    \"created_at\": \"1962-11-04T07:56:32.005Z\",\n    \"updated_at\": \"2018-07-21T07:02:11.620Z\",\n    \"questions\": [\n      {\n        \"prompt\": \"string\",\n        \"options\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      {\n        \"prompt\": \"string\",\n        \"options\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3bb4ea30-60f7-4e87-9a20-a1c03aaef70a",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chat",
+                    "templates"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "818b9698-65f5-4581-a402-2c3672edb279",
+          "name": "get chat template",
+          "request": {
+            "name": "get chat template",
+            "description": {},
+            "url": {
+              "path": [
+                "chat",
+                "templates",
+                ":template_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "template_id",
+                  "description": "(Required) The chat template ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "161a4c9f-b471-4f8d-8e9a-b44962402902",
+              "name": "Chat template retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chat",
+                    "templates",
+                    ":template_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "template_id",
+                      "description": "(Required) The chat template ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"c7287ec2-8ac8-9dcb-23b6-2aca3b5ab47e\",\n  \"chat_session_id\": \"e6078f75-c151-c5c9-c305-4a3e07c72b32\",\n  \"title\": \"string\",\n  \"description\": \"string\",\n  \"image_url\": \"string\",\n  \"display_order\": 8812,\n  \"is_active\": true,\n  \"created_by\": \"9e4d6815-a760-cce6-20ff-1f7961f04192\",\n  \"updated_by\": \"d1262a14-d3fb-fe32-cb04-e0554929916b\",\n  \"created_at\": \"1964-07-20T00:02:16.174Z\",\n  \"updated_at\": \"1999-11-04T17:28:48.858Z\",\n  \"questions\": [\n    {\n      \"prompt\": \"string\",\n      \"options\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    {\n      \"prompt\": \"string\",\n      \"options\": [\n        \"string\",\n        \"string\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b28a868-e198-4662-bbdb-b4a979fe718a",
+              "name": "Chat template not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chat",
+                    "templates",
+                    ":template_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "template_id",
+                      "description": "(Required) The chat template ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b3e6dd67-ee27-46ca-ab34-bb5b0a2bb168",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "chat",
+                    "templates",
+                    ":template_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "template_id",
+                      "description": "(Required) The chat template ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.structify.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "939b462d-bd24-45ec-903e-34def4200914",
+    "name": "Structify account chat_templates API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Every enterprise's data team.\n\nContact Support:\n Name: Structify Team\n Email: team@structify.ai",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,442 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Structify account entity API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "entity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Add an entity (or entities) to a dataset given a graph representation of the entity (or entities).",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/entity/add",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add an entity (or entities) to a dataset given a graph representation of the entity (or entities)."
+        },
+        {
+          "info": {
+            "name": "Add a batch of entities to a dataset given a list of graph representations of the entities.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/entity/add_batch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a batch of entities to a dataset given a list of graph representations of the entities."
+        },
+        {
+          "info": {
+            "name": "Add a relationship between two entities in a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/entity/add_relationship",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a relationship between two entities in a dataset"
+        },
+        {
+          "info": {
+            "name": "Delete an entity manually",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.structify.ai/entity/delete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete an entity manually"
+        },
+        {
+          "info": {
+            "name": "delete a relationship between two entities in a dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/entity/delete_relationship",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "delete a relationship between two entities in a dataset"
+        },
+        {
+          "info": {
+            "name": "Derive a new property value based on existing source properties",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/entity/derive",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Derive a new property value based on existing source properties"
+        },
+        {
+          "info": {
+            "name": "Derive a new property value based on existing source properties for all entities in a table",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/entity/derive_all",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Derive a new property value based on existing source properties for all entities in a table"
+        },
+        {
+          "info": {
+            "name": "Get entity with a given id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/entity/get",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resolve_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get entity with a given id"
+        },
+        {
+          "info": {
+            "name": "entity_get_local_subgraph",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/entity/get_local_subgraph",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "radius",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "Get all historical merges for a given entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/entity/get_merges",
+            "params": [
+              {
+                "name": "entity_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get all historical merges for a given entity"
+        },
+        {
+          "info": {
+            "name": "entity_get_source_entities",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/entity/get_source_entities",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "list jobs for a given entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/entity/list_jobs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "list jobs for a given entity"
+        },
+        {
+          "info": {
+            "name": "merge an entity manually",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/entity/merge",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "merge an entity manually"
+        },
+        {
+          "info": {
+            "name": "Search for entities based on the given query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/entity/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Search for entities based on the given query"
+        },
+        {
+          "info": {
+            "name": "Search for entities based on the given query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/entity/summarize",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Search for entities based on the given query"
+        },
+        {
+          "info": {
+            "name": "Trigger our merge process for a given entity",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/entity/trigger_merge",
+            "params": [
+              {
+                "name": "entity_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Trigger our merge process for a given entity"
+        },
+        {
+          "info": {
+            "name": "update an entity manually",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/entity/update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "update an entity manually"
+        },
+        {
+          "info": {
+            "name": "Add multiple entities to a dataset from a CSV file",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/entity/upload",
+            "params": [
+              {
+                "name": "dataset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "table_name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "file_type",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "clean",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "ignore_columns",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Add multiple entities to a dataset from a CSV file"
+        },
+        {
+          "info": {
+            "name": "Add multiple entities to a dataset from a Parquet file with fast batch insert",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/entity/upload_parquet",
+            "params": [
+              {
+                "name": "dataset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "table_name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "start_embedding",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Add multiple entities to a dataset from a Parquet file with fast batch insert"
+        },
+        {
+          "info": {
+            "name": "verify a kg against the dataset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/entity/verify",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "verify a kg against the dataset"
+        },
+        {
+          "info": {
+            "name": "entity_view",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/entity/view",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "resolve_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,104 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Structify account whitelabel API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "whitelabel",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "whitelabel_estimate_cost",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/whitelabel/:service/estimate-cost/:path",
+            "params": [
+              {
+                "name": "service",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "whitelabel_proxy_get",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/whitelabel/:service/:path",
+            "params": [
+              {
+                "name": "service",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "whitelabel_proxy_post",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/whitelabel/:service/:path",
+            "params": [
+              {
+                "name": "service",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "path",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

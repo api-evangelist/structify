@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Structify account sandbox API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "sandbox",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "sandbox_list",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/sandbox/list/:chat_id",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path",
+                "description": "Chat ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "sandbox_get_live",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/sandbox/live/:chat_id",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path",
+                "description": "Chat ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "sandbox_get_metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/sandbox/:sandbox_id/metrics",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "sandbox_update_status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.structify.ai/sandbox/:sandbox_id/status",
+            "params": [
+              {
+                "name": "sandbox_id",
+                "value": "",
+                "type": "path",
+                "description": "Sandbox ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

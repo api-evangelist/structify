@@ -1,0 +1,343 @@
+{
+  "item": [
+    {
+      "id": "b463f4cc-40ee-4062-9409-5ac6525b0ca3",
+      "name": "public_sessions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5114df6e-5950-4fc6-9855-812707303da3",
+          "name": "get public latest workflow",
+          "request": {
+            "name": "get public latest workflow",
+            "description": {},
+            "url": {
+              "path": [
+                "public",
+                "chat",
+                ":chat_session_id",
+                "latest-workflow"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "chat_session_id",
+                  "description": "(Required) Id of the chat session to get latest workflow for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "55747fb6-a0d7-4f0e-805c-7dcd07a6f308",
+              "name": "Successfully retrieved latest workflow DAG.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "chat",
+                    ":chat_session_id",
+                    "latest-workflow"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "chat_session_id",
+                      "description": "(Required) Id of the chat session to get latest workflow for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"session_id\": \"cf385a07-29d8-a73a-8441-810e994fb7a0\",\n  \"aborted\": false,\n  \"nodes\": [\n    {\n      \"id\": \"f91955aa-e81d-aeeb-f271-b05c970b85b2\",\n      \"node_index\": 6840,\n      \"node_name\": \"string\",\n      \"session_id\": \"53e573c7-f3cd-bfae-9863-62a9a2605aea\",\n      \"function_name\": \"string\",\n      \"docstring\": \"string\",\n      \"execution_status\": \"PendingConfirmation\",\n      \"updated_at\": \"2012-01-12T02:06:56.524Z\",\n      \"code_md5_hash\": \"string\",\n      \"reviewed\": true,\n      \"cache_final_rows\": 8505,\n      \"cache_final_size_bytes\": 8217,\n      \"cache_max_bytes\": 8002,\n      \"cache_original_rows\": 5604,\n      \"cache_original_size_bytes\": 2452,\n      \"cache_truncated\": false,\n      \"code\": \"string\",\n      \"confirmation_status\": \"string\",\n      \"connector_id\": \"f6b71f48-3c91-4b2f-e6b3-411c7f4e85c5\",\n      \"created_at\": \"1955-09-24T16:35:38.458Z\",\n      \"error_message\": \"string\",\n      \"error_traceback\": \"string\",\n      \"estimated_cost\": 7277,\n      \"execution_time_ms\": 8394,\n      \"input_row_count\": 6916,\n      \"manually_edited\": false,\n      \"original_node\": \"a6e76885-2ab9-e607-04e8-55894206bdcf\",\n      \"output_blob_name\": \"string\",\n      \"output_schema\": {},\n      \"progress\": {},\n      \"visualization_output\": {}\n    },\n    {\n      \"id\": \"4958d50b-a573-c1dc-c13f-fd4758bba560\",\n      \"node_index\": 7515,\n      \"node_name\": \"string\",\n      \"session_id\": \"c84a6ebc-bd64-8e5f-7f2b-16bc58a14394\",\n      \"function_name\": \"string\",\n      \"docstring\": \"string\",\n      \"execution_status\": \"Aborted\",\n      \"updated_at\": \"1947-11-13T17:49:35.920Z\",\n      \"code_md5_hash\": \"string\",\n      \"reviewed\": true,\n      \"cache_final_rows\": 8310,\n      \"cache_final_size_bytes\": 9813,\n      \"cache_max_bytes\": 1742,\n      \"cache_original_rows\": 2247,\n      \"cache_original_size_bytes\": 2893,\n      \"cache_truncated\": true,\n      \"code\": \"string\",\n      \"confirmation_status\": \"string\",\n      \"connector_id\": \"a3f8a2fd-3bb4-03b7-9623-603bbfeb15fe\",\n      \"created_at\": \"1988-12-17T23:39:56.582Z\",\n      \"error_message\": \"string\",\n      \"error_traceback\": \"string\",\n      \"estimated_cost\": 6231,\n      \"execution_time_ms\": 5855,\n      \"input_row_count\": 113,\n      \"manually_edited\": false,\n      \"original_node\": \"17e5a80e-3055-6cb8-f629-37fb98f23588\",\n      \"output_blob_name\": \"string\",\n      \"output_schema\": {},\n      \"progress\": {},\n      \"visualization_output\": {}\n    }\n  ],\n  \"edges\": [\n    {\n      \"id\": \"4eac92a3-988f-243f-66d4-39424bb32228\",\n      \"session_id\": \"8175eb85-fd90-3727-de30-c013592cf167\",\n      \"source_node_id\": \"27506f3e-5911-a020-1100-ac10b364b876\",\n      \"target_node_id\": \"d69ac320-f8d3-8258-6f98-4ad979a327fc\",\n      \"created_at\": \"2014-05-15T10:35:46.483Z\"\n    },\n    {\n      \"id\": \"131cfb1c-4dce-2a85-534a-46b17683936e\",\n      \"session_id\": \"9a9cdc9b-68dc-3055-3740-9325d55e3daa\",\n      \"source_node_id\": \"3c7d92c3-3989-4d76-47de-727fbc333cad\",\n      \"target_node_id\": \"0c27e80c-6995-cc53-3e7c-afd43e299a49\",\n      \"created_at\": \"1973-11-28T07:46:16.775Z\"\n    }\n  ],\n  \"is_ready\": false,\n  \"dashboard_specs\": [\n    {\n      \"file_name\": \"string\",\n      \"spec\": {\n        \"version\": \"string\",\n        \"title\": \"string\",\n        \"description\": \"string\",\n        \"dataset\": \"string\",\n        \"params\": {\n          \"key_0\": {\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"control\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"queries\": [\n          {\n            \"id\": \"string\",\n            \"sql\": \"string\"\n          },\n          {\n            \"id\": \"string\",\n            \"sql\": \"string\"\n          }\n        ],\n        \"figures\": [\n          {\n            \"id\": \"string\",\n            \"figure\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": \"string\",\n            \"span\": 8910,\n            \"title\": \"string\"\n          },\n          {\n            \"id\": \"string\",\n            \"figure\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": \"string\",\n            \"span\": 2713,\n            \"title\": \"string\"\n          }\n        ]\n      }\n    },\n    {\n      \"file_name\": \"string\",\n      \"spec\": {\n        \"version\": \"string\",\n        \"title\": \"string\",\n        \"description\": \"string\",\n        \"dataset\": \"string\",\n        \"params\": {\n          \"key_0\": {\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"control\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"queries\": [\n          {\n            \"id\": \"string\",\n            \"sql\": \"string\"\n          },\n          {\n            \"id\": \"string\",\n            \"sql\": \"string\"\n          }\n        ],\n        \"figures\": [\n          {\n            \"id\": \"string\",\n            \"figure\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": \"string\",\n            \"span\": 7948,\n            \"title\": \"string\"\n          },\n          {\n            \"id\": \"string\",\n            \"figure\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": \"string\",\n            \"span\": 2978,\n            \"title\": \"string\"\n          }\n        ]\n      }\n    }\n  ],\n  \"dag_ready_at\": \"2019-07-11T16:32:25.619Z\",\n  \"dashboard_layout\": {\n    \"title\": \"string\",\n    \"dashboards\": [\n      {\n        \"components\": [\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"controls\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"datasetNodeName\": \"string\",\n        \"description\": \"string\",\n        \"title\": \"string\"\n      },\n      {\n        \"components\": [\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"controls\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"datasetNodeName\": \"string\",\n        \"description\": \"string\",\n        \"title\": \"string\"\n      }\n    ],\n    \"description\": \"string\"\n  },\n  \"error\": \"string\",\n  \"error_traceback\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74d6eb9d-25aa-4287-8858-49e2cfdf7f1e",
+              "name": "Chat session not found or no workflow sessions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "chat",
+                    ":chat_session_id",
+                    "latest-workflow"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "chat_session_id",
+                      "description": "(Required) Id of the chat session to get latest workflow for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "89e00c44-c062-4104-8480-131b9af21c4e",
+          "name": "get public node output data",
+          "request": {
+            "name": "get public node output data",
+            "description": {},
+            "url": {
+              "path": [
+                "public",
+                "nodes",
+                ":node_id",
+                "output_data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "node_id",
+                  "description": "(Required) Id of the workflow node to get output data for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "17e9d1b8-1853-4a41-8ce3-559ed964dc2a",
+              "name": "Successfully retrieved output data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "nodes",
+                    ":node_id",
+                    "output_data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) Id of the workflow node to get output data for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "32bf8fc2-ce1d-4f25-bfc8-056aba8cbc28",
+              "name": "Node not found or no output data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "public",
+                    "nodes",
+                    ":node_id",
+                    "output_data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) Id of the workflow node to get output data for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.structify.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "98ee38e0-96af-49c5-8392-a5c414077341",
+    "name": "Structify account public_sessions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Every enterprise's data team.\n\nContact Support:\n Name: Structify Team\n Email: team@structify.ai",
+      "type": "text/plain"
+    }
+  }
+}

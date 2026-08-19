@@ -1,0 +1,188 @@
+generated: '2026-08-14'
+method: probed
+source: live GET probes of /.well-known/* on every Structify host
+summary: >-
+  Five hosts were probed for eight well-known paths each. Only the documentation
+  host, docs.structify.ai, serves real documents: an A2A Agent Card and an MCP
+  discovery manifest. The apex and www hosts 404 everything. app.structify.ai
+  answers HTTP 200 with the Next.js single-page-app shell for several paths —
+  those are HTML, not documents, and are recorded as MISSES. trust.structify.ai
+  behaves the same way (200 HTML for every path) and is likewise a miss. No
+  security.txt is served anywhere, so no SecurityTxt pointer is emitted.
+checked: '2026-08-14'
+hits: 2
+probes:
+- host: docs.structify.ai
+  path: /.well-known/agent-card.json
+  status: 200
+  content_type: application/json
+  document: true
+  file: well-known/structify-agent-card.json
+  note: Real A2A Agent Card. Graded in a2a/structify-a2a.yml.
+- host: docs.structify.ai
+  path: /.well-known/mcp.json
+  status: 200
+  content_type: application/json
+  document: true
+  file: well-known/structify-mcp.json
+  note: >-
+    MCP discovery manifest. Declares transport http and one server named
+    "public" with authentication "none". Both URLs in the document point at
+    https://structify.main-kill-isr.mintlify.me/mcp — a Mintlify preview
+    hostname, not the customer domain. The endpoint that actually answers
+    tools/list is https://docs.structify.ai/mcp; see mcp/structify-mcp.yml.
+- host: docs.structify.ai
+  path: /.well-known/security.txt
+  status: 404
+  document: false
+- host: docs.structify.ai
+  path: /.well-known/openid-configuration
+  status: 404
+  document: false
+- host: docs.structify.ai
+  path: /.well-known/oauth-authorization-server
+  status: 404
+  document: false
+- host: docs.structify.ai
+  path: /.well-known/oauth-protected-resource
+  status: 404
+  document: false
+- host: docs.structify.ai
+  path: /.well-known/api-catalog
+  status: 404
+  document: false
+- host: docs.structify.ai
+  path: /.well-known/ai-plugin.json
+  status: 404
+  document: false
+- host: docs.structify.ai
+  path: /.well-known/agent.json
+  status: 404
+  document: false
+  note: Legacy pre-0.3 agent card path. Not served.
+- host: api.structify.ai
+  path: /.well-known/security.txt
+  status: 404
+  document: false
+  note: >-
+    The API host returns a consistent JSON 404 envelope
+    ({"error":"Not Found","message":"The requested endpoint does not exist"})
+    for all eight well-known paths.
+- host: api.structify.ai
+  path: /.well-known/openid-configuration
+  status: 404
+  document: false
+- host: api.structify.ai
+  path: /.well-known/oauth-authorization-server
+  status: 404
+  document: false
+- host: api.structify.ai
+  path: /.well-known/oauth-protected-resource
+  status: 404
+  document: false
+- host: api.structify.ai
+  path: /.well-known/api-catalog
+  status: 404
+  document: false
+- host: api.structify.ai
+  path: /.well-known/ai-plugin.json
+  status: 404
+  document: false
+- host: api.structify.ai
+  path: /.well-known/agent-card.json
+  status: 404
+  document: false
+- host: api.structify.ai
+  path: /.well-known/agent.json
+  status: 404
+  document: false
+- host: www.structify.ai
+  path: /.well-known/security.txt
+  status: 404
+  document: false
+  note: All eight paths 404 with the marketing site's HTML 404 page.
+- host: www.structify.ai
+  path: /.well-known/api-catalog
+  status: 404
+  document: false
+- host: www.structify.ai
+  path: /.well-known/agent-card.json
+  status: 404
+  document: false
+- host: www.structify.ai
+  path: /.well-known/agent.json
+  status: 404
+  document: false
+- host: structify.ai
+  path: /.well-known/security.txt
+  status: 404
+  document: false
+  note: Apex behaves identically to www; all eight paths 404.
+- host: structify.ai
+  path: /.well-known/agent-card.json
+  status: 404
+  document: false
+- host: structify.ai
+  path: /.well-known/agent.json
+  status: 404
+  document: false
+- host: app.structify.ai
+  path: /.well-known/openid-configuration
+  status: 200
+  content_type: text/html
+  document: false
+  note: >-
+    FALSE POSITIVE. HTTP 200 but the body is the Next.js SPA shell
+    (<!DOCTYPE html>), not an OpenID Provider Metadata document. Counted as a
+    miss.
+- host: app.structify.ai
+  path: /.well-known/oauth-authorization-server
+  status: 200
+  content_type: text/html
+  document: false
+  note: FALSE POSITIVE — SPA catch-all HTML, not an authorization server document.
+- host: app.structify.ai
+  path: /.well-known/oauth-protected-resource
+  status: 200
+  content_type: text/html
+  document: false
+  note: FALSE POSITIVE — SPA catch-all HTML.
+- host: app.structify.ai
+  path: /.well-known/api-catalog
+  status: 200
+  content_type: text/html
+  document: false
+  note: FALSE POSITIVE — SPA catch-all HTML, not an RFC 9727 API catalog.
+- host: app.structify.ai
+  path: /.well-known/security.txt
+  status: 404
+  document: false
+- host: app.structify.ai
+  path: /.well-known/agent-card.json
+  status: 404
+  document: false
+- host: app.structify.ai
+  path: /.well-known/agent.json
+  status: 404
+  document: false
+- host: trust.structify.ai
+  path: /.well-known/security.txt
+  status: 200
+  content_type: text/html
+  document: false
+  note: >-
+    FALSE POSITIVE. The trust center is a client-rendered single-page app that
+    returns 200 with the same HTML shell for every path, including paths that do
+    not exist. No security.txt is served.
+- host: trust.structify.ai
+  path: /.well-known/agent-card.json
+  status: 200
+  content_type: text/html
+  document: false
+  note: FALSE POSITIVE — same SPA catch-all shell.
+security_txt:
+  served: false
+  note: >-
+    No RFC 9116 security.txt on any host. No SecurityTxt pointer is emitted, and
+    no vulnerability disclosure program was found — see
+    security/structify-trust-center.yml.

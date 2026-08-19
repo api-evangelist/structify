@@ -1,0 +1,959 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Structify account chat API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "chat",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "chat_add_code",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/chat/add_code/:chat_id",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "run_workflow",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "Copy a chat session with its workflows and git files",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/chat/copy",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Copy a chat session with its workflows and git files"
+        },
+        {
+          "info": {
+            "name": "Load files from a chat session's git repository",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/chat/files/load",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Load files from a chat session's git repository"
+        },
+        {
+          "info": {
+            "name": "Delete input files from a chat session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/chat/input-files/delete/:chat_id",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete input files from a chat session"
+        },
+        {
+          "info": {
+            "name": "Download all input files for a chat session as base64-encoded JSON.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/chat/input-files/download-all/:chat_id",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Pass `since` query param (RFC 3339 timestamp) to only get files created/updated after that time.\nThe response includes `latest_timestamp` which can be passed as `since` on the next call."
+        },
+        {
+          "info": {
+            "name": "Download a single input file by chat ID and filename",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/chat/input-files/download/:chat_id/:filename",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "filename",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Download a single input file by chat ID and filename"
+        },
+        {
+          "info": {
+            "name": "List input files for a chat session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/chat/input-files/list/:chat_id",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List input files for a chat session"
+        },
+        {
+          "info": {
+            "name": "Upload an input file to a chat session's bucket storage",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/chat/input-files/upload/:chat_id",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Upload an input file to a chat session's bucket storage"
+        },
+        {
+          "info": {
+            "name": "List all chat sessions for the authenticated user within a specific team and project.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/chat/sessions",
+            "params": [
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "query",
+                "description": "Team ID to filter chat sessions"
+              },
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "query",
+                "description": "Project ID to filter chat sessions"
+              },
+              {
+                "name": "connector_id",
+                "value": "",
+                "type": "query",
+                "description": "Connector ID to filter chat sessions that use this connector"
+              },
+              {
+                "name": "tab",
+                "value": "",
+                "type": "query",
+                "description": "Tab filter for chat sessions"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of sessions to skip (default: 0)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of sessions to return (default: 50)"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Search query to filter sessions by name (case-insensitive)"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List all chat sessions for the authenticated user within a specific team and project."
+        },
+        {
+          "info": {
+            "name": "Create a new chat session with an initial message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/chat/sessions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a new chat session with an initial message"
+        },
+        {
+          "info": {
+            "name": "Add an IssueFound tool call as an admin-only auto-review message",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/chat/sessions/:chat_id/admin/issue_found",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path",
+                "description": "Chat session ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Add an IssueFound tool call as an admin-only auto-review message"
+        },
+        {
+          "info": {
+            "name": "Grant temporary admin override access for the calling admin to a chat session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/chat/sessions/:chat_id/admin_override",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path",
+                "description": "The chat ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Grant temporary admin override access for the calling admin to a chat session"
+        },
+        {
+          "info": {
+            "name": "List all users who have access to a chat session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/chat/sessions/:chat_id/collaborators",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path",
+                "description": "The chat session ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List all users who have access to a chat session"
+        },
+        {
+          "info": {
+            "name": "chat_add_collaborator",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/chat/sessions/:chat_id/collaborators",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path",
+                "description": "The chat ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "chat_remove_collaborator",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.structify.ai/chat/sessions/:chat_id/collaborators/:user_id",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path",
+                "description": "The chat ID"
+              },
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path",
+                "description": "The user ID to remove"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "Get a specific git commit by its hash for a chat session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/chat/sessions/:chat_id/commits/:commit_hash",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path",
+                "description": "The chat session ID"
+              },
+              {
+                "name": "commit_hash",
+                "value": "",
+                "type": "path",
+                "description": "The git commit hash"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get a specific git commit by its hash for a chat session"
+        },
+        {
+          "info": {
+            "name": "List dashboard specs for a chat session at a specific commit hash.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/chat/sessions/:chat_id/dashboards",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path",
+                "description": "The chat session ID"
+              },
+              {
+                "name": "commit_hash",
+                "value": "",
+                "type": "query",
+                "description": "Optional commit hash. If omitted, uses the chat session latest commit."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List dashboard specs for a chat session at a specific commit hash."
+        },
+        {
+          "info": {
+            "name": "Get a chat session with all its messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/chat/sessions/:session_id",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "The chat session ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get a chat session with all its messages"
+        },
+        {
+          "info": {
+            "name": "update_chat_session",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.structify.ai/chat/sessions/:session_id",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "Chat session ID to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "Delete a chat session",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.structify.ai/chat/sessions/:session_id",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "The chat session ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete a chat session"
+        },
+        {
+          "info": {
+            "name": "List git commits for a chat session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/chat/sessions/:session_id/commits",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "The chat session ID"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Number of commits to skip (for pagination)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of commits to return (defaults to 50)"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List git commits for a chat session"
+        },
+        {
+          "info": {
+            "name": "Add a git commit to a chat session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/chat/sessions/:session_id/commits",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "The chat session ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Add a git commit to a chat session"
+        },
+        {
+          "info": {
+            "name": "chat_compress",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/chat/sessions/:session_id/compress",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "The chat session ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "Get all dependencies for a chat session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/chat/sessions/:session_id/dependencies",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "The chat session ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get all dependencies for a chat session"
+        },
+        {
+          "info": {
+            "name": "update_chat_session_favorite",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.structify.ai/chat/sessions/:session_id/favorite",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "Chat session ID to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "Make an ephemeral chat session permanent",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.structify.ai/chat/sessions/:session_id/make-permanent",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "The chat session ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Make an ephemeral chat session permanent"
+        },
+        {
+          "info": {
+            "name": "chat_copy_node_output_by_code_hash",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/chat/sessions/:session_id/nodes/by_code_hash",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the chat session to search in."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "Revert a chat session to a specific commit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/chat/sessions/:session_id/revert",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "The chat session ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Revert a chat session to a specific commit"
+        },
+        {
+          "info": {
+            "name": "Get chronological timeline of messages and commits for a chat session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/chat/sessions/:session_id/timeline",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "The chat session ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get chronological timeline of messages and commits for a chat session"
+        },
+        {
+          "info": {
+            "name": "Update visibility of a chat session",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.structify.ai/chat/sessions/:session_id/visibility",
+            "params": [
+              {
+                "name": "session_id",
+                "value": "",
+                "type": "path",
+                "description": "The chat session ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update visibility of a chat session"
+        },
+        {
+          "info": {
+            "name": "WebSocket endpoint for chat session events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/chat/ws",
+            "params": [
+              {
+                "name": "chat_session_id",
+                "value": "",
+                "type": "query",
+                "description": "Chat session ID to subscribe to"
+              },
+              {
+                "name": "api_key",
+                "value": "",
+                "type": "query",
+                "description": "API key for authentication"
+              },
+              {
+                "name": "session_token",
+                "value": "",
+                "type": "query",
+                "description": "Session token for authentication"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "WebSocket endpoint for chat session events"
+        },
+        {
+          "info": {
+            "name": "Get all partial chats for a chat session",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/chat/:chat_session_id/partial-chats",
+            "params": [
+              {
+                "name": "chat_session_id",
+                "value": "",
+                "type": "path",
+                "description": "Chat session ID to get partial chats for"
+              }
+            ]
+          },
+          "docs": "Get all partial chats for a chat session"
+        },
+        {
+          "info": {
+            "name": "Generate a one-off assistant response from an edited prompt without persisting",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/chat/:chat_session_id/simulate-prompt",
+            "params": [
+              {
+                "name": "chat_session_id",
+                "value": "",
+                "type": "path",
+                "description": "Chat session ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "any messages to the database."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,188 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Structify account structure API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "structure",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get aggregated status counts for multiple jobs.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/jobs/status_aggregated",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns counts of jobs by status (completed, running, failed, queued).\nExactly one of job_ids or dataset_name must be provided.\nThis endpoint can handle large numbers of job IDs since it returns aggregated data instead of individual job details."
+        },
+        {
+          "info": {
+            "name": "enhance_property a given entity by searching specifically for a certain missing property.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/structure/enhance_property",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a job id that can be waited on until the request is finished."
+        },
+        {
+          "info": {
+            "name": "Enhance relationships between entities by searching for missing connections.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/structure/enhance_relationship",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a job id that can be waited on until the request is finished."
+        },
+        {
+          "info": {
+            "name": "Attempt to find the given relation between two entities.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/structure/find_relationship",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Attempt to find the given relation between two entities."
+        },
+        {
+          "info": {
+            "name": "Wait for all specified async tasks to be completed.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/structure/is_complete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Wait for all specified async tasks to be completed."
+        },
+        {
+          "info": {
+            "name": "Get status for specified jobs with detailed information similar to websocket endpoint.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/structure/job_status",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "If only dataset_name is provided, up to 1000 of the most recent jobs for that dataset will be returned."
+        },
+        {
+          "info": {
+            "name": "Structure a PDF document into the given dataset.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/structure/pdf",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "For single mode, creates one job for the entire PDF.\nFor batch mode, creates one job per PDF page."
+        },
+        {
+          "info": {
+            "name": "Structure an unstructured data source into the given dataset in an async fashion.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/structure/run_async",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns a token that can be waited on until the request is finished."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

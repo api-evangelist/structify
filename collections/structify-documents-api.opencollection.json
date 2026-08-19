@@ -1,0 +1,106 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Structify account documents API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Delete a file from the database",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.structify.ai/documents/delete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete a file from the database"
+        },
+        {
+          "info": {
+            "name": "Download a file from the database",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/documents/download",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Download a file from the database"
+        },
+        {
+          "info": {
+            "name": "List all files for your user account in the database.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/documents/list",
+            "params": [
+              {
+                "name": "dataset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List all files for your user account in the database."
+        },
+        {
+          "info": {
+            "name": "Add a new file to the database",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/documents/upload",
+            "params": [
+              {
+                "name": "dataset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Add a new file to the database"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

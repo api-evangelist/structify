@@ -1,0 +1,178 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Structify account workflow_schedule API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "workflow_schedule",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "get_workflow_schedules_for_user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/workflow-schedule"
+          }
+        },
+        {
+          "info": {
+            "name": "get_workflow_schedules_for_chat",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/workflow-schedule/:chat_session_id",
+            "params": [
+              {
+                "name": "chat_session_id",
+                "value": "",
+                "type": "path",
+                "description": "The chat session ID"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "create_workflow_schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/workflow-schedule/:chat_session_id",
+            "params": [
+              {
+                "name": "chat_session_id",
+                "value": "",
+                "type": "path",
+                "description": "The chat session ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "update_workflow_schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.structify.ai/workflow-schedule/:schedule_id",
+            "params": [
+              {
+                "name": "schedule_id",
+                "value": "",
+                "type": "path",
+                "description": "The workflow schedule ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "delete_workflow_schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.structify.ai/workflow-schedule/:schedule_id",
+            "params": [
+              {
+                "name": "schedule_id",
+                "value": "",
+                "type": "path",
+                "description": "The workflow schedule ID"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "pause_workflow_schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.structify.ai/workflow-schedule/:schedule_id/pause",
+            "params": [
+              {
+                "name": "schedule_id",
+                "value": "",
+                "type": "path",
+                "description": "The workflow schedule ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "run_workflow_schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/workflow-schedule/:schedule_id/run",
+            "params": [
+              {
+                "name": "schedule_id",
+                "value": "",
+                "type": "path",
+                "description": "The workflow schedule ID"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "get_workflow_schedule_sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/workflow-schedule/:schedule_id/sessions",
+            "params": [
+              {
+                "name": "schedule_id",
+                "value": "",
+                "type": "path",
+                "description": "The workflow schedule ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

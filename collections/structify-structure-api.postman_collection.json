@@ -1,0 +1,1003 @@
+{
+  "item": [
+    {
+      "id": "687176a3-43f1-485c-ad54-c06bcf22f2ae",
+      "name": "structure",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "560bbdbc-878c-48b3-bd49-d796cefa9d39",
+          "name": "Get aggregated status counts for multiple jobs.",
+          "request": {
+            "name": "Get aggregated status counts for multiple jobs.",
+            "description": {
+              "content": "Returns counts of jobs by status (completed, running, failed, queued).\nExactly one of job_ids or dataset_name must be provided.\nThis endpoint can handle large numbers of job IDs since it returns aggregated data instead of individual job details.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "jobs",
+                "status_aggregated"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataset_name\": \"<string>\",\n  \"job_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"node_id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "db87e0f4-3534-4622-b397-c650badff44c",
+              "name": "Aggregated status counts for specified jobs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    "status_aggregated"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataset_name\": \"<string>\",\n  \"job_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"node_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 2761,\n  \"completed\": 9127,\n  \"failed\": 4839,\n  \"running\": 3651,\n  \"queued\": 7819\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d397d45-3c61-4a78-8dfa-c13e8a8b0cca",
+              "name": "Bad request - exactly one of job_ids or dataset_name must be provided.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    "status_aggregated"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataset_name\": \"<string>\",\n  \"job_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"node_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0e6925c7-8451-4f7b-97e2-f121e9fc3294",
+          "name": "enhance_property a given entity by searching specifically for a certain missing property.",
+          "request": {
+            "name": "enhance_property a given entity by searching specifically for a certain missing property.",
+            "description": {
+              "content": "Returns a job id that can be waited on until the request is finished.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "structure",
+                "enhance_property"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entity_id\": \"<uuid>\",\n  \"property_name\": \"<string>\",\n  \"banned_domains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"starting_searches\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"starting_urls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"allow_extra_entities\": \"<boolean>\",\n  \"node_id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "24bd4064-3305-487d-9954-67160428dd84",
+              "name": "The job id.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "structure",
+                    "enhance_property"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entity_id\": \"<uuid>\",\n  \"property_name\": \"<string>\",\n  \"banned_domains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"starting_searches\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"starting_urls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"allow_extra_entities\": \"<boolean>\",\n  \"node_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "624badd5-d857-4e96-88d5-464695adae3d",
+          "name": "Enhance relationships between entities by searching for missing connections.",
+          "request": {
+            "name": "Enhance relationships between entities by searching for missing connections.",
+            "description": {
+              "content": "Returns a job id that can be waited on until the request is finished.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "structure",
+                "enhance_relationship"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entity_id\": \"<uuid>\",\n  \"relationship_name\": \"<string>\",\n  \"banned_domains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"starting_searches\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"starting_urls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"allow_extra_entities\": \"<boolean>\",\n  \"node_id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "10823f41-71ea-42c3-b010-f44b1dd16915",
+              "name": "The job id.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "structure",
+                    "enhance_relationship"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entity_id\": \"<uuid>\",\n  \"relationship_name\": \"<string>\",\n  \"banned_domains\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"starting_searches\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"starting_urls\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"allow_extra_entities\": \"<boolean>\",\n  \"node_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6903bdb7-ade3-43ae-9ae9-bb15ea4a5256",
+          "name": "Attempt to find the given relation between two entities.",
+          "request": {
+            "name": "Attempt to find the given relation between two entities.",
+            "description": {},
+            "url": {
+              "path": [
+                "structure",
+                "find_relationship"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "99ea93e4-2c49-4531-b396-0437b2b6b12d",
+              "name": "The job id.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "structure",
+                    "find_relationship"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<object>",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8cddb5b5-d6af-49f2-ac9d-04d6765b5f45",
+          "name": "Wait for all specified async tasks to be completed.",
+          "request": {
+            "name": "Wait for all specified async tasks to be completed.",
+            "description": {},
+            "url": {
+              "path": [
+                "structure",
+                "is_complete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "[\n  \"<string>\",\n  \"<string>\"\n]",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "af3f7a42-e146-4045-9ddc-12c91415677a",
+              "name": "All tasks finished.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "structure",
+                    "is_complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "[\n  \"<string>\",\n  \"<string>\"\n]",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3a8c8d55-edd0-4856-9fdc-c488ff86df78",
+          "name": "Get status for specified jobs with detailed information similar to websocket endpoint.",
+          "request": {
+            "name": "Get status for specified jobs with detailed information similar to websocket endpoint.",
+            "description": {
+              "content": "If only dataset_name is provided, up to 1000 of the most recent jobs for that dataset will be returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "structure",
+                "job_status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataset_name\": \"<string>\",\n  \"job_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e612536b-bc38-4b33-8ff4-68ac188f6fcb",
+              "name": "Status of all specified jobs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "structure",
+                    "job_status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataset_name\": \"<string>\",\n  \"job_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"dataset_name\": \"string\",\n    \"job_id\": \"<uuid>\",\n    \"status\": \"Running\",\n    \"target\": {\n      \"entity_id\": \"<uuid>\",\n      \"property_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"relationship_name\": \"string\"\n    }\n  },\n  {\n    \"dataset_name\": \"string\",\n    \"job_id\": \"<uuid>\",\n    \"status\": \"Failed\",\n    \"target\": {\n      \"entity_id\": \"<uuid>\",\n      \"property_names\": [\n        \"string\",\n        \"string\"\n      ],\n      \"relationship_name\": \"string\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "68a13462-3160-443a-8c0c-f29a766cafe3",
+          "name": "Structure a PDF document into the given dataset.",
+          "request": {
+            "name": "Structure a PDF document into the given dataset.",
+            "description": {
+              "content": "For single mode, creates one job for the entire PDF.\nFor batch mode, creates one job per PDF page.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "structure",
+                "pdf"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"path\": \"<string>\",\n  \"dataset\": \"<string>\",\n  \"instructions\": \"<string>\",\n  \"model\": \"<string>\",\n  \"node_id\": \"<uuid>\",\n  \"pages\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a9161596-5321-4a2b-8f5b-e529c8bca72b",
+              "name": "List of created job IDs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "structure",
+                    "pdf"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"path\": \"<string>\",\n  \"dataset\": \"<string>\",\n  \"instructions\": \"<string>\",\n  \"model\": \"<string>\",\n  \"node_id\": \"<uuid>\",\n  \"pages\": [\n    \"<integer>\",\n    \"<integer>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"job_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e0363ef7-4950-4c1e-a05d-99d71b75030f",
+          "name": "Structure an unstructured data source into the given dataset in an async fashion.",
+          "request": {
+            "name": "Structure an unstructured data source into the given dataset in an async fashion.",
+            "description": {
+              "content": "Returns a token that can be waited on until the request is finished.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "structure",
+                "run_async"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"source\": {\n    \"PDF\": {\n      \"path\": \"<string>\",\n      \"page\": \"<integer>\"\n    }\n  },\n  \"dataset\": \"<string>\",\n  \"instructions\": \"<string>\",\n  \"model\": \"<string>\",\n  \"node_id\": \"<uuid>\",\n  \"save_requirement\": [\n    {\n      \"relationship_name\": \"<string>\"\n    },\n    {\n      \"relationship_name\": \"<string>\"\n    }\n  ],\n  \"seeded_entity\": {\n    \"entities\": [\n      {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"properties\": {\n          \"key_0\": \"<string>\"\n        }\n      },\n      {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"properties\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        }\n      }\n    ],\n    \"relationships\": [\n      {\n        \"type\": \"<string>\",\n        \"source\": \"<integer>\",\n        \"target\": \"<integer>\",\n        \"properties\": {\n          \"key_0\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"source\": \"<integer>\",\n        \"target\": \"<integer>\",\n        \"properties\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\",\n          \"key_3\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cb2885f0-39d3-43f0-85b4-31d33c3d02ae",
+              "name": "The job id.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "structure",
+                    "run_async"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"source\": {\n    \"PDF\": {\n      \"path\": \"<string>\",\n      \"page\": \"<integer>\"\n    }\n  },\n  \"dataset\": \"<string>\",\n  \"instructions\": \"<string>\",\n  \"model\": \"<string>\",\n  \"node_id\": \"<uuid>\",\n  \"save_requirement\": [\n    {\n      \"relationship_name\": \"<string>\"\n    },\n    {\n      \"relationship_name\": \"<string>\"\n    }\n  ],\n  \"seeded_entity\": {\n    \"entities\": [\n      {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"properties\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      },\n      {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"properties\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      }\n    ],\n    \"relationships\": [\n      {\n        \"type\": \"<string>\",\n        \"source\": \"<integer>\",\n        \"target\": \"<integer>\",\n        \"properties\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"source\": \"<integer>\",\n        \"target\": \"<integer>\",\n        \"properties\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\",\n          \"key_3\": \"<string>\"\n        }\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.structify.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "de896695-7b08-4879-b68d-15023d1ba3b1",
+    "name": "Structify account structure API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Every enterprise's data team.\n\nContact Support:\n Name: Structify Team\n Email: team@structify.ai",
+      "type": "text/plain"
+    }
+  }
+}

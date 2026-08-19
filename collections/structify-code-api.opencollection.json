@@ -1,0 +1,93 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Structify account code API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "code",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "apply_manual_edit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/code/apply-manual-edit/:chat_id",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "Generates code based on the provided prompt.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/code/generate-code",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Events are streamed via WebSocket connection. This endpoint returns immediately\nafter starting the generation process.\n"
+        },
+        {
+          "info": {
+            "name": "Interrupts an ongoing code generation for the specified chat session.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/code/interrupt-generation",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This sets an interrupt flag that will cause the generation to stop gracefully\nat the next checkpoint (before publishing the next event).\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

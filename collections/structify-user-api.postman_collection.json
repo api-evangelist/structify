@@ -1,0 +1,365 @@
+{
+  "item": [
+    {
+      "id": "b64a8e23-0e31-4505-a879-e006699471f8",
+      "name": "user",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "d4aa39e1-cb27-4395-b5f1-d0db77ca6040",
+          "name": "user enrich",
+          "request": {
+            "name": "user enrich",
+            "description": {},
+            "url": {
+              "path": [
+                "user",
+                "enrich"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "be03228c-9302-4377-bd2d-d7810bcb93a5",
+              "name": "Enrichment started",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user",
+                    "enrich"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "abfab462-548e-4688-997c-aa33de6a3f37",
+              "name": "Admin access required",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user",
+                    "enrich"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b9cb990c-4383-4ce7-b5c0-039307e4df90",
+              "name": "User not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user",
+                    "enrich"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d93de473-5af7-458f-8b55-ff304d172c29",
+          "name": "Update a user's permissions and type.",
+          "request": {
+            "name": "Update a user's permissions and type.",
+            "description": {},
+            "url": {
+              "path": [
+                "user",
+                "update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"updates\": {\n    \"apollo_data\": {},\n    \"company_description\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"completed_onboarding\": \"<boolean>\",\n    \"cost_confirmation_threshold\": \"<long>\",\n    \"cufinder_data\": {},\n    \"email\": \"<string>\",\n    \"feature_flags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"feature_overrides\": {},\n    \"full_name\": \"<string>\",\n    \"job_title\": \"<string>\",\n    \"last_selected_team_id\": \"<uuid>\",\n    \"linkedin_url\": \"<string>\",\n    \"notify_for_interaction\": \"<boolean>\",\n    \"permissions\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"slack_user_id\": \"<string>\",\n    \"slack_username\": \"<string>\",\n    \"survey_response\": {},\n    \"teams_user_id\": \"<string>\",\n    \"teams_user_name\": \"<string>\",\n    \"user_type\": \"<string>\"\n  },\n  \"current_email\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c6f2c44c-fd15-428b-8882-7ed8af7c2cfd",
+              "name": "Updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"updates\": {\n    \"apollo_data\": {},\n    \"company_description\": \"<string>\",\n    \"company_name\": \"<string>\",\n    \"completed_onboarding\": \"<boolean>\",\n    \"cost_confirmation_threshold\": \"<long>\",\n    \"cufinder_data\": {},\n    \"email\": \"<string>\",\n    \"feature_flags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"feature_overrides\": {},\n    \"full_name\": \"<string>\",\n    \"job_title\": \"<string>\",\n    \"last_selected_team_id\": \"<uuid>\",\n    \"linkedin_url\": \"<string>\",\n    \"notify_for_interaction\": \"<boolean>\",\n    \"permissions\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"slack_user_id\": \"<string>\",\n    \"slack_username\": \"<string>\",\n    \"survey_response\": {},\n    \"teams_user_id\": \"<string>\",\n    \"teams_user_name\": \"<string>\",\n    \"user_type\": \"<string>\"\n  },\n  \"current_email\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"0eb9b9f5-9ce3-5ff3-acb3-fbf450b1fa6b\",\n  \"email\": \"string\",\n  \"feature_flags\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"permissions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"user_type\": \"<string>\",\n  \"created_at\": \"1966-04-14T18:47:15.268Z\",\n  \"updated_at\": \"1969-12-12T12:28:26.637Z\",\n  \"full_name\": \"string\",\n  \"feature_overrides\": {\n    \"key_0\": 5307.798030580756\n  },\n  \"completed_onboarding\": false,\n  \"notify_for_interaction\": false,\n  \"apollo_data\": {},\n  \"company_description\": \"string\",\n  \"company_name\": \"string\",\n  \"cost_confirmation_threshold\": 502,\n  \"cufinder_data\": {},\n  \"job_title\": \"string\",\n  \"last_activity\": \"1992-07-03T21:11:41.115Z\",\n  \"last_selected_team_id\": \"<uuid>\",\n  \"linkedin_url\": \"string\",\n  \"slack_user_id\": \"string\",\n  \"slack_username\": \"string\",\n  \"survey_completed_at\": \"2015-08-22T23:46:59.697Z\",\n  \"survey_response\": {},\n  \"teams_user_id\": \"string\",\n  \"teams_user_name\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.structify.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "90565f13-8575-4b0c-afb9-773fc5a1fd00",
+    "name": "Structify account user API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Every enterprise's data team.\n\nContact Support:\n Name: Structify Team\n Email: team@structify.ai",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,499 @@
+{
+  "item": [
+    {
+      "id": "955aaa74-e5a7-4ac9-84dd-b034564e8628",
+      "name": "connector_catalog",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e5149b89-0349-4938-9d65-1196b9a846ac",
+          "name": "List all connector catalog entries with their auth methods and logos",
+          "request": {
+            "name": "List all connector catalog entries with their auth methods and logos",
+            "description": {},
+            "url": {
+              "path": [
+                "connector-catalog"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<long>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<long>"
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "Optional search query to filter by name, slug, or category (case-insensitive substring match)"
+                },
+                {
+                  "disabled": false,
+                  "key": "categories",
+                  "value": "<string>",
+                  "description": "Optional category filter (exact match against any element in the categories array)"
+                },
+                {
+                  "disabled": false,
+                  "key": "categories",
+                  "value": "<string>",
+                  "description": "Optional category filter (exact match against any element in the categories array)"
+                },
+                {
+                  "disabled": false,
+                  "key": "include_inactive",
+                  "value": "<boolean>",
+                  "description": "Include inactive auth methods (admin only)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f5ae2560-1687-47c8-8f40-d88a8926ef7e",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connector-catalog"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "include_inactive",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"auth_methods\": [\n        {\n          \"auth_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"connector_catalog_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"created_at\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"credential_fields\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"priority\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scopes\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"updated_at\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"label\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nango_integration_key\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"auth_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"connector_catalog_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"created_at\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"credential_fields\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"priority\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scopes\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"updated_at\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"label\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nango_integration_key\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"categories\": [\n        \"string\",\n        \"string\"\n      ],\n      \"created_at\": \"2001-09-05T12:47:16.223Z\",\n      \"enterprise_only\": true,\n      \"id\": \"e415e739-f66f-c52e-394e-3dbbbaef0a2b\",\n      \"name\": \"string\",\n      \"slug\": \"string\",\n      \"updated_at\": \"1949-03-16T14:19:38.457Z\",\n      \"description\": \"string\",\n      \"onboarding_priority\": 7445,\n      \"priority\": 7766,\n      \"logo_url\": \"string\"\n    },\n    {\n      \"auth_methods\": [\n        {\n          \"auth_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"connector_catalog_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"created_at\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"credential_fields\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"priority\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scopes\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"updated_at\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"label\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nango_integration_key\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"auth_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"connector_catalog_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"created_at\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"credential_fields\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"is_active\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"priority\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scopes\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"updated_at\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"label\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"nango_integration_key\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"categories\": [\n        \"string\",\n        \"string\"\n      ],\n      \"created_at\": \"1992-11-02T08:18:25.330Z\",\n      \"enterprise_only\": true,\n      \"id\": \"7574cdcc-5486-04be-f5ef-50c1b721e63d\",\n      \"name\": \"string\",\n      \"slug\": \"string\",\n      \"updated_at\": \"1948-10-08T15:07:49.822Z\",\n      \"description\": \"string\",\n      \"onboarding_priority\": 7939,\n      \"priority\": 8388,\n      \"logo_url\": \"string\"\n    }\n  ],\n  \"total_count\": 7015,\n  \"category_counts\": [\n    {\n      \"category\": \"string\",\n      \"count\": 7410\n    },\n    {\n      \"category\": \"string\",\n      \"count\": 8467\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "448af5cc-bec7-4182-9afd-7146c21bb0ff",
+          "name": "Get a connector catalog entry by slug with its active auth methods",
+          "request": {
+            "name": "Get a connector catalog entry by slug with its active auth methods",
+            "description": {},
+            "url": {
+              "path": [
+                "connector-catalog",
+                ":slug"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "slug",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "88569e70-acdc-4dd3-a04f-170d75c95a78",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connector-catalog",
+                    ":slug"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"auth_methods\": [\n    {\n      \"auth_type\": \"credentials\",\n      \"connector_catalog_id\": \"05a89dff-4c41-a4b3-426a-f074795890d7\",\n      \"created_at\": \"2003-04-30T00:21:14.708Z\",\n      \"credential_fields\": [\n        {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"auth_method_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"string\",\n          \"is_optional\": false,\n          \"field_type\": \"string\",\n          \"display_order\": 1815,\n          \"created_at\": \"1980-10-24T22:38:36.903Z\",\n          \"updated_at\": \"1959-06-18T23:18:47.856Z\",\n          \"default_value\": \"string\",\n          \"description\": \"string\",\n          \"label\": \"string\",\n          \"options\": {}\n        },\n        {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"auth_method_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"string\",\n          \"is_optional\": true,\n          \"field_type\": \"string\",\n          \"display_order\": 5276,\n          \"created_at\": \"1965-10-25T08:41:11.004Z\",\n          \"updated_at\": \"1963-10-09T05:25:29.263Z\",\n          \"default_value\": \"string\",\n          \"description\": \"string\",\n          \"label\": \"string\",\n          \"options\": {}\n        }\n      ],\n      \"id\": \"6d834f2f-57c5-4c28-2d6d-51dfbcae1c16\",\n      \"is_active\": false,\n      \"priority\": 1536,\n      \"scopes\": [\n        {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"connector_auth_method_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scope_value\": \"string\",\n          \"query_parameter\": \"string\",\n          \"is_required\": false,\n          \"is_recommended\": false,\n          \"created_at\": \"2004-07-16T18:21:37.841Z\",\n          \"updated_at\": \"1951-06-05T18:38:44.046Z\"\n        },\n        {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"connector_auth_method_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scope_value\": \"string\",\n          \"query_parameter\": \"string\",\n          \"is_required\": false,\n          \"is_recommended\": true,\n          \"created_at\": \"1963-11-22T09:25:46.294Z\",\n          \"updated_at\": \"1972-08-25T15:29:54.686Z\"\n        }\n      ],\n      \"updated_at\": \"2002-11-20T06:41:51.372Z\",\n      \"label\": \"string\",\n      \"nango_integration_key\": \"string\"\n    },\n    {\n      \"auth_type\": \"credentials\",\n      \"connector_catalog_id\": \"d0937d4a-5d42-8649-5714-0f870e4609ab\",\n      \"created_at\": \"1991-07-08T06:29:11.352Z\",\n      \"credential_fields\": [\n        {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"auth_method_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"string\",\n          \"is_optional\": false,\n          \"field_type\": \"string\",\n          \"display_order\": 7139,\n          \"created_at\": \"1955-07-30T21:03:39.783Z\",\n          \"updated_at\": \"1960-06-25T08:45:32.568Z\",\n          \"default_value\": \"string\",\n          \"description\": \"string\",\n          \"label\": \"string\",\n          \"options\": {}\n        },\n        {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"auth_method_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"name\": \"string\",\n          \"is_optional\": true,\n          \"field_type\": \"string\",\n          \"display_order\": 8634,\n          \"created_at\": \"1952-06-13T03:17:23.022Z\",\n          \"updated_at\": \"1977-05-07T11:38:11.595Z\",\n          \"default_value\": \"string\",\n          \"description\": \"string\",\n          \"label\": \"string\",\n          \"options\": {}\n        }\n      ],\n      \"id\": \"516432bb-8312-703a-7f3c-7c4b21d56244\",\n      \"is_active\": false,\n      \"priority\": 3988,\n      \"scopes\": [\n        {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"connector_auth_method_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scope_value\": \"string\",\n          \"query_parameter\": \"string\",\n          \"is_required\": false,\n          \"is_recommended\": false,\n          \"created_at\": \"2003-10-27T16:44:46.865Z\",\n          \"updated_at\": \"1990-06-16T02:38:09.379Z\"\n        },\n        {\n          \"id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"connector_auth_method_id\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"scope_value\": \"string\",\n          \"query_parameter\": \"string\",\n          \"is_required\": true,\n          \"is_recommended\": false,\n          \"created_at\": \"2014-01-27T19:26:27.360Z\",\n          \"updated_at\": \"2013-01-15T06:52:04.044Z\"\n        }\n      ],\n      \"updated_at\": \"1957-06-07T07:41:24.149Z\",\n      \"label\": \"string\",\n      \"nango_integration_key\": \"string\"\n    }\n  ],\n  \"categories\": [\n    \"string\",\n    \"string\"\n  ],\n  \"created_at\": \"2006-05-10T00:23:00.891Z\",\n  \"enterprise_only\": false,\n  \"id\": \"c0aef2e2-5a62-5df1-4dd3-79a317f33813\",\n  \"name\": \"string\",\n  \"slug\": \"string\",\n  \"updated_at\": \"1999-07-02T03:31:45.519Z\",\n  \"description\": \"string\",\n  \"onboarding_priority\": 3924,\n  \"priority\": 5002,\n  \"logo_url\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f74ef1d0-e77b-4b80-a6f5-33c61832cad2",
+              "name": "Connector catalog not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connector-catalog",
+                    ":slug"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c5a40fa8-61e2-4743-9b95-3aace41598f8",
+          "name": "get connector logo",
+          "request": {
+            "name": "get connector logo",
+            "description": {},
+            "url": {
+              "path": [
+                "connector-catalog",
+                ":slug",
+                "logo"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "slug",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a3638742-8b1f-4bf5-8b17-080912cfe3e9",
+              "name": "Connector logo bytes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connector-catalog",
+                    ":slug",
+                    "logo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7abb8238-9a26-428a-8e00-3eddbaceba68",
+              "name": "No logo exists for this slug",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "connector-catalog",
+                    ":slug",
+                    "logo"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "slug",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.structify.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "64c358f7-15fa-4cf1-821c-c9412c081aa0",
+    "name": "Structify account connector_catalog API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Every enterprise's data team.\n\nContact Support:\n Name: Structify Team\n Email: team@structify.ai",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,6 +1,7 @@
-generated: '2026-07-21'
+generated: '2026-08-14'
 method: searched
 source: https://docs.structify.ai/sdks/python/installation
+checked: '2026-08-14'
 packages:
 - language: python
   registry: pypi
@@ -8,19 +9,37 @@ packages:
   url: https://pypi.org/project/structifyai/
   install: pip install structifyai
   version: 1.183.0
+  published: '2026-02-11'
   repository: https://github.com/StructifyAI/structify-python
   official: true
+  metadata_source: https://pypi.org/pypi/structifyai/json
 - language: javascript
   registry: npm
   name: structifyai
   url: https://www.npmjs.com/package/structifyai
   install: npm install structifyai
   version: 1.173.0
+  published: '2026-01-30'
   repository: https://github.com/StructifyAI/structify-node
   official: true
+  metadata_source: https://registry.npmjs.org/structifyai
+official_count: 2
+currency:
+  note: >-
+    Both SDKs are auto-generated from the Structify OpenAPI and were released in
+    near-lockstep with backend changes through early 2026, then stopped. The
+    latest Python release is 1.183.0 (2026-02-11) and the latest npm release is
+    1.173.0 (2026-01-30); both GitHub repos last saw a push on 2026-07-18. No
+    SDK release has shipped in roughly six months while the REST surface it
+    wraps remains 281 operations. Recorded as an observation, not a verdict —
+    the backend may simply not have changed.
+  latest_release: '2026-02-11'
 notes: >-
   Official first-party SDKs generated from the Structify OpenAPI. The docs also
-  reference an import path of `@structify/prospero`, but the published npm
-  package is `structifyai` (repo StructifyAI/structify-node). The unrelated PyPI
-  package `structify` (atul-bhouraskar, "Simplify binary structures") is NOT
-  first-party and is excluded.
+  reference an import path of `@structify/prospero`, but that npm package does
+  not exist (registry.npmjs.org returns 404); the published package is
+  `structifyai` (repo StructifyAI/structify-node). The unrelated PyPI package
+  `structify` (atul-bhouraskar, "Simplify binary structures") is NOT first-party
+  and is excluded. No Maven, NuGet, Go, RubyGems, Packagist or crates.io package
+  is published, and the StructifyAI GitHub org contains no CLI or MCP package —
+  only the two SDK repos plus forks of third-party ML projects.

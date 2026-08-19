@@ -1,16 +1,66 @@
-generated: '2026-07-21'
+generated: '2026-08-14'
 method: searched
-probe: true
 source: https://www.structify.ai/security
-url: https://www.structify.ai/security
+url: https://trust.structify.ai
+checked: '2026-08-14'
+summary: >-
+  Structify runs a dedicated trust center at trust.structify.ai, linked from the
+  marketing footer under "Security". The trust center itself is a client-rendered
+  single-page app — it returns HTTP 200 with the same HTML shell for every path,
+  including paths that do not exist, and no certification content is present in
+  the served HTML. The certifications below are therefore taken from the two
+  pages that state them in server-rendered markup: the security page and the
+  compliance badge row on the homepage.
+trust_center:
+  url: https://trust.structify.ai
+  status: 200
+  machine_readable: false
+  note: >-
+    JS-rendered SPA. A crawler or agent reading trust.structify.ai gets no
+    certification data. This is the provider's to fix.
 certifications:
-- SOC 2
-- HIPAA
+- name: SOC 2 Type II
+  source: https://www.structify.ai/
+  evidence: Compliance badge row states SOC 2 Type II, audited annually.
+- name: HIPAA
+  source: https://www.structify.ai/security
+  evidence: Stated on the security page and in the homepage compliance badges.
+- name: CMMC
+  source: https://www.structify.ai/
+  evidence: >-
+    Homepage compliance badge, labelled "CMMC — DoD cybersecurity"
+    (/assets/compliance/cmmc.png).
+- name: GDPR
+  source: https://www.structify.ai/
+  evidence: >-
+    Homepage compliance badge, labelled "GDPR — EU Data Protection"
+    (/assets/compliance/gdpr.png).
+controls:
+- AES-256 encryption at rest, TLS 1.2+ in transit
+- SSO and SAML (Okta, Entra, Google)
+- Role-based access control with least privilege down to the data-source level
+- Full audit logging of queries, connections and exports
+- Tenant isolation with isolated data stores
+- Isolated sandbox execution environments that self-destruct after jobs
+- Automatic data cleanup within 6 hours
+- Customer data is not used for model training
+vulnerability_disclosure:
+  present: false
+  note: >-
+    No vulnerability disclosure policy, security contact address or bug bounty
+    program was found. No /.well-known/security.txt is served on any Structify
+    host (see well-known/structify-well-known.yml), neither HackerOne nor
+    Bugcrowd nor Intigriti lists a Structify program, and the security page
+    carries no report-a-vulnerability link. The only published contact is the
+    general mailbox team@structify.ai. No Security / VulnerabilityDisclosure
+    pointer is emitted.
 evidence:
 - source: https://www.structify.ai/security
-  keywords:
-  - soc 2
-  - soc2
-  - hipaa
-  - trust center
-  - compliance certification
+  status: 200
+  keywords: [soc2, hipaa, aes-256, tls 1.2, sso, saml, rbac, audit logging, tenant isolation]
+- source: https://www.structify.ai/
+  status: 200
+  keywords: [soc 2 type ii, hipaa, cmmc, gdpr]
+- source: https://trust.structify.ai
+  status: 200
+  keywords: []

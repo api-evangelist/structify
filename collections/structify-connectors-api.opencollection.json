@@ -1,0 +1,798 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Structify account connectors API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "connectors",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "upsert_connector_type_snippet",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.structify.ai/connector-type-snippets/:connector_type",
+            "params": [
+              {
+                "name": "connector_type",
+                "value": "",
+                "type": "path",
+                "description": "Connector type identifier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "list_connectors",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/connectors",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "create_connector",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/connectors",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "Mark a clarification request as resolved",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.structify.ai/connectors/clarification-requests/:clarification_id/resolve",
+            "params": [
+              {
+                "name": "clarification_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Mark a clarification request as resolved"
+        },
+        {
+          "info": {
+            "name": "Update column metadata (notes)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.structify.ai/connectors/columns/:column_id",
+            "params": [
+              {
+                "name": "column_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update column metadata (notes)"
+        },
+        {
+          "info": {
+            "name": "search_tables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/connectors/search-tables",
+            "params": [
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Search query string"
+              },
+              {
+                "name": "team_id",
+                "value": "",
+                "type": "query",
+                "description": "Team ID to scope table search"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "list_connector_stores",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/connectors/stores",
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "list_connector_summaries",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/connectors/summaries",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "Update table metadata (description or notes)",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.structify.ai/connectors/tables/:table_id",
+            "params": [
+              {
+                "name": "table_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update table metadata (description or notes)"
+        },
+        {
+          "info": {
+            "name": "get_table_lineage",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/connectors/tables/:table_id/lineage",
+            "params": [
+              {
+                "name": "table_id",
+                "value": "",
+                "type": "path",
+                "description": "The table ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "get_connector_table_path",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/connectors/tables/:table_id/path",
+            "params": [
+              {
+                "name": "table_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "list_connectors_with_snippets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/connectors/with-snippets",
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "get_connector",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/connectors/:connector_id",
+            "params": [
+              {
+                "name": "connector_id",
+                "value": "",
+                "type": "path",
+                "description": "The connector ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "update_connector",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.structify.ai/connectors/:connector_id",
+            "params": [
+              {
+                "name": "connector_id",
+                "value": "",
+                "type": "path",
+                "description": "The connector ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "delete_connector",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.structify.ai/connectors/:connector_id",
+            "params": [
+              {
+                "name": "connector_id",
+                "value": "",
+                "type": "path",
+                "description": "The connector ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "Get all clarification requests for a connector",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/connectors/:connector_id/clarification-requests",
+            "params": [
+              {
+                "name": "connector_id",
+                "value": "",
+                "type": "path",
+                "description": "The connector ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get all clarification requests for a connector"
+        },
+        {
+          "info": {
+            "name": "explore_connector",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/connectors/:connector_id/explore",
+            "params": [
+              {
+                "name": "connector_id",
+                "value": "",
+                "type": "path",
+                "description": "The connector ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "get_active_exploration_run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/connectors/:connector_id/explore/active-run",
+            "params": [
+              {
+                "name": "connector_id",
+                "value": "",
+                "type": "path",
+                "description": "The connector ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "Get chats from connector exploration (requires debug permission)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/connectors/:connector_id/explore/chat",
+            "params": [
+              {
+                "name": "connector_id",
+                "value": "",
+                "type": "path",
+                "description": "The connector ID"
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "database_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "schema_id",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "table_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Optionally filter by run, database, schema, or table"
+        },
+        {
+          "info": {
+            "name": "Get all exploration runs for a connector (requires debug permission)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/connectors/:connector_id/explore/runs",
+            "params": [
+              {
+                "name": "connector_id",
+                "value": "",
+                "type": "path",
+                "description": "The connector ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get all exploration runs for a connector (requires debug permission)"
+        },
+        {
+          "info": {
+            "name": "get_exploration_run_progress",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/connectors/:connector_id/explore/runs/:run_id/progress",
+            "params": [
+              {
+                "name": "connector_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "add_connector_schema_object",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/connectors/:connector_id/schema_object",
+            "params": [
+              {
+                "name": "connector_id",
+                "value": "",
+                "type": "path",
+                "description": "The connector ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "delete_connector_schema_object",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.structify.ai/connectors/:connector_id/schema_object",
+            "params": [
+              {
+                "name": "connector_id",
+                "value": "",
+                "type": "path",
+                "description": "The connector ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "create_connector_secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/connectors/:connector_id/secrets",
+            "params": [
+              {
+                "name": "connector_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "delete_connector_secret",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.structify.ai/connectors/:connector_id/secrets/:secret_name",
+            "params": [
+              {
+                "name": "connector_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "secret_name",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "get_connector_store",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/connectors/:connector_id/store",
+            "params": [
+              {
+                "name": "connector_id",
+                "value": "",
+                "type": "path",
+                "description": "The connector ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "List all tables for a connector",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/connectors/:connector_id/tables",
+            "params": [
+              {
+                "name": "connector_id",
+                "value": "",
+                "type": "path",
+                "description": "Connector ID"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns all tables across all databases and schemas for the given connector.\nUseful for finding table IDs to pass to the explore endpoint for single-table exploration."
+        },
+        {
+          "info": {
+            "name": "connectors_download_datahub_artifact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/internal/connectors/:connector_id/datahub-artifacts/:kind",
+            "params": [
+              {
+                "name": "connector_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "exploration_run_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "connectors_upload_datahub_artifact",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.structify.ai/internal/connectors/:connector_id/datahub-artifacts/:kind",
+            "params": [
+              {
+                "name": "connector_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "kind",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "exploration_run_id",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,675 @@
+{
+  "item": [
+    {
+      "id": "b08b2316-98ab-4810-940c-b0030e5f2743",
+      "name": "jobs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c091d89d-8380-49b8-a7fd-f5bb28aee832",
+          "name": "You successfully cancelled a job.",
+          "request": {
+            "name": "You successfully cancelled a job.",
+            "description": {},
+            "url": {
+              "path": [
+                "jobs",
+                "cancel",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uuid",
+                  "description": "(Required) UUID of the job you want to cancel."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "183161f1-df4d-42c6-befa-7d89e7452bb5",
+              "name": "Succesfully cancelled a job.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    "cancel",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) UUID of the job you want to cancel."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"f007068d-0156-7ff6-e702-d6c707a829c2\",\n  \"status\": \"Completed\",\n  \"created_at\": \"2007-01-13T21:42:48.409Z\",\n  \"user_id\": \"bbade2e8-4674-3ccc-496d-b7df1f2fcac4\",\n  \"membership_id\": \"48485e08-4c11-6e4e-d317-f19fd0caaf0f\",\n  \"job_type\": \"ConnectorExplore\",\n  \"max_steps_without_save\": 6130,\n  \"use_proxy\": true,\n  \"updated_at\": \"2004-09-05T01:28:03.511Z\",\n  \"dataset_id\": \"0cabc6dd-9940-b55e-bfb3-ccfdd8085c11\",\n  \"exploration_run_id\": \"fa036cc7-6681-46d2-2ec5-10727469398d\",\n  \"max_errors\": 4906,\n  \"max_execution_time_secs\": 2503,\n  \"max_total_steps\": 7475,\n  \"message\": \"string\",\n  \"node_id\": \"3c0ce9dc-d131-d9ea-1ea7-1d05d904fbf6\",\n  \"parameters\": \"string\",\n  \"reason\": \"string\",\n  \"run_started_time\": \"1964-06-22T01:43:58.640Z\",\n  \"run_time_milliseconds\": 6471,\n  \"seeded_kg_search_term\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6745026c-5dcd-4609-881c-6cc1f851e6ca",
+          "name": "get job",
+          "request": {
+            "name": "get job",
+            "description": {},
+            "url": {
+              "path": [
+                "jobs",
+                "get",
+                ":job_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "job_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5f30e8ff-23ca-4077-bbab-6f69ae9a8243",
+              "name": "Full job details including info, source entities, and scrapers.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    "get",
+                    ":job_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "job_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"info\": {\n    \"id\": \"<uuid>\",\n    \"status\": \"Completed\",\n    \"created_at\": \"1981-02-22T03:35:14.884Z\",\n    \"job_type\": \"ConnectorExplore\",\n    \"user_id\": \"f6ca925c-e19b-3104-453d-8c314a52b434\",\n    \"dataset_id\": \"b9bc036e-7425-2a39-384c-1baa0d039b8f\",\n    \"message\": \"string\",\n    \"parameters\": {\n      \"structuring_input\": {\n        \"Agent\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"extraction_criteria\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"allow_extra_entities\": true,\n      \"instructions\": \"string\",\n      \"model\": \"string\",\n      \"seeded_kg\": {\n        \"entities\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"relationships\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    },\n    \"reason\": \"string\",\n    \"run_started_time\": \"2014-05-14T20:22:32.326Z\",\n    \"run_time_milliseconds\": 3703\n  },\n  \"saved\": [\n    [\n      {\n        \"created_at\": \"2009-12-23T18:20:52.598Z\",\n        \"id\": \"5824492e-f71e-1e63-3f75-c793591ed414\",\n        \"is_summary\": false,\n        \"label\": \"string\",\n        \"llm_id\": 4292,\n        \"properties\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"source_id\": \"cbc92b01-b956-2230-3768-3372f38c48da\",\n        \"user_specified\": false,\n        \"job_id\": \"<uuid>\",\n        \"kg_entity_id\": \"61d7b8ac-7743-c870-f2b3-aa4c3720eade\",\n        \"link\": {\n          \"Web\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"location\": {\n          \"Text\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"scraper_id\": \"e09313ef-debc-93a1-fad4-e998882a3c61\"\n      },\n      {\n        \"created_at\": \"2005-04-21T00:26:58.861Z\",\n        \"id\": \"3cf9d204-94f6-7134-43c5-785d462cbf22\",\n        \"is_summary\": false,\n        \"label\": \"string\",\n        \"llm_id\": 1661,\n        \"properties\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\",\n          \"key_2\": \"string\"\n        },\n        \"source_id\": \"a9639e7e-225c-3e71-419e-74c2aa5d3118\",\n        \"user_specified\": true,\n        \"job_id\": \"<uuid>\",\n        \"kg_entity_id\": \"97d86d4b-2d10-e18e-e61d-2779a556686f\",\n        \"link\": {\n          \"Web\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"location\": {\n          \"Text\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"scraper_id\": \"1571ab31-7047-d699-2bb6-8568e4e5ae60\"\n      }\n    ],\n    [\n      {\n        \"created_at\": \"1956-12-13T22:45:18.343Z\",\n        \"id\": \"52580f19-fe16-e056-9e19-306df9e7bc51\",\n        \"is_summary\": true,\n        \"label\": \"string\",\n        \"llm_id\": 3616,\n        \"properties\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"source_id\": \"727802b9-f35c-66d4-9728-1bfb6e46a3c2\",\n        \"user_specified\": false,\n        \"job_id\": \"<uuid>\",\n        \"kg_entity_id\": \"b9f29aca-02e0-5d22-2185-74f415f8f602\",\n        \"link\": {\n          \"Web\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"location\": {\n          \"Text\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"scraper_id\": \"adabfa35-d33d-8183-2d17-f1333f688439\"\n      },\n      {\n        \"created_at\": \"1969-07-03T11:33:16.844Z\",\n        \"id\": \"95b9eb37-2a3b-a3b9-7058-9fd1ca1160ab\",\n        \"is_summary\": true,\n        \"label\": \"string\",\n        \"llm_id\": 2285,\n        \"properties\": {\n          \"key_0\": \"string\",\n          \"key_1\": \"string\"\n        },\n        \"source_id\": \"4b5efc71-8368-8147-7df5-b8f624e61d6a\",\n        \"user_specified\": true,\n        \"job_id\": \"<uuid>\",\n        \"kg_entity_id\": \"5875dc78-aa2c-047f-68da-e15df7c9fdb8\",\n        \"link\": {\n          \"Web\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"location\": {\n          \"Text\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        \"scraper_id\": \"527edb2e-68ab-d7ed-65e6-ef8984acb67a\"\n      }\n    ]\n  ],\n  \"agents\": [\n    {\n      \"scraper_id\": \"43b5be1f-5055-54de-3347-8c5cb756cd7b\",\n      \"base_url\": \"string\",\n      \"scraper_created_at\": \"1958-04-24T14:50:07.471Z\",\n      \"scraper_updated_at\": \"2010-09-02T15:44:28.423Z\",\n      \"is_newly_created\": false,\n      \"chat\": {\n        \"metadata\": {\n          \"dataset_descriptor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"extracted_entities\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"extraction_criteria\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"formatter_specific\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qa_potentially_sus_response\": \"string\"\n        },\n        \"messages\": [\n          {\n            \"role\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"content\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"role\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"content\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"decoding_params\": {\n          \"parameters\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      },\n      \"code\": \"string\",\n      \"events\": [\n        {\n          \"TextMessage\": {\n            \"message\": \"string\"\n          }\n        },\n        {\n          \"TextMessage\": {\n            \"message\": \"string\"\n          }\n        }\n      ],\n      \"next_page_code\": \"string\"\n    },\n    {\n      \"scraper_id\": \"ba48b841-5fa7-b9a8-8457-61413fff0c79\",\n      \"base_url\": \"string\",\n      \"scraper_created_at\": \"1997-04-10T21:36:16.992Z\",\n      \"scraper_updated_at\": \"1970-05-13T19:00:31.477Z\",\n      \"is_newly_created\": true,\n      \"chat\": {\n        \"metadata\": {\n          \"dataset_descriptor\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"extracted_entities\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"extraction_criteria\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"formatter_specific\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"qa_potentially_sus_response\": \"string\"\n        },\n        \"messages\": [\n          {\n            \"role\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"content\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"role\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"content\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"decoding_params\": {\n          \"parameters\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        }\n      },\n      \"code\": \"string\",\n      \"events\": [\n        {\n          \"TextMessage\": {\n            \"message\": \"string\"\n          }\n        },\n        {\n          \"TextMessage\": {\n            \"message\": \"string\"\n          }\n        }\n      ],\n      \"next_page_code\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "460bf4c3-ea6b-4f51-935d-c181ba6feee0",
+          "name": "List all the executions",
+          "request": {
+            "name": "List all the executions",
+            "description": {},
+            "url": {
+              "path": [
+                "jobs",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "dataset",
+                  "value": "<string>",
+                  "description": "Dataset name to optionally filter jobs by"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status to optionally filter jobs by"
+                },
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<dateTime>",
+                  "description": "List since a specific timestamp"
+                },
+                {
+                  "disabled": false,
+                  "key": "job_type",
+                  "value": "<string>",
+                  "description": "Type of job to optionally filter jobs by"
+                },
+                {
+                  "disabled": false,
+                  "key": "seeded_kg_search_term",
+                  "value": "<string>",
+                  "description": "seeded kg search term"
+                },
+                {
+                  "disabled": false,
+                  "key": "node_id",
+                  "value": "<uuid>",
+                  "description": "Node ID to optionally filter jobs by"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "af8a745d-20f9-46d1-bb0e-548b6d553ac9",
+              "name": "A list of all execution histories",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "dataset",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "since",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "job_type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "seeded_kg_search_term",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "node_id",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"status\": \"<string>\",\n    \"created_at\": \"1956-10-29T22:50:45.660Z\",\n    \"job_type\": \"<string>\",\n    \"user_id\": \"ce8a6fae-ebfd-4751-ee88-a28407dab37a\",\n    \"dataset_id\": \"accdc57e-8d77-2bcc-e22f-9ab3e69aa973\",\n    \"message\": \"string\",\n    \"parameters\": {\n      \"structuring_input\": {\n        \"Agent\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"extraction_criteria\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"allow_extra_entities\": true,\n      \"instructions\": \"string\",\n      \"model\": \"string\",\n      \"seeded_kg\": {\n        \"entities\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"relationships\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    },\n    \"reason\": \"string\",\n    \"run_started_time\": \"1996-11-17T01:41:57.058Z\",\n    \"run_time_milliseconds\": 7207\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"status\": \"<string>\",\n    \"created_at\": \"1981-07-18T01:17:03.846Z\",\n    \"job_type\": \"<string>\",\n    \"user_id\": \"c827c8f8-a60b-a964-3b6e-8bf524e67a1f\",\n    \"dataset_id\": \"1b6a4a12-5cbc-2957-fd5a-f0922eaa51a3\",\n    \"message\": \"string\",\n    \"parameters\": {\n      \"structuring_input\": {\n        \"Agent\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"extraction_criteria\": [\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      ],\n      \"allow_extra_entities\": true,\n      \"instructions\": \"string\",\n      \"model\": \"string\",\n      \"seeded_kg\": {\n        \"entities\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"relationships\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    },\n    \"reason\": \"string\",\n    \"run_started_time\": \"1991-06-17T09:59:22.675Z\",\n    \"run_time_milliseconds\": 3762\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6c001783-63a0-4d5a-8161-aaba97d56be4",
+          "name": "You successfully scheduled a job.",
+          "request": {
+            "name": "You successfully scheduled a job.",
+            "description": {
+              "content": "One example use case is every single day check the news websites and\npull them into my dataset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "jobs",
+                "schedule"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "872e5d16-ca5f-4335-8114-617f1b68ac7b",
+              "name": "Succesfully scheduled a job.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    "schedule"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "27841769-a5eb-4a26-a258-342d5219e70a",
+          "name": "get job events",
+          "request": {
+            "name": "get job events",
+            "description": {},
+            "url": {
+              "path": [
+                "jobs",
+                ":job_id",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "job_id",
+                  "description": "(Required) Id of the job whose events to get."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6eff91ef-5bcf-4a1c-98ae-1732ca21cf63",
+              "name": "Successfully got job events.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    ":job_id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "job_id",
+                      "description": "(Required) Id of the job whose events to get."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"events\": [\n    {\n      \"created_at\": \"1993-07-09T06:27:56.120Z\",\n      \"body\": {\n        \"url\": \"string\",\n        \"mode\": \"text\",\n        \"event_type\": \"agent_navigated\"\n      }\n    },\n    {\n      \"created_at\": \"2022-06-25T08:19:37.324Z\",\n      \"body\": {\n        \"url\": \"string\",\n        \"mode\": \"visual\",\n        \"event_type\": \"agent_navigated\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d15a086a-57ad-427c-9a17-47e5602edb0e",
+              "name": "Job not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    ":job_id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "job_id",
+                      "description": "(Required) Id of the job whose events to get."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b8c0c6a9-27b1-40ee-a92e-db8f18f00c7f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "jobs",
+                    ":job_id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "job_id",
+                      "description": "(Required) Id of the job whose events to get."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.structify.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a61ec0c9-a00f-4941-b717-b0d9d0248b5f",
+    "name": "Structify account jobs API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Every enterprise's data team.\n\nContact Support:\n Name: Structify Team\n Email: team@structify.ai",
+      "type": "text/plain"
+    }
+  }
+}

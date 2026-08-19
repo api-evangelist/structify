@@ -1,0 +1,224 @@
+{
+  "item": [
+    {
+      "id": "45d1b812-37a4-4c70-9bd1-33cef78ca89c",
+      "name": "usage",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "64d89308-358f-4ba9-9956-fe9230e48b52",
+          "name": "user transactions",
+          "request": {
+            "name": "user transactions",
+            "description": {},
+            "url": {
+              "path": [
+                "user",
+                "transactions",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d35b3e10-6153-494f-9b45-f5c097772a63",
+              "name": "Got the transactions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user",
+                    "transactions",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"acf042c0-ff32-756b-8a5e-f93a5b3664ee\",\n    \"amount\": 9185,\n    \"timestamp\": \"2013-05-10T05:52:06.313Z\",\n    \"membership_id\": \"cb0e7743-568b-0244-38a5-52e6c95bfa03\",\n    \"credit_grant_id\": \"8d46536f-a964-e039-b861-2f496068ac51\",\n    \"job_id\": \"75481ede-874d-2bc9-9f8b-f063d9029d71\"\n  },\n  {\n    \"id\": \"b6db2e7d-51f6-d501-f033-e03f5b802c98\",\n    \"amount\": 2004,\n    \"timestamp\": \"1961-09-20T10:28:45.109Z\",\n    \"membership_id\": \"adf2b521-63d8-a864-c647-afcd07826eda\",\n    \"credit_grant_id\": \"a6348fc4-e86c-4384-ceae-2a88c1f0558e\",\n    \"job_id\": \"34d14b92-f01f-97c7-9be2-f73603967c3e\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dcd00893-0550-489a-b574-1449edf06b07",
+          "name": "Returns usage statistics for the user.",
+          "request": {
+            "name": "Returns usage statistics for the user.",
+            "description": {},
+            "url": {
+              "path": [
+                "user",
+                "usage"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dataset",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "89fa0869-5bf2-4a62-a578-daac41ed2847",
+              "name": "Responded with user statstics",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "user",
+                    "usage"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dataset",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"num_entities\": 1554,\n  \"num_relationships\": 7611,\n  \"credits_used\": 2300\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.structify.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "63ff2659-2a8d-48a5-9bd2-7481234f7232",
+    "name": "Structify account usage API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Every enterprise's data team.\n\nContact Support:\n Name: Structify Team\n Email: team@structify.ai",
+      "type": "text/plain"
+    }
+  }
+}

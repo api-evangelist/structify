@@ -1,43 +1,128 @@
-generated: '2026-07-21'
-method: derived
-status: candidate
-source: openapi/structify-openapi-original.json
-note: >-
-  No official hosted/remote Structify MCP server was found (no entry in the MCP
-  registry, npm @modelcontextprotocol, or the docs). The following is a
-  candidate tool set derived from marquee OpenAPI operations, one tool per
-  operationId, to seed an MCP server. Not published by Structify.
+generated: '2026-08-14'
+method: probed
+source: https://docs.structify.ai/mcp
+summary: >-
+  Structify serves a live, anonymous, remote MCP server from its documentation
+  host. It answered a real tools/list on 2026-08-14 and returned three tools
+  with full JSON Schema inputSchemas. It is a DOCUMENTATION-PLANE server: the
+  tools search, read and give feedback on the Structify docs. None of them call
+  the Structify data platform. Structify publishes no MCP server for its REST
+  API, so an agent can read Structify's documentation over MCP but must fall
+  back to the REST API (openapi/) to actually create a dataset, scrape a page or
+  run a job.
+deployment:
+  mode: remote
+  endpoint: https://docs.structify.ai/mcp
+  auth: none
+  verified: probed
+  checked: '2026-08-14'
+  transport: streamable-http
+  note: >-
+    No stdio package is published — nothing on npm or PyPI under a Structify
+    scope ships an MCP server, and the StructifyAI GitHub org contains only the
+    two SDK repos. Mode is therefore remote, not both.
+discovery:
+  well_known: https://docs.structify.ai/.well-known/mcp.json
+  well_known_status: 200
+  declared_url: https://structify.main-kill-isr.mintlify.me/mcp
+  declared_url_note: >-
+    The published /.well-known/mcp.json advertises a Mintlify preview hostname
+    (structify.main-kill-isr.mintlify.me) rather than the customer domain. That
+    URL is not a Structify-controlled host and should not be used as the client
+    endpoint. The working, first-party endpoint is https://docs.structify.ai/mcp,
+    which is the one recorded above and the one that was probed.
 server:
   name: structify
-  transport: http
+  vendor_platform: Mintlify docs MCP
+  plane: documentation
+  hosted_by: Structify (docs.structify.ai)
+x-evidence:
+  fetched: '2026-08-14'
+  request: '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+  http_status: 200
+  content_type: text/event-stream
+  tool_count: 3
+  raw: mcp/structify-mcp-tools.json
 tools:
-- name: create_dataset
-  description: Create a dataset (schema container).
-  source_operation: openapi/structify-openapi-original.json#dataset_create
-- name: get_dataset_info
-  description: Get dataset metadata and schema.
-  source_operation: openapi/structify-openapi-original.json#dataset_info
-- name: add_entity
-  description: Add an entity (node) to a dataset table.
-  source_operation: openapi/structify-openapi-original.json#entity_add
-- name: search_entities
-  description: Search entities in a dataset.
-  source_operation: openapi/structify-openapi-original.json#entity_search
-- name: add_relationship
-  description: Create a typed relationship between two entities.
-  source_operation: openapi/structify-openapi-original.json#entity_add_relationship
-- name: scrape
-  description: Run a web/PDF scrape into structured data.
-  source_operation: openapi/structify-openapi-original.json#scrape
-- name: run_workflow
-  description: Run a workflow/pipeline.
-  source_operation: openapi/structify-openapi-original.json#run_workflow
-- name: get_job
-  description: Get the status/result of an asynchronous job.
-  source_operation: openapi/structify-openapi-original.json#get_job
-- name: list_connectors
-  description: List configured data connectors.
-  source_operation: openapi/structify-openapi-original.json#list_connectors
-- name: export_dataset_csv
-  description: Export a dataset to CSV.
-  source_operation: openapi/structify-openapi-original.json#dataset_export_csv
+- name: search_structify
+  title: Search documentation
+  description: >-
+    Search across the Structify knowledge base to find relevant information,
+    code examples, API references, and guides. Returns contextual content with
+    titles and direct links to documentation pages.
+  input_schema:
+    query:
+      type: string
+      required: true
+      description: Search query
+- name: query_docs_filesystem_structify
+  description: >-
+    Run a read-only shell-like query (rg / tree / ls / head / cat) against a
+    virtualized in-memory filesystem containing only the Structify documentation
+    pages and OpenAPI specs. Nothing executes on any real machine.
+  input_schema:
+    command:
+      type: string
+      required: true
+      description: >-
+        A shell command to run against the virtualized documentation
+        filesystem, e.g. `rg -il "keyword" /`, `tree / -L 2`,
+        `head -80 /path/file.mdx`.
+- name: submit_feedback
+  title: Submit documentation feedback
+  description: >-
+    Report a problem with the documentation site so the docs team can fix it.
+    For documentation content only, not product support.
+  input_schema:
+    path:
+      type: string
+      required: true
+      description: The documentation page path the feedback is about.
+    feedback:
+      type: string
+      required: true
+      description: A clear description of the documentation issue or suggestion.
+candidate_tools:
+  status: candidate
+  method: derived
+  source: openapi/_original/structify-openapi-original.json
+  note: >-
+    NOT PUBLISHED BY STRUCTIFY. This is the API-plane tool set the pipeline
+    derived from marquee OpenAPI operations in an earlier round, retained as a
+    gap record: it is what a Structify data-platform MCP server would expose,
+    and none of it is reachable over the live documentation-plane server above.
+  tools:
+  - name: create_dataset
+    description: Create a dataset (schema container).
+    source_operation: openapi/_original/structify-openapi-original.json#dataset_create
+  - name: get_dataset_info
+    description: Get dataset metadata and schema.
+    source_operation: openapi/_original/structify-openapi-original.json#dataset_info
+  - name: add_entity
+    description: Add an entity (node) to a dataset table.
+    source_operation: openapi/_original/structify-openapi-original.json#entity_add
+  - name: search_entities
+    description: Search entities in a dataset.
+    source_operation: openapi/_original/structify-openapi-original.json#entity_search
+  - name: add_relationship
+    description: Create a typed relationship between two entities.
+    source_operation: openapi/_original/structify-openapi-original.json#entity_add_relationship
+  - name: scrape
+    description: Run a web/PDF scrape into structured data.
+    source_operation: openapi/_original/structify-openapi-original.json#scrape
+  - name: run_workflow
+    description: Run a workflow/pipeline.
+    source_operation: openapi/_original/structify-openapi-original.json#run_workflow
+  - name: get_job
+    description: Get the status/result of an asynchronous job.
+    source_operation: openapi/_original/structify-openapi-original.json#get_job
+  - name: list_connectors
+    description: List configured data connectors.
+    source_operation: openapi/_original/structify-openapi-original.json#list_connectors
+  - name: export_dataset_csv
+    description: Export a dataset to CSV.
+    source_operation: openapi/_original/structify-openapi-original.json#dataset_export_csv
+related:
+  crosswalk: mcp/structify-tool-crosswalk.yml
+  agent_card: a2a/structify-a2a.yml
+  well_known: well-known/structify-well-known.yml

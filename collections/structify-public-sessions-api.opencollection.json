@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Structify account public_sessions API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "public_sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "get_public_latest_workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/public/chat/:chat_session_id/latest-workflow",
+            "params": [
+              {
+                "name": "chat_session_id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the chat session to get latest workflow for."
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "get_public_node_output_data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/public/nodes/:node_id/output_data",
+            "params": [
+              {
+                "name": "node_id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the workflow node to get output data for."
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

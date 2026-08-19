@@ -1,0 +1,294 @@
+{
+  "item": [
+    {
+      "id": "6e1b8d78-ef9c-462d-bcdf-6c4699c77e75",
+      "name": "teams",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "94ed2949-2b0e-41f4-98fd-156fbd008496",
+          "name": "download teams file",
+          "request": {
+            "name": "download teams file",
+            "description": {},
+            "url": {
+              "path": [
+                "teams",
+                "files",
+                ":token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "token",
+                  "description": "(Required) Signed download token for a Teams file."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "478b3443-8b16-444f-bd09-de7dc8ca8b14",
+              "name": "Download Teams file.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "teams",
+                    "files",
+                    ":token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Signed download token for a Teams file."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6d6570ce-ce82-4911-914f-0b47366e826c",
+              "name": "File not found or token expired.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "teams",
+                    "files",
+                    ":token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "token",
+                      "description": "(Required) Signed download token for a Teams file."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "22dde417-70d0-426f-9ca9-c2fa9b368f12",
+          "name": "Handles Microsoft Teams Bot Framework webhook messages",
+          "request": {
+            "name": "Handles Microsoft Teams Bot Framework webhook messages",
+            "description": {
+              "content": "This endpoint receives activities from Teams when users message the bot.\nIt handles message activities and invoke activities (for Adaptive Card actions).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "teams",
+                "messages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"<string>\",\n  \"attachments\": [\n    {\n      \"contentType\": \"<string>\",\n      \"content\": {},\n      \"contentUrl\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"contentType\": \"<string>\",\n      \"content\": {},\n      \"contentUrl\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"channelId\": \"<string>\",\n  \"conversation\": {\n    \"id\": \"<string>\",\n    \"conversationType\": \"<string>\",\n    \"isGroup\": \"<boolean>\",\n    \"name\": \"<string>\",\n    \"tenantId\": \"<string>\"\n  },\n  \"from\": {\n    \"id\": \"<string>\",\n    \"aadObjectId\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"id\": \"<string>\",\n  \"membersAdded\": [\n    {\n      \"id\": \"<string>\",\n      \"aadObjectId\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"aadObjectId\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"recipient\": {\n    \"id\": \"<string>\",\n    \"aadObjectId\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"replyToId\": \"<string>\",\n  \"serviceUrl\": \"<string>\",\n  \"text\": \"<string>\",\n  \"timestamp\": \"<string>\",\n  \"value\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2dd40f5d-36d8-4c91-98fa-35a8e86fa9d6",
+              "name": "Activity processed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "teams",
+                    "messages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"type\": \"<string>\",\n  \"attachments\": [\n    {\n      \"contentType\": \"<string>\",\n      \"content\": {},\n      \"contentUrl\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"contentType\": \"<string>\",\n      \"content\": {},\n      \"contentUrl\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"channelId\": \"<string>\",\n  \"conversation\": {\n    \"id\": \"<string>\",\n    \"conversationType\": \"<string>\",\n    \"isGroup\": \"<boolean>\",\n    \"name\": \"<string>\",\n    \"tenantId\": \"<string>\"\n  },\n  \"from\": {\n    \"id\": \"<string>\",\n    \"aadObjectId\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"id\": \"<string>\",\n  \"membersAdded\": [\n    {\n      \"id\": \"<string>\",\n      \"aadObjectId\": \"<string>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"aadObjectId\": \"<string>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"recipient\": {\n    \"id\": \"<string>\",\n    \"aadObjectId\": \"<string>\",\n    \"name\": \"<string>\"\n  },\n  \"replyToId\": \"<string>\",\n  \"serviceUrl\": \"<string>\",\n  \"text\": \"<string>\",\n  \"timestamp\": \"<string>\",\n  \"value\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ok\": false,\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.structify.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ceda668b-3c6d-4591-90d9-97e2aa2d230d",
+    "name": "Structify account teams API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Every enterprise's data team.\n\nContact Support:\n Name: Structify Team\n Email: team@structify.ai",
+      "type": "text/plain"
+    }
+  }
+}

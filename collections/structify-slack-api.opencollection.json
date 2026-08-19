@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Structify account slack API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "slack",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Handles Slack Events API webhooks for app mentions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/slack/events",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint receives events from Slack when users mention @structify.\nIt handles URL verification challenges and app mention events.\nRequires proper authentication via StructifyUser - no fake users created."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

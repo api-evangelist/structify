@@ -1,0 +1,3369 @@
+{
+  "item": [
+    {
+      "id": "bf2e4d61-f789-486b-8933-4c7f2904b5c3",
+      "name": "dataset",
+      "description": {
+        "content": "Dataset management endpoints",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "884d2415-c844-4c09-bca9-598dcb5c5745",
+          "name": "Add a property descriptor to a table in the dataset schema",
+          "request": {
+            "name": "Add a property descriptor to a table in the dataset schema",
+            "description": {},
+            "url": {
+              "path": [
+                "dataset",
+                "add_property"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataset_name\": \"<string>\",\n  \"table_name\": \"<string>\",\n  \"property\": {\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"merge_strategy\": \"<string>\",\n    \"prop_type\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5e76de78-41f0-4998-aa2d-d41c91fc8dd2",
+              "name": "Property added successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "add_property"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataset_name\": \"<string>\",\n  \"table_name\": \"<string>\",\n  \"property\": {\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"merge_strategy\": \"<string>\",\n    \"prop_type\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "853681ab-4c55-46fa-9b20-0f9c79ee7eaf",
+          "name": "dataset count missing embeddings",
+          "request": {
+            "name": "dataset count missing embeddings",
+            "description": {},
+            "url": {
+              "path": [
+                "dataset",
+                "count_missing_embeddings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8b3e1256-ac14-4d4a-95d2-b33cd76a7f8f",
+              "name": "Count of entities with missing embeddings retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "count_missing_embeddings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"count\": 9225\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d900bcc5-10f2-49d2-bcfe-0fcd28b2cb82",
+              "name": "Dataset not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "count_missing_embeddings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "30b14ae0-de4e-4343-8b3a-29881ce962ff",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "count_missing_embeddings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "215f9059-bcbc-45da-9c40-2940984f9ce3",
+          "name": "Create a Dataset",
+          "request": {
+            "name": "Create a Dataset",
+            "description": {
+              "content": "Creates a dataset.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dataset",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"tables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"properties\": [\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"expected_cardinality\": \"<long>\",\n      \"primary_column\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"properties\": [\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"expected_cardinality\": \"<long>\",\n      \"primary_column\": \"<string>\"\n    }\n  ],\n  \"relationships\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"source_table\": \"<string>\",\n      \"target_table\": \"<string>\",\n      \"merge_strategy\": {\n        \"nullable\": true,\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"properties\": [\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"source_table\": \"<string>\",\n      \"target_table\": \"<string>\",\n      \"merge_strategy\": {\n        \"nullable\": true,\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"properties\": [\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    }\n  ],\n  \"llm_override_field\": \"<string>\",\n  \"ephemeral\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d16eb3eb-f51c-4372-9ed2-2a0f8f7a6657",
+              "name": "Dataset created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"tables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"properties\": [\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"expected_cardinality\": \"<long>\",\n      \"primary_column\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"properties\": [\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"expected_cardinality\": \"<long>\",\n      \"primary_column\": \"<string>\"\n    }\n  ],\n  \"relationships\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"source_table\": \"<string>\",\n      \"target_table\": \"<string>\",\n      \"merge_strategy\": {\n        \"nullable\": true,\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"properties\": [\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"source_table\": \"<string>\",\n      \"target_table\": \"<string>\",\n      \"merge_strategy\": {\n        \"nullable\": true,\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"properties\": [\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    }\n  ],\n  \"llm_override_field\": \"<string>\",\n  \"ephemeral\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"6b0edb69-ac85-3c8f-3ff3-13030ce75277\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f5e92878-ca4e-475c-a851-c0c96afcefc6",
+              "name": "Bad request - dataset already exists or invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"tables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"properties\": [\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"expected_cardinality\": \"<long>\",\n      \"primary_column\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"properties\": [\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"expected_cardinality\": \"<long>\",\n      \"primary_column\": \"<string>\"\n    }\n  ],\n  \"relationships\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"source_table\": \"<string>\",\n      \"target_table\": \"<string>\",\n      \"merge_strategy\": {\n        \"nullable\": true,\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"properties\": [\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"source_table\": \"<string>\",\n      \"target_table\": \"<string>\",\n      \"merge_strategy\": {\n        \"nullable\": true,\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"properties\": [\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    }\n  ],\n  \"llm_override_field\": \"<string>\",\n  \"ephemeral\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df43d1a5-3f58-43ba-a159-324d18184347",
+              "name": "Forbidden - user does not have write access in any team",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"tables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"properties\": [\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"expected_cardinality\": \"<long>\",\n      \"primary_column\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"properties\": [\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"expected_cardinality\": \"<long>\",\n      \"primary_column\": \"<string>\"\n    }\n  ],\n  \"relationships\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"source_table\": \"<string>\",\n      \"target_table\": \"<string>\",\n      \"merge_strategy\": {\n        \"nullable\": true,\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"properties\": [\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"source_table\": \"<string>\",\n      \"target_table\": \"<string>\",\n      \"merge_strategy\": {\n        \"nullable\": true,\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"properties\": [\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    }\n  ],\n  \"llm_override_field\": \"<string>\",\n  \"ephemeral\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "740a2346-ea71-4522-996c-a9e28b46b3a2",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"tables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"properties\": [\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"expected_cardinality\": \"<long>\",\n      \"primary_column\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"properties\": [\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"expected_cardinality\": \"<long>\",\n      \"primary_column\": \"<string>\"\n    }\n  ],\n  \"relationships\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"source_table\": \"<string>\",\n      \"target_table\": \"<string>\",\n      \"merge_strategy\": {\n        \"nullable\": true,\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"properties\": [\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"source_table\": \"<string>\",\n      \"target_table\": \"<string>\",\n      \"merge_strategy\": {\n        \"nullable\": true,\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"properties\": [\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    }\n  ],\n  \"llm_override_field\": \"<string>\",\n  \"ephemeral\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7b586996-9161-47ab-a03e-c67b7b6430f9",
+          "name": "Permanently delete a dataset and all its contents",
+          "request": {
+            "name": "Permanently delete a dataset and all its contents",
+            "description": {},
+            "url": {
+              "path": [
+                "dataset",
+                "delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) The name of the dataset"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "83c366f8-13d1-4266-9938-f2859e317672",
+              "name": "Dataset deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a3c51781-ecaa-44af-8dc0-0cf199294bb2",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "171d7c63-d90f-4528-a435-eaca350060fe",
+              "name": "Forbidden - user does not have write access in any team",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88bafd8b-4531-4bea-8524-432166bd532f",
+              "name": "Dataset not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7c861ee-ddda-4018-9a72-a775649d2680",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "520fec87-a040-4ce5-bcd5-601d2f1a2ac4",
+          "name": "Get the enrichment progress for a dataset",
+          "request": {
+            "name": "Get the enrichment progress for a dataset",
+            "description": {},
+            "url": {
+              "path": [
+                "dataset",
+                "enrichment_progress"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Enrichment progress for the dataset"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "646d4b8f-c89b-4ef3-8442-3db8ccc16cb8",
+              "name": "Enrichment progress for dataset retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "enrichment_progress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total\": 2828,\n  \"completed\": 2386,\n  \"failed\": 1114,\n  \"running\": 2201,\n  \"queued\": 8396\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "765e918d-c894-4df7-acb6-493cb5710197",
+          "name": "dataset entity ws",
+          "request": {
+            "name": "dataset entity ws",
+            "description": {},
+            "url": {
+              "path": [
+                "dataset",
+                "entity_ws"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) The name of the dataset to monitor"
+                },
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "API key for authentication"
+                },
+                {
+                  "disabled": false,
+                  "key": "session_token",
+                  "value": "<string>",
+                  "description": "Session token for authentication"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ae0f854a-e55c-426f-8ea4-06bfb1951da9",
+              "name": "WebSocket connection established",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "entity_ws"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "session_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Switching Protocols",
+              "code": 101,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "385a49f9-0af2-436f-8fe6-9706ae7ead8a",
+          "name": "Delete a dataset evaluation result by ID",
+          "request": {
+            "name": "Delete a dataset evaluation result by ID",
+            "description": {},
+            "url": {
+              "path": [
+                "dataset",
+                "evaluate",
+                "delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<uuid>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4f6e2d67-848f-4788-90b3-77ae37e9208b",
+              "name": "Dataset evaluation deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "evaluate",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c0c691c7-4435-444e-9b87-05cbd8b818dc",
+          "name": "Get a dataset evaluation result by ID",
+          "request": {
+            "name": "Get a dataset evaluation result by ID",
+            "description": {},
+            "url": {
+              "path": [
+                "dataset",
+                "evaluate",
+                "get"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<uuid>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "33503111-2ce7-4145-b4ed-222ddf6c1b4f",
+              "name": "Dataset evaluated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "evaluate",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<uuid>\",\n  \"iou\": 6629.886445631693,\n  \"matched\": 5765,\n  \"unmatched\": 5260,\n  \"matches\": {\n    \"table_matches\": {\n      \"key_0\": {\n        \"entity_matches\": [\n          {\n            \"baseline_cardinality\": 3287,\n            \"p_match\": 3079.9786187083387,\n            \"p_match_threshold\": 1274.578692752697,\n            \"matched_properties\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"entity_a\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"entity_b\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cardinality_override\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"baseline_cardinality\": 1795,\n            \"p_match\": 5045.408652938088,\n            \"p_match_threshold\": 4689.0048697382,\n            \"matched_properties\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"entity_a\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"entity_b\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cardinality_override\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"unmatched_a\": [\n          {\n            \"entity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"best_match\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"entity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"best_match\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"unmatched_b\": [\n          {\n            \"entity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"best_match\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"entity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"best_match\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"key_1\": {\n        \"entity_matches\": [\n          {\n            \"baseline_cardinality\": 2597,\n            \"p_match\": 7859.68049801745,\n            \"p_match_threshold\": 918.4687018335491,\n            \"matched_properties\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"entity_a\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"entity_b\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cardinality_override\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"baseline_cardinality\": 2670,\n            \"p_match\": 4506.804788986304,\n            \"p_match_threshold\": 1701.8536545593065,\n            \"matched_properties\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"entity_a\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"entity_b\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"cardinality_override\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"unmatched_a\": [\n          {\n            \"entity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"best_match\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"entity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"best_match\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"unmatched_b\": [\n          {\n            \"entity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"best_match\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"entity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"best_match\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    },\n    \"relationship_matches\": {\n      \"key_0\": {\n        \"relationship_matches\": [\n          {\n            \"matched_properties\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"relationship_a\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relationship_b\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"matched_properties\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"relationship_a\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relationship_b\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"unmatched_a\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"from_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"to_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"label\": \"string\",\n            \"properties\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"created_at\": \"2001-04-10T03:50:34.207Z\",\n            \"updated_at\": \"1964-01-11T09:20:12.423Z\",\n            \"dataset_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"from_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"to_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"label\": \"string\",\n            \"properties\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"created_at\": \"1979-07-19T14:48:28.918Z\",\n            \"updated_at\": \"1949-05-16T19:41:45.177Z\",\n            \"dataset_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"unmatched_b\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"from_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"to_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"label\": \"string\",\n            \"properties\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"created_at\": \"2002-10-10T09:42:51.355Z\",\n            \"updated_at\": \"2021-07-05T06:03:03.904Z\",\n            \"dataset_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"from_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"to_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"label\": \"string\",\n            \"properties\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"created_at\": \"2022-10-22T12:45:45.669Z\",\n            \"updated_at\": \"1953-12-03T16:11:51.128Z\",\n            \"dataset_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"key_1\": {\n        \"relationship_matches\": [\n          {\n            \"matched_properties\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"relationship_a\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relationship_b\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"matched_properties\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"relationship_a\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relationship_b\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"unmatched_a\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"from_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"to_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"label\": \"string\",\n            \"properties\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"created_at\": \"1962-04-09T17:52:01.022Z\",\n            \"updated_at\": \"1951-05-29T21:42:59.255Z\",\n            \"dataset_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"from_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"to_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"label\": \"string\",\n            \"properties\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"created_at\": \"1952-01-05T11:51:52.295Z\",\n            \"updated_at\": \"1962-03-30T04:58:44.119Z\",\n            \"dataset_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"unmatched_b\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"from_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"to_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"label\": \"string\",\n            \"properties\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"created_at\": \"2007-09-03T20:58:11.081Z\",\n            \"updated_at\": \"2004-04-10T10:56:18.758Z\",\n            \"dataset_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"from_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"to_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"label\": \"string\",\n            \"properties\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"created_at\": \"2007-03-06T10:04:35.974Z\",\n            \"updated_at\": \"1957-07-16T14:12:33.297Z\",\n            \"dataset_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"key_2\": {\n        \"relationship_matches\": [\n          {\n            \"matched_properties\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"relationship_a\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relationship_b\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"matched_properties\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"relationship_a\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"relationship_b\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"unmatched_a\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"from_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"to_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"label\": \"string\",\n            \"properties\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"created_at\": \"1966-07-01T06:19:55.439Z\",\n            \"updated_at\": \"2015-08-26T08:14:01.703Z\",\n            \"dataset_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"from_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"to_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"label\": \"string\",\n            \"properties\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"created_at\": \"1964-04-06T09:49:54.738Z\",\n            \"updated_at\": \"1984-10-03T10:29:36.389Z\",\n            \"dataset_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"unmatched_b\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"from_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"to_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"label\": \"string\",\n            \"properties\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_2\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"created_at\": \"2008-05-18T05:58:11.806Z\",\n            \"updated_at\": \"1973-10-07T14:00:42.649Z\",\n            \"dataset_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"from_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"to_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"label\": \"string\",\n            \"properties\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"created_at\": \"1992-01-12T16:07:04.239Z\",\n            \"updated_at\": \"1955-08-09T05:45:08.437Z\",\n            \"dataset_id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    }\n  },\n  \"stats\": {\n    \"per_table\": {\n      \"key_0\": {\n        \"entity_granularity\": {\n          \"true_positives\": 5388.967750936818,\n          \"false_positives\": 3672.424941836856,\n          \"false_negatives\": 4181.2908006575235\n        },\n        \"prop_granularity\": {\n          \"true_positives\": 7387.898065483679,\n          \"false_positives\": 1197.7157059096232,\n          \"false_negatives\": 8688.81641449515\n        },\n        \"per_property\": {\n          \"key_0\": {\n            \"true_positives\": 8116.217712493993,\n            \"false_positives\": 6627.204619826322,\n            \"false_negatives\": 1920.6819227982796\n          },\n          \"key_1\": {\n            \"true_positives\": 6693.068053740168,\n            \"false_positives\": 27.988358018522508,\n            \"false_negatives\": 3887.1507073120383\n          }\n        }\n      },\n      \"key_1\": {\n        \"entity_granularity\": {\n          \"true_positives\": 1387.8895376391965,\n          \"false_positives\": 2251.6326568220966,\n          \"false_negatives\": 572.3152414569465\n        },\n        \"prop_granularity\": {\n          \"true_positives\": 5890.966467377243,\n          \"false_positives\": 2781.910433706801,\n          \"false_negatives\": 8486.109489469323\n        },\n        \"per_property\": {\n          \"key_0\": {\n            \"true_positives\": 9438.853251533526,\n            \"false_positives\": 9955.214977660129,\n            \"false_negatives\": 4970.438330326526\n          }\n        }\n      },\n      \"key_2\": {\n        \"entity_granularity\": {\n          \"true_positives\": 9036.68752290711,\n          \"false_positives\": 4808.302346921757,\n          \"false_negatives\": 9275.8890919604\n        },\n        \"prop_granularity\": {\n          \"true_positives\": 9168.051061128255,\n          \"false_positives\": 4121.859855359808,\n          \"false_negatives\": 8193.051208086828\n        },\n        \"per_property\": {\n          \"key_0\": {\n            \"true_positives\": 2554.284554600933,\n            \"false_positives\": 2194.577072621525,\n            \"false_negatives\": 7975.886740440697\n          }\n        }\n      }\n    },\n    \"per_relationship\": {\n      \"key_0\": {\n        \"relationship_granularity\": {\n          \"true_positives\": 3647.4581518910886,\n          \"false_positives\": 8718.028348239077,\n          \"false_negatives\": 522.7770810561605\n        },\n        \"prop_granularity\": {\n          \"true_positives\": 6762.195962627364,\n          \"false_positives\": 9536.744643298767,\n          \"false_negatives\": 432.55612955390046\n        },\n        \"per_property\": {\n          \"key_0\": {\n            \"true_positives\": 4202.234565963481,\n            \"false_positives\": 899.5519672269114,\n            \"false_negatives\": 5133.868648571879\n          },\n          \"key_1\": {\n            \"true_positives\": 8828.041945738285,\n            \"false_positives\": 4421.884251992961,\n            \"false_negatives\": 7153.786032068547\n          },\n          \"key_2\": {\n            \"true_positives\": 6444.300072886261,\n            \"false_positives\": 6989.078664404422,\n            \"false_negatives\": 5417.68667096467\n          }\n        }\n      }\n    }\n  },\n  \"dataset_2_is_ground_truth\": true,\n  \"dataset_1\": \"7c702c63-b781-a151-920c-639caa13076e\",\n  \"dataset_2\": \"29a46c1e-efae-253b-21fc-cfcdd08fd840\",\n  \"dataset_1_name\": \"string\",\n  \"dataset_2_name\": \"string\",\n  \"status\": \"Failed\",\n  \"started_at\": \"2003-07-04T20:21:32.200Z\",\n  \"run_message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7fe7051b-2b54-4637-9bf4-80ab4d81f266",
+          "name": "List all dataset evaluation results with pagination",
+          "request": {
+            "name": "List all dataset evaluation results with pagination",
+            "description": {},
+            "url": {
+              "path": [
+                "dataset",
+                "evaluate",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d7f108c5-a6f4-4175-8075-bb7db9ec2f0e",
+              "name": "Dataset evaluations listed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "evaluate",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"dataset_1\": \"string\",\n    \"dataset_2\": \"string\",\n    \"started_at\": \"1980-04-18T09:03:01.618Z\",\n    \"status\": \"Completed\",\n    \"iou\": 9082.917245340446,\n    \"matched\": 1229,\n    \"unmatched\": 8987,\n    \"run_message\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"dataset_1\": \"string\",\n    \"dataset_2\": \"string\",\n    \"started_at\": \"1979-11-29T03:00:54.715Z\",\n    \"status\": \"Running\",\n    \"iou\": 8105.367006159272,\n    \"matched\": 592,\n    \"unmatched\": 9742,\n    \"run_message\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1542f12-50e2-4af7-a743-7c8a58e81538",
+          "name": "Evaluate two datasets",
+          "request": {
+            "name": "Evaluate two datasets",
+            "description": {},
+            "url": {
+              "path": [
+                "dataset",
+                "evaluate",
+                "run"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dataset_1",
+                  "value": "<uuid>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "dataset_2",
+                  "value": "<uuid>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "dataset_2_is_ground_truth",
+                  "value": "false",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "merge_threshold_override",
+                  "value": "<double>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3d28b08e-75d0-470b-8445-41dbe03eae8b",
+              "name": "Dataset evaluation started",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "evaluate",
+                    "run"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dataset_1",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "dataset_2",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "dataset_2_is_ground_truth",
+                      "value": "false"
+                    },
+                    {
+                      "key": "merge_threshold_override",
+                      "value": "<double>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"<uuid>\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "384336a8-b2dd-4f7b-ba47-fc9f6304477a",
+          "name": "Get the status of a dataset evaluation",
+          "request": {
+            "name": "Get the status of a dataset evaluation",
+            "description": {},
+            "url": {
+              "path": [
+                "dataset",
+                "evaluate",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<uuid>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f43f66cd-7d8c-4e2f-9cb2-c49685951a1b",
+              "name": "Dataset evaluation status retrieved successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "evaluate",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"Running\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e408b155-ae80-4af2-b7b2-e3a3006c324e",
+          "name": "Export entities from a table in your dataset as CSV.",
+          "request": {
+            "name": "Export entities from a table in your dataset as CSV.",
+            "description": {
+              "content": "You need to specify a dataset and a table_name",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dataset",
+                "export_to_csv"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dataset",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4e6146aa-0c92-4ce5-b782-11bfd6550301",
+              "name": "CSV file containing table data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "export_to_csv"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dataset",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c8a84f78-3eec-43f1-9c93-6ba9d2244ccb",
+          "name": "Export all tables and relationships from your dataset as an Excel file.",
+          "request": {
+            "name": "Export all tables and relationships from your dataset as an Excel file.",
+            "description": {
+              "content": "Each table and relationship type will be in its own sheet",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dataset",
+                "export_to_excel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dataset",
+                  "value": "<string>",
+                  "description": "(Required) "
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1e144fd3-7879-45f9-95ef-07dafaef5757",
+              "name": "Excel file containing all tables and relationships",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "export_to_excel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dataset",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9064621e-d658-4651-8787-2390022c7b03",
+          "name": "Grab a dataset by its name.",
+          "request": {
+            "name": "Grab a dataset by its name.",
+            "description": {},
+            "url": {
+              "path": [
+                "dataset",
+                "info"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Information about the dataset"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ec43d385-f76e-4d4a-9580-4d3ffe53fdea",
+              "name": "Dataset retrieved successfully or not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "info"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"created_timestamp\": \"2003-08-05T13:54:23.679Z\",\n  \"description\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"relationships\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"source_table\": \"<string>\",\n      \"target_table\": \"<string>\",\n      \"merge_strategy\": {\n        \"nullable\": true,\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"properties\": [\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"source_table\": \"<string>\",\n      \"target_table\": \"<string>\",\n      \"merge_strategy\": {\n        \"nullable\": true,\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"properties\": [\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ]\n    }\n  ],\n  \"tables\": [\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"properties\": [\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"expected_cardinality\": \"<long>\",\n      \"primary_column\": \"<string>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"properties\": [\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"description\": \"<string>\",\n          \"merge_strategy\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"prop_type\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      ],\n      \"expected_cardinality\": \"<long>\",\n      \"primary_column\": \"<string>\"\n    }\n  ],\n  \"llm_override_field\": \"<string>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "02a07598-3031-4db6-9273-51c15ce7d796",
+          "name": "WebSocket endpoint for job updates",
+          "request": {
+            "name": "WebSocket endpoint for job updates",
+            "description": {},
+            "url": {
+              "path": [
+                "dataset",
+                "job_ws"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) The name of the dataset to monitor"
+                },
+                {
+                  "disabled": false,
+                  "key": "api_key",
+                  "value": "<string>",
+                  "description": "API key for authentication"
+                },
+                {
+                  "disabled": false,
+                  "key": "session_token",
+                  "value": "<string>",
+                  "description": "Session token for authentication"
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f1849975-4da9-422d-92e4-5433c28b1a0e",
+              "name": "WebSocket connection established",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "job_ws"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "api_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "session_token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Switching Protocols",
+              "code": 101,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "570b3f36-3102-43d2-8f2a-e080f27d8092",
+          "name": "List datasets",
+          "request": {
+            "name": "List datasets",
+            "description": {
+              "content": "Gets all datasets owned by the current user",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dataset",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7c69aeae-3d6c-4ce1-82f0-cfdf2e8bf756",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"created_timestamp\": \"2001-09-23T07:22:22.134Z\",\n    \"description\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"relationships\": [\n      {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"source_table\": \"<string>\",\n        \"target_table\": \"<string>\",\n        \"merge_strategy\": {\n          \"nullable\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"properties\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"source_table\": \"<string>\",\n        \"target_table\": \"<string>\",\n        \"merge_strategy\": {\n          \"nullable\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"properties\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    ],\n    \"tables\": [\n      {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"properties\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"expected_cardinality\": \"<long>\",\n        \"primary_column\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"properties\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"expected_cardinality\": \"<long>\",\n        \"primary_column\": \"<string>\"\n      }\n    ],\n    \"llm_override_field\": \"<string>\"\n  },\n  {\n    \"created_timestamp\": \"1998-12-13T00:59:20.773Z\",\n    \"description\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"relationships\": [\n      {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"source_table\": \"<string>\",\n        \"target_table\": \"<string>\",\n        \"merge_strategy\": {\n          \"nullable\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"properties\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"source_table\": \"<string>\",\n        \"target_table\": \"<string>\",\n        \"merge_strategy\": {\n          \"nullable\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"properties\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ]\n      }\n    ],\n    \"tables\": [\n      {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"properties\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"expected_cardinality\": \"<long>\",\n        \"primary_column\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"properties\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"expected_cardinality\": \"<long>\",\n        \"primary_column\": \"<string>\"\n      }\n    ],\n    \"llm_override_field\": \"<string>\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b057b2bc-9689-47da-b1ab-50ddb63a3b57",
+          "name": "Given a query subgraph, find the most similar subgraph in the existing dataset.",
+          "request": {
+            "name": "Given a query subgraph, find the most similar subgraph in the existing dataset.",
+            "description": {
+              "content": "Returns: The matched subgraph and a score for the match.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dataset",
+                "match"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query_kg\": {\n    \"entities\": [\n      {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"properties\": {\n          \"key_0\": \"<string>\"\n        }\n      },\n      {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"properties\": {\n          \"key_0\": \"<string>\"\n        }\n      }\n    ],\n    \"relationships\": [\n      {\n        \"type\": \"<string>\",\n        \"source\": \"<integer>\",\n        \"target\": \"<integer>\",\n        \"properties\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"source\": \"<integer>\",\n        \"target\": \"<integer>\",\n        \"properties\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        }\n      }\n    ]\n  },\n  \"dataset\": \"<string>\",\n  \"match_threshold\": \"<double>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4abd9b48-d587-42ac-88fd-ec96cf8692cf",
+              "name": "Match correspondences",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "match"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"query_kg\": {\n    \"entities\": [\n      {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"properties\": {\n          \"key_0\": \"<string>\"\n        }\n      },\n      {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"properties\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\"\n        }\n      }\n    ],\n    \"relationships\": [\n      {\n        \"type\": \"<string>\",\n        \"source\": \"<integer>\",\n        \"target\": \"<integer>\",\n        \"properties\": {\n          \"key_0\": \"<string>\"\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"source\": \"<integer>\",\n        \"target\": \"<integer>\",\n        \"properties\": {\n          \"key_0\": \"<string>\",\n          \"key_1\": \"<string>\",\n          \"key_2\": \"<string>\"\n        }\n      }\n    ]\n  },\n  \"dataset\": \"<string>\",\n  \"match_threshold\": \"<double>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": {\n    \"entity\": \"1643866b-a465-a569-c6d1-c7f28ce40a92\",\n    \"score\": 8076.7941542246635\n  },\n  \"key_1\": {\n    \"entity\": \"57a77778-e2b9-f877-7365-f268ea0eefab\",\n    \"score\": 2686.121851273088\n  },\n  \"key_2\": {\n    \"entity\": \"a97035b1-35c2-e872-2170-0d756ced2a4f\",\n    \"score\": 5187.377812798427\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c923efe6-4643-45a4-887b-f7e1a8eeaf1b",
+          "name": "Remove a property descriptor from a table in the dataset schema",
+          "request": {
+            "name": "Remove a property descriptor from a table in the dataset schema",
+            "description": {},
+            "url": {
+              "path": [
+                "dataset",
+                "remove_property"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataset_name\": \"<string>\",\n  \"table_name\": \"<string>\",\n  \"property_name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8d723ac9-6cf5-4757-90ed-8ff00287f417",
+              "name": "Property removed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "remove_property"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataset_name\": \"<string>\",\n  \"table_name\": \"<string>\",\n  \"property_name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2b2e9641-7211-4c31-9590-7453a719ddb9",
+          "name": "dataset reorder properties",
+          "request": {
+            "name": "dataset reorder properties",
+            "description": {},
+            "url": {
+              "path": [
+                "dataset",
+                "reorder_properties"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataset_name\": \"<string>\",\n  \"table_name\": \"<string>\",\n  \"property_names\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "817a4add-22c0-4add-95fa-b5599f1d2521",
+              "name": "Properties reordered successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "reorder_properties"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataset_name\": \"<string>\",\n  \"table_name\": \"<string>\",\n  \"property_names\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "97a79a18-90eb-43f6-9577-708dee3e75f6",
+          "name": "dataset set primary column",
+          "request": {
+            "name": "dataset set primary column",
+            "description": {},
+            "url": {
+              "path": [
+                "dataset",
+                "set_primary_column"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataset_name\": \"<string>\",\n  \"table_name\": \"<string>\",\n  \"property_name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a73f2ea2-81df-4f38-9fad-22c7e98329e1",
+              "name": "Primary column set successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "set_primary_column"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataset_name\": \"<string>\",\n  \"table_name\": \"<string>\",\n  \"property_name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e47b64d8-926b-4c75-89c2-c9765feac1d2",
+          "name": "Update a property descriptor in a table in the dataset schema",
+          "request": {
+            "name": "Update a property descriptor in a table in the dataset schema",
+            "description": {},
+            "url": {
+              "path": [
+                "dataset",
+                "update_property"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataset_name\": \"<string>\",\n  \"table_name\": \"<string>\",\n  \"property_name\": \"<string>\",\n  \"new_property_description\": \"<string>\",\n  \"new_property_merge_strategy\": \"<string>\",\n  \"new_property_type\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "443b1b40-a141-4c37-a48c-63f4b4f75a7c",
+              "name": "Property updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "update_property"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataset_name\": \"<string>\",\n  \"table_name\": \"<string>\",\n  \"property_name\": \"<string>\",\n  \"new_property_description\": \"<string>\",\n  \"new_property_merge_strategy\": \"<string>\",\n  \"new_property_type\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "573f3ed5-2d0a-41e8-8ad4-34d94a421e68",
+          "name": "Update a relationship descriptor in the dataset schema",
+          "request": {
+            "name": "Update a relationship descriptor in the dataset schema",
+            "description": {},
+            "url": {
+              "path": [
+                "dataset",
+                "update_relationship"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataset_name\": \"<string>\",\n  \"relationship_name\": \"<string>\",\n  \"new_description\": \"<string>\",\n  \"new_merge_strategy\": {\n    \"source_cardinality_given_target_match\": \"<long>\",\n    \"target_cardinality_given_source_match\": \"<long>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a823e8e3-e2e1-457c-bee2-96e9f694fae6",
+              "name": "Relationship updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "update_relationship"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataset_name\": \"<string>\",\n  \"relationship_name\": \"<string>\",\n  \"new_description\": \"<string>\",\n  \"new_merge_strategy\": {\n    \"source_cardinality_given_target_match\": \"<long>\",\n    \"target_cardinality_given_source_match\": \"<long>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "849db128-cc82-49a7-8365-ca0ed56f645f",
+          "name": "View relationships in your dataset.",
+          "request": {
+            "name": "View relationships in your dataset.",
+            "description": {
+              "content": "You need to specify a dataset and the name of the relationship",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dataset",
+                "view_relationships"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "dataset",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "job_id",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_updated",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "col_id",
+                  "value": "{\"user_defined_column\":\"<string>\"}"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e855091e-fe50-4cbf-99b2-ca9cdc87a8e9",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "view_relationships"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "dataset",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "job_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "last_updated",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "col_id",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"91f2621b-7772-bc4b-eda8-a783d3a8ce75\",\n    \"from_id\": \"ac15aecc-f9e3-b618-1458-3f35fcfe96f9\",\n    \"to_id\": \"4295bf69-5c02-e368-5079-d135b99c33cc\",\n    \"label\": \"string\",\n    \"properties\": {\n      \"key_0\": \"string\"\n    },\n    \"created_at\": \"1952-09-05T14:20:56.570Z\",\n    \"updated_at\": \"1953-02-24T08:44:43.710Z\",\n    \"dataset_id\": \"<uuid>\"\n  },\n  {\n    \"id\": \"aad2c8b3-f657-ca11-ff53-1d43831453f9\",\n    \"from_id\": \"e07bf5cb-c5c2-d362-a4b9-49ab7b4e8fec\",\n    \"to_id\": \"e7093043-7d3d-4d78-f5f9-da30a98e10c2\",\n    \"label\": \"string\",\n    \"properties\": {\n      \"key_0\": \"string\"\n    },\n    \"created_at\": \"1967-12-13T13:13:42.332Z\",\n    \"updated_at\": \"2006-09-20T15:38:17.627Z\",\n    \"dataset_id\": \"<uuid>\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c70eb25c-c55e-4aec-94b0-5b43ef6bd075",
+          "name": "View entities from a table in your dataset.",
+          "request": {
+            "name": "View entities from a table in your dataset.",
+            "description": {
+              "content": "You need to specify a dataset and a table_name",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dataset",
+                "view_table"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "dataset",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "job_id",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_updated",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "col_id",
+                  "value": "{\"user_defined_column\":\"<string>\"}"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "066d9c5a-04c5-46e3-8bfb-e31b3c8f6ae4",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "view_table"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "dataset",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "job_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "last_updated",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "col_id",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"cd3b00d2-717f-415c-d16a-303dfe36f1b8\",\n    \"label\": \"string\",\n    \"created_at\": \"1964-09-02T08:32:13.509Z\",\n    \"updated_at\": \"2008-08-24T00:19:32.781Z\",\n    \"dataset_id\": \"<uuid>\",\n    \"properties\": {\n      \"key_0\": \"string\"\n    },\n    \"job_id\": \"<uuid>\"\n  },\n  {\n    \"id\": \"1855e41c-b9e3-a898-89bf-93fbb2e7fc2f\",\n    \"label\": \"string\",\n    \"created_at\": \"1983-12-10T13:46:32.258Z\",\n    \"updated_at\": \"1965-06-23T17:52:16.639Z\",\n    \"dataset_id\": \"<uuid>\",\n    \"properties\": {\n      \"key_0\": \"string\"\n    },\n    \"job_id\": \"<uuid>\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "31789eab-bf83-4520-8321-c32f8e879154",
+          "name": "Paginates through the entities. As its paginating through the entities, it gets",
+          "request": {
+            "name": "Paginates through the entities. As its paginating through the entities, it gets",
+            "description": {
+              "content": "the relationships for each entity and the targets for each relationship.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dataset",
+                "view_tables_with_relationships"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "dataset",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "job_id",
+                  "value": "<uuid>"
+                },
+                {
+                  "disabled": false,
+                  "key": "last_updated",
+                  "value": "<dateTime>"
+                },
+                {
+                  "disabled": false,
+                  "key": "col_id",
+                  "value": "{\"user_defined_column\":\"<string>\"}"
+                },
+                {
+                  "disabled": false,
+                  "key": "sort",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e0f95d96-6602-428a-adaf-0374d5b038bf",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dataset",
+                    "view_tables_with_relationships"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "dataset",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "job_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "key": "last_updated",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "col_id",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "sort",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entities\": [\n    {\n      \"id\": \"92613b88-6cf7-738e-b160-faa7e0ad6495\",\n      \"label\": \"string\",\n      \"created_at\": \"1978-09-27T04:33:08.057Z\",\n      \"updated_at\": \"1961-12-28T17:44:42.794Z\",\n      \"dataset_id\": \"<uuid>\",\n      \"properties\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"job_id\": \"<uuid>\"\n    },\n    {\n      \"id\": \"2a8fec0b-e968-c92e-e476-9b31bf910b09\",\n      \"label\": \"string\",\n      \"created_at\": \"1962-09-14T16:28:44.937Z\",\n      \"updated_at\": \"1991-07-16T12:16:33.872Z\",\n      \"dataset_id\": \"<uuid>\",\n      \"properties\": {\n        \"key_0\": \"string\"\n      },\n      \"job_id\": \"<uuid>\"\n    }\n  ],\n  \"relationships\": [\n    {\n      \"id\": \"cce94f33-6f2e-0f50-7316-f7d128152067\",\n      \"from_id\": \"e141fe24-c9a1-c3ed-b66b-a283102105a1\",\n      \"to_id\": \"5ac787ec-ecc5-5eb9-1ea5-7f707a1d7c5a\",\n      \"label\": \"string\",\n      \"properties\": {\n        \"key_0\": \"string\"\n      },\n      \"created_at\": \"2010-09-14T07:49:42.174Z\",\n      \"updated_at\": \"2014-07-16T23:33:45.386Z\",\n      \"dataset_id\": \"<uuid>\"\n    },\n    {\n      \"id\": \"83234c69-0f94-e6f8-925c-f6471f545068\",\n      \"from_id\": \"62c6ef1c-3220-0fbc-3f57-020f69917ad1\",\n      \"to_id\": \"ab322f88-e1d8-05af-7d18-dd1c943e5a38\",\n      \"label\": \"string\",\n      \"properties\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"created_at\": \"1962-12-21T09:19:49.187Z\",\n      \"updated_at\": \"2020-12-22T23:49:55.186Z\",\n      \"dataset_id\": \"<uuid>\"\n    }\n  ],\n  \"connected_entities\": [\n    {\n      \"id\": \"f2a9df40-6b29-befd-68cc-5b737bb013d3\",\n      \"label\": \"string\",\n      \"created_at\": \"2026-01-29T04:34:40.696Z\",\n      \"updated_at\": \"2007-05-04T01:57:32.400Z\",\n      \"dataset_id\": \"<uuid>\",\n      \"properties\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\",\n        \"key_2\": \"string\",\n        \"key_3\": \"string\"\n      },\n      \"job_id\": \"<uuid>\"\n    },\n    {\n      \"id\": \"6b317722-c0ac-3451-3fc0-8c78b99fb469\",\n      \"label\": \"string\",\n      \"created_at\": \"1955-12-22T19:49:11.773Z\",\n      \"updated_at\": \"1988-07-29T01:29:29.081Z\",\n      \"dataset_id\": \"<uuid>\",\n      \"properties\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      },\n      \"job_id\": \"<uuid>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.structify.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "7c44ce3e-3526-4b54-b393-e2ad69f3ffc6",
+    "name": "Structify account dataset API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Every enterprise's data team.\n\nContact Support:\n Name: Structify Team\n Email: team@structify.ai",
+      "type": "text/plain"
+    }
+  }
+}

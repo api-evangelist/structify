@@ -1,0 +1,504 @@
+{
+  "item": [
+    {
+      "id": "7b96e71f-747c-4eef-9930-70db91ccd8a2",
+      "name": "scrape",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4c389b94-d66a-4bc7-96fc-794e3e4d8215",
+          "name": "scrape",
+          "request": {
+            "name": "scrape",
+            "description": {},
+            "url": {
+              "path": [
+                "scrape"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataset_name\": \"<string>\",\n  \"url\": \"<string>\",\n  \"extraction_criteria\": [\n    {\n      \"relationship_name\": \"<string>\"\n    },\n    {\n      \"relationship_name\": \"<string>\"\n    }\n  ],\n  \"node_id\": \"<uuid>\",\n  \"seeded_kg\": {\n    \"entities\": [\n      {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"properties\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key_1\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"properties\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key_1\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key_2\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    ],\n    \"relationships\": [\n      {\n        \"type\": \"<string>\",\n        \"source\": \"<integer>\",\n        \"target\": \"<integer>\",\n        \"properties\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key_1\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key_2\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"source\": \"<integer>\",\n        \"target\": \"<integer>\",\n        \"properties\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key_1\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key_2\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key_3\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key_4\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    ]\n  },\n  \"use_proxy\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "449c184b-3d4d-4387-8f77-73d99ea3ea5d",
+              "name": "Scrape job created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scrape"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataset_name\": \"<string>\",\n  \"url\": \"<string>\",\n  \"extraction_criteria\": [\n    {\n      \"relationship_name\": \"<string>\"\n    },\n    {\n      \"relationship_name\": \"<string>\"\n    }\n  ],\n  \"node_id\": \"<uuid>\",\n  \"seeded_kg\": {\n    \"entities\": [\n      {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"properties\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"properties\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    ],\n    \"relationships\": [\n      {\n        \"type\": \"<string>\",\n        \"source\": \"<integer>\",\n        \"target\": \"<integer>\",\n        \"properties\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"source\": \"<integer>\",\n        \"target\": \"<integer>\",\n        \"properties\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key_1\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    ]\n  },\n  \"use_proxy\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"job_id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bfb52d29-5de2-456a-ae55-392d99851c64",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scrape"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataset_name\": \"<string>\",\n  \"url\": \"<string>\",\n  \"extraction_criteria\": [\n    {\n      \"relationship_name\": \"<string>\"\n    },\n    {\n      \"relationship_name\": \"<string>\"\n    }\n  ],\n  \"node_id\": \"<uuid>\",\n  \"seeded_kg\": {\n    \"entities\": [\n      {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"properties\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"properties\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    ],\n    \"relationships\": [\n      {\n        \"type\": \"<string>\",\n        \"source\": \"<integer>\",\n        \"target\": \"<integer>\",\n        \"properties\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"source\": \"<integer>\",\n        \"target\": \"<integer>\",\n        \"properties\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key_1\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    ]\n  },\n  \"use_proxy\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "82d8a149-51c0-4fff-904d-8d78811c40b8",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scrape"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataset_name\": \"<string>\",\n  \"url\": \"<string>\",\n  \"extraction_criteria\": [\n    {\n      \"relationship_name\": \"<string>\"\n    },\n    {\n      \"relationship_name\": \"<string>\"\n    }\n  ],\n  \"node_id\": \"<uuid>\",\n  \"seeded_kg\": {\n    \"entities\": [\n      {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"properties\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"properties\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    ],\n    \"relationships\": [\n      {\n        \"type\": \"<string>\",\n        \"source\": \"<integer>\",\n        \"target\": \"<integer>\",\n        \"properties\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"source\": \"<integer>\",\n        \"target\": \"<integer>\",\n        \"properties\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key_1\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    ]\n  },\n  \"use_proxy\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f7681c6a-dc44-4f92-a9a1-8c514904f76b",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scrape"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataset_name\": \"<string>\",\n  \"url\": \"<string>\",\n  \"extraction_criteria\": [\n    {\n      \"relationship_name\": \"<string>\"\n    },\n    {\n      \"relationship_name\": \"<string>\"\n    }\n  ],\n  \"node_id\": \"<uuid>\",\n  \"seeded_kg\": {\n    \"entities\": [\n      {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"properties\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\",\n        \"properties\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    ],\n    \"relationships\": [\n      {\n        \"type\": \"<string>\",\n        \"source\": \"<integer>\",\n        \"target\": \"<integer>\",\n        \"properties\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      },\n      {\n        \"type\": \"<string>\",\n        \"source\": \"<integer>\",\n        \"target\": \"<integer>\",\n        \"properties\": {\n          \"key_0\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          \"key_1\": {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        }\n      }\n    ]\n  },\n  \"use_proxy\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "61c18ad8-d5eb-417e-83b3-0fedb49c6c02",
+          "name": "scrape list",
+          "request": {
+            "name": "scrape list",
+            "description": {},
+            "url": {
+              "path": [
+                "scrape",
+                "list"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataset_descriptor\": {\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"tables\": [\n      {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"properties\": [\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"expected_cardinality\": \"<long>\",\n        \"primary_column\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"properties\": [\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"expected_cardinality\": \"<long>\",\n        \"primary_column\": \"<string>\"\n      }\n    ],\n    \"relationships\": [\n      {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"source_table\": \"<string>\",\n        \"target_table\": \"<string>\",\n        \"merge_strategy\": {\n          \"nullable\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"properties\": [\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"source_table\": \"<string>\",\n        \"target_table\": \"<string>\",\n        \"merge_strategy\": {\n          \"nullable\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"properties\": [\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    ],\n    \"llm_override_field\": \"<string>\"\n  },\n  \"table_name\": \"<string>\",\n  \"input\": {\n    \"Direct\": {\n      \"url\": \"<string>\"\n    }\n  },\n  \"dataset_name\": \"<string>\",\n  \"node_id\": \"<uuid>\",\n  \"use_proxy\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "139a71e8-f0be-4ea6-b70f-2841b4ac1022",
+              "name": "Knowledge graph extracted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scrape",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataset_descriptor\": {\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"tables\": [\n      {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"properties\": [\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"expected_cardinality\": \"<long>\",\n        \"primary_column\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"properties\": [\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"expected_cardinality\": \"<long>\",\n        \"primary_column\": \"<string>\"\n      }\n    ],\n    \"relationships\": [\n      {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"source_table\": \"<string>\",\n        \"target_table\": \"<string>\",\n        \"merge_strategy\": {\n          \"nullable\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"properties\": [\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"source_table\": \"<string>\",\n        \"target_table\": \"<string>\",\n        \"merge_strategy\": {\n          \"nullable\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"properties\": [\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    ],\n    \"llm_override_field\": \"<string>\"\n  },\n  \"table_name\": \"<string>\",\n  \"input\": {\n    \"Direct\": {\n      \"url\": \"<string>\"\n    }\n  },\n  \"dataset_name\": \"<string>\",\n  \"node_id\": \"<uuid>\",\n  \"use_proxy\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"job_id\": \"d920dce8-49b6-da52-8911-ce16dedaab1a\",\n  \"dataset_name\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c0ebac61-5873-4780-a1cf-ffbdab05a712",
+              "name": "Invalid input",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scrape",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataset_descriptor\": {\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"tables\": [\n      {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"properties\": [\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"expected_cardinality\": \"<long>\",\n        \"primary_column\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"properties\": [\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"expected_cardinality\": \"<long>\",\n        \"primary_column\": \"<string>\"\n      }\n    ],\n    \"relationships\": [\n      {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"source_table\": \"<string>\",\n        \"target_table\": \"<string>\",\n        \"merge_strategy\": {\n          \"nullable\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"properties\": [\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"source_table\": \"<string>\",\n        \"target_table\": \"<string>\",\n        \"merge_strategy\": {\n          \"nullable\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"properties\": [\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    ],\n    \"llm_override_field\": \"<string>\"\n  },\n  \"table_name\": \"<string>\",\n  \"input\": {\n    \"Direct\": {\n      \"url\": \"<string>\"\n    }\n  },\n  \"dataset_name\": \"<string>\",\n  \"node_id\": \"<uuid>\",\n  \"use_proxy\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d5c8acf-511b-4f77-89ad-8b538348a3e8",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "scrape",
+                    "list"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataset_descriptor\": {\n    \"name\": \"<string>\",\n    \"description\": \"<string>\",\n    \"tables\": [\n      {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"properties\": [\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"expected_cardinality\": \"<long>\",\n        \"primary_column\": \"<string>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"properties\": [\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"expected_cardinality\": \"<long>\",\n        \"primary_column\": \"<string>\"\n      }\n    ],\n    \"relationships\": [\n      {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"source_table\": \"<string>\",\n        \"target_table\": \"<string>\",\n        \"merge_strategy\": {\n          \"nullable\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"properties\": [\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"description\": \"<string>\",\n        \"source_table\": \"<string>\",\n        \"target_table\": \"<string>\",\n        \"merge_strategy\": {\n          \"nullable\": true,\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"properties\": [\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"name\": \"<string>\",\n            \"description\": \"<string>\",\n            \"merge_strategy\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"prop_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    ],\n    \"llm_override_field\": \"<string>\"\n  },\n  \"table_name\": \"<string>\",\n  \"input\": {\n    \"Direct\": {\n      \"url\": \"<string>\"\n    }\n  },\n  \"dataset_name\": \"<string>\",\n  \"node_id\": \"<uuid>\",\n  \"use_proxy\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.structify.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "9821774e-49f9-4f43-b568-983d6ab1296b",
+    "name": "Structify account scrape API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Every enterprise's data team.\n\nContact Support:\n Name: Structify Team\n Email: team@structify.ai",
+      "type": "text/plain"
+    }
+  }
+}

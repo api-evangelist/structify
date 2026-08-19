@@ -1,0 +1,114 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Structify account connector_catalog API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "connector_catalog",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all connector catalog entries with their auth methods and logos",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/connector-catalog",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "Optional search query to filter by name, slug, or category (case-insensitive substring match)"
+              },
+              {
+                "name": "categories",
+                "value": "",
+                "type": "query",
+                "description": "Optional category filter (exact match against any element in the categories array)"
+              },
+              {
+                "name": "include_inactive",
+                "value": "",
+                "type": "query",
+                "description": "Include inactive auth methods (admin only)"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List all connector catalog entries with their auth methods and logos"
+        },
+        {
+          "info": {
+            "name": "Get a connector catalog entry by slug with its active auth methods",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/connector-catalog/:slug",
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Get a connector catalog entry by slug with its active auth methods"
+        },
+        {
+          "info": {
+            "name": "get_connector_logo",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/connector-catalog/:slug/logo",
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

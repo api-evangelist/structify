@@ -1,0 +1,304 @@
+{
+  "item": [
+    {
+      "id": "83529ef0-fae4-44c6-b1b9-d385142ef4ac",
+      "name": "match",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3c879abb-f2bd-4f94-8d13-d302f0f20bd7",
+          "name": "Create match jobs for all entities in a source table to match against a target table.",
+          "request": {
+            "name": "Create match jobs for all entities in a source table to match against a target table.",
+            "description": {
+              "content": "This endpoint creates one job per entity in the source table. Each job will attempt to find\na matching entity in the target table using LLM-based matching.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "match",
+                "create_jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataset\": \"<string>\",\n  \"source_table\": \"<string>\",\n  \"target_table\": \"<string>\",\n  \"conditioning\": \"<string>\",\n  \"node_id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "aea8e769-783c-4786-b6b1-2ed838af647c",
+              "name": "Successfully created match jobs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "match",
+                    "create_jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"dataset\": \"<string>\",\n  \"source_table\": \"<string>\",\n  \"target_table\": \"<string>\",\n  \"conditioning\": \"<string>\",\n  \"node_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"job_ids\": [\n    \"30464054-e0e2-22b4-405d-6ed2e9c8863c\",\n    \"d729521f-05bd-2302-a5df-b2553ebde23f\"\n  ],\n  \"count\": 973\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "086156f0-33dd-4f92-873f-9300839a51ae",
+          "name": "Get all match results for entities in a source table.",
+          "request": {
+            "name": "Get all match results for entities in a source table.",
+            "description": {
+              "content": "Returns paginated match results showing which entities from the source table\nwere matched to entities in target tables, along with the reasoning.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "match",
+                "list_results"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "dataset",
+                  "value": "<string>",
+                  "description": "(Required) Dataset name"
+                },
+                {
+                  "disabled": false,
+                  "key": "source_table",
+                  "value": "<string>",
+                  "description": "(Required) Source table name to get matches for"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Number of results to return (default: 1000, max: 1000)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Offset for pagination (default: 0)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "api_key"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "dd89c14a-936c-4b5e-bcab-1329c200fab6",
+              "name": "List of match results for the source table",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "match",
+                    "list_results"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "dataset",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "source_table",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"88b9054b-54b4-b84d-487d-2cd412ac85f7\",\n    \"job_id\": \"e4ba1a73-4792-933e-3e12-6efba32e1c3c\",\n    \"source_entity_id\": \"7efeb99e-cbe4-09d7-553a-4d41ba651d4b\",\n    \"target_entity_id\": \"22e62e2e-a511-04b3-3c92-6d5bb61c551c\",\n    \"match_reason\": \"string\",\n    \"created_at\": \"1989-04-07T00:34:32.881Z\",\n    \"confidence_score\": 5463.660702440534,\n    \"source_entity_index\": 4966,\n    \"target_entity_index\": 6775\n  },\n  {\n    \"id\": \"bab0717f-8030-f285-6128-c2c504c5de7e\",\n    \"job_id\": \"7300d942-48fb-8c20-83fb-e65f5521f891\",\n    \"source_entity_id\": \"73750baf-6be0-c086-58cb-c484cfb281bc\",\n    \"target_entity_id\": \"9d2214db-faeb-4d81-9548-a8b51fbc3d1f\",\n    \"match_reason\": \"string\",\n    \"created_at\": \"2007-05-09T16:51:38.271Z\",\n    \"confidence_score\": 8604.790710098505,\n    \"source_entity_index\": 107,\n    \"target_entity_index\": 9491\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.structify.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "5e0bcc92-f736-44b8-a7ae-02475aa2d24c",
+    "name": "Structify account match API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Every enterprise's data team.\n\nContact Support:\n Name: Structify Team\n Email: team@structify.ai",
+      "type": "text/plain"
+    }
+  }
+}

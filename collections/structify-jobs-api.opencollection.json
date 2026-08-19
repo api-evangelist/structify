@@ -1,0 +1,156 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Structify account jobs API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "jobs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "You successfully cancelled a job.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/jobs/cancel/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path",
+                "description": "UUID of the job you want to cancel."
+              }
+            ]
+          },
+          "docs": "You successfully cancelled a job."
+        },
+        {
+          "info": {
+            "name": "get_job",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/jobs/get/:job_id",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          }
+        },
+        {
+          "info": {
+            "name": "List all the executions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/jobs/list",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "dataset",
+                "value": "",
+                "type": "query",
+                "description": "Dataset name to optionally filter jobs by"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status to optionally filter jobs by"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "List since a specific timestamp"
+              },
+              {
+                "name": "job_type",
+                "value": "",
+                "type": "query",
+                "description": "Type of job to optionally filter jobs by"
+              },
+              {
+                "name": "seeded_kg_search_term",
+                "value": "",
+                "type": "query",
+                "description": "seeded kg search term"
+              },
+              {
+                "name": "node_id",
+                "value": "",
+                "type": "query",
+                "description": "Node ID to optionally filter jobs by"
+              }
+            ]
+          },
+          "docs": "List all the executions"
+        },
+        {
+          "info": {
+            "name": "You successfully scheduled a job.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/jobs/schedule"
+          },
+          "docs": "One example use case is every single day check the news websites and\npull them into my dataset."
+        },
+        {
+          "info": {
+            "name": "get_job_events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/jobs/:job_id/events",
+            "params": [
+              {
+                "name": "job_id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the job whose events to get."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

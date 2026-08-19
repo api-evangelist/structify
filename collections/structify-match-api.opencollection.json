@@ -1,0 +1,90 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Structify account match API",
+    "version": "0.1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "api_key",
+      "value": "{{api_key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "match",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create match jobs for all entities in a source table to match against a target table.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.structify.ai/match/create_jobs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "This endpoint creates one job per entity in the source table. Each job will attempt to find\na matching entity in the target table using LLM-based matching."
+        },
+        {
+          "info": {
+            "name": "Get all match results for entities in a source table.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.structify.ai/match/list_results",
+            "params": [
+              {
+                "name": "dataset",
+                "value": "",
+                "type": "query",
+                "description": "Dataset name"
+              },
+              {
+                "name": "source_table",
+                "value": "",
+                "type": "query",
+                "description": "Source table name to get matches for"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to return (default: 1000, max: 1000)"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Offset for pagination (default: 0)"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "api_key",
+              "value": "{{api_key}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Returns paginated match results showing which entities from the source table\nwere matched to entities in target tables, along with the reasoning."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,86 @@
+generated: '2026-08-14'
+method: probed
+source: https://docs.structify.ai/.well-known/agent-card.json
+summary: >-
+  Structify publishes a real A2A Agent Card from its own documentation host,
+  docs.structify.ai. The card names Structify as the provider organization,
+  declares one skill, and points that skill at a provider-published Agent Skill
+  markdown file on the same host. It is served by the Mintlify-hosted docs site
+  (x-matched-path /_sites/[subdomain]/.well-known/agent-card.json), but the
+  document is Structify's own content on a Structify-controlled subdomain, so it
+  is recorded as a first-party agent surface.
+discovery:
+  path: /.well-known/agent-card.json
+  canonical: true
+  host: docs.structify.ai
+  note: >-
+    The legacy pre-0.3 path /.well-known/agent.json returned 404 on this host.
+    The apex (structify.ai), www, api.structify.ai and app.structify.ai hosts all
+    miss on both paths — see well-known/structify-well-known.yml for the full
+    probe matrix.
+x-evidence:
+  fetched: '2026-08-14'
+  url: https://docs.structify.ai/.well-known/agent-card.json
+  http_status: 200
+  content_type: application/json
+  bytes: 1109
+card:
+  file: a2a/structify-agent-card.json
+  name: Structify
+  url: https://docs.structify.ai/
+  version: 1.0.0
+  protocol_version: '0.3'
+  preferred_transport: HTTP+JSON
+  provider_organization: Structify
+  documentation_url: https://docs.structify.ai/
+  capabilities:
+    streaming: false
+    pushNotifications: false
+  default_input_modes:
+  - text/plain
+  default_output_modes:
+  - text/plain
+  skill_count: 1
+  skills:
+  - id: structify
+    name: Structify
+    url: https://docs.structify.ai/.well-known/agent-skills/structify/skill.md
+    tags: []
+grade:
+  level: conformant
+  spec: A2A 1.0.0
+  hard_checks:
+    capabilities_is_object: true
+    protocol_version_present: true
+    skills_is_array: true
+  optional_checks:
+    preferred_transport_present: true
+    default_input_modes_present: true
+    default_output_modes_present: true
+  note: >-
+    Passes all three hard checks and carries every optional field the grader
+    looks for, so it grades conformant.
+deviations:
+- field: description
+  issue: >-
+    The A2A AgentCard object requires a root-level `description`. This card has
+    none; the human-readable description lives only inside skills[0].description.
+- field: protocolVersion
+  issue: >-
+    Declares protocolVersion "0.3" rather than a 1.x value, so the card is
+    written against the pre-1.0 A2A protocol even though it is served from the
+    current /.well-known/agent-card.json path.
+- field: skills[].tags
+  issue: >-
+    skills[0].tags is an empty array. Tags are how an A2A client filters skills,
+    so an untagged skill is discoverable only by reading its description.
+- field: url / supportedInterfaces
+  issue: >-
+    Both `url` and supportedInterfaces[0].url point at the documentation site
+    root (https://docs.structify.ai/), not at an A2A JSON-RPC endpoint. An A2A
+    client cannot task this agent; the card functions as a discovery pointer to
+    the docs and the published skill file rather than as a callable interface.
+related:
+  agent_skill: skills/structify-provider-skill.md
+  mcp_server: mcp/structify-mcp.yml
+  well_known: well-known/structify-well-known.yml

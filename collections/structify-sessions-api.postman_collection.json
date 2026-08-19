@@ -1,0 +1,4166 @@
+{
+  "item": [
+    {
+      "id": "95f43eb3-4b64-4836-8070-2220e807d037",
+      "name": "sessions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "aaca5048-6690-4f35-9c96-699861f6297e",
+          "name": "create session",
+          "request": {
+            "name": "create session",
+            "description": {},
+            "url": {
+              "path": [
+                "sessions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"chat_session_id\": \"<uuid>\",\n  \"parent_chat_message_id\": \"<uuid>\",\n  \"workflow_schedule_id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "53950019-ca59-4bb0-bb42-98b97afcecf5",
+              "name": "Successfully created session.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"chat_session_id\": \"<uuid>\",\n  \"parent_chat_message_id\": \"<uuid>\",\n  \"workflow_schedule_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"eb829463-201e-1e02-c67b-85f2e5fa6cb9\",\n  \"chat_session_id\": \"<uuid>\",\n  \"updated_at\": \"1980-09-01T14:18:38.787Z\",\n  \"dag_ready\": true,\n  \"aborted\": false,\n  \"created_at\": \"1999-02-03T19:16:59.964Z\",\n  \"dag_ready_at\": \"1988-08-12T18:37:41.553Z\",\n  \"dashboard_layout_proto\": \"string\",\n  \"error_message\": \"string\",\n  \"error_traceback\": \"string\",\n  \"parent_chat_message_id\": \"<uuid>\",\n  \"workflow_schedule_id\": \"<uuid>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a980b6f-4e56-4672-889b-37e1c14aa54d",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"chat_session_id\": \"<uuid>\",\n  \"parent_chat_message_id\": \"<uuid>\",\n  \"workflow_schedule_id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "369469f3-941b-4bd9-81ea-9431abbfb348",
+          "name": "estimate cost",
+          "request": {
+            "name": "estimate cost",
+            "description": {},
+            "url": {
+              "path": [
+                "sessions",
+                "estimate_cost"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"operation\": \"<string>\",\n  \"avg_pages_per_doc\": \"<long>\",\n  \"num_documents\": \"<long>\",\n  \"num_properties\": \"<long>\",\n  \"row_count\": \"<long>\",\n  \"source_count\": \"<long>\",\n  \"target_count\": \"<long>\",\n  \"use_proxy\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "75abce59-6ee9-457a-9215-f45dee6b38a4",
+              "name": "Cost estimate calculated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "estimate_cost"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"operation\": \"<string>\",\n  \"avg_pages_per_doc\": \"<long>\",\n  \"num_documents\": \"<long>\",\n  \"num_properties\": \"<long>\",\n  \"row_count\": \"<long>\",\n  \"source_count\": \"<long>\",\n  \"target_count\": \"<long>\",\n  \"use_proxy\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"estimated_credits\": 4706,\n  \"estimated_dollars\": 773.2845770334529\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87d208a1-423f-43c1-9cd9-76b29594c15c",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "estimate_cost"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"operation\": \"<string>\",\n  \"avg_pages_per_doc\": \"<long>\",\n  \"num_documents\": \"<long>\",\n  \"num_properties\": \"<long>\",\n  \"row_count\": \"<long>\",\n  \"source_count\": \"<long>\",\n  \"target_count\": \"<long>\",\n  \"use_proxy\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d8944d35-7031-4c20-9c9c-6d0f20dd9ecc",
+          "name": "get node",
+          "request": {
+            "name": "get node",
+            "description": {},
+            "url": {
+              "path": [
+                "sessions",
+                "nodes",
+                ":node_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "node_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f4fadf0c-6a06-4354-a84c-cc120488407b",
+              "name": "Node retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "nodes",
+                    ":node_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"node\": {\n    \"id\": \"<uuid>\",\n    \"node_index\": 9534,\n    \"node_name\": \"string\",\n    \"session_id\": \"b560fe8d-b6f4-212f-3520-922af7bb1203\",\n    \"function_name\": \"string\",\n    \"docstring\": \"string\",\n    \"execution_status\": \"Failure\",\n    \"updated_at\": \"2023-08-28T10:58:54.205Z\",\n    \"code_md5_hash\": \"string\",\n    \"reviewed\": false,\n    \"cache_final_rows\": 3718,\n    \"cache_final_size_bytes\": 4511,\n    \"cache_max_bytes\": 130,\n    \"cache_original_rows\": 8349,\n    \"cache_original_size_bytes\": 2923,\n    \"cache_truncated\": false,\n    \"code\": \"string\",\n    \"confirmation_status\": \"string\",\n    \"connector_id\": \"00e8681b-7340-0f57-46cb-1ee472662878\",\n    \"created_at\": \"1958-12-09T14:55:04.557Z\",\n    \"error_message\": \"string\",\n    \"error_traceback\": \"string\",\n    \"estimated_cost\": 313,\n    \"execution_time_ms\": 8039,\n    \"input_row_count\": 7186,\n    \"manually_edited\": true,\n    \"original_node\": \"<uuid>\",\n    \"output_blob_name\": \"string\",\n    \"output_schema\": {},\n    \"progress\": {},\n    \"visualization_output\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f93c17bd-bf4e-4f6e-89cb-d1b617d35389",
+              "name": "Node not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "nodes",
+                    ":node_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "232e8ec0-3741-4c1d-86fc-41c9e5ee2558",
+          "name": "update workflow node",
+          "request": {
+            "name": "update workflow node",
+            "description": {},
+            "url": {
+              "path": [
+                "sessions",
+                "nodes",
+                ":node_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "node_id",
+                  "description": "(Required) Id of the workflow node to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"execution_status\": \"<string>\",\n  \"error_message\": \"<string>\",\n  \"error_traceback\": \"<string>\",\n  \"execution_time_ms\": \"<long>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1d87c072-b793-4898-8fdc-fea6fbd4df08",
+              "name": "Successfully updated node.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "nodes",
+                    ":node_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) Id of the workflow node to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"execution_status\": \"<string>\",\n  \"error_message\": \"<string>\",\n  \"error_traceback\": \"<string>\",\n  \"execution_time_ms\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<uuid>\",\n  \"node_index\": 5154,\n  \"node_name\": \"string\",\n  \"session_id\": \"f81b2424-fd68-d2af-3a05-1bdce0822919\",\n  \"function_name\": \"string\",\n  \"docstring\": \"string\",\n  \"execution_status\": \"<string>\",\n  \"updated_at\": \"1976-09-02T11:35:56.107Z\",\n  \"code_md5_hash\": \"string\",\n  \"reviewed\": false,\n  \"cache_final_rows\": 7459,\n  \"cache_final_size_bytes\": 9895,\n  \"cache_max_bytes\": 175,\n  \"cache_original_rows\": 8923,\n  \"cache_original_size_bytes\": 3182,\n  \"cache_truncated\": true,\n  \"code\": \"string\",\n  \"confirmation_status\": \"string\",\n  \"connector_id\": \"354122f4-475a-9fbe-15d6-311facffb252\",\n  \"created_at\": \"2000-02-06T06:17:26.732Z\",\n  \"error_message\": \"string\",\n  \"error_traceback\": \"string\",\n  \"estimated_cost\": 5704,\n  \"execution_time_ms\": 7127,\n  \"input_row_count\": 5712,\n  \"manually_edited\": true,\n  \"original_node\": \"<uuid>\",\n  \"output_blob_name\": \"string\",\n  \"output_schema\": {},\n  \"progress\": {},\n  \"visualization_output\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ac84ae31-78ef-4ca8-b1b5-ce7ab25d3e96",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "nodes",
+                    ":node_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) Id of the workflow node to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"execution_status\": \"<string>\",\n  \"error_message\": \"<string>\",\n  \"error_traceback\": \"<string>\",\n  \"execution_time_ms\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f25fd7f1-4936-41ff-b67b-64d83d1f0865",
+              "name": "Node not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "nodes",
+                    ":node_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) Id of the workflow node to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"execution_status\": \"<string>\",\n  \"error_message\": \"<string>\",\n  \"error_traceback\": \"<string>\",\n  \"execution_time_ms\": \"<long>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c732490f-1d18-4c71-b911-7ea9f2d0af3f",
+          "name": "confirm node",
+          "request": {
+            "name": "confirm node",
+            "description": {},
+            "url": {
+              "path": [
+                "sessions",
+                "nodes",
+                ":node_id",
+                "confirm"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "node_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"confirmed\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "02c0d00e-d45e-4151-8652-efbda7912118",
+              "name": "Successfully confirmed/rejected node.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "nodes",
+                    ":node_id",
+                    "confirm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"confirmed\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<uuid>\",\n  \"node_index\": 5154,\n  \"node_name\": \"string\",\n  \"session_id\": \"f81b2424-fd68-d2af-3a05-1bdce0822919\",\n  \"function_name\": \"string\",\n  \"docstring\": \"string\",\n  \"execution_status\": \"<string>\",\n  \"updated_at\": \"1976-09-02T11:35:56.107Z\",\n  \"code_md5_hash\": \"string\",\n  \"reviewed\": false,\n  \"cache_final_rows\": 7459,\n  \"cache_final_size_bytes\": 9895,\n  \"cache_max_bytes\": 175,\n  \"cache_original_rows\": 8923,\n  \"cache_original_size_bytes\": 3182,\n  \"cache_truncated\": true,\n  \"code\": \"string\",\n  \"confirmation_status\": \"string\",\n  \"connector_id\": \"354122f4-475a-9fbe-15d6-311facffb252\",\n  \"created_at\": \"2000-02-06T06:17:26.732Z\",\n  \"error_message\": \"string\",\n  \"error_traceback\": \"string\",\n  \"estimated_cost\": 5704,\n  \"execution_time_ms\": 7127,\n  \"input_row_count\": 5712,\n  \"manually_edited\": true,\n  \"original_node\": \"<uuid>\",\n  \"output_blob_name\": \"string\",\n  \"output_schema\": {},\n  \"progress\": {},\n  \"visualization_output\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "884e109c-28a2-4355-b964-57be2663e5e2",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "nodes",
+                    ":node_id",
+                    "confirm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"confirmed\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f6cd89ef-66c4-4c23-a580-056cd0714de4",
+              "name": "Node not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "nodes",
+                    ":node_id",
+                    "confirm"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"confirmed\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d7d84229-4f70-4361-af91-eb73b0ce333a",
+          "name": "edit workflow node output",
+          "request": {
+            "name": "edit workflow node output",
+            "description": {},
+            "url": {
+              "path": [
+                "sessions",
+                "nodes",
+                ":node_id",
+                "edit_output"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "node_id",
+                  "description": "(Required) Id of the workflow node whose output to edit."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"edits\": [\n    {\n      \"column_name\": \"<string>\",\n      \"row_index\": \"<integer>\",\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"column_name\": \"<string>\",\n      \"row_index\": \"<integer>\",\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e8b1033c-dcdb-4c9f-a857-f955097f10fe",
+              "name": "Edit completed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "nodes",
+                    ":node_id",
+                    "edit_output"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) Id of the workflow node whose output to edit."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"edits\": [\n    {\n      \"column_name\": \"<string>\",\n      \"row_index\": \"<integer>\",\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"column_name\": \"<string>\",\n      \"row_index\": \"<integer>\",\n      \"type\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error_message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "513f4ea5-1ca6-4560-bcc1-7d40cc51565a",
+          "name": "Get events from all jobs for a specific workflow node.",
+          "request": {
+            "name": "Get events from all jobs for a specific workflow node.",
+            "description": {},
+            "url": {
+              "path": [
+                "sessions",
+                "nodes",
+                ":node_id",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "search_term",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<long>"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<long>"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "node_id",
+                  "description": "(Required) Id of the node to get events for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "69cf8d58-d96c-427f-ad34-27de51b75410",
+              "name": "Successfully retrieved node events.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "nodes",
+                    ":node_id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search_term",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) Id of the node to get events for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"events\": [\n    {\n      \"id\": \"c75a2117-9329-d5fb-6c0e-ad356b8c0ad1\",\n      \"status\": \"<string>\",\n      \"run_started_time\": \"1966-12-25T05:17:30.692Z\",\n      \"events\": [\n        {\n          \"created_at\": \"1981-03-13T22:26:27.285Z\",\n          \"body\": {\n            \"url\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"event_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"created_at\": \"1978-05-23T07:16:47.955Z\",\n          \"body\": {\n            \"url\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"event_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"seeded_kg\": {\n        \"entities\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"properties\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"properties\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"relationships\": [\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"source\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"properties\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"source\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"properties\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    },\n    {\n      \"id\": \"c71709ed-a674-efb5-b8f1-e5f9200bde0e\",\n      \"status\": \"<string>\",\n      \"run_started_time\": \"2011-06-12T23:52:38.425Z\",\n      \"events\": [\n        {\n          \"created_at\": \"2001-01-14T10:23:04.220Z\",\n          \"body\": {\n            \"url\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"event_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        {\n          \"created_at\": \"1949-11-13T06:00:46.576Z\",\n          \"body\": {\n            \"url\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"mode\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"event_type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      ],\n      \"seeded_kg\": {\n        \"entities\": [\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"properties\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"id\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"properties\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"relationships\": [\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"source\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"properties\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"source\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"target\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"properties\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      }\n    }\n  ],\n  \"count\": 6026\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6610054a-1fb4-4c72-8af9-adf8da1ff480",
+              "name": "Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "nodes",
+                    ":node_id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search_term",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) Id of the node to get events for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9e0be665-bf5e-4a72-86e2-b44b5e8665c2",
+              "name": "Node not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "nodes",
+                    ":node_id",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "search_term",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) Id of the node to get events for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "09830976-8c9e-44e6-9338-a46ad152afb4",
+          "name": "get workflow node output data",
+          "request": {
+            "name": "get workflow node output data",
+            "description": {},
+            "url": {
+              "path": [
+                "sessions",
+                "nodes",
+                ":node_id",
+                "output_data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "node_id",
+                  "description": "(Required) Id of the workflow node to upload output data for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/octet-stream"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "47df7b9d-c014-4c46-ab1a-ac7ebe566989",
+              "name": "Successfully retrieved output data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "nodes",
+                    ":node_id",
+                    "output_data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) Id of the workflow node to upload output data for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/octet-stream"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/octet-stream"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8e3078da-2241-4708-b384-5d7bc9e465a5",
+              "name": "Invalid request or node not in success status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "nodes",
+                    ":node_id",
+                    "output_data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) Id of the workflow node to upload output data for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6420566f-2337-4124-929d-65b8185b6647",
+              "name": "Node not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "nodes",
+                    ":node_id",
+                    "output_data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) Id of the workflow node to upload output data for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2cb1a83d-3acd-4a10-bab0-43906174b3c7",
+          "name": "upload workflow node output data",
+          "request": {
+            "name": "upload workflow node output data",
+            "description": {},
+            "url": {
+              "path": [
+                "sessions",
+                "nodes",
+                ":node_id",
+                "output_data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "node_id",
+                  "description": "(Required) Id of the workflow node to upload output data for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "content",
+                  "type": "file",
+                  "description": "(Required) "
+                },
+                {
+                  "key": "cache_final_rows",
+                  "value": "<long>",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "cache_final_size_bytes",
+                  "value": "<long>",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "cache_max_bytes",
+                  "value": "<long>",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "cache_original_rows",
+                  "value": "<long>",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "cache_original_size_bytes",
+                  "value": "<long>",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "cache_truncated",
+                  "value": "<boolean>",
+                  "type": "text",
+                  "description": ""
+                },
+                {
+                  "key": "output_schema",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": ""
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2cafc1e1-2133-4a4b-8874-fc3f93d967ec",
+              "name": "Successfully uploaded output data.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "nodes",
+                    ":node_id",
+                    "output_data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) Id of the workflow node to upload output data for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "content",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "cache_final_rows",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "cache_final_size_bytes",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "cache_max_bytes",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "cache_original_rows",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "cache_original_size_bytes",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "cache_truncated",
+                      "value": "<boolean>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "output_schema",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<uuid>\",\n  \"node_index\": 5154,\n  \"node_name\": \"string\",\n  \"session_id\": \"f81b2424-fd68-d2af-3a05-1bdce0822919\",\n  \"function_name\": \"string\",\n  \"docstring\": \"string\",\n  \"execution_status\": \"<string>\",\n  \"updated_at\": \"1976-09-02T11:35:56.107Z\",\n  \"code_md5_hash\": \"string\",\n  \"reviewed\": false,\n  \"cache_final_rows\": 7459,\n  \"cache_final_size_bytes\": 9895,\n  \"cache_max_bytes\": 175,\n  \"cache_original_rows\": 8923,\n  \"cache_original_size_bytes\": 3182,\n  \"cache_truncated\": true,\n  \"code\": \"string\",\n  \"confirmation_status\": \"string\",\n  \"connector_id\": \"354122f4-475a-9fbe-15d6-311facffb252\",\n  \"created_at\": \"2000-02-06T06:17:26.732Z\",\n  \"error_message\": \"string\",\n  \"error_traceback\": \"string\",\n  \"estimated_cost\": 5704,\n  \"execution_time_ms\": 7127,\n  \"input_row_count\": 5712,\n  \"manually_edited\": true,\n  \"original_node\": \"<uuid>\",\n  \"output_blob_name\": \"string\",\n  \"output_schema\": {},\n  \"progress\": {},\n  \"visualization_output\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4ee2deea-1f81-46fb-ac9d-e99d50c80400",
+              "name": "Invalid request or node not in success status.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "nodes",
+                    ":node_id",
+                    "output_data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) Id of the workflow node to upload output data for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "content",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "cache_final_rows",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "cache_final_size_bytes",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "cache_max_bytes",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "cache_original_rows",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "cache_original_size_bytes",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "cache_truncated",
+                      "value": "<boolean>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "output_schema",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "297c081d-084b-4ff8-9821-095e9a1444cf",
+              "name": "Node not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "nodes",
+                    ":node_id",
+                    "output_data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) Id of the workflow node to upload output data for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "content",
+                      "value": "<binary>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "cache_final_rows",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "cache_final_size_bytes",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "cache_max_bytes",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "cache_original_rows",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "cache_original_size_bytes",
+                      "value": "<long>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "cache_truncated",
+                      "value": "<boolean>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "",
+                        "type": "text/plain"
+                      },
+                      "key": "output_schema",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d26d4d24-10ca-446d-bc89-8cebae6c4bd3",
+          "name": "get workflow node progress",
+          "request": {
+            "name": "get workflow node progress",
+            "description": {},
+            "url": {
+              "path": [
+                "sessions",
+                "nodes",
+                ":node_id",
+                "progress"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "node_id",
+                  "description": "(Required) Id of the workflow node to get progress for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4bd6fac6-ced4-4066-82f4-428853655740",
+              "name": "Successfully retrieved node progress.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "nodes",
+                    ":node_id",
+                    "progress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) Id of the workflow node to get progress for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": {\n    \"started_at\": \"1964-05-30T18:02:09.724Z\",\n    \"current\": 2905,\n    \"elapsed_seconds\": 1683.6505951426418,\n    \"total\": 6175\n  },\n  \"key_1\": {\n    \"started_at\": \"1993-02-04T07:30:43.777Z\",\n    \"current\": 8608,\n    \"elapsed_seconds\": 9779.386542446522,\n    \"total\": 5694\n  },\n  \"key_2\": {\n    \"started_at\": \"2014-01-09T22:57:54.957Z\",\n    \"current\": 3706,\n    \"elapsed_seconds\": 2383.2816540386502,\n    \"total\": 3066\n  },\n  \"key_3\": {\n    \"started_at\": \"1970-03-29T13:32:18.558Z\",\n    \"current\": 5960,\n    \"elapsed_seconds\": 9500.41575823936,\n    \"total\": 9928\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40cc0685-f037-4e45-b64a-7efc2c1f4a65",
+              "name": "Node not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "nodes",
+                    ":node_id",
+                    "progress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) Id of the workflow node to get progress for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c6c514bd-1c1f-476d-90b7-9d97a334d39e",
+          "name": "update workflow node progress",
+          "request": {
+            "name": "update workflow node progress",
+            "description": {},
+            "url": {
+              "path": [
+                "sessions",
+                "nodes",
+                ":node_id",
+                "progress"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "node_id",
+                  "description": "(Required) Id of the workflow node to update progress for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"current\": \"<integer>\",\n  \"elapsed_seconds\": \"<double>\",\n  \"total\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "237ca05b-36b4-450e-b7fb-f69415d435c4",
+              "name": "Successfully updated node progress.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "nodes",
+                    ":node_id",
+                    "progress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) Id of the workflow node to update progress for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"current\": \"<integer>\",\n  \"elapsed_seconds\": \"<double>\",\n  \"total\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<uuid>\",\n  \"node_index\": 5154,\n  \"node_name\": \"string\",\n  \"session_id\": \"f81b2424-fd68-d2af-3a05-1bdce0822919\",\n  \"function_name\": \"string\",\n  \"docstring\": \"string\",\n  \"execution_status\": \"<string>\",\n  \"updated_at\": \"1976-09-02T11:35:56.107Z\",\n  \"code_md5_hash\": \"string\",\n  \"reviewed\": false,\n  \"cache_final_rows\": 7459,\n  \"cache_final_size_bytes\": 9895,\n  \"cache_max_bytes\": 175,\n  \"cache_original_rows\": 8923,\n  \"cache_original_size_bytes\": 3182,\n  \"cache_truncated\": true,\n  \"code\": \"string\",\n  \"confirmation_status\": \"string\",\n  \"connector_id\": \"354122f4-475a-9fbe-15d6-311facffb252\",\n  \"created_at\": \"2000-02-06T06:17:26.732Z\",\n  \"error_message\": \"string\",\n  \"error_traceback\": \"string\",\n  \"estimated_cost\": 5704,\n  \"execution_time_ms\": 7127,\n  \"input_row_count\": 5712,\n  \"manually_edited\": true,\n  \"original_node\": \"<uuid>\",\n  \"output_blob_name\": \"string\",\n  \"output_schema\": {},\n  \"progress\": {},\n  \"visualization_output\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e77b90b-90e7-4f30-9856-333ecc594fe3",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "nodes",
+                    ":node_id",
+                    "progress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) Id of the workflow node to update progress for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"current\": \"<integer>\",\n  \"elapsed_seconds\": \"<double>\",\n  \"total\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6df54de7-a51f-4ea9-9b97-b038e20e0c0c",
+              "name": "Node not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "nodes",
+                    ":node_id",
+                    "progress"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) Id of the workflow node to update progress for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"<string>\",\n  \"current\": \"<integer>\",\n  \"elapsed_seconds\": \"<double>\",\n  \"total\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ce27f7d0-eebd-4a0d-9495-2975b31b501d",
+          "name": "request node confirmation",
+          "request": {
+            "name": "request node confirmation",
+            "description": {},
+            "url": {
+              "path": [
+                "sessions",
+                "nodes",
+                ":node_id",
+                "request_confirmation"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "node_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"row_count\": \"<long>\",\n  \"operation\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f76cb2f0-ccec-43fc-87b8-5a3a2886541c",
+              "name": "Node set to pending confirmation.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "nodes",
+                    ":node_id",
+                    "request_confirmation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"row_count\": \"<long>\",\n  \"operation\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<uuid>\",\n  \"node_index\": 5154,\n  \"node_name\": \"string\",\n  \"session_id\": \"f81b2424-fd68-d2af-3a05-1bdce0822919\",\n  \"function_name\": \"string\",\n  \"docstring\": \"string\",\n  \"execution_status\": \"<string>\",\n  \"updated_at\": \"1976-09-02T11:35:56.107Z\",\n  \"code_md5_hash\": \"string\",\n  \"reviewed\": false,\n  \"cache_final_rows\": 7459,\n  \"cache_final_size_bytes\": 9895,\n  \"cache_max_bytes\": 175,\n  \"cache_original_rows\": 8923,\n  \"cache_original_size_bytes\": 3182,\n  \"cache_truncated\": true,\n  \"code\": \"string\",\n  \"confirmation_status\": \"string\",\n  \"connector_id\": \"354122f4-475a-9fbe-15d6-311facffb252\",\n  \"created_at\": \"2000-02-06T06:17:26.732Z\",\n  \"error_message\": \"string\",\n  \"error_traceback\": \"string\",\n  \"estimated_cost\": 5704,\n  \"execution_time_ms\": 7127,\n  \"input_row_count\": 5712,\n  \"manually_edited\": true,\n  \"original_node\": \"<uuid>\",\n  \"output_blob_name\": \"string\",\n  \"output_schema\": {},\n  \"progress\": {},\n  \"visualization_output\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49c9801c-15f9-4c18-81b0-6f67f73d9550",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "nodes",
+                    ":node_id",
+                    "request_confirmation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"row_count\": \"<long>\",\n  \"operation\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7542580e-90dc-4bba-9ecb-602dc5dbf7f6",
+              "name": "Node not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "nodes",
+                    ":node_id",
+                    "request_confirmation"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"row_count\": \"<long>\",\n  \"operation\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8a08135e-83ac-4e2e-b46f-0656ed9cbe11",
+          "name": "upload node visualization output",
+          "request": {
+            "name": "upload node visualization output",
+            "description": {},
+            "url": {
+              "path": [
+                "sessions",
+                "nodes",
+                ":node_id",
+                "visualization_output"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "node_id",
+                  "description": "(Required) Id of the workflow node to upload visualization output for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"visualization_output\": {\n    \"key_0\": 1360.3581604138915,\n    \"key_1\": 6924\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3fe6da84-d8a8-49a7-af06-2de44ecf1dfb",
+              "name": "Successfully uploaded visualization output.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "nodes",
+                    ":node_id",
+                    "visualization_output"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) Id of the workflow node to upload visualization output for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"visualization_output\": {\n    \"key_0\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<uuid>\",\n  \"node_index\": 5154,\n  \"node_name\": \"string\",\n  \"session_id\": \"f81b2424-fd68-d2af-3a05-1bdce0822919\",\n  \"function_name\": \"string\",\n  \"docstring\": \"string\",\n  \"execution_status\": \"<string>\",\n  \"updated_at\": \"1976-09-02T11:35:56.107Z\",\n  \"code_md5_hash\": \"string\",\n  \"reviewed\": false,\n  \"cache_final_rows\": 7459,\n  \"cache_final_size_bytes\": 9895,\n  \"cache_max_bytes\": 175,\n  \"cache_original_rows\": 8923,\n  \"cache_original_size_bytes\": 3182,\n  \"cache_truncated\": true,\n  \"code\": \"string\",\n  \"confirmation_status\": \"string\",\n  \"connector_id\": \"354122f4-475a-9fbe-15d6-311facffb252\",\n  \"created_at\": \"2000-02-06T06:17:26.732Z\",\n  \"error_message\": \"string\",\n  \"error_traceback\": \"string\",\n  \"estimated_cost\": 5704,\n  \"execution_time_ms\": 7127,\n  \"input_row_count\": 5712,\n  \"manually_edited\": true,\n  \"original_node\": \"<uuid>\",\n  \"output_blob_name\": \"string\",\n  \"output_schema\": {},\n  \"progress\": {},\n  \"visualization_output\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "608741d1-382b-4dda-a00c-b8887fb4a6bf",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "nodes",
+                    ":node_id",
+                    "visualization_output"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) Id of the workflow node to upload visualization output for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"visualization_output\": {\n    \"key_0\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "744306ef-8f25-4fa7-a281-5e7ce5866f73",
+              "name": "Node not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    "nodes",
+                    ":node_id",
+                    "visualization_output"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "node_id",
+                      "description": "(Required) Id of the workflow node to upload visualization output for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"visualization_output\": {\n    \"key_0\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "349c1d70-a84a-4287-bbc8-8a60039e6aa4",
+          "name": "get workflow dag",
+          "request": {
+            "name": "get workflow dag",
+            "description": {},
+            "url": {
+              "path": [
+                "sessions",
+                ":session_id",
+                "dag"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "session_id",
+                  "description": "(Required) Id of the session to get DAG for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "78769337-dbbf-4400-9c3c-807c01824a2c",
+              "name": "Successfully retrieved workflow DAG.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id",
+                    "dag"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Id of the session to get DAG for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"session_id\": \"<uuid>\",\n  \"aborted\": false,\n  \"nodes\": [\n    {\n      \"id\": \"<uuid>\",\n      \"node_index\": 2102,\n      \"node_name\": \"string\",\n      \"session_id\": \"<uuid>\",\n      \"function_name\": \"string\",\n      \"docstring\": \"string\",\n      \"execution_status\": \"<string>\",\n      \"updated_at\": \"1959-04-17T06:12:53.054Z\",\n      \"code_md5_hash\": \"string\",\n      \"reviewed\": false,\n      \"cache_final_rows\": 3165,\n      \"cache_final_size_bytes\": 6905,\n      \"cache_max_bytes\": 7072,\n      \"cache_original_rows\": 7312,\n      \"cache_original_size_bytes\": 5007,\n      \"cache_truncated\": true,\n      \"code\": \"string\",\n      \"confirmation_status\": \"string\",\n      \"connector_id\": \"8f721934-6c46-0620-83ee-e120c41e0118\",\n      \"created_at\": \"1964-11-15T10:36:29.996Z\",\n      \"error_message\": \"string\",\n      \"error_traceback\": \"string\",\n      \"estimated_cost\": 4366,\n      \"execution_time_ms\": 7384,\n      \"input_row_count\": 9750,\n      \"manually_edited\": false,\n      \"original_node\": \"<uuid>\",\n      \"output_blob_name\": \"string\",\n      \"output_schema\": {},\n      \"progress\": {},\n      \"visualization_output\": {}\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"node_index\": 5214,\n      \"node_name\": \"string\",\n      \"session_id\": \"<uuid>\",\n      \"function_name\": \"string\",\n      \"docstring\": \"string\",\n      \"execution_status\": \"<string>\",\n      \"updated_at\": \"1992-03-20T03:29:43.781Z\",\n      \"code_md5_hash\": \"string\",\n      \"reviewed\": false,\n      \"cache_final_rows\": 5373,\n      \"cache_final_size_bytes\": 3651,\n      \"cache_max_bytes\": 7157,\n      \"cache_original_rows\": 1083,\n      \"cache_original_size_bytes\": 9186,\n      \"cache_truncated\": true,\n      \"code\": \"string\",\n      \"confirmation_status\": \"string\",\n      \"connector_id\": \"862811c0-d3ee-2f30-b9c0-7da1aab81d8d\",\n      \"created_at\": \"1949-03-19T08:01:35.325Z\",\n      \"error_message\": \"string\",\n      \"error_traceback\": \"string\",\n      \"estimated_cost\": 7850,\n      \"execution_time_ms\": 8752,\n      \"input_row_count\": 7130,\n      \"manually_edited\": false,\n      \"original_node\": \"<uuid>\",\n      \"output_blob_name\": \"string\",\n      \"output_schema\": {},\n      \"progress\": {},\n      \"visualization_output\": {}\n    }\n  ],\n  \"edges\": [\n    {\n      \"id\": \"c8b1926a-dccf-1e39-718f-c60b6cefbecf\",\n      \"session_id\": \"<uuid>\",\n      \"source_node_id\": \"<uuid>\",\n      \"target_node_id\": \"<uuid>\",\n      \"created_at\": \"1987-07-17T03:38:42.406Z\"\n    },\n    {\n      \"id\": \"f0865b74-acd9-e13f-42a7-316f48405b00\",\n      \"session_id\": \"<uuid>\",\n      \"source_node_id\": \"<uuid>\",\n      \"target_node_id\": \"<uuid>\",\n      \"created_at\": \"1979-01-15T08:26:20.839Z\"\n    }\n  ],\n  \"is_ready\": true,\n  \"dashboard_specs\": [\n    {\n      \"file_name\": \"string\",\n      \"spec\": {\n        \"version\": \"string\",\n        \"title\": \"string\",\n        \"description\": \"string\",\n        \"dataset\": \"string\",\n        \"params\": {\n          \"key_0\": {\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"control\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"queries\": [\n          {\n            \"id\": \"string\",\n            \"sql\": \"string\"\n          },\n          {\n            \"id\": \"string\",\n            \"sql\": \"string\"\n          }\n        ],\n        \"figures\": [\n          {\n            \"id\": \"string\",\n            \"figure\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": \"string\",\n            \"span\": 1800,\n            \"title\": \"string\"\n          },\n          {\n            \"id\": \"string\",\n            \"figure\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": \"string\",\n            \"span\": 1219,\n            \"title\": \"string\"\n          }\n        ]\n      }\n    },\n    {\n      \"file_name\": \"string\",\n      \"spec\": {\n        \"version\": \"string\",\n        \"title\": \"string\",\n        \"description\": \"string\",\n        \"dataset\": \"string\",\n        \"params\": {\n          \"key_0\": {\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"control\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"key_1\": {\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"control\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"key_2\": {\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"control\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"queries\": [\n          {\n            \"id\": \"string\",\n            \"sql\": \"string\"\n          },\n          {\n            \"id\": \"string\",\n            \"sql\": \"string\"\n          }\n        ],\n        \"figures\": [\n          {\n            \"id\": \"string\",\n            \"figure\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": \"string\",\n            \"span\": 6834,\n            \"title\": \"string\"\n          },\n          {\n            \"id\": \"string\",\n            \"figure\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": \"string\",\n            \"span\": 846,\n            \"title\": \"string\"\n          }\n        ]\n      }\n    }\n  ],\n  \"dag_ready_at\": \"2026-08-12T07:44:17.787Z\",\n  \"dashboard_layout\": {\n    \"title\": \"string\",\n    \"dashboards\": [\n      {\n        \"components\": [\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"controls\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"datasetNodeName\": \"string\",\n        \"description\": \"string\",\n        \"title\": \"string\"\n      },\n      {\n        \"components\": [\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"controls\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"datasetNodeName\": \"string\",\n        \"description\": \"string\",\n        \"title\": \"string\"\n      }\n    ],\n    \"description\": \"string\"\n  },\n  \"error\": \"string\",\n  \"error_traceback\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7d2629b7-2907-4ca4-8737-59c8ea2d70d0",
+              "name": "Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id",
+                    "dag"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Id of the session to get DAG for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1a095e39-bd99-4fb5-aeb8-9a47697ac04f",
+              "name": "Session not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id",
+                    "dag"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Id of the session to get DAG for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "383df1d8-3289-45e9-afae-58a419946da9",
+          "name": "Finalize a workflow session DAG by creating all nodes/edges and marking it as ready",
+          "request": {
+            "name": "Finalize a workflow session DAG by creating all nodes/edges and marking it as ready",
+            "description": {},
+            "url": {
+              "path": [
+                "sessions",
+                ":session_id",
+                "dag_ready"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "session_id",
+                  "description": "(Required) Workflow session ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nodes\": [\n    {\n      \"function_name\": \"<string>\",\n      \"docstring\": \"<string>\",\n      \"code_md5_hash\": \"<string>\",\n      \"code\": \"<string>\",\n      \"connector_id\": \"<uuid>\"\n    },\n    {\n      \"function_name\": \"<string>\",\n      \"docstring\": \"<string>\",\n      \"code_md5_hash\": \"<string>\",\n      \"code\": \"<string>\",\n      \"connector_id\": \"<uuid>\"\n    }\n  ],\n  \"edges\": [\n    {\n      \"source_node_index\": \"<integer>\",\n      \"target_node_index\": \"<integer>\"\n    },\n    {\n      \"source_node_index\": \"<integer>\",\n      \"target_node_index\": \"<integer>\"\n    }\n  ],\n  \"dashboard_layout\": {\n    \"title\": \"<string>\",\n    \"dashboards\": [\n      {\n        \"components\": [\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"controls\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"datasetNodeName\": \"<string>\",\n        \"description\": \"<string>\",\n        \"title\": \"<string>\"\n      },\n      {\n        \"components\": [\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"controls\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"datasetNodeName\": \"<string>\",\n        \"description\": \"<string>\",\n        \"title\": \"<string>\"\n      }\n    ],\n    \"description\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d799258c-009d-4a53-9f69-e9f2094174b7",
+              "name": "DAG finalized successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id",
+                    "dag_ready"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Workflow session ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nodes\": [\n    {\n      \"function_name\": \"<string>\",\n      \"docstring\": \"<string>\",\n      \"code_md5_hash\": \"<string>\",\n      \"code\": \"<string>\",\n      \"connector_id\": \"<uuid>\"\n    },\n    {\n      \"function_name\": \"<string>\",\n      \"docstring\": \"<string>\",\n      \"code_md5_hash\": \"<string>\",\n      \"code\": \"<string>\",\n      \"connector_id\": \"<uuid>\"\n    }\n  ],\n  \"edges\": [\n    {\n      \"source_node_index\": \"<integer>\",\n      \"target_node_index\": \"<integer>\"\n    },\n    {\n      \"source_node_index\": \"<integer>\",\n      \"target_node_index\": \"<integer>\"\n    }\n  ],\n  \"dashboard_layout\": {\n    \"title\": \"<string>\",\n    \"dashboards\": [\n      {\n        \"components\": [\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"controls\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"datasetNodeName\": \"<string>\",\n        \"description\": \"<string>\",\n        \"title\": \"<string>\"\n      },\n      {\n        \"components\": [\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"controls\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"datasetNodeName\": \"<string>\",\n        \"description\": \"<string>\",\n        \"title\": \"<string>\"\n      }\n    ],\n    \"description\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"node_ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "824e3b98-3129-4387-8a04-847be88cc469",
+              "name": "DAG validation failed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id",
+                    "dag_ready"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Workflow session ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nodes\": [\n    {\n      \"function_name\": \"<string>\",\n      \"docstring\": \"<string>\",\n      \"code_md5_hash\": \"<string>\",\n      \"code\": \"<string>\",\n      \"connector_id\": \"<uuid>\"\n    },\n    {\n      \"function_name\": \"<string>\",\n      \"docstring\": \"<string>\",\n      \"code_md5_hash\": \"<string>\",\n      \"code\": \"<string>\",\n      \"connector_id\": \"<uuid>\"\n    }\n  ],\n  \"edges\": [\n    {\n      \"source_node_index\": \"<integer>\",\n      \"target_node_index\": \"<integer>\"\n    },\n    {\n      \"source_node_index\": \"<integer>\",\n      \"target_node_index\": \"<integer>\"\n    }\n  ],\n  \"dashboard_layout\": {\n    \"title\": \"<string>\",\n    \"dashboards\": [\n      {\n        \"components\": [\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"controls\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"datasetNodeName\": \"<string>\",\n        \"description\": \"<string>\",\n        \"title\": \"<string>\"\n      },\n      {\n        \"components\": [\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"controls\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"datasetNodeName\": \"<string>\",\n        \"description\": \"<string>\",\n        \"title\": \"<string>\"\n      }\n    ],\n    \"description\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "694f6358-c16c-45f5-a6ac-b3a6d3b2fc83",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id",
+                    "dag_ready"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Workflow session ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nodes\": [\n    {\n      \"function_name\": \"<string>\",\n      \"docstring\": \"<string>\",\n      \"code_md5_hash\": \"<string>\",\n      \"code\": \"<string>\",\n      \"connector_id\": \"<uuid>\"\n    },\n    {\n      \"function_name\": \"<string>\",\n      \"docstring\": \"<string>\",\n      \"code_md5_hash\": \"<string>\",\n      \"code\": \"<string>\",\n      \"connector_id\": \"<uuid>\"\n    }\n  ],\n  \"edges\": [\n    {\n      \"source_node_index\": \"<integer>\",\n      \"target_node_index\": \"<integer>\"\n    },\n    {\n      \"source_node_index\": \"<integer>\",\n      \"target_node_index\": \"<integer>\"\n    }\n  ],\n  \"dashboard_layout\": {\n    \"title\": \"<string>\",\n    \"dashboards\": [\n      {\n        \"components\": [\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"controls\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"datasetNodeName\": \"<string>\",\n        \"description\": \"<string>\",\n        \"title\": \"<string>\"\n      },\n      {\n        \"components\": [\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"controls\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"datasetNodeName\": \"<string>\",\n        \"description\": \"<string>\",\n        \"title\": \"<string>\"\n      }\n    ],\n    \"description\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6e641973-5ad5-4df6-be27-c966426e6386",
+          "name": "upload dashboard layout",
+          "request": {
+            "name": "upload dashboard layout",
+            "description": {},
+            "url": {
+              "path": [
+                "sessions",
+                ":session_id",
+                "dashboard_layout"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "session_id",
+                  "description": "(Required) Id of the workflow session to upload dashboard layout for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"layout\": {\n    \"title\": \"<string>\",\n    \"dashboards\": [\n      {\n        \"components\": [\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"controls\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"datasetNodeName\": \"<string>\",\n        \"description\": \"<string>\",\n        \"title\": \"<string>\"\n      },\n      {\n        \"components\": [\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"controls\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"datasetNodeName\": \"<string>\",\n        \"description\": \"<string>\",\n        \"title\": \"<string>\"\n      }\n    ],\n    \"description\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "484c9665-9c2f-4be5-a30d-f1b26d74a61e",
+              "name": "Successfully uploaded dashboard layout.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id",
+                    "dashboard_layout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Id of the workflow session to upload dashboard layout for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"layout\": {\n    \"title\": \"<string>\",\n    \"dashboards\": [\n      {\n        \"components\": [\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"controls\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"datasetNodeName\": \"<string>\",\n        \"description\": \"<string>\",\n        \"title\": \"<string>\"\n      },\n      {\n        \"components\": [\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"controls\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"datasetNodeName\": \"<string>\",\n        \"description\": \"<string>\",\n        \"title\": \"<string>\"\n      }\n    ],\n    \"description\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<uuid>\",\n  \"chat_session_id\": \"<uuid>\",\n  \"updated_at\": \"2016-12-01T17:32:12.661Z\",\n  \"dag_ready\": true,\n  \"aborted\": false,\n  \"created_at\": \"2001-11-15T00:49:50.559Z\",\n  \"dag_ready_at\": \"1952-03-04T00:16:25.293Z\",\n  \"dashboard_layout_proto\": \"string\",\n  \"error_message\": \"string\",\n  \"error_traceback\": \"string\",\n  \"parent_chat_message_id\": \"<uuid>\",\n  \"workflow_schedule_id\": \"<uuid>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4fa0db80-ac75-4005-8b37-92480b9b1256",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id",
+                    "dashboard_layout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Id of the workflow session to upload dashboard layout for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"layout\": {\n    \"title\": \"<string>\",\n    \"dashboards\": [\n      {\n        \"components\": [\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"controls\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"datasetNodeName\": \"<string>\",\n        \"description\": \"<string>\",\n        \"title\": \"<string>\"\n      },\n      {\n        \"components\": [\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"controls\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"datasetNodeName\": \"<string>\",\n        \"description\": \"<string>\",\n        \"title\": \"<string>\"\n      }\n    ],\n    \"description\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9fb26a7d-df64-46e7-b2c4-e70e4a328175",
+              "name": "Session not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id",
+                    "dashboard_layout"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Id of the workflow session to upload dashboard layout for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"layout\": {\n    \"title\": \"<string>\",\n    \"dashboards\": [\n      {\n        \"components\": [\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"controls\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"datasetNodeName\": \"<string>\",\n        \"description\": \"<string>\",\n        \"title\": \"<string>\"\n      },\n      {\n        \"components\": [\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"node_name\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"title\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"description\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"span\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ],\n        \"controls\": [\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          },\n          {\n            \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n          }\n        ],\n        \"datasetNodeName\": \"<string>\",\n        \"description\": \"<string>\",\n        \"title\": \"<string>\"\n      }\n    ],\n    \"description\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1de1c098-7367-4593-bf5f-0b11c6282279",
+          "name": "mark workflow session errored",
+          "request": {
+            "name": "mark workflow session errored",
+            "description": {},
+            "url": {
+              "path": [
+                "sessions",
+                ":session_id",
+                "error"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "session_id",
+                  "description": "(Required) Id of the workflow session to mark as errored."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"error_message\": \"<string>\",\n  \"autofix\": \"<boolean>\",\n  \"autofix_context\": \"<string>\",\n  \"error_traceback\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8ea8d57c-e1f0-4a68-aef5-b8da138a84a7",
+              "name": "Successfully marked session as errored.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id",
+                    "error"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Id of the workflow session to mark as errored."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"error_message\": \"<string>\",\n  \"autofix\": \"<boolean>\",\n  \"autofix_context\": \"<string>\",\n  \"error_traceback\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"<uuid>\",\n  \"chat_session_id\": \"<uuid>\",\n  \"updated_at\": \"2016-12-01T17:32:12.661Z\",\n  \"dag_ready\": true,\n  \"aborted\": false,\n  \"created_at\": \"2001-11-15T00:49:50.559Z\",\n  \"dag_ready_at\": \"1952-03-04T00:16:25.293Z\",\n  \"dashboard_layout_proto\": \"string\",\n  \"error_message\": \"string\",\n  \"error_traceback\": \"string\",\n  \"parent_chat_message_id\": \"<uuid>\",\n  \"workflow_schedule_id\": \"<uuid>\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c56d1dbf-5fd4-4a6f-ac40-a6118375a4a4",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id",
+                    "error"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Id of the workflow session to mark as errored."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"error_message\": \"<string>\",\n  \"autofix\": \"<boolean>\",\n  \"autofix_context\": \"<string>\",\n  \"error_traceback\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "77373d56-f120-40af-a566-87a4dcb5e734",
+              "name": "Session not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id",
+                    "error"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Id of the workflow session to mark as errored."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"error_message\": \"<string>\",\n  \"autofix\": \"<boolean>\",\n  \"autofix_context\": \"<string>\",\n  \"error_traceback\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cf0128a9-124f-4c4d-865b-a4cc9fdf8f2f",
+          "name": "kill all jobs for workflow",
+          "request": {
+            "name": "kill all jobs for workflow",
+            "description": {},
+            "url": {
+              "path": [
+                "sessions",
+                ":session_id",
+                "kill_jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "session_id",
+                  "description": "(Required) Id of the workflow session to kill jobs for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"message\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3bfde12c-3721-408b-b332-b298caef649e",
+              "name": "Successfully killed all jobs for the workflow session.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id",
+                    "kill_jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Id of the workflow session to kill jobs for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"killed_jobs\": [\n    \"c9a58d4a-b1ae-df4a-e6a5-ca5452a74b85\",\n    \"31620219-393f-eae6-c82a-8e875db6b1be\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "596f64b3-0127-4ca4-bb70-4e08941b5f2a",
+              "name": "Invalid request or session not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id",
+                    "kill_jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Id of the workflow session to kill jobs for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "488e05aa-fa3c-4ff4-83fa-31965c9bc83b",
+              "name": "Access denied.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id",
+                    "kill_jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Id of the workflow session to kill jobs for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"message\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bc5c8fbf-e160-4200-b728-3b5a30c1f1e6",
+          "name": "trigger workflow review",
+          "request": {
+            "name": "trigger workflow review",
+            "description": {},
+            "url": {
+              "path": [
+                "sessions",
+                ":session_id",
+                "trigger_review"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "session_id",
+                  "description": "(Required) Id of the workflow session to trigger review for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3de59488-4801-496b-9366-376a2ef2c5a8",
+              "name": "Review triggered (or skipped if not needed).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id",
+                    "trigger_review"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Id of the workflow session to trigger review for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"triggered\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "95a34d4d-244c-44e8-b80b-dec931e11672",
+              "name": "Invalid request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id",
+                    "trigger_review"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Id of the workflow session to trigger review for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d13d5d85-2b9c-4e62-8614-7a7df76696d6",
+              "name": "Session not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sessions",
+                    ":session_id",
+                    "trigger_review"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "session_id",
+                      "description": "(Required) Id of the workflow session to trigger review for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "api_key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.structify.ai",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "api_key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "58ca3edf-fe64-421c-bd0f-2aa1152a3eb2",
+    "name": "Structify account sessions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Every enterprise's data team.\n\nContact Support:\n Name: Structify Team\n Email: team@structify.ai",
+      "type": "text/plain"
+    }
+  }
+}

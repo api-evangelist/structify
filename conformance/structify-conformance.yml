@@ -1,27 +1,77 @@
-generated: '2026-07-21'
-method: derived
-source: openapi/structify-openapi-original.json
+generated: '2026-08-14'
+method: searched
+source: >-
+  openapi/_original/structify-openapi-original.json plus
+  https://www.structify.ai/security, https://www.structify.ai/ (compliance
+  badges), and live probes of docs.structify.ai/.well-known/agent-card.json and
+  docs.structify.ai/mcp
 standards:
 - id: openapi-3.0
   conforms: true
-  evidence: Publishes OpenAPI 3.0.3 at docs.structify.ai/openapi.json (248 paths, 281 operations).
+  evidence: >-
+    Publishes OpenAPI 3.0.3 at https://docs.structify.ai/openapi.json (HTTP 200,
+    248 paths, 281 operations). info.title "Structify", contact
+    team@structify.ai, servers https://api.structify.ai — first-party.
 - id: rest
   conforms: true
   evidence: RESTful JSON API over HTTPS.
+- id: mcp
+  conforms: true
+  evidence: >-
+    Live remote MCP server at https://docs.structify.ai/mcp answered tools/list
+    with 3 tools and full JSON Schema inputSchemas on 2026-08-14 (auth none).
+    Documentation plane only — no data-plane tools. See
+    mcp/structify-tool-crosswalk.yml.
+- id: a2a-agent-card
+  conforms: true
+  evidence: >-
+    Serves /.well-known/agent-card.json from docs.structify.ai (HTTP 200,
+    application/json). Grades conformant against A2A 1.0.0 hard checks, though
+    it declares protocolVersion 0.3 and omits root description. See
+    a2a/structify-a2a.yml.
 - id: oauth2
   conforms: false
   evidence: No oauth2 security schemes; auth is api_key header + http bearer session token.
 - id: oidc
   conforms: false
+  evidence: No /.well-known/openid-configuration is served on any host.
 - id: rfc9457-problem-details
   conforms: false
   evidence: Error responses use application/json, not application/problem+json.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: >-
+    No /.well-known/security.txt on any of the five probed hosts. See
+    well-known/structify-well-known.yml.
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: No Sunset/Deprecation header contract or deprecation policy is published.
+- id: idempotency
+  conforms: false
+  evidence: >-
+    No Idempotency-Key header or idempotent-retry contract in the docs or the
+    OpenAPI. See conventions/structify-conventions.yml.
 - id: soc2
   conforms: true
-  evidence: SOC 2 stated on https://www.structify.ai/security (see security/structify-trust-center.yml).
+  evidence: >-
+    SOC 2 Type II stated on https://www.structify.ai/security and in the
+    homepage compliance badges (audited annually).
 - id: hipaa
   conforms: true
   evidence: HIPAA stated on https://www.structify.ai/security.
+- id: cmmc
+  conforms: true
+  evidence: >-
+    CMMC ("DoD cybersecurity") compliance badge on https://www.structify.ai/.
+- id: gdpr
+  conforms: true
+  evidence: >-
+    GDPR ("EU Data Protection") compliance badge on https://www.structify.ai/.
 - id: pagination-limit-offset
   conforms: true
   evidence: List operations use limit/offset parameters.
+see:
+  trust_center: security/structify-trust-center.yml
+  well_known: well-known/structify-well-known.yml
+  a2a: a2a/structify-a2a.yml
+  mcp: mcp/structify-mcp.yml

@@ -1,0 +1,61 @@
+generated: '2026-08-14'
+method: searched
+source: https://docs.structify.ai/concepts/api-overview
+summary: >-
+  Structify publishes no pricing page. structify.ai/pricing, www.structify.ai/pricing
+  and docs.structify.ai/pricing all return HTTP 404, and neither the site
+  navigation nor the footer carries a pricing link — the commercial call to
+  action is "Book a demo" (https://www.structify.ai/demo). Three tier NAMES are
+  published, but only in the API Overview's rate-limit table, and no price,
+  currency, billing period, included quota or overage is stated anywhere public.
+  The tiers below are therefore recorded with prices null: they are real,
+  provider-named plans with unpublished economics, which is a different fact
+  from "no plans exist".
+pricing_page: null
+pricing_page_probes:
+- url: https://www.structify.ai/pricing
+  status: 404
+- url: https://structify.ai/pricing
+  status: 404
+- url: https://docs.structify.ai/pricing
+  status: 404
+sales_gate: https://www.structify.ai/demo
+plan_count: 3
+plans:
+- name: Free
+  price: null
+  currency: null
+  billing_period: null
+  included_quota: null
+  overage: null
+  limits:
+    requests_per_minute: 60
+    concurrent_jobs: 2
+  source: https://docs.structify.ai/concepts/api-overview
+  note: Named and rate-limited in the API Overview; no price published.
+- name: Pro
+  price: null
+  currency: null
+  billing_period: null
+  included_quota: null
+  overage: null
+  limits:
+    requests_per_minute: 600
+    concurrent_jobs: 10
+  source: https://docs.structify.ai/concepts/api-overview
+  note: Named and rate-limited in the API Overview; no price published.
+- name: Enterprise
+  price: null
+  currency: null
+  billing_period: null
+  included_quota: null
+  overage: null
+  limits:
+    requests_per_minute: custom
+    concurrent_jobs: custom
+  source: https://docs.structify.ai/concepts/api-overview
+  note: >-
+    Listed as "Custom / Custom" in the rate-limit table. Acquired through the
+    demo/sales motion; no self-serve price.
+checked: '2026-08-14'
+see: rate-limits/structify-rate-limits.yml
