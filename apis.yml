@@ -126,7 +126,7 @@ apis:
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
   tags:
-  - Code
+  - code
   tags_raw:
   - code
   properties:
@@ -139,8 +139,7 @@ apis:
   description: The connector_catalog API from Structify — 3 operation(s) for connector_catalog.
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
-  tags:
-  - Connector Catalog
+  tags: []
   tags_raw:
   - connector_catalog
   properties:
@@ -196,7 +195,7 @@ apis:
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
   tags:
-  - Entity
+  - entity
   tags_raw:
   - entity
   properties:
@@ -224,7 +223,7 @@ apis:
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
   tags:
-  - Match
+  - match
   tags_raw:
   - match
   properties:
@@ -277,7 +276,7 @@ apis:
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
   tags:
-  - Sandbox
+  - sandbox
   tags_raw:
   - sandbox
   properties:
@@ -291,7 +290,7 @@ apis:
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
   tags:
-  - Scrape
+  - scrape
   tags_raw:
   - scrape
   properties:
@@ -347,7 +346,7 @@ apis:
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
   tags:
-  - Source
+  - source
   tags_raw:
   - source
   properties:
@@ -361,7 +360,7 @@ apis:
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
   tags:
-  - Structure
+  - structure
   tags_raw:
   - structure
   properties:
@@ -459,7 +458,7 @@ apis:
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
   tags:
-  - White Label
+  - whitelabel
   tags_raw:
   - whitelabel
   properties:
@@ -473,7 +472,7 @@ apis:
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
   tags:
-  - Wiki
+  - wiki
   tags_raw:
   - wiki
   properties:
