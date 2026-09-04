@@ -24,16 +24,19 @@ deliveryModel:
   generated: '2026-08-28'
   method: derived
 accessModel:
-  pricing: unknown
+  pricing: freemium
   onboarding: self-serve
   trial: false
-  try_now: false
+  try_now: true
   public: false
-  label: Self-serve signup
-  confidence: medium
+  label: Freemium · Self-serve signup
+  confidence: high
   source:
+  - plans
   - authentication
-  generated: '2026-07-22'
+  - rate-limits
+  - security
+  generated: '2026-09-03'
   method: derived
 image: https://www.structify.ai/assets/site/structify-homepage-hero.png
 x-type: company
@@ -514,6 +517,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/structify-capability-edges.yml
+  name: Structify Business Capability Map
 - type: Overlay
   url: overlays/structify-openapi-overlay.yaml
 - type: DeveloperPortal
@@ -564,8 +570,9 @@ common:
   url: security/structify-trust-center.yml
 - type: DomainSecurity
   url: security/structify-domain-security.yml
-- type: MCPServer
+- type: X-MCPServerCandidate
   url: mcp/structify-mcp.yml
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
 - type: Webhooks
   url: asyncapi/structify-events-webhooks.yml
 - type: AgenticAccess
