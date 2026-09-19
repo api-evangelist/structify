@@ -171,7 +171,7 @@ apis:
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
   tags:
-  - Dataset
+  - Datasets
   tags_raw:
   - dataset
   properties:
@@ -308,7 +308,7 @@ apis:
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
   tags:
-  - Server
+  - Servers
   tags_raw:
   - server
   properties:
