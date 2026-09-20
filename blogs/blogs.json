@@ -5,10 +5,17 @@
       "source": "https://docs.structify.ai/api-reference/quickstart",
       "feed_url": "https://www.structify.ai/blog/rss.xml",
       "title": "",
-      "saved": 1,
+      "saved": 0,
       "method": "discovered"
+    },
+    {
+      "source": "https://www.structify.ai/blog/rss.xml",
+      "feed_url": "https://www.structify.ai/blog/rss.xml",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
     }
   ],
-  "post_count": 1,
-  "fetched": "2026-09-13T13:00:00Z"
+  "post_count": 29,
+  "fetched": "2026-09-19T20:17:39Z"
 }
