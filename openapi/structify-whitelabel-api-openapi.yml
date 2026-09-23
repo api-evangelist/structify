@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   contact:
     email: team@structify.ai
@@ -7,7 +7,7 @@ info:
   license:
     name: Discuss directly with founders for license.
     url: https://structify.ai
-  title: Structify account whitelabel API
+  title: Structify Whitelabel API
   version: 0.1.0
 servers:
 - description: Production server
@@ -49,6 +49,8 @@ paths:
       - api_key: []
       tags:
       - whitelabel
+      summary: Whitelabel estimate cost
+      x-summary-source: derived
   /whitelabel/{service}/{path}:
     get:
       operationId: whitelabel_proxy_get
@@ -77,6 +79,8 @@ paths:
       - api_key: []
       tags:
       - whitelabel
+      summary: Whitelabel proxy get
+      x-summary-source: derived
     post:
       operationId: whitelabel_proxy_post
       parameters:
@@ -104,6 +108,8 @@ paths:
       - api_key: []
       tags:
       - whitelabel
+      summary: Whitelabel proxy post
+      x-summary-source: derived
 components:
   schemas:
     WhitelabelCostEstimateResponse:

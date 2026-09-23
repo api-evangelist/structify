@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   contact:
     email: team@structify.ai
@@ -7,7 +7,7 @@ info:
   license:
     name: Discuss directly with founders for license.
     url: https://structify.ai
-  title: Structify account code API
+  title: Structify Code API
   version: 0.1.0
 servers:
 - description: Production server
@@ -19,7 +19,7 @@ security:
 - session_token: []
 tags:
 - description: Code generation endpoints
-  name: code
+  name: Code
 paths:
   /code/apply-manual-edit/{chat_id}:
     post:
@@ -53,14 +53,14 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - code
+      - Code
+      summary: Apply manual edit
+      x-summary-source: derived
   /code/generate-code:
     post:
       description: 'Events are streamed via WebSocket connection. This endpoint returns immediately
 
-        after starting the generation process.
-
-        '
+        after starting the generation process.'
       operationId: generate_code
       requestBody:
         content:
@@ -104,16 +104,14 @@ paths:
       security:
       - session_token: []
       - api_key: []
-      summary: Generates code based on the provided prompt.
+      summary: Generates code based on the provided prompt
       tags:
-      - code
+      - Code
   /code/interrupt-generation:
     post:
       description: 'This sets an interrupt flag that will cause the generation to stop gracefully
 
-        at the next checkpoint (before publishing the next event).
-
-        '
+        at the next checkpoint (before publishing the next event).'
       operationId: interrupt_generation
       requestBody:
         content:
@@ -127,43 +125,23 @@ paths:
       security:
       - api_key: []
       - session_token: []
-      summary: Interrupts an ongoing code generation for the specified chat session.
+      summary: Interrupts an ongoing code generation for the specified chat session
       tags:
-      - code
+      - Code
 components:
   schemas:
-    ConnectorId:
-      format: uuid
-      type: string
-    InterruptGenerationRequest:
-      properties:
-        chatSessionId:
-          $ref: '#/components/schemas/ChatSessionId'
-      required:
-      - chatSessionId
-      type: object
-    ApplyManualEditRequest:
-      properties:
-        code:
-          type: string
-        filename:
-          type: string
-      required:
-      - filename
-      - code
-      type: object
     GenerateCodeRequest:
       properties:
         assistantMessageId:
           format: uuid
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         chatSessionId:
           $ref: '#/components/schemas/ChatSessionId'
         config:
           allOf:
           - $ref: '#/components/schemas/ChatSessionConfig'
-          nullable: true
         connectorIds:
           items:
             $ref: '#/components/schemas/ConnectorId'
@@ -175,38 +153,43 @@ components:
         overridePreviousMessageId:
           allOf:
           - $ref: '#/components/schemas/ChatMessageId'
-          nullable: true
         prompt:
           type: string
         triggerWorkflowExecution:
           type: boolean
         userMessageId:
           format: uuid
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       required:
       - prompt
       - chatSessionId
       type: object
-    ChatSessionConfig:
-      description: Configuration for chat session with system prompt and LLM key
+    ChatSessionId:
+      format: uuid
+      type: string
+    ConnectorId:
+      format: uuid
+      type: string
+    InterruptGenerationRequest:
       properties:
-        llm_key:
-          allOf:
-          - $ref: '#/components/schemas/LLMKey'
-          nullable: true
-        max_steps:
-          format: int32
-          minimum: 0
-          nullable: true
-          type: integer
-        reminder_message:
-          nullable: true
-          type: string
-        system_prompt:
-          nullable: true
-          type: string
+        chatSessionId:
+          $ref: '#/components/schemas/ChatSessionId'
+      required:
+      - chatSessionId
       type: object
+    ErrorResponse:
+      description: Standard error response
+      properties:
+        error:
+          type: string
+      required:
+      - error
+      type: object
+    ChatMessageId:
+      format: uuid
+      type: string
     LLMKey:
       description: 'LLM model keys available in the system. Format: <provider>.<model-name>'
       enum:
@@ -235,20 +218,37 @@ components:
       - vertex_anthropic.claude-sonnet-4-5-vertex
       - vertex_anthropic.claude-opus-4-5-vertex
       type: string
-    ChatSessionId:
-      format: uuid
-      type: string
-    ErrorResponse:
-      description: Standard error response
+    ApplyManualEditRequest:
       properties:
-        error:
+        code:
+          type: string
+        filename:
           type: string
       required:
-      - error
+      - filename
+      - code
       type: object
-    ChatMessageId:
-      format: uuid
-      type: string
+    ChatSessionConfig:
+      description: Configuration for chat session with system prompt and LLM key
+      properties:
+        llm_key:
+          allOf:
+          - $ref: '#/components/schemas/LLMKey'
+        max_steps:
+          format: int32
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        reminder_message:
+          type:
+          - string
+          - 'null'
+        system_prompt:
+          type:
+          - string
+          - 'null'
+      type: object
   securitySchemes:
     api_key:
       in: header

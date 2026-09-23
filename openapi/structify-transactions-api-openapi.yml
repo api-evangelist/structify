@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   contact:
     email: team@structify.ai
@@ -7,7 +7,7 @@ info:
   license:
     name: Discuss directly with founders for license.
     url: https://structify.ai
-  title: Structify account transactions API
+  title: Structify Transactions API
   version: 0.1.0
 servers:
 - description: Production server
@@ -18,7 +18,7 @@ security:
 - api_key: []
 - session_token: []
 tags:
-- name: transactions
+- name: Transactions
 paths:
   /user/transactions/stripe/create_portal_session:
     post:
@@ -40,7 +40,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - transactions
+      - Transactions
+      summary: Create stripe portal session
+      x-summary-source: derived
   /user/transactions/stripe/create_session:
     post:
       operationId: create_stripe_session
@@ -61,7 +63,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - transactions
+      - Transactions
+      summary: Create stripe session
+      x-summary-source: derived
   /user/transactions/stripe/create_subscription:
     post:
       operationId: create_stripe_subscription
@@ -82,9 +86,24 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - transactions
+      - Transactions
+      summary: Create stripe subscription
+      x-summary-source: derived
 components:
   schemas:
+    CreateSubscriptionRequest:
+      properties:
+        origin:
+          type: string
+        plan:
+          $ref: '#/components/schemas/SubscriptionPlan'
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+      required:
+      - origin
+      - plan
+      - team_id
+      type: object
     CreatePortalRequest:
       properties:
         return_url:
@@ -94,6 +113,13 @@ components:
       required:
       - return_url
       - team_id
+      type: object
+    CreateSessionResponse:
+      properties:
+        url:
+          type: string
+      required:
+      - url
       type: object
     CreateSessionRequest:
       properties:
@@ -115,26 +141,6 @@ components:
       - Pro
       - Team
       type: string
-    CreateSessionResponse:
-      properties:
-        url:
-          type: string
-      required:
-      - url
-      type: object
-    CreateSubscriptionRequest:
-      properties:
-        origin:
-          type: string
-        plan:
-          $ref: '#/components/schemas/SubscriptionPlan'
-        team_id:
-          $ref: '#/components/schemas/TeamId'
-      required:
-      - origin
-      - plan
-      - team_id
-      type: object
     TeamId:
       format: uuid
       type: string

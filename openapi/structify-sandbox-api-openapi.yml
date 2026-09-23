@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   contact:
     email: team@structify.ai
@@ -7,7 +7,7 @@ info:
   license:
     name: Discuss directly with founders for license.
     url: https://structify.ai
-  title: Structify account sandbox API
+  title: Structify Sandbox API
   version: 0.1.0
 servers:
 - description: Production server
@@ -19,7 +19,7 @@ security:
 - session_token: []
 tags:
 - description: Sandbox management endpoints
-  name: sandbox
+  name: Sandbox
 paths:
   /sandbox/list/{chat_id}:
     get:
@@ -62,7 +62,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - sandbox
+      - Sandbox
+      summary: Sandbox list
+      x-summary-source: derived
   /sandbox/live/{chat_id}:
     post:
       operationId: sandbox_get_live
@@ -108,7 +110,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - sandbox
+      - Sandbox
+      summary: Sandbox get live
+      x-summary-source: derived
   /sandbox/{sandbox_id}/metrics:
     get:
       operationId: sandbox_get_metrics
@@ -148,7 +152,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - sandbox
+      - Sandbox
+      summary: Sandbox get metrics
+      x-summary-source: derived
   /sandbox/{sandbox_id}/status:
     patch:
       operationId: sandbox_update_status
@@ -194,17 +200,16 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - sandbox
+      - Sandbox
+      summary: Sandbox update status
+      x-summary-source: derived
 components:
   schemas:
-    SandboxId:
+    WorkflowSessionNodeId:
       format: uuid
       type: string
-    SandboxStatus:
-      enum:
-      - alive
-      - paused
-      - terminated
+    UserSessionId:
+      format: uuid
       type: string
     SandboxMetricsSandbox:
       properties:
@@ -226,127 +231,6 @@ components:
       - remaining_seconds
       - total_timeout_seconds
       type: object
-    SandboxMetricsProcess:
-      properties:
-        cpu_percent:
-          format: double
-          type: number
-        memory_mb:
-          format: double
-          type: number
-      required:
-      - memory_mb
-      - cpu_percent
-      type: object
-    ExplorationRunId:
-      format: uuid
-      type: string
-    UpdateSandboxStatusRequest:
-      properties:
-        status:
-          type: string
-      required:
-      - status
-      type: object
-    ChatSessionId:
-      format: uuid
-      type: string
-    Sandbox:
-      properties:
-        api_url:
-          nullable: true
-          type: string
-        chat_session_id:
-          allOf:
-          - $ref: '#/components/schemas/ChatSessionId'
-          nullable: true
-        created_at:
-          format: date-time
-          type: string
-        exploration_run_id:
-          allOf:
-          - $ref: '#/components/schemas/ExplorationRunId'
-          nullable: true
-        id:
-          $ref: '#/components/schemas/SandboxId'
-        latest_node:
-          allOf:
-          - $ref: '#/components/schemas/WorkflowSessionNodeId'
-          nullable: true
-        provider:
-          $ref: '#/components/schemas/SandboxProvider'
-        provider_id:
-          type: string
-        resumed_at:
-          format: date-time
-          nullable: true
-          type: string
-        session_id:
-          allOf:
-          - $ref: '#/components/schemas/UserSessionId'
-          nullable: true
-        status:
-          $ref: '#/components/schemas/SandboxStatus'
-        team_id:
-          $ref: '#/components/schemas/TeamId'
-        tunnel_url:
-          nullable: true
-          type: string
-        updated_at:
-          format: date-time
-          type: string
-      required:
-      - id
-      - team_id
-      - provider_id
-      - status
-      - created_at
-      - updated_at
-      - provider
-      type: object
-    SandboxProvider:
-      enum:
-      - modal
-      - daytona
-      type: string
-    ErrorResponse:
-      description: Standard error response
-      properties:
-        error:
-          type: string
-      required:
-      - error
-      type: object
-    UserSessionId:
-      format: uuid
-      type: string
-    SandboxMetricsResponse:
-      properties:
-        cpu_percent:
-          format: double
-          type: number
-        memory:
-          $ref: '#/components/schemas/SandboxMetricsMemory'
-        process:
-          $ref: '#/components/schemas/SandboxMetricsProcess'
-        sandbox:
-          $ref: '#/components/schemas/SandboxMetricsSandbox'
-      required:
-      - cpu_percent
-      - memory
-      - process
-      - sandbox
-      type: object
-    GetSandboxRequest:
-      properties:
-        modal_control_service_url_override:
-          description: Override URL for the modal control service (for testing/development)
-          nullable: true
-          type: string
-      type: object
-    WorkflowSessionNodeId:
-      format: uuid
-      type: string
     SandboxMetricsMemory:
       properties:
         available_mb:
@@ -367,8 +251,132 @@ components:
       - percent
       - available_mb
       type: object
+    UpdateSandboxStatusRequest:
+      properties:
+        status:
+          type: string
+      required:
+      - status
+      type: object
+    SandboxMetricsResponse:
+      properties:
+        cpu_percent:
+          format: double
+          type: number
+        memory:
+          $ref: '#/components/schemas/SandboxMetricsMemory'
+        process:
+          $ref: '#/components/schemas/SandboxMetricsProcess'
+        sandbox:
+          $ref: '#/components/schemas/SandboxMetricsSandbox'
+      required:
+      - cpu_percent
+      - memory
+      - process
+      - sandbox
+      type: object
+    SandboxMetricsProcess:
+      properties:
+        cpu_percent:
+          format: double
+          type: number
+        memory_mb:
+          format: double
+          type: number
+      required:
+      - memory_mb
+      - cpu_percent
+      type: object
+    SandboxId:
+      format: uuid
+      type: string
+    ChatSessionId:
+      format: uuid
+      type: string
+    SandboxProvider:
+      enum:
+      - modal
+      - daytona
+      type: string
+    ErrorResponse:
+      description: Standard error response
+      properties:
+        error:
+          type: string
+      required:
+      - error
+      type: object
+    GetSandboxRequest:
+      properties:
+        modal_control_service_url_override:
+          description: Override URL for the modal control service (for testing/development)
+          type:
+          - string
+          - 'null'
+      type: object
+    ExplorationRunId:
+      format: uuid
+      type: string
     TeamId:
       format: uuid
+      type: string
+    Sandbox:
+      properties:
+        api_url:
+          type:
+          - string
+          - 'null'
+        chat_session_id:
+          allOf:
+          - $ref: '#/components/schemas/ChatSessionId'
+        created_at:
+          format: date-time
+          type: string
+        exploration_run_id:
+          allOf:
+          - $ref: '#/components/schemas/ExplorationRunId'
+        id:
+          $ref: '#/components/schemas/SandboxId'
+        latest_node:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowSessionNodeId'
+        provider:
+          $ref: '#/components/schemas/SandboxProvider'
+        provider_id:
+          type: string
+        resumed_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        session_id:
+          allOf:
+          - $ref: '#/components/schemas/UserSessionId'
+        status:
+          $ref: '#/components/schemas/SandboxStatus'
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+        tunnel_url:
+          type:
+          - string
+          - 'null'
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - id
+      - team_id
+      - provider_id
+      - status
+      - created_at
+      - updated_at
+      - provider
+      type: object
+    SandboxStatus:
+      enum:
+      - alive
+      - paused
+      - terminated
       type: string
   securitySchemes:
     api_key:

@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   contact:
     email: team@structify.ai
@@ -7,7 +7,7 @@ info:
   license:
     name: Discuss directly with founders for license.
     url: https://structify.ai
-  title: Structify account teams API
+  title: Structify Teams API
   version: 0.1.0
 servers:
 - description: Production server
@@ -18,7 +18,7 @@ security:
 - api_key: []
 - session_token: []
 tags:
-- name: teams
+- name: Teams
 paths:
   /teams/files/{token}:
     get:
@@ -41,7 +41,9 @@ paths:
         '404':
           description: File not found or token expired.
       tags:
-      - teams
+      - Teams
+      summary: Download teams file
+      x-summary-source: derived
   /teams/messages:
     post:
       description: 'This endpoint receives activities from Teams when users message the bot.
@@ -63,37 +65,50 @@ paths:
           description: Activity processed successfully
       summary: Handles Microsoft Teams Bot Framework webhook messages
       tags:
-      - teams
+      - Teams
 components:
   schemas:
     TeamsEventResponse:
       properties:
         message:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         ok:
           type: boolean
       required:
       - ok
       type: object
-    TeamsConversationAccount:
+    TeamsChannelAccount:
       properties:
-        conversationType:
-          nullable: true
-          type: string
+        aadObjectId:
+          type:
+          - string
+          - 'null'
         id:
           type: string
-        isGroup:
-          nullable: true
-          type: boolean
         name:
-          nullable: true
-          type: string
-        tenantId:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       required:
       - id
+      type: object
+    TeamsAttachment:
+      properties:
+        content: {}
+        contentType:
+          type: string
+        contentUrl:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+      required:
+      - contentType
       type: object
     TeamsActivityType:
       enum:
@@ -102,82 +117,81 @@ components:
       - conversationUpdate
       - other
       type: string
+    TeamsConversationAccount:
+      properties:
+        conversationType:
+          type:
+          - string
+          - 'null'
+        id:
+          type: string
+        isGroup:
+          type:
+          - boolean
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        tenantId:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      type: object
     TeamsActivity:
       properties:
         attachments:
           items:
             $ref: '#/components/schemas/TeamsAttachment'
-          nullable: true
-          type: array
+          type:
+          - array
+          - 'null'
         channelId:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         conversation:
           allOf:
           - $ref: '#/components/schemas/TeamsConversationAccount'
-          nullable: true
         from:
           allOf:
           - $ref: '#/components/schemas/TeamsChannelAccount'
-          nullable: true
         id:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         membersAdded:
           items:
             $ref: '#/components/schemas/TeamsChannelAccount'
-          nullable: true
-          type: array
+          type:
+          - array
+          - 'null'
         recipient:
           allOf:
           - $ref: '#/components/schemas/TeamsChannelAccount'
-          nullable: true
         replyToId:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         serviceUrl:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         text:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         timestamp:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         type:
           $ref: '#/components/schemas/TeamsActivityType'
-        value:
-          nullable: true
+        value: {}
       required:
       - type
-      type: object
-    TeamsChannelAccount:
-      properties:
-        aadObjectId:
-          nullable: true
-          type: string
-        id:
-          type: string
-        name:
-          nullable: true
-          type: string
-      required:
-      - id
-      type: object
-    TeamsAttachment:
-      properties:
-        content:
-          nullable: true
-        contentType:
-          type: string
-        contentUrl:
-          nullable: true
-          type: string
-        name:
-          nullable: true
-          type: string
-      required:
-      - contentType
       type: object
   securitySchemes:
     api_key:

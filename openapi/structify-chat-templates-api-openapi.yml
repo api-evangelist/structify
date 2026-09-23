@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   contact:
     email: team@structify.ai
@@ -7,7 +7,7 @@ info:
   license:
     name: Discuss directly with founders for license.
     url: https://structify.ai
-  title: Structify account chat_templates API
+  title: Structify Chat Templates API
   version: 0.1.0
 servers:
 - description: Production server
@@ -66,11 +66,32 @@ paths:
       - session_token: []
       tags:
       - chat_templates
+      summary: Get chat template
+      x-summary-source: derived
 components:
   schemas:
+    ChatTemplateId:
+      format: uuid
+      type: string
+    ChatSessionId:
+      format: uuid
+      type: string
     UserId:
       format: uuid
       type: string
+    TemplateQuestion:
+      properties:
+        options:
+          items:
+            type: string
+          type:
+          - array
+          - 'null'
+        prompt:
+          type: string
+      required:
+      - prompt
+      type: object
     ChatTemplate:
       properties:
         chat_session_id:
@@ -115,24 +136,6 @@ components:
       - created_at
       - updated_at
       - questions
-      type: object
-    ChatSessionId:
-      format: uuid
-      type: string
-    ChatTemplateId:
-      format: uuid
-      type: string
-    TemplateQuestion:
-      properties:
-        options:
-          items:
-            type: string
-          nullable: true
-          type: array
-        prompt:
-          type: string
-      required:
-      - prompt
       type: object
   securitySchemes:
     api_key:

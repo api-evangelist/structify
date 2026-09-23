@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   contact:
     email: team@structify.ai
@@ -7,7 +7,7 @@ info:
   license:
     name: Discuss directly with founders for license.
     url: https://structify.ai
-  title: Structify account project API
+  title: Structify Project API
   version: 0.1.0
 servers:
 - description: Production server
@@ -19,7 +19,7 @@ security:
 - session_token: []
 tags:
 - description: Project management endpoints
-  name: project
+  name: Project
 paths:
   /team/{team_id}/project/{project_id}:
     delete:
@@ -66,7 +66,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - project
+      - Project
+      summary: Project delete
+      x-summary-source: derived
     get:
       operationId: project_get
       parameters:
@@ -111,7 +113,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - project
+      - Project
+      summary: Project get
+      x-summary-source: derived
     patch:
       operationId: project_update
       parameters:
@@ -162,7 +166,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - project
+      - Project
+      summary: Project update
+      x-summary-source: derived
   /team/{team_id}/projects:
     get:
       operationId: project_list
@@ -202,7 +208,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - project
+      - Project
+      summary: Project list
+      x-summary-source: derived
     post:
       operationId: project_create
       parameters:
@@ -247,59 +255,39 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - project
+      - Project
+      summary: Project create
+      x-summary-source: derived
 components:
   schemas:
+    UpdateProjectRequest:
+      properties:
+        collaborators:
+          items:
+            $ref: '#/components/schemas/ProjectCollaboratorInput'
+          type:
+          - array
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        visibility:
+          allOf:
+          - $ref: '#/components/schemas/ProjectVisibility'
+      type: object
     ProjectVisibility:
       enum:
       - private
       - shared_with_team
       type: string
-    DeleteProjectResponse:
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      type: object
     UserId:
       format: uuid
       type: string
-    TeamId:
-      format: uuid
-      type: string
-    ProjectCollaboratorInput:
-      properties:
-        email:
-          type: string
-        role:
-          $ref: '#/components/schemas/ChatSessionRole'
-      required:
-      - email
-      - role
-      type: object
-    ProjectId:
-      format: uuid
-      type: string
-    ListProjectsResponse:
-      properties:
-        projects:
-          items:
-            $ref: '#/components/schemas/Project'
-          type: array
-      required:
-      - projects
-      type: object
-    CreateProjectRequest:
-      properties:
-        description:
-          nullable: true
-          type: string
-        name:
-          type: string
-      required:
-      - name
-      type: object
     ProjectMember:
       properties:
         created_at:
@@ -329,23 +317,24 @@ components:
       required:
       - error
       type: object
-    UpdateProjectRequest:
+    ListProjectsResponse:
       properties:
-        collaborators:
+        projects:
           items:
-            $ref: '#/components/schemas/ProjectCollaboratorInput'
-          nullable: true
+            $ref: '#/components/schemas/Project'
           type: array
-        description:
-          nullable: true
+      required:
+      - projects
+      type: object
+    ProjectCollaboratorInput:
+      properties:
+        email:
           type: string
-        name:
-          nullable: true
-          type: string
-        visibility:
-          allOf:
-          - $ref: '#/components/schemas/ProjectVisibility'
-          nullable: true
+        role:
+          $ref: '#/components/schemas/ChatSessionRole'
+      required:
+      - email
+      - role
       type: object
     Project:
       properties:
@@ -353,8 +342,9 @@ components:
           format: date-time
           type: string
         description:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         id:
           $ref: '#/components/schemas/ProjectId'
         name:
@@ -374,6 +364,36 @@ components:
       - updated_at
       - visibility
       type: object
+    CreateProjectRequest:
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+      required:
+      - name
+      type: object
+    TeamId:
+      format: uuid
+      type: string
+    DeleteProjectResponse:
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      type: object
+    ChatSessionRole:
+      enum:
+      - viewer
+      - editor
+      - owner
+      type: string
+    ProjectId:
+      format: uuid
+      type: string
     ProjectWithMembers:
       allOf:
       - $ref: '#/components/schemas/Project'
@@ -385,12 +405,6 @@ components:
         required:
         - members
         type: object
-    ChatSessionRole:
-      enum:
-      - viewer
-      - editor
-      - owner
-      type: string
   securitySchemes:
     api_key:
       in: header

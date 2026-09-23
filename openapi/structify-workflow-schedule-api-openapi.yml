@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   contact:
     email: team@structify.ai
@@ -7,7 +7,7 @@ info:
   license:
     name: Discuss directly with founders for license.
     url: https://structify.ai
-  title: Structify account workflow_schedule API
+  title: Structify Workflow Schedule API
   version: 0.1.0
 servers:
 - description: Production server
@@ -36,6 +36,8 @@ paths:
           description: Access denied
       tags:
       - workflow_schedule
+      summary: Get workflow schedules for user
+      x-summary-source: derived
   /workflow-schedule/{chat_session_id}:
     get:
       operationId: get_workflow_schedules_for_chat
@@ -53,7 +55,6 @@ paths:
               schema:
                 allOf:
                 - $ref: '#/components/schemas/WorkflowScheduleInfo'
-                nullable: true
           description: Successfully retrieved workflow schedule
         '403':
           description: Access denied
@@ -61,6 +62,8 @@ paths:
           description: Chat session not found
       tags:
       - workflow_schedule
+      summary: Get workflow schedules for chat
+      x-summary-source: derived
     post:
       operationId: create_workflow_schedule
       parameters:
@@ -89,6 +92,8 @@ paths:
           description: Access denied
       tags:
       - workflow_schedule
+      summary: Create workflow schedule
+      x-summary-source: derived
   /workflow-schedule/{schedule_id}:
     delete:
       operationId: delete_workflow_schedule
@@ -108,6 +113,8 @@ paths:
           description: Workflow schedule not found
       tags:
       - workflow_schedule
+      summary: Delete workflow schedule
+      x-summary-source: derived
     put:
       operationId: update_workflow_schedule
       parameters:
@@ -138,6 +145,8 @@ paths:
           description: Workflow schedule not found
       tags:
       - workflow_schedule
+      summary: Update workflow schedule
+      x-summary-source: derived
   /workflow-schedule/{schedule_id}/pause:
     patch:
       operationId: pause_workflow_schedule
@@ -167,6 +176,8 @@ paths:
           description: Workflow schedule not found
       tags:
       - workflow_schedule
+      summary: Pause workflow schedule
+      x-summary-source: derived
   /workflow-schedule/{schedule_id}/run:
     post:
       operationId: run_workflow_schedule
@@ -186,6 +197,8 @@ paths:
           description: Workflow schedule not found
       tags:
       - workflow_schedule
+      summary: Run workflow schedule
+      x-summary-source: derived
   /workflow-schedule/{schedule_id}/sessions:
     post:
       operationId: get_workflow_schedule_sessions
@@ -215,14 +228,10 @@ paths:
           description: Workflow schedule not found
       tags:
       - workflow_schedule
+      summary: Get workflow schedule sessions
+      x-summary-source: derived
 components:
   schemas:
-    ChatMessageId:
-      format: uuid
-      type: string
-    WorkflowScheduleId:
-      format: uuid
-      type: string
     GetWorkflowScheduleSessionsRequest:
       properties:
         limit:
@@ -231,6 +240,154 @@ components:
         offset:
           format: int64
           type: integer
+      type: object
+    PauseWorkflowScheduleRequest:
+      properties:
+        paused:
+          type: boolean
+      required:
+      - paused
+      type: object
+    UpdateWorkflowScheduleRequest:
+      properties:
+        cron_schedule:
+          type:
+          - string
+          - 'null'
+        git_commit_hash:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        paused:
+          type:
+          - boolean
+          - 'null'
+      type: object
+    ChatSessionId:
+      format: uuid
+      type: string
+    CreateWorkflowScheduleRequest:
+      properties:
+        cron_schedule:
+          type:
+          - string
+          - 'null'
+        git_commit_hash:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+      required:
+      - name
+      type: object
+    ChatVisibility:
+      enum:
+      - private
+      - shared_with_team
+      - shared_with_team_view
+      - public
+      type: string
+    WorkflowScheduleId:
+      format: uuid
+      type: string
+    WorkflowSessionId:
+      format: uuid
+      type: string
+    ChatMessageId:
+      format: uuid
+      type: string
+    WorkflowScheduleInfo:
+      properties:
+        chat_session_id:
+          $ref: '#/components/schemas/ChatSessionId'
+        cron_schedule:
+          type:
+          - string
+          - 'null'
+        git_commit_hash:
+          type:
+          - string
+          - 'null'
+        id:
+          $ref: '#/components/schemas/WorkflowScheduleId'
+        name:
+          type: string
+        next_run_time:
+          type:
+          - string
+          - 'null'
+        owner_email:
+          type:
+          - string
+          - 'null'
+        paused:
+          type: boolean
+        updated_at:
+          type:
+          - string
+          - 'null'
+        visibility:
+          allOf:
+          - $ref: '#/components/schemas/ChatVisibility'
+      required:
+      - id
+      - name
+      - chat_session_id
+      - paused
+      type: object
+    WorkflowSession:
+      properties:
+        aborted:
+          type: boolean
+        chat_session_id:
+          $ref: '#/components/schemas/ChatSessionId'
+        created_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        dag_ready:
+          type: boolean
+        dag_ready_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        dashboard_layout_proto:
+          format: binary
+          type:
+          - string
+          - 'null'
+        error_message:
+          type:
+          - string
+          - 'null'
+        error_traceback:
+          type:
+          - string
+          - 'null'
+        id:
+          $ref: '#/components/schemas/WorkflowSessionId'
+        parent_chat_message_id:
+          allOf:
+          - $ref: '#/components/schemas/ChatMessageId'
+        updated_at:
+          format: date-time
+          type: string
+        workflow_schedule_id:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowScheduleId'
+      required:
+      - id
+      - chat_session_id
+      - updated_at
+      - dag_ready
+      - aborted
       type: object
     GetWorkflowScheduleSessionsResponse:
       properties:
@@ -244,135 +401,6 @@ components:
       required:
       - sessions
       - total_count
-      type: object
-    WorkflowSession:
-      properties:
-        aborted:
-          type: boolean
-        chat_session_id:
-          $ref: '#/components/schemas/ChatSessionId'
-        created_at:
-          format: date-time
-          nullable: true
-          type: string
-        dag_ready:
-          type: boolean
-        dag_ready_at:
-          format: date-time
-          nullable: true
-          type: string
-        dashboard_layout_proto:
-          format: binary
-          nullable: true
-          type: string
-        error_message:
-          nullable: true
-          type: string
-        error_traceback:
-          nullable: true
-          type: string
-        id:
-          $ref: '#/components/schemas/WorkflowSessionId'
-        parent_chat_message_id:
-          allOf:
-          - $ref: '#/components/schemas/ChatMessageId'
-          nullable: true
-        updated_at:
-          format: date-time
-          type: string
-        workflow_schedule_id:
-          allOf:
-          - $ref: '#/components/schemas/WorkflowScheduleId'
-          nullable: true
-      required:
-      - id
-      - chat_session_id
-      - updated_at
-      - dag_ready
-      - aborted
-      type: object
-    CreateWorkflowScheduleRequest:
-      properties:
-        cron_schedule:
-          nullable: true
-          type: string
-        git_commit_hash:
-          nullable: true
-          type: string
-        name:
-          type: string
-      required:
-      - name
-      type: object
-    ChatVisibility:
-      enum:
-      - private
-      - shared_with_team
-      - shared_with_team_view
-      - public
-      type: string
-    ChatSessionId:
-      format: uuid
-      type: string
-    WorkflowSessionId:
-      format: uuid
-      type: string
-    WorkflowScheduleInfo:
-      properties:
-        chat_session_id:
-          $ref: '#/components/schemas/ChatSessionId'
-        cron_schedule:
-          nullable: true
-          type: string
-        git_commit_hash:
-          nullable: true
-          type: string
-        id:
-          $ref: '#/components/schemas/WorkflowScheduleId'
-        name:
-          type: string
-        next_run_time:
-          nullable: true
-          type: string
-        owner_email:
-          nullable: true
-          type: string
-        paused:
-          type: boolean
-        updated_at:
-          nullable: true
-          type: string
-        visibility:
-          allOf:
-          - $ref: '#/components/schemas/ChatVisibility'
-          nullable: true
-      required:
-      - id
-      - name
-      - chat_session_id
-      - paused
-      type: object
-    PauseWorkflowScheduleRequest:
-      properties:
-        paused:
-          type: boolean
-      required:
-      - paused
-      type: object
-    UpdateWorkflowScheduleRequest:
-      properties:
-        cron_schedule:
-          nullable: true
-          type: string
-        git_commit_hash:
-          nullable: true
-          type: string
-        name:
-          nullable: true
-          type: string
-        paused:
-          nullable: true
-          type: boolean
       type: object
   securitySchemes:
     api_key:

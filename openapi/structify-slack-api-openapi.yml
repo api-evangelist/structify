@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   contact:
     email: team@structify.ai
@@ -7,7 +7,7 @@ info:
   license:
     name: Discuss directly with founders for license.
     url: https://structify.ai
-  title: Structify account slack API
+  title: Structify Slack API
   version: 0.1.0
 servers:
 - description: Production server
@@ -18,7 +18,7 @@ security:
 - api_key: []
 - session_token: []
 tags:
-- name: slack
+- name: Slack
 paths:
   /slack/events:
     post:
@@ -43,9 +43,35 @@ paths:
           description: Event processed successfully
       summary: Handles Slack Events API webhooks for app mentions
       tags:
-      - slack
+      - Slack
 components:
   schemas:
+    SlackFile:
+      properties:
+        filetype:
+          type:
+          - string
+          - 'null'
+        id:
+          type: string
+        mimetype:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        url_private:
+          type:
+          - string
+          - 'null'
+        url_private_download:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - name
+      type: object
     SlackChallengeResponse:
       properties:
         challenge:
@@ -53,6 +79,10 @@ components:
       required:
       - challenge
       type: object
+    SlackApiResponse:
+      oneOf:
+      - $ref: '#/components/schemas/SlackChallengeResponse'
+      - $ref: '#/components/schemas/SlackEventResponse'
     SlackEvent:
       discriminator:
         propertyName: type
@@ -61,27 +91,33 @@ components:
           channel:
             type: string
           channel_type:
-            nullable: true
-            type: string
+            type:
+            - string
+            - 'null'
           client_msg_id:
-            nullable: true
-            type: string
+            type:
+            - string
+            - 'null'
           event_ts:
-            nullable: true
-            type: string
+            type:
+            - string
+            - 'null'
           files:
             items:
               $ref: '#/components/schemas/SlackFile'
-            nullable: true
-            type: array
+            type:
+            - array
+            - 'null'
           team:
-            nullable: true
-            type: string
+            type:
+            - string
+            - 'null'
           text:
             type: string
           thread_ts:
-            nullable: true
-            type: string
+            type:
+            - string
+            - 'null'
           ts:
             type: string
           type:
@@ -97,32 +133,6 @@ components:
         - channel
         - type
         type: object
-    SlackApiResponse:
-      oneOf:
-      - $ref: '#/components/schemas/SlackChallengeResponse'
-      - $ref: '#/components/schemas/SlackEventResponse'
-    SlackFile:
-      properties:
-        filetype:
-          nullable: true
-          type: string
-        id:
-          type: string
-        mimetype:
-          nullable: true
-          type: string
-        name:
-          type: string
-        url_private:
-          nullable: true
-          type: string
-        url_private_download:
-          nullable: true
-          type: string
-      required:
-      - id
-      - name
-      type: object
     SlackEventPayload:
       discriminator:
         propertyName: type
@@ -131,8 +141,9 @@ components:
           challenge:
             type: string
           token:
-            nullable: true
-            type: string
+            type:
+            - string
+            - 'null'
           type:
             enum:
             - url_verification
@@ -143,25 +154,29 @@ components:
         type: object
       - properties:
           api_app_id:
-            nullable: true
-            type: string
+            type:
+            - string
+            - 'null'
           authed_users:
             items:
               type: string
-            nullable: true
-            type: array
+            type:
+            - array
+            - 'null'
           event:
             $ref: '#/components/schemas/SlackEvent'
           event_context:
-            nullable: true
-            type: string
+            type:
+            - string
+            - 'null'
           event_id:
             type: string
           event_time:
             format: int64
             minimum: 0
-            nullable: true
-            type: integer
+            type:
+            - integer
+            - 'null'
           team_id:
             type: string
           type:
@@ -177,8 +192,9 @@ components:
     SlackEventResponse:
       properties:
         message:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         ok:
           type: boolean
       required:

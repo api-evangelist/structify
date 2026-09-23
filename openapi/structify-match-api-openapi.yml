@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   contact:
     email: team@structify.ai
@@ -7,7 +7,7 @@ info:
   license:
     name: Discuss directly with founders for license.
     url: https://structify.ai
-  title: Structify account match API
+  title: Structify Match API
   version: 0.1.0
 servers:
 - description: Production server
@@ -18,7 +18,7 @@ security:
 - api_key: []
 - session_token: []
 tags:
-- name: match
+- name: Match
 paths:
   /match/create_jobs:
     post:
@@ -42,9 +42,9 @@ paths:
       security:
       - api_key: []
       - session_token: []
-      summary: Create match jobs for all entities in a source table to match against a target table.
+      summary: Create match jobs for all entities in a source table to match against a target…
       tags:
-      - match
+      - Match
   /match/list_results:
     get:
       description: 'Returns paginated match results showing which entities from the source table
@@ -89,38 +89,11 @@ paths:
           description: List of match results for the source table
       security:
       - api_key: []
-      summary: Get all match results for entities in a source table.
+      summary: Get all match results for entities in a source table
       tags:
-      - match
+      - Match
 components:
   schemas:
-    CreateMatchJobsRequest:
-      properties:
-        conditioning:
-          description: Optional conditioning prompt for the LLM matcher
-          type: string
-        dataset:
-          description: Dataset name
-          type: string
-        node_id:
-          allOf:
-          - $ref: '#/components/schemas/WorkflowSessionNodeId'
-          nullable: true
-        source_table:
-          description: Source table name (entities to match from)
-          type: string
-        target_table:
-          description: Target table name (entities to match to)
-          type: string
-      required:
-      - dataset
-      - source_table
-      - target_table
-      - conditioning
-      type: object
-    JobId:
-      format: uuid
-      type: string
     CreateMatchJobsResponse:
       properties:
         count:
@@ -136,9 +109,35 @@ components:
       - job_ids
       - count
       type: object
-    EntityId:
+    JobId:
       format: uuid
       type: string
+    WorkflowSessionNodeId:
+      format: uuid
+      type: string
+    CreateMatchJobsRequest:
+      properties:
+        conditioning:
+          description: Optional conditioning prompt for the LLM matcher
+          type: string
+        dataset:
+          description: Dataset name
+          type: string
+        node_id:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowSessionNodeId'
+        source_table:
+          description: Source table name (entities to match from)
+          type: string
+        target_table:
+          description: Target table name (entities to match to)
+          type: string
+      required:
+      - dataset
+      - source_table
+      - target_table
+      - conditioning
+      type: object
     MatchResultId:
       format: uuid
       type: string
@@ -146,8 +145,9 @@ components:
       properties:
         confidence_score:
           format: double
-          nullable: true
-          type: number
+          type:
+          - number
+          - 'null'
         created_at:
           format: date-time
           type: string
@@ -161,14 +161,16 @@ components:
           $ref: '#/components/schemas/EntityId'
         source_entity_index:
           format: int32
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
         target_entity_id:
           $ref: '#/components/schemas/EntityId'
         target_entity_index:
           format: int32
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
       required:
       - id
       - job_id
@@ -177,7 +179,7 @@ components:
       - match_reason
       - created_at
       type: object
-    WorkflowSessionNodeId:
+    EntityId:
       format: uuid
       type: string
   securitySchemes:

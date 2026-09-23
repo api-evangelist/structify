@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   contact:
     email: team@structify.ai
@@ -7,7 +7,7 @@ info:
   license:
     name: Discuss directly with founders for license.
     url: https://structify.ai
-  title: Structify account wiki API
+  title: Structify Wiki API
   version: 0.1.0
 servers:
 - description: Production server
@@ -19,7 +19,7 @@ security:
 - session_token: []
 tags:
 - description: Team wiki page management endpoints
-  name: wiki
+  name: Wiki
 paths:
   /team/{team_id}/wiki:
     get:
@@ -47,7 +47,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - wiki
+      - Wiki
+      summary: List wiki pages
+      x-summary-source: derived
     post:
       operationId: create_wiki_page
       parameters:
@@ -81,7 +83,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - wiki
+      - Wiki
+      summary: Create wiki page
+      x-summary-source: derived
   /team/{team_id}/wiki/{slug}:
     delete:
       operationId: delete_wiki_page
@@ -109,7 +113,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - wiki
+      - Wiki
+      summary: Delete wiki page
+      x-summary-source: derived
     get:
       operationId: get_wiki_page
       parameters:
@@ -140,7 +146,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - wiki
+      - Wiki
+      summary: Get wiki page
+      x-summary-source: derived
     put:
       operationId: update_wiki_page
       parameters:
@@ -183,66 +191,14 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - wiki
+      - Wiki
+      summary: Update wiki page
+      x-summary-source: derived
 components:
   schemas:
-    CreateWikiPageRequest:
-      properties:
-        markdown:
-          type: string
-        slug:
-          type: string
-        title:
-          type: string
-      required:
-      - title
-      - slug
-      - markdown
-      type: object
-    ConnectorId:
+    ConnectorTableId:
       format: uuid
       type: string
-    UpdateWikiPageRequest:
-      properties:
-        base_version:
-          format: int32
-          nullable: true
-          type: integer
-        markdown:
-          type: string
-        title:
-          nullable: true
-          type: string
-      required:
-      - markdown
-      type: object
-    ConnectorColumnId:
-      format: uuid
-      type: string
-    ReferenceIdConnector:
-      properties:
-        id:
-          $ref: '#/components/schemas/ConnectorId'
-      required:
-      - id
-      type: object
-    ReferenceIdSchema:
-      properties:
-        id:
-          $ref: '#/components/schemas/ConnectorSchemaId'
-      required:
-      - id
-      type: object
-    TeamId:
-      format: uuid
-      type: string
-    ReferenceIdColumn:
-      properties:
-        id:
-          $ref: '#/components/schemas/ConnectorColumnId'
-      required:
-      - id
-      type: object
     ConnectorDatabaseId:
       format: uuid
       type: string
@@ -321,34 +277,6 @@ components:
       - is_deleted
       - path
       type: object
-    ReferenceIdDatabase:
-      properties:
-        id:
-          $ref: '#/components/schemas/ConnectorDatabaseId'
-      required:
-      - id
-      type: object
-    ReferenceIdTable:
-      properties:
-        id:
-          $ref: '#/components/schemas/ConnectorTableId'
-      required:
-      - id
-      type: object
-    ConnectorTableId:
-      format: uuid
-      type: string
-    WikiPageWithReferences:
-      allOf:
-      - $ref: '#/components/schemas/WikiPage'
-      - properties:
-          references:
-            items:
-              $ref: '#/components/schemas/WikiConnectorReference'
-            type: array
-        required:
-        - references
-        type: object
     WikiPage:
       properties:
         created_at:
@@ -377,6 +305,90 @@ components:
       - created_at
       - updated_at
       - version
+      type: object
+    ConnectorId:
+      format: uuid
+      type: string
+    ReferenceIdTable:
+      properties:
+        id:
+          $ref: '#/components/schemas/ConnectorTableId'
+      required:
+      - id
+      type: object
+    ConnectorColumnId:
+      format: uuid
+      type: string
+    UpdateWikiPageRequest:
+      properties:
+        base_version:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        markdown:
+          type: string
+        title:
+          type:
+          - string
+          - 'null'
+      required:
+      - markdown
+      type: object
+    ReferenceIdDatabase:
+      properties:
+        id:
+          $ref: '#/components/schemas/ConnectorDatabaseId'
+      required:
+      - id
+      type: object
+    ReferenceIdColumn:
+      properties:
+        id:
+          $ref: '#/components/schemas/ConnectorColumnId'
+      required:
+      - id
+      type: object
+    ReferenceIdConnector:
+      properties:
+        id:
+          $ref: '#/components/schemas/ConnectorId'
+      required:
+      - id
+      type: object
+    WikiPageWithReferences:
+      allOf:
+      - $ref: '#/components/schemas/WikiPage'
+      - properties:
+          references:
+            items:
+              $ref: '#/components/schemas/WikiConnectorReference'
+            type: array
+        required:
+        - references
+        type: object
+    CreateWikiPageRequest:
+      properties:
+        markdown:
+          type: string
+        slug:
+          type: string
+        title:
+          type: string
+      required:
+      - title
+      - slug
+      - markdown
+      type: object
+    TeamId:
+      format: uuid
+      type: string
+    ReferenceIdSchema:
+      properties:
+        id:
+          $ref: '#/components/schemas/ConnectorSchemaId'
+      required:
+      - id
       type: object
   securitySchemes:
     api_key:

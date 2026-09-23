@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   contact:
     email: team@structify.ai
@@ -7,7 +7,7 @@ info:
   license:
     name: Discuss directly with founders for license.
     url: https://structify.ai
-  title: Structify account source API
+  title: Structify Source API
   version: 0.1.0
 servers:
 - description: Production server
@@ -18,7 +18,7 @@ security:
 - api_key: []
 - session_token: []
 tags:
-- name: source
+- name: Source
 paths:
   /source/entity:
     delete:
@@ -41,7 +41,9 @@ paths:
         '404':
           description: Source entity not found
       tags:
-      - source
+      - Source
+      summary: Delete source entity
+      x-summary-source: derived
   /source/get_sources:
     get:
       operationId: source_get_sources
@@ -57,8 +59,9 @@ paths:
         name: property
         required: false
         schema:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       responses:
         '200':
           content:
@@ -70,7 +73,7 @@ paths:
           description: Source Information
       summary: Get all sources for a given entity
       tags:
-      - source
+      - Source
   /source/relationship:
     delete:
       operationId: delete_source_relationship
@@ -92,18 +95,61 @@ paths:
         '404':
           description: Source relationship not found
       tags:
-      - source
+      - Source
+      summary: Delete source relationship
+      x-summary-source: derived
 components:
   schemas:
-    DeleteSourceRelationshipParams:
+    ScraperId:
+      format: uuid
+      type: string
+    DeleteSourceEntityResponse:
+      properties:
+        message:
+          description: Optional message about the deletion
+          type: string
+        success:
+          description: Whether the deletion was successful
+          type: boolean
+      required:
+      - success
+      - message
+      type: object
+    Source:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        id:
+          $ref: '#/components/schemas/SourceId'
+        is_summary:
+          type: boolean
+        link:
+          allOf:
+          - $ref: '#/components/schemas/SourceLink'
+        location:
+          allOf:
+          - $ref: '#/components/schemas/SourceLocation'
+        scraper_id:
+          allOf:
+          - $ref: '#/components/schemas/ScraperId'
+        user_specified:
+          type: boolean
+      required:
+      - id
+      - user_specified
+      - is_summary
+      - created_at
+      type: object
+    DeleteSourceEntityParams:
       additionalProperties: false
       properties:
-        source_relationship_id:
-          $ref: '#/components/schemas/SourceRelationshipId'
+        source_entity_id:
+          $ref: '#/components/schemas/SourceEntityId'
       required:
-      - source_relationship_id
+      - source_entity_id
       type: object
-    SourceId:
+    SourceRelationshipId:
       format: uuid
       type: string
     SourceLocation:
@@ -149,53 +195,6 @@ components:
         required:
         - Page
         type: object
-    Source:
-      properties:
-        created_at:
-          format: date-time
-          type: string
-        id:
-          $ref: '#/components/schemas/SourceId'
-        is_summary:
-          type: boolean
-        link:
-          allOf:
-          - $ref: '#/components/schemas/SourceLink'
-          nullable: true
-        location:
-          allOf:
-          - $ref: '#/components/schemas/SourceLocation'
-          nullable: true
-        scraper_id:
-          allOf:
-          - $ref: '#/components/schemas/ScraperId'
-          nullable: true
-        user_specified:
-          type: boolean
-      required:
-      - id
-      - user_specified
-      - is_summary
-      - created_at
-      type: object
-    DeleteSourceEntityResponse:
-      properties:
-        message:
-          description: Optional message about the deletion
-          type: string
-        success:
-          description: Whether the deletion was successful
-          type: boolean
-      required:
-      - success
-      - message
-      type: object
-    EntityId:
-      format: uuid
-      type: string
-    SourceEntityId:
-      format: uuid
-      type: string
     SourceLink:
       oneOf:
       - properties:
@@ -234,18 +233,15 @@ components:
         required:
         - SecFiling
         type: object
-    DeleteSourceEntityParams:
+    DeleteSourceRelationshipParams:
       additionalProperties: false
       properties:
-        source_entity_id:
-          $ref: '#/components/schemas/SourceEntityId'
+        source_relationship_id:
+          $ref: '#/components/schemas/SourceRelationshipId'
       required:
-      - source_entity_id
+      - source_relationship_id
       type: object
-    ScraperId:
-      format: uuid
-      type: string
-    SourceRelationshipId:
+    SourceEntityId:
       format: uuid
       type: string
     DeleteSourceRelationshipResponse:
@@ -260,6 +256,12 @@ components:
       - success
       - message
       type: object
+    EntityId:
+      format: uuid
+      type: string
+    SourceId:
+      format: uuid
+      type: string
   securitySchemes:
     api_key:
       in: header

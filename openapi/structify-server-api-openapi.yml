@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   contact:
     email: team@structify.ai
@@ -7,7 +7,7 @@ info:
   license:
     name: Discuss directly with founders for license.
     url: https://structify.ai
-  title: Structify account server API
+  title: Structify Server API
   version: 0.1.0
 servers:
 - description: Production server
@@ -18,7 +18,7 @@ security:
 - api_key: []
 - session_token: []
 tags:
-- name: server
+- name: Server
 paths:
   /server/version:
     get:
@@ -38,7 +38,7 @@ paths:
           description: ''
       summary: Version
       tags:
-      - server
+      - Server
 components:
   schemas:
     ServerInformation:

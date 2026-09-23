@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   contact:
     email: team@structify.ai
@@ -7,7 +7,7 @@ info:
   license:
     name: Discuss directly with founders for license.
     url: https://structify.ai
-  title: Structify account admin API
+  title: Structify Admin API
   version: 0.1.0
 servers:
 - description: Production server
@@ -19,7 +19,7 @@ security:
 - session_token: []
 tags:
 - description: Admin endpoints
-  name: admin
+  name: Admin
 paths:
   /admin/chat/templates:
     get:
@@ -31,7 +31,6 @@ paths:
         schema:
           allOf:
           - $ref: '#/components/schemas/ChatSessionId'
-          nullable: true
       responses:
         '200':
           content:
@@ -47,7 +46,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin list chat templates
+      x-summary-source: derived
     post:
       operationId: admin_create_chat_template
       requestBody:
@@ -75,7 +76,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin create chat template
+      x-summary-source: derived
   /admin/chat/templates/{template_id}:
     patch:
       operationId: admin_update_chat_template
@@ -107,7 +110,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin update chat template
+      x-summary-source: derived
   /admin/connector-catalog:
     post:
       operationId: admin_create_connector_catalog
@@ -129,7 +134,7 @@ paths:
       - session_token: []
       summary: Create a new connector catalog entry
       tags:
-      - admin
+      - Admin
   /admin/connector-catalog/auth-methods:
     post:
       operationId: admin_create_connector_auth_method
@@ -151,7 +156,7 @@ paths:
       - session_token: []
       summary: Create a new connector auth method
       tags:
-      - admin
+      - Admin
   /admin/connector-catalog/auth-methods/{id}:
     patch:
       operationId: admin_update_connector_auth_method
@@ -179,7 +184,7 @@ paths:
       - session_token: []
       summary: Update a connector auth method
       tags:
-      - admin
+      - Admin
   /admin/connector-catalog/credential-fields:
     post:
       operationId: admin_create_connector_credential_field
@@ -201,7 +206,7 @@ paths:
       - session_token: []
       summary: Create a new connector credential field
       tags:
-      - admin
+      - Admin
   /admin/connector-catalog/credential-fields/batch:
     post:
       operationId: admin_batch_create_connector_credential_fields
@@ -225,7 +230,7 @@ paths:
       - session_token: []
       summary: Batch create connector credential fields
       tags:
-      - admin
+      - Admin
   /admin/connector-catalog/credential-fields/{id}:
     delete:
       operationId: admin_delete_connector_credential_field
@@ -245,7 +250,7 @@ paths:
       - session_token: []
       summary: Delete a connector credential field
       tags:
-      - admin
+      - Admin
     patch:
       operationId: admin_update_connector_credential_field
       parameters:
@@ -272,7 +277,7 @@ paths:
       - session_token: []
       summary: Update a connector credential field
       tags:
-      - admin
+      - Admin
   /admin/connector-catalog/nango-pending:
     get:
       operationId: admin_list_nango_pending
@@ -290,7 +295,7 @@ paths:
       - session_token: []
       summary: List Nango integrations that are not yet in the connector catalog
       tags:
-      - admin
+      - Admin
   /admin/connector-catalog/scopes:
     get:
       operationId: admin_list_connector_auth_method_scopes
@@ -311,7 +316,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin list connector auth method scopes
+      x-summary-source: derived
     post:
       operationId: admin_create_connector_auth_method_scope
       requestBody:
@@ -331,7 +338,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin create connector auth method scope
+      x-summary-source: derived
   /admin/connector-catalog/scopes/batch:
     post:
       operationId: admin_batch_create_connector_auth_method_scopes
@@ -352,7 +361,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin batch create connector auth method scopes
+      x-summary-source: derived
   /admin/connector-catalog/scopes/{id}:
     delete:
       operationId: admin_delete_connector_auth_method_scope
@@ -371,7 +382,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin delete connector auth method scope
+      x-summary-source: derived
     patch:
       operationId: admin_update_connector_auth_method_scope
       parameters:
@@ -399,7 +412,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin update connector auth method scope
+      x-summary-source: derived
   /admin/connector-catalog/{id}:
     delete:
       operationId: admin_delete_connector_catalog
@@ -418,7 +433,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin delete connector catalog
+      x-summary-source: derived
     patch:
       operationId: admin_update_connector_catalog
       parameters:
@@ -445,7 +462,7 @@ paths:
       - session_token: []
       summary: Update a connector catalog entry
       tags:
-      - admin
+      - Admin
   /admin/connector-catalog/{slug}/logo:
     put:
       operationId: admin_upload_connector_logo
@@ -472,7 +489,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin upload connector logo
+      x-summary-source: derived
   /admin/connector/clone:
     post:
       operationId: admin_clone_connectors
@@ -497,7 +516,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin clone connectors
+      x-summary-source: derived
   /admin/connector/datahub-config:
     post:
       operationId: admin_set_connector_datahub_config
@@ -522,7 +543,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin set connector datahub config
+      x-summary-source: derived
   /admin/connector/team/{team_id}:
     get:
       operationId: admin_list_team_connectors
@@ -546,7 +569,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin list team connectors
+      x-summary-source: derived
   /admin/critical:
     post:
       operationId: admin_report_critical
@@ -565,7 +590,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin report critical
+      x-summary-source: derived
   /admin/dataset/get_by_id:
     get:
       operationId: admin_dataset_get_by_id
@@ -588,7 +615,9 @@ paths:
       security:
       - api_key: []
       tags:
-      - admin
+      - Admin
+      summary: Admin dataset get by id
+      x-summary-source: derived
   /admin/functional_tests/create:
     post:
       description: Creates a new functional test with optional model and prompt overrides.
@@ -615,7 +644,7 @@ paths:
       - session_token: []
       summary: Create a new functional test
       tags:
-      - admin
+      - Admin
   /admin/functional_tests/link:
     post:
       description: Links a chat session to a functional test with a specific sample name and initial results.
@@ -638,7 +667,7 @@ paths:
       - session_token: []
       summary: Link a chat session to a functional test
       tags:
-      - admin
+      - Admin
   /admin/functional_tests/list:
     get:
       description: Gets all functional tests with their overrides and creation dates, ordered by most recent first.
@@ -659,7 +688,7 @@ paths:
       - session_token: []
       summary: List all functional tests
       tags:
-      - admin
+      - Admin
   /admin/functional_tests/results:
     get:
       description: 'Gets all results and chat IDs for either a specific functional test or a specific sample name.
@@ -673,13 +702,13 @@ paths:
         schema:
           allOf:
           - $ref: '#/components/schemas/FunctionalTestId'
-          nullable: true
       - in: query
         name: sample_name
         required: false
         schema:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       responses:
         '200':
           content:
@@ -696,7 +725,7 @@ paths:
       - session_token: []
       summary: Get results for a functional test or sample
       tags:
-      - admin
+      - Admin
   /admin/functional_tests/system_prompt:
     get:
       description: Returns the current system prompt template used by the code agent.
@@ -715,7 +744,7 @@ paths:
       - session_token: []
       summary: Get the system prompt template
       tags:
-      - admin
+      - Admin
   /admin/functional_tests/update_results:
     put:
       description: Updates the results for a specific chat session linked to a functional test.
@@ -740,7 +769,7 @@ paths:
       - session_token: []
       summary: Update results for a chat linked to a functional test
       tags:
-      - admin
+      - Admin
   /admin/jobs/concurrency_limits:
     get:
       operationId: admin_get_job_concurrency_limits
@@ -755,7 +784,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin get job concurrency limits
+      x-summary-source: derived
     put:
       operationId: admin_update_job_concurrency_limits
       requestBody:
@@ -775,7 +806,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin update job concurrency limits
+      x-summary-source: derived
   /admin/jobs/delete:
     post:
       operationId: admin_jobs_delete
@@ -798,7 +831,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin jobs delete
+      x-summary-source: derived
   /admin/jobs/kill_by_user:
     post:
       operationId: admin_kill_jobs_by_user
@@ -819,7 +854,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin kill jobs by user
+      x-summary-source: derived
   /admin/jobs/list:
     get:
       operationId: admin_jobs_list
@@ -842,21 +879,18 @@ paths:
         schema:
           allOf:
           - $ref: '#/components/schemas/JobStatus'
-          nullable: true
       - in: query
         name: job_type
         required: false
         schema:
           allOf:
           - $ref: '#/components/schemas/JobType'
-          nullable: true
       - in: query
         name: user_id
         required: false
         schema:
           allOf:
           - $ref: '#/components/schemas/UserId'
-          nullable: true
       responses:
         '200':
           content:
@@ -870,7 +904,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin jobs list
+      x-summary-source: derived
   /admin/jobs/running_stats:
     get:
       operationId: admin_get_running_job_stats
@@ -885,7 +921,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin get running job stats
+      x-summary-source: derived
   /admin/redis/flush:
     post:
       operationId: admin_redis_flush
@@ -902,7 +940,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin redis flush
+      x-summary-source: derived
   /admin/sandbox/create_job:
     post:
       operationId: admin_sandbox_create_job
@@ -923,7 +963,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin sandbox create job
+      x-summary-source: derived
   /admin/sandbox/list:
     get:
       operationId: admin_sandbox_list
@@ -933,15 +975,17 @@ paths:
         required: false
         schema:
           format: int64
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
       - in: query
         name: offset
         required: false
         schema:
           format: int64
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
       responses:
         '200':
           content:
@@ -954,7 +998,9 @@ paths:
       security:
       - api_key: []
       tags:
-      - admin
+      - Admin
+      summary: Admin sandbox list
+      x-summary-source: derived
   /admin/sandbox/{sandbox_id}/terminate:
     post:
       operationId: admin_sandbox_terminate
@@ -976,7 +1022,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin sandbox terminate
+      x-summary-source: derived
   /admin/team/add_member:
     post:
       operationId: admin_team_add_member
@@ -997,7 +1045,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin team add member
+      x-summary-source: derived
   /admin/team/cancel_subscription:
     post:
       operationId: admin_team_cancel_subscription
@@ -1018,7 +1068,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin team cancel subscription
+      x-summary-source: derived
   /admin/team/create_subscription:
     post:
       operationId: admin_team_create_subscription
@@ -1039,7 +1091,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin team create subscription
+      x-summary-source: derived
   /admin/team/expire_grants:
     post:
       operationId: admin_team_expire_grants
@@ -1060,7 +1114,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin team expire grants
+      x-summary-source: derived
   /admin/team/extend_trial:
     post:
       operationId: admin_team_extend_trial
@@ -1081,7 +1137,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin team extend trial
+      x-summary-source: derived
   /admin/team/get/{team_id}:
     get:
       operationId: admin_team_get
@@ -1107,7 +1165,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin team get
+      x-summary-source: derived
   /admin/team/grant_credits:
     post:
       operationId: admin_team_grant_credits
@@ -1128,7 +1188,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin team grant credits
+      x-summary-source: derived
   /admin/team/list:
     get:
       description: 'Lists teams in the system along with their subscription information, credit grants, and member counts.
@@ -1141,21 +1203,24 @@ paths:
         required: false
         schema:
           format: int64
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
       - in: query
         name: offset
         required: false
         schema:
           format: int64
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
       - in: query
         name: search
         required: false
         schema:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       responses:
         '200':
           content:
@@ -1166,9 +1231,9 @@ paths:
       security:
       - api_key: []
       - session_token: []
-      summary: Gets all the teams with their subscription status, grants, and member counts.
+      summary: Gets all the teams with their subscription status, grants, and member counts
       tags:
-      - admin
+      - Admin
   /admin/team/remove_member:
     post:
       operationId: admin_team_remove_member
@@ -1189,7 +1254,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin team remove member
+      x-summary-source: derived
   /admin/team/update_seats_override:
     post:
       operationId: admin_team_update_seats_override
@@ -1210,7 +1277,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin team update seats override
+      x-summary-source: derived
   /admin/team/{team_id}/members:
     get:
       operationId: admin_team_list_members
@@ -1232,7 +1301,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin team list members
+      x-summary-source: derived
   /admin/users/create:
     post:
       operationId: admin_user_create
@@ -1252,9 +1323,9 @@ paths:
       security:
       - api_key: []
       - session_token: []
-      summary: Create a user, returning their session token.
+      summary: Create a user, returning their session token
       tags:
-      - admin
+      - Admin
   /admin/users/get_stats:
     post:
       operationId: admin_user_stats
@@ -1277,7 +1348,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - admin
+      - Admin
+      summary: Admin user stats
+      x-summary-source: derived
   /admin/users/impersonate:
     post:
       operationId: admin_impersonate_user
@@ -1304,7 +1377,9 @@ paths:
       - session_token: []
       - api_key: []
       tags:
-      - admin
+      - Admin
+      summary: Admin impersonate user
+      x-summary-source: derived
   /admin/users/list:
     get:
       operationId: admin_user_list
@@ -1320,801 +1395,11 @@ paths:
       security:
       - api_key: []
       - session_token: []
-      summary: Lists all users with their team memberships.
+      summary: Lists all users with their team memberships
       tags:
-      - admin
+      - Admin
 components:
   schemas:
-    SetDatahubConfigRequest:
-      properties:
-        connector_id:
-          $ref: '#/components/schemas/ConnectorId'
-        datahub_ingestion_type:
-          allOf:
-          - $ref: '#/components/schemas/DatahubIngestionType'
-          nullable: true
-        datahub_secret_map:
-          allOf:
-          - $ref: '#/components/schemas/DatahubSecretMap'
-          nullable: true
-      required:
-      - connector_id
-      type: object
-    SandboxStatus:
-      enum:
-      - alive
-      - paused
-      - terminated
-      type: string
-    UpdateConnectorCredentialFieldRequest:
-      properties:
-        default_value:
-          nullable: true
-          type: string
-        description:
-          nullable: true
-          type: string
-        display_order:
-          format: int32
-          nullable: true
-          type: integer
-        field_type:
-          nullable: true
-          type: string
-        is_optional:
-          nullable: true
-          type: boolean
-        label:
-          nullable: true
-          type: string
-        name:
-          nullable: true
-          type: string
-        options:
-          nullable: true
-      type: object
-    TableDescriptor:
-      additionalProperties: false
-      description: The full definition of what a schema is - without duplicate information.
-      properties:
-        description:
-          type: string
-        expected_cardinality:
-          description: 'Expected number of unique values in the complete dataset.
-
-
-            This is used for our probabilistic merge strategy.'
-          format: int64
-          minimum: 0
-          nullable: true
-          type: integer
-        name:
-          description: Organized in a name, description format.
-          type: string
-        primary_column:
-          nullable: true
-          type: string
-        properties:
-          description: Organized in a name, description format.
-          items:
-            $ref: '#/components/schemas/PropertyDescriptor'
-          type: array
-      required:
-      - name
-      - description
-      - properties
-      type: object
-    CreateJobSandboxResponse:
-      properties:
-        auth_token:
-          type: string
-        proxy_api_key:
-          nullable: true
-          type: string
-        sandbox_id:
-          type: string
-        tunnel_url:
-          type: string
-      required:
-      - sandbox_id
-      - tunnel_url
-      - auth_token
-      type: object
-    AdminListMembersResponse:
-      properties:
-        members:
-          items:
-            $ref: '#/components/schemas/TeamMember'
-          type: array
-      required:
-      - members
-      type: object
-    UpdateSeatsOverrideResponse:
-      properties:
-        seats_override:
-          format: int32
-          nullable: true
-          type: integer
-        team_id:
-          $ref: '#/components/schemas/TeamId'
-      required:
-      - team_id
-      type: object
-    ConnectorAuthMethodScope:
-      properties:
-        connector_auth_method_id:
-          $ref: '#/components/schemas/ConnectorAuthMethodId'
-        created_at:
-          format: date-time
-          type: string
-        id:
-          $ref: '#/components/schemas/ConnectorAuthMethodScopeId'
-        is_recommended:
-          type: boolean
-        is_required:
-          type: boolean
-        query_parameter:
-          type: string
-        scope_value:
-          type: string
-        updated_at:
-          format: date-time
-          type: string
-      required:
-      - id
-      - connector_auth_method_id
-      - scope_value
-      - query_parameter
-      - is_required
-      - is_recommended
-      - created_at
-      - updated_at
-      type: object
-    CloneConnectorsResponse:
-      properties:
-        connectors:
-          items:
-            $ref: '#/components/schemas/Connector'
-          type: array
-      required:
-      - connectors
-      type: object
-    UploadConnectorLogoForm:
-      properties:
-        file:
-          format: binary
-          type: string
-      required:
-      - file
-      type: object
-    MergeStrategy:
-      oneOf:
-      - description: 'Property with unique 1:1 correspondence to its parent.
-
-
-          Merge based on this property 100% of the time'
-        enum:
-        - Unique
-        type: string
-      - properties:
-          Probabilistic:
-            $ref: '#/components/schemas/MergeConfig'
-        required:
-        - Probabilistic
-        type: object
-      - enum:
-        - NoSignal
-        type: string
-    ConnectorTableId:
-      format: uuid
-      type: string
-    JobStatus:
-      enum:
-      - Queued
-      - Running
-      - Completed
-      - Failed
-      type: string
-    CloneConnectorItem:
-      properties:
-        known_connector_type:
-          type: string
-        name:
-          type: string
-        source_connector_id:
-          $ref: '#/components/schemas/ConnectorId'
-      required:
-      - source_connector_id
-      - name
-      - known_connector_type
-      type: object
-    FunctionalTestResult:
-      properties:
-        chat_session_id:
-          $ref: '#/components/schemas/ChatSessionId'
-        results:
-          additionalProperties: true
-          type: object
-          x-stainless-empty-object: true
-        sample_name:
-          type: string
-      required:
-      - chat_session_id
-      - sample_name
-      - results
-      type: object
-    JobInput:
-      properties:
-        allow_extra_entities:
-          type: boolean
-        extraction_criteria:
-          items:
-            $ref: '#/components/schemas/SaveRequirement'
-          type: array
-        instructions:
-          nullable: true
-          type: string
-        model:
-          nullable: true
-          type: string
-        seeded_kg:
-          allOf:
-          - $ref: '#/components/schemas/LLMKnowledgeGraph'
-          nullable: true
-        structuring_input:
-          $ref: '#/components/schemas/InputType'
-      required:
-      - structuring_input
-      - extraction_criteria
-      - allow_extra_entities
-      type: object
-    ConnectorAuthMethod:
-      properties:
-        auth_type:
-          $ref: '#/components/schemas/ConnectorAuthType'
-        connector_catalog_id:
-          $ref: '#/components/schemas/ConnectorCatalogId'
-        created_at:
-          format: date-time
-          type: string
-        id:
-          $ref: '#/components/schemas/ConnectorAuthMethodId'
-        is_active:
-          type: boolean
-        label:
-          nullable: true
-          type: string
-        nango_integration_key:
-          nullable: true
-          type: string
-        priority:
-          format: int32
-          type: integer
-        updated_at:
-          format: date-time
-          type: string
-      required:
-      - id
-      - connector_catalog_id
-      - auth_type
-      - is_active
-      - priority
-      - created_at
-      - updated_at
-      type: object
-    UserId:
-      format: uuid
-      type: string
-    UpdateConnectorCatalogRequest:
-      properties:
-        categories:
-          items:
-            type: string
-          nullable: true
-          type: array
-        description:
-          nullable: true
-          type: string
-        enterprise_only:
-          nullable: true
-          type: boolean
-        name:
-          nullable: true
-          type: string
-        onboarding_priority:
-          format: int32
-          nullable: true
-          type: integer
-        priority:
-          format: int32
-          nullable: true
-          type: integer
-      type: object
-    DatahubSecretMap:
-      additionalProperties:
-        type: string
-      description: Maps DatahubIngestionKey to the name of the connector secret that holds the value.
-      type: object
-    CreateChatTemplateRequest:
-      properties:
-        chat_session_id:
-          $ref: '#/components/schemas/ChatSessionId'
-        description:
-          type: string
-        display_order:
-          format: int32
-          type: integer
-        image_url:
-          type: string
-        is_active:
-          type: boolean
-        questions:
-          items:
-            $ref: '#/components/schemas/TemplateQuestion'
-          type: array
-        title:
-          type: string
-      required:
-      - chat_session_id
-      - title
-      - description
-      - image_url
-      - questions
-      - display_order
-      - is_active
-      type: object
-    Input:
-      oneOf:
-      - properties:
-          PDF:
-            $ref: '#/components/schemas/PDFIngestor'
-        required:
-        - PDF
-        type: object
-      - properties:
-          Web:
-            $ref: '#/components/schemas/WebSearch'
-        required:
-        - Web
-        type: object
-    ConnectorExplorationInput:
-      properties:
-        connector_id:
-          $ref: '#/components/schemas/ConnectorId'
-        exploration_phase_id:
-          $ref: '#/components/schemas/ExplorationPhaseId'
-        exploration_run_id:
-          $ref: '#/components/schemas/ExplorationRunId'
-        strategy:
-          $ref: '#/components/schemas/ExplorationStrategy'
-      required:
-      - connector_id
-      - exploration_phase_id
-      - exploration_run_id
-      - strategy
-      type: object
-    AdminCreateSubscriptionRequest:
-      properties:
-        billing_interval:
-          type: string
-        external_customer_id:
-          nullable: true
-          type: string
-        external_price_id:
-          nullable: true
-          type: string
-        external_subscription_id:
-          nullable: true
-          type: string
-        is_active:
-          type: boolean
-        subscription_tier:
-          $ref: '#/components/schemas/SubscriptionTier'
-        team_id:
-          $ref: '#/components/schemas/TeamId'
-      required:
-      - team_id
-      - subscription_tier
-      - billing_interval
-      - is_active
-      type: object
-    UserSessionId:
-      format: uuid
-      type: string
-    FunctionalTestId:
-      format: uuid
-      type: string
-    AdminCreateSubscriptionResponse:
-      properties:
-        is_active:
-          type: boolean
-        subscription_tier:
-          type: string
-        team_id:
-          $ref: '#/components/schemas/TeamId'
-      required:
-      - team_id
-      - subscription_tier
-      - is_active
-      type: object
-    ImpersonateResponse:
-      properties:
-        expires_at:
-          format: date-time
-          type: string
-        refresh_token:
-          type: string
-        refresh_token_expires_at:
-          format: date-time
-          type: string
-        session_token:
-          type: string
-      required:
-      - session_token
-      - refresh_token
-      - expires_at
-      - refresh_token_expires_at
-      type: object
-    RequiredEntity:
-      additionalProperties: false
-      properties:
-        entity_id:
-          allOf:
-          - $ref: '#/components/schemas/EntityId'
-          nullable: true
-        seeded_entity_id:
-          description: The integer id corresponding to an entity in the seeded entity graph (different from the global dataset entity id)
-          minimum: 0
-          type: integer
-      required:
-      - seeded_entity_id
-      type: object
-    DatahubIngestionType:
-      enum:
-      - postgres
-      - snowflake
-      - salesforce
-      - hubspot
-      - bigquery
-      type: string
-    TeamListResponse:
-      allOf:
-      - $ref: '#/components/schemas/Team'
-      - properties:
-          grants:
-            items:
-              $ref: '#/components/schemas/CreditGrant'
-            type: array
-          member_count:
-            format: int64
-            type: integer
-          subscription:
-            $ref: '#/components/schemas/TeamSubscriptionInfo'
-        required:
-        - subscription
-        - member_count
-        - grants
-        type: object
-    Team:
-      properties:
-        created_at:
-          format: date-time
-          type: string
-        daytona_credentials:
-          allOf:
-          - $ref: '#/components/schemas/DaytonaCredentials'
-          nullable: true
-        description:
-          nullable: true
-          type: string
-        id:
-          $ref: '#/components/schemas/TeamId'
-        name:
-          type: string
-        sandbox_provider:
-          nullable: true
-          type: string
-        seats_override:
-          format: int32
-          nullable: true
-          type: integer
-        slack_team_icon:
-          nullable: true
-          type: string
-        slack_team_id:
-          nullable: true
-          type: string
-        slack_team_name:
-          nullable: true
-          type: string
-        teams_app_id:
-          nullable: true
-          type: string
-        teams_service_url:
-          nullable: true
-          type: string
-        teams_tenant_id:
-          nullable: true
-          type: string
-        updated_at:
-          format: date-time
-          type: string
-        workflow_bucket:
-          allOf:
-          - $ref: '#/components/schemas/WorkflowBucket'
-          nullable: true
-      required:
-      - id
-      - name
-      - created_at
-      - updated_at
-      type: object
-    JobStats:
-      properties:
-        job_count:
-          format: int64
-          type: integer
-        period:
-          format: date-time
-          type: string
-      required:
-      - period
-      - job_count
-      type: object
-    TokenResponse:
-      properties:
-        permissions:
-          items:
-            $ref: '#/components/schemas/Permission'
-          type: array
-        refresh_token:
-          type: string
-        session_expires_at:
-          type: string
-        session_token:
-          type: string
-      required:
-      - permissions
-      - session_token
-      - refresh_token
-      - session_expires_at
-      type: object
-    DatasetId:
-      format: uuid
-      type: string
-    UpdateSeatsOverrideRequest:
-      properties:
-        seats_override:
-          format: int32
-          nullable: true
-          type: integer
-        team_id:
-          $ref: '#/components/schemas/TeamId'
-      required:
-      - team_id
-      type: object
-    AdminAddMemberResponse:
-      properties:
-        membership:
-          $ref: '#/components/schemas/Membership'
-      required:
-      - membership
-      type: object
-    GrantCreditsResponse:
-      properties:
-        amount:
-          format: int64
-          type: integer
-        grant_id:
-          type: string
-        team_id:
-          $ref: '#/components/schemas/TeamId'
-      required:
-      - grant_id
-      - amount
-      - team_id
-      type: object
-    PDFIngestor:
-      additionalProperties: false
-      description: Ingest all pages of a PDF and process them independently.
-      properties:
-        page:
-          format: int32
-          minimum: 0
-          nullable: true
-          type: integer
-        path:
-          type: string
-      required:
-      - path
-      type: object
-    LLMEntity:
-      additionalProperties: false
-      properties:
-        id:
-          minimum: 0
-          type: integer
-        properties:
-          additionalProperties:
-            $ref: '#/components/schemas/BasicPropValue'
-          type: object
-        type:
-          type: string
-      required:
-      - id
-      - type
-      - properties
-      type: object
-    JobTypeCount:
-      properties:
-        count:
-          format: int64
-          type: integer
-        job_type:
-          type: string
-      required:
-      - job_type
-      - count
-      type: object
-    TeamRole:
-      enum:
-      - read_only
-      - member
-      - admin
-      - owner
-      type: string
-    CancelSubscriptionResponse:
-      properties:
-        canceled:
-          type: boolean
-        team_id:
-          $ref: '#/components/schemas/TeamId'
-      required:
-      - team_id
-      - canceled
-      type: object
-    LinkChatToFunctionalTestRequest:
-      properties:
-        chat_session_id:
-          $ref: '#/components/schemas/ChatSessionId'
-        functional_test_id:
-          $ref: '#/components/schemas/FunctionalTestId'
-        results:
-          additionalProperties: true
-          type: object
-          x-stainless-empty-object: true
-        sample_name:
-          type: string
-      required:
-      - chat_session_id
-      - functional_test_id
-      - sample_name
-      - results
-      type: object
-    FunctionalTest:
-      properties:
-        created_at:
-          format: date-time
-          type: string
-        created_by:
-          $ref: '#/components/schemas/UserId'
-        id:
-          $ref: '#/components/schemas/FunctionalTestId'
-        model_override:
-          nullable: true
-          type: string
-        prompt_override:
-          nullable: true
-          type: string
-      required:
-      - id
-      - created_at
-      - created_by
-      type: object
-    UserJobCount:
-      properties:
-        email:
-          type: string
-        queued:
-          format: int64
-          type: integer
-        running:
-          format: int64
-          type: integer
-        user_id:
-          type: string
-      required:
-      - user_id
-      - email
-      - running
-      - queued
-      type: object
-    Sandbox:
-      properties:
-        api_url:
-          nullable: true
-          type: string
-        chat_session_id:
-          allOf:
-          - $ref: '#/components/schemas/ChatSessionId'
-          nullable: true
-        created_at:
-          format: date-time
-          type: string
-        exploration_run_id:
-          allOf:
-          - $ref: '#/components/schemas/ExplorationRunId'
-          nullable: true
-        id:
-          $ref: '#/components/schemas/SandboxId'
-        latest_node:
-          allOf:
-          - $ref: '#/components/schemas/WorkflowSessionNodeId'
-          nullable: true
-        provider:
-          $ref: '#/components/schemas/SandboxProvider'
-        provider_id:
-          type: string
-        resumed_at:
-          format: date-time
-          nullable: true
-          type: string
-        session_id:
-          allOf:
-          - $ref: '#/components/schemas/UserSessionId'
-          nullable: true
-        status:
-          $ref: '#/components/schemas/SandboxStatus'
-        team_id:
-          $ref: '#/components/schemas/TeamId'
-        tunnel_url:
-          nullable: true
-          type: string
-        updated_at:
-          format: date-time
-          type: string
-      required:
-      - id
-      - team_id
-      - provider_id
-      - status
-      - created_at
-      - updated_at
-      - provider
-      type: object
-    TeamVisibility:
-      enum:
-      - Team
-      - Private
-      type: string
-    ConnectorId:
-      format: uuid
-      type: string
-    BatchCreateCredentialFieldsRequest:
-      properties:
-        fields:
-          items:
-            $ref: '#/components/schemas/CreateConnectorCredentialFieldRequest'
-          type: array
-      required:
-      - fields
-      type: object
-    FunctionalTestResultsResponse:
-      properties:
-        functional_test_id:
-          allOf:
-          - $ref: '#/components/schemas/FunctionalTestId'
-          nullable: true
-        results:
-          items:
-            $ref: '#/components/schemas/FunctionalTestResult'
-          type: array
-        sample_name:
-          nullable: true
-          type: string
-      required:
-      - results
-      type: object
     AdminDeleteJobsRequest:
       properties:
         job_ids:
@@ -2124,288 +1409,22 @@ components:
       required:
       - job_ids
       type: object
-    KillByUserResponse:
-      properties:
-        killed_jobs:
-          minimum: 0
-          type: integer
-      required:
-      - killed_jobs
-      type: object
-    TimeBucket:
-      enum:
-      - Second
-      - Minute
-      - Hour
-      - Day
-      - Week
-      - Month
-      - Quarter
-      - Year
-      - Decade
-      type: string
-    MembershipId:
+    UserSessionId:
       format: uuid
       type: string
-    AdminDeleteJobsResponse:
-      properties:
-        deleted_jobs:
-          minimum: 0
-          type: integer
-      required:
-      - deleted_jobs
-      type: object
-    UpdateChatTemplate:
-      properties:
-        description:
-          nullable: true
-          type: string
-        display_order:
-          format: int32
-          nullable: true
-          type: integer
-        image_url:
-          nullable: true
-          type: string
-        is_active:
-          nullable: true
-          type: boolean
-        questions:
-          items:
-            $ref: '#/components/schemas/TemplateQuestion'
-          nullable: true
-          type: array
-        title:
-          nullable: true
-          type: string
-        updated_by:
-          allOf:
-          - $ref: '#/components/schemas/UserId'
-          nullable: true
-      type: object
-    ConnectorCatalog:
-      properties:
-        categories:
-          items:
-            nullable: true
-            type: string
-          type: array
-        created_at:
-          format: date-time
-          type: string
-        description:
-          nullable: true
-          type: string
-        enterprise_only:
-          type: boolean
-        id:
-          $ref: '#/components/schemas/ConnectorCatalogId'
-        name:
-          type: string
-        onboarding_priority:
-          format: int32
-          nullable: true
-          type: integer
-        priority:
-          format: int32
-          nullable: true
-          type: integer
-        slug:
-          type: string
-        updated_at:
-          format: date-time
-          type: string
-      required:
-      - id
-      - slug
-      - name
-      - categories
-      - created_at
-      - updated_at
-      - enterprise_only
-      type: object
-    JobType:
+    ExplorationStrategy:
       enum:
-      - Web
-      - Pdf
-      - Derive
-      - Scrape
-      - Match
-      - ConnectorExplore
-      - DatahubIngestion
+      - full
+      - diff
       type: string
-    LLMKnowledgeGraph:
-      additionalProperties: false
-      description: 'Knowledge graph info structured to deserialize and display
-
-        in the same format that the LLM outputs.
-
-        Also the first representation of an LLM output in the pipeline from raw tool output to being merged into a DB'
-      properties:
-        entities:
-          items:
-            $ref: '#/components/schemas/LLMEntity'
-          type: array
-        relationships:
-          items:
-            $ref: '#/components/schemas/LLMRelationship'
-          type: array
-      required:
-      - entities
-      type: object
-    UserListResponse:
-      allOf:
-      - $ref: '#/components/schemas/User'
-      - properties:
-          memberships:
-            items:
-              $ref: '#/components/schemas/UserMembershipInfo'
-            type: array
-        required:
-        - memberships
-        type: object
-    ChatTemplate:
-      properties:
-        chat_session_id:
-          $ref: '#/components/schemas/ChatSessionId'
-        created_at:
-          format: date-time
-          type: string
-        created_by:
-          $ref: '#/components/schemas/UserId'
-        description:
-          type: string
-        display_order:
-          format: int32
-          type: integer
-        id:
-          $ref: '#/components/schemas/ChatTemplateId'
-        image_url:
-          type: string
-        is_active:
-          type: boolean
-        questions:
-          items:
-            $ref: '#/components/schemas/TemplateQuestion'
-          type: array
-        title:
-          type: string
-        updated_at:
-          format: date-time
-          type: string
-        updated_by:
-          $ref: '#/components/schemas/UserId'
-      required:
-      - id
-      - chat_session_id
-      - title
-      - description
-      - image_url
-      - display_order
-      - is_active
-      - created_by
-      - updated_by
-      - created_at
-      - updated_at
-      - questions
-      type: object
-    Membership:
-      description: Contains membership information and API token value
-      properties:
-        created_at:
-          format: date-time
-          type: string
-        id:
-          $ref: '#/components/schemas/MembershipId'
-        invitation_expires_at:
-          format: date-time
-          nullable: true
-          type: string
-        invitation_token:
-          format: uuid
-          nullable: true
-          type: string
-        invited_at:
-          format: date-time
-          nullable: true
-          type: string
-        invited_by_user_id:
-          allOf:
-          - $ref: '#/components/schemas/UserId'
-          nullable: true
-        invitee_email:
-          nullable: true
-          type: string
-        pending:
-          type: boolean
-        role:
-          $ref: '#/components/schemas/TeamRole'
-        team_id:
-          $ref: '#/components/schemas/TeamId'
-        user_id:
-          allOf:
-          - $ref: '#/components/schemas/UserId'
-          nullable: true
-        value:
-          format: binary
-          type: string
-      required:
-      - id
-      - value
-      - created_at
-      - team_id
-      - role
-      - pending
-      type: object
-    WorkflowBucket:
-      properties:
-        bucket_url:
-          type: string
-        gcp_credentials_json:
-          nullable: true
-          type: string
-      required:
-      - bucket_url
-      type: object
-    RequiredProperty:
-      additionalProperties: false
-      properties:
-        property_names:
-          description: If there are multiple properties, it can match just one of them
-          items:
-            type: string
-          type: array
-        table_name:
-          description: The table name of the entity to update
-          type: string
-      required:
-      - table_name
-      - property_names
-      type: object
-    BasicPropValue:
-      oneOf:
-      - type: string
-      - format: int64
-        type: integer
-      - type: boolean
-      - format: double
-        type: number
-    CreateConnectorAuthMethodScopeRequest:
-      properties:
-        connector_auth_method_id:
-          $ref: '#/components/schemas/ConnectorAuthMethodId'
-        is_recommended:
-          type: boolean
-        is_required:
-          type: boolean
-        query_parameter:
-          type: string
-        scope_value:
-          type: string
-      required:
-      - connector_auth_method_id
-      - scope_value
-      type: object
+    Permission:
+      enum:
+      - labeler
+      - qa_labeler
+      - debug
+      - human_llm
+      - none
+      type: string
     BatchCreateScopesRequest:
       properties:
         scopes:
@@ -2415,15 +1434,24 @@ components:
       required:
       - scopes
       type: object
-    SubscriptionTier:
-      description: Represents the different subscription tiers available
+    TeamVisibility:
       enum:
-      - free
-      - free_trial
-      - pro
-      - team
-      - enterprise
+      - Team
+      - Private
       type: string
+    PaginatedTeamListResponse:
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/TeamListResponse'
+          type: array
+        total_count:
+          format: int64
+          type: integer
+      required:
+      - items
+      - total_count
+      type: object
     CreditGrant:
       properties:
         amount:
@@ -2437,23 +1465,25 @@ components:
           type: string
         expires_at:
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         id:
           $ref: '#/components/schemas/CreditGrantId'
         source_ref:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         source_type:
           type: string
         starts_at:
           format: date-time
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         stripe_event_id:
           allOf:
           - $ref: '#/components/schemas/StripeEventId'
-          nullable: true
         team_id:
           $ref: '#/components/schemas/TeamId'
         updated_at:
@@ -2468,22 +1498,201 @@ components:
       - created_at
       - updated_at
       type: object
+    WebSearch:
+      properties:
+        banned_domains:
+          items:
+            type: string
+          type: array
+        starting_searches:
+          items:
+            type: string
+          type: array
+        starting_urls:
+          items:
+            type: string
+          type: array
+      type: object
+    RequiredRelationship:
+      additionalProperties: false
+      properties:
+        relationship_name:
+          type: string
+      required:
+      - relationship_name
+      type: object
+    ConnectorDatabaseId:
+      format: uuid
+      type: string
+    StripeEventId:
+      format: uuid
+      type: string
+    SubscriptionTier:
+      description: Represents the different subscription tiers available
+      enum:
+      - free
+      - free_trial
+      - pro
+      - team
+      - enterprise
+      type: string
+    RelationshipMergeProbability:
+      properties:
+        source_cardinality_given_target_match:
+          description: 'Describes the expected cardinality of the source table when a match is found in the target table
+
+
+            For example, if we have a source company and a target funding round, we expect the source company
+
+            to appear in multiple funding rounds, but not *too* many.
+
+            So if we have a funding round match, the expected number of unique companies is relatively small.
+
+            This is an estimate of that number.'
+          format: int64
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        target_cardinality_given_source_match:
+          description: 'Describes the expected cardinality of the target table when a match is found in the source table
+
+
+            For example, if we have a source company and a target funding round, we usually expect
+
+            some number of funding rounds to be associated with a single company but not *too* many.
+
+            So if we have a company match, the expected number of unique funding rounds is relatively small.
+
+            This is an estimate of that number.'
+          format: int64
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+      type: object
+    FunctionalTestResultsResponse:
+      properties:
+        functional_test_id:
+          allOf:
+          - $ref: '#/components/schemas/FunctionalTestId'
+        results:
+          items:
+            $ref: '#/components/schemas/FunctionalTestResult'
+          type: array
+        sample_name:
+          type:
+          - string
+          - 'null'
+      required:
+      - results
+      type: object
+    KillByUserRequest:
+      properties:
+        user_id:
+          $ref: '#/components/schemas/UserId'
+      required:
+      - user_id
+      type: object
+    Sandbox:
+      properties:
+        api_url:
+          type:
+          - string
+          - 'null'
+        chat_session_id:
+          allOf:
+          - $ref: '#/components/schemas/ChatSessionId'
+        created_at:
+          format: date-time
+          type: string
+        exploration_run_id:
+          allOf:
+          - $ref: '#/components/schemas/ExplorationRunId'
+        id:
+          $ref: '#/components/schemas/SandboxId'
+        latest_node:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowSessionNodeId'
+        provider:
+          $ref: '#/components/schemas/SandboxProvider'
+        provider_id:
+          type: string
+        resumed_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        session_id:
+          allOf:
+          - $ref: '#/components/schemas/UserSessionId'
+        status:
+          $ref: '#/components/schemas/SandboxStatus'
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+        tunnel_url:
+          type:
+          - string
+          - 'null'
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - id
+      - team_id
+      - provider_id
+      - status
+      - created_at
+      - updated_at
+      - provider
+      type: object
+    GrantCreditsRequest:
+      properties:
+        amount:
+          format: int64
+          type: integer
+        expires_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        source_ref:
+          type:
+          - string
+          - 'null'
+        source_type:
+          type: string
+        starts_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+      required:
+      - team_id
+      - amount
+      - source_type
+      type: object
     UserParams:
       properties:
         credit_count:
           minimum: 0
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
         email:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         feature_flags:
           items:
             $ref: '#/components/schemas/FeatureFlag'
           type: array
         full_name:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         is_admin:
           type: boolean
         permissions:
@@ -2493,579 +1702,17 @@ components:
         test:
           type: boolean
       type: object
-    ConnectorSchemaId:
-      format: uuid
-      type: string
-    ChatSessionId:
-      format: uuid
-      type: string
-    KillByUserRequest:
-      properties:
-        user_id:
-          $ref: '#/components/schemas/UserId'
-      required:
-      - user_id
-      type: object
-    FeatureFlag:
-      enum:
-      - functional_test
-      - pdf_parsing
-      - boredm_construction_model
-      - generic_suspicious_queue
-      - new_use_case_preview
-      - bedrock_codegen
-      - cerebras_codegen
-      - gemini25pro
-      - claude_sonnet4
-      - allow_job_deletion
-      - none
-      type: string
-    SandboxProvider:
-      enum:
-      - modal
-      - daytona
-      type: string
-    AdminAddMemberRequest:
-      properties:
-        email:
-          type: string
-        role:
-          $ref: '#/components/schemas/TeamRole'
-        team_id:
-          $ref: '#/components/schemas/TeamId'
-      required:
-      - team_id
-      - email
-      - role
-      type: object
-    ConnectorCredentialFieldId:
-      format: uuid
-      type: string
-    SandboxId:
-      format: uuid
-      type: string
-    BatchCreateScopesResponse:
-      properties:
-        scopes:
-          items:
-            $ref: '#/components/schemas/ConnectorAuthMethodScope'
-          type: array
-      required:
-      - scopes
-      type: object
     DaytonaCredentials:
       properties:
         api_key:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         api_url:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       type: object
-    UserType:
-      enum:
-      - admin
-      - public
-      - end_user
-      type: string
-    ComparisonStrategy:
-      enum:
-      - Default
-      - EnforceUniqueness
-      type: string
-    ConnectorAuthType:
-      enum:
-      - credentials
-      - oauth_nango
-      type: string
-    ChatTemplateId:
-      format: uuid
-      type: string
-    UpdateJobConcurrencyLimits:
-      properties:
-        max_connector_explore_jobs:
-          format: int32
-          nullable: true
-          type: integer
-        max_derive_jobs:
-          format: int32
-          nullable: true
-          type: integer
-        max_match_jobs:
-          format: int32
-          nullable: true
-          type: integer
-        max_pdf_jobs:
-          format: int32
-          nullable: true
-          type: integer
-        max_scrape_jobs:
-          format: int32
-          nullable: true
-          type: integer
-        max_total_jobs:
-          format: int32
-          nullable: true
-          type: integer
-        max_web_jobs:
-          format: int32
-          nullable: true
-          type: integer
-      type: object
-    LLMRelationship:
-      additionalProperties: false
-      properties:
-        properties:
-          additionalProperties:
-            $ref: '#/components/schemas/BasicPropValue'
-          type: object
-        source:
-          minimum: 0
-          type: integer
-        target:
-          minimum: 0
-          type: integer
-        type:
-          type: string
-      required:
-      - type
-      - source
-      - target
-      type: object
-    CreateConnectorAuthMethodRequest:
-      properties:
-        auth_type:
-          $ref: '#/components/schemas/ConnectorAuthType'
-        connector_catalog_id:
-          $ref: '#/components/schemas/ConnectorCatalogId'
-        is_active:
-          type: boolean
-        label:
-          nullable: true
-          type: string
-        nango_integration_key:
-          nullable: true
-          type: string
-        priority:
-          format: int32
-          type: integer
-      required:
-      - connector_catalog_id
-      - auth_type
-      - is_active
-      - priority
-      type: object
-    User:
-      properties:
-        apollo_data:
-          nullable: true
-        company_description:
-          nullable: true
-          type: string
-        company_name:
-          nullable: true
-          type: string
-        completed_onboarding:
-          type: boolean
-        cost_confirmation_threshold:
-          description: Cost confirmation threshold in credits (thousandth of a cent).
-          format: int64
-          nullable: true
-          type: integer
-        created_at:
-          format: date-time
-          type: string
-        cufinder_data:
-          nullable: true
-        email:
-          type: string
-        feature_flags:
-          items:
-            allOf:
-            - $ref: '#/components/schemas/FeatureFlag'
-            nullable: true
-          type: array
-        feature_overrides:
-          additionalProperties: true
-          type: object
-          x-stainless-empty-object: true
-        full_name:
-          type: string
-        id:
-          $ref: '#/components/schemas/UserId'
-        job_title:
-          nullable: true
-          type: string
-        last_activity:
-          format: date-time
-          nullable: true
-          type: string
-        last_selected_team_id:
-          allOf:
-          - $ref: '#/components/schemas/TeamId'
-          nullable: true
-        linkedin_url:
-          nullable: true
-          type: string
-        notify_for_interaction:
-          type: boolean
-        permissions:
-          items:
-            allOf:
-            - $ref: '#/components/schemas/Permission'
-            nullable: true
-          type: array
-        slack_user_id:
-          nullable: true
-          type: string
-        slack_username:
-          nullable: true
-          type: string
-        survey_completed_at:
-          format: date-time
-          nullable: true
-          type: string
-        survey_response:
-          nullable: true
-        teams_user_id:
-          nullable: true
-          type: string
-        teams_user_name:
-          nullable: true
-          type: string
-        updated_at:
-          format: date-time
-          type: string
-        user_type:
-          $ref: '#/components/schemas/UserType'
-      required:
-      - id
-      - email
-      - feature_flags
-      - permissions
-      - user_type
-      - created_at
-      - updated_at
-      - full_name
-      - feature_overrides
-      - completed_onboarding
-      - notify_for_interaction
-      type: object
-    GrantCreditsRequest:
-      properties:
-        amount:
-          format: int64
-          type: integer
-        expires_at:
-          format: date-time
-          nullable: true
-          type: string
-        source_ref:
-          nullable: true
-          type: string
-        source_type:
-          type: string
-        starts_at:
-          format: date-time
-          nullable: true
-          type: string
-        team_id:
-          $ref: '#/components/schemas/TeamId'
-      required:
-      - team_id
-      - amount
-      - source_type
-      type: object
-    TeamSubscriptionInfo:
-      properties:
-        has_active_subscription:
-          type: boolean
-        is_trial:
-          type: boolean
-        remaining_credits:
-          format: int64
-          type: integer
-        subscription_tier:
-          $ref: '#/components/schemas/SubscriptionTier'
-        trial_expires_at:
-          format: date-time
-          nullable: true
-          type: string
-      required:
-      - subscription_tier
-      - is_trial
-      - has_active_subscription
-      - remaining_credits
-      type: object
-    Connector:
-      properties:
-        connector_category:
-          allOf:
-          - $ref: '#/components/schemas/ConnectorCategory'
-          nullable: true
-        created_at:
-          format: date-time
-          type: string
-        datahub_ingestion_type:
-          nullable: true
-          type: string
-        datahub_secret_map:
-          allOf:
-          - $ref: '#/components/schemas/DatahubSecretMap'
-          nullable: true
-        datahub_urn:
-          nullable: true
-          type: string
-        deleted_at:
-          format: date-time
-          nullable: true
-          type: string
-        description:
-          nullable: true
-          type: string
-        id:
-          $ref: '#/components/schemas/ConnectorId'
-        known_connector_type:
-          type: string
-        name:
-          type: string
-        nango_connection_id:
-          nullable: true
-          type: string
-        oauth_scopes:
-          items:
-            nullable: true
-            type: string
-          nullable: true
-          type: array
-        owner_user_id:
-          $ref: '#/components/schemas/UserId'
-        refresh_cron_schedule:
-          nullable: true
-          type: string
-        refresh_next_run_at:
-          format: date-time
-          nullable: true
-          type: string
-        team_id:
-          $ref: '#/components/schemas/TeamId'
-        team_visibility:
-          $ref: '#/components/schemas/TeamVisibility'
-        updated_at:
-          format: date-time
-          type: string
-        usage_snippet_override:
-          nullable: true
-          type: string
-      required:
-      - id
-      - name
-      - created_at
-      - updated_at
-      - known_connector_type
-      - team_id
-      - team_visibility
-      - owner_user_id
-      type: object
-    JobId:
-      format: uuid
-      type: string
-    ImpersonateRequest:
-      properties:
-        membership_id:
-          $ref: '#/components/schemas/MembershipId'
-      required:
-      - membership_id
-      type: object
-    CreateFunctionalTestRequest:
-      properties:
-        model_override:
-          nullable: true
-          type: string
-        prompt_override:
-          nullable: true
-          type: string
-        team_id:
-          $ref: '#/components/schemas/TeamId'
-      required:
-      - team_id
-      type: object
-    ConnectorCredentialField:
-      properties:
-        auth_method_id:
-          $ref: '#/components/schemas/ConnectorAuthMethodId'
-        created_at:
-          format: date-time
-          type: string
-        default_value:
-          nullable: true
-          type: string
-        description:
-          nullable: true
-          type: string
-        display_order:
-          format: int32
-          type: integer
-        field_type:
-          type: string
-        id:
-          $ref: '#/components/schemas/ConnectorCredentialFieldId'
-        is_optional:
-          type: boolean
-        label:
-          nullable: true
-          type: string
-        name:
-          type: string
-        options:
-          nullable: true
-        updated_at:
-          format: date-time
-          type: string
-      required:
-      - id
-      - auth_method_id
-      - name
-      - is_optional
-      - field_type
-      - display_order
-      - created_at
-      - updated_at
-      type: object
-    UpdateFunctionalTestResultsRequest:
-      properties:
-        chat_session_id:
-          $ref: '#/components/schemas/ChatSessionId'
-        functional_test_id:
-          $ref: '#/components/schemas/FunctionalTestId'
-        results:
-          additionalProperties: true
-          type: object
-          x-stainless-empty-object: true
-        sample_name:
-          type: string
-      required:
-      - chat_session_id
-      - functional_test_id
-      - sample_name
-      - results
-      type: object
-    JobConcurrencyLimits:
-      properties:
-        id:
-          format: int32
-          type: integer
-        max_connector_explore_jobs:
-          format: int32
-          nullable: true
-          type: integer
-        max_derive_jobs:
-          format: int32
-          nullable: true
-          type: integer
-        max_match_jobs:
-          format: int32
-          nullable: true
-          type: integer
-        max_pdf_jobs:
-          format: int32
-          nullable: true
-          type: integer
-        max_scrape_jobs:
-          format: int32
-          nullable: true
-          type: integer
-        max_total_jobs:
-          format: int32
-          nullable: true
-          type: integer
-        max_web_jobs:
-          format: int32
-          nullable: true
-          type: integer
-        updated_at:
-          format: date-time
-          type: string
-      required:
-      - id
-      - updated_at
-      type: object
-    ConnectorCategory:
-      enum:
-      - RelationalDatabase
-      - ApiTabular
-      type: string
-    ScrapePageInput:
-      properties:
-        batch_scrape:
-          type: boolean
-        url_property_name:
-          type: string
-        use_markdown:
-          type: boolean
-      required:
-      - url_property_name
-      - batch_scrape
-      - use_markdown
-      type: object
-    UserMembershipInfo:
-      properties:
-        membership_id:
-          $ref: '#/components/schemas/MembershipId'
-        role:
-          $ref: '#/components/schemas/TeamRole'
-        team_id:
-          $ref: '#/components/schemas/TeamId'
-        team_name:
-          type: string
-      required:
-      - membership_id
-      - team_id
-      - team_name
-      - role
-      type: object
-    TeamMember:
-      properties:
-        created_at:
-          format: date-time
-          type: string
-        email:
-          type: string
-        pending:
-          type: boolean
-        role:
-          $ref: '#/components/schemas/TeamRole'
-        team_id:
-          $ref: '#/components/schemas/TeamId'
-        user_id:
-          allOf:
-          - $ref: '#/components/schemas/UserId'
-          nullable: true
-      required:
-      - team_id
-      - role
-      - created_at
-      - email
-      - pending
-      type: object
-    StripeEventId:
-      format: uuid
-      type: string
-    TemplateQuestion:
-      properties:
-        options:
-          items:
-            type: string
-          nullable: true
-          type: array
-        prompt:
-          type: string
-      required:
-      - prompt
-      type: object
-    RelationshipMergeStrategy:
-      oneOf:
-      - $ref: '#/components/schemas/RelationshipMergeProbability'
     ExplorationPhaseId:
       description: 'Identifies the phase of connector exploration
 
@@ -3160,79 +1807,622 @@ components:
         - resource_name
         - type
         type: object
-    WebSearch:
+    SaveRequirement:
+      description: It's an OR statement across these.
+      oneOf:
+      - $ref: '#/components/schemas/RequiredRelationship'
+      - $ref: '#/components/schemas/RequiredEntity'
+      - $ref: '#/components/schemas/RequiredProperty'
+    KillByUserResponse:
       properties:
-        banned_domains:
-          items:
-            type: string
-          type: array
-        starting_searches:
-          items:
-            type: string
-          type: array
-        starting_urls:
-          items:
-            type: string
-          type: array
+        killed_jobs:
+          minimum: 0
+          type: integer
+      required:
+      - killed_jobs
       type: object
-    CreateConnectorCatalogRequest:
+    AdminListMembersResponse:
+      properties:
+        members:
+          items:
+            $ref: '#/components/schemas/TeamMember'
+          type: array
+      required:
+      - members
+      type: object
+    MembershipId:
+      format: uuid
+      type: string
+    UpdateChatTemplate:
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+        display_order:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        image_url:
+          type:
+          - string
+          - 'null'
+        is_active:
+          type:
+          - boolean
+          - 'null'
+        questions:
+          items:
+            $ref: '#/components/schemas/TemplateQuestion'
+          type:
+          - array
+          - 'null'
+        title:
+          type:
+          - string
+          - 'null'
+        updated_by:
+          allOf:
+          - $ref: '#/components/schemas/UserId'
+      type: object
+    RequiredEntity:
+      additionalProperties: false
+      properties:
+        entity_id:
+          allOf:
+          - $ref: '#/components/schemas/EntityId'
+        seeded_entity_id:
+          description: The integer id corresponding to an entity in the seeded entity graph (different from the global dataset entity id)
+          minimum: 0
+          type: integer
+      required:
+      - seeded_entity_id
+      type: object
+    FunctionalTest:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        created_by:
+          $ref: '#/components/schemas/UserId'
+        id:
+          $ref: '#/components/schemas/FunctionalTestId'
+        model_override:
+          type:
+          - string
+          - 'null'
+        prompt_override:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - created_at
+      - created_by
+      type: object
+    SandboxProvider:
+      enum:
+      - modal
+      - daytona
+      type: string
+    SetDatahubConfigRequest:
+      properties:
+        connector_id:
+          $ref: '#/components/schemas/ConnectorId'
+        datahub_ingestion_type:
+          allOf:
+          - $ref: '#/components/schemas/DatahubIngestionType'
+        datahub_secret_map:
+          allOf:
+          - $ref: '#/components/schemas/DatahubSecretMap'
+      required:
+      - connector_id
+      type: object
+    ConnectorCatalogId:
+      format: uuid
+      type: string
+    UpdateConnectorCatalogRequest:
       properties:
         categories:
           items:
             type: string
-          type: array
+          type:
+          - array
+          - 'null'
         description:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         enterprise_only:
-          type: boolean
+          type:
+          - boolean
+          - 'null'
         name:
-          type: string
+          type:
+          - string
+          - 'null'
         onboarding_priority:
           format: int32
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
         priority:
           format: int32
-          nullable: true
-          type: integer
-        slug:
-          type: string
-      required:
-      - slug
-      - name
+          type:
+          - integer
+          - 'null'
       type: object
-    AdminListConnectorsResponse:
-      properties:
-        connectors:
-          items:
-            $ref: '#/components/schemas/Connector'
-          type: array
-      required:
-      - connectors
-      type: object
-    Permission:
-      enum:
-      - labeler
-      - qa_labeler
-      - debug
-      - human_llm
-      - none
+    ConnectorCredentialFieldId:
+      format: uuid
       type: string
-    ExtendTrialResponse:
+    CreateConnectorAuthMethodScopeRequest:
       properties:
-        grant_id:
+        connector_auth_method_id:
+          $ref: '#/components/schemas/ConnectorAuthMethodId'
+        is_recommended:
+          type: boolean
+        is_required:
+          type: boolean
+        query_parameter:
           type: string
-        new_expires_at:
+        scope_value:
+          type: string
+      required:
+      - connector_auth_method_id
+      - scope_value
+      type: object
+    UpdateFunctionalTestResultsRequest:
+      properties:
+        chat_session_id:
+          $ref: '#/components/schemas/ChatSessionId'
+        functional_test_id:
+          $ref: '#/components/schemas/FunctionalTestId'
+        results:
+          additionalProperties: true
+          type: object
+          x-stainless-empty-object: true
+        sample_name:
+          type: string
+      required:
+      - chat_session_id
+      - functional_test_id
+      - sample_name
+      - results
+      type: object
+    ComparisonStrategy:
+      enum:
+      - Default
+      - EnforceUniqueness
+      type: string
+    CreateConnectorAuthMethodRequest:
+      properties:
+        auth_type:
+          $ref: '#/components/schemas/ConnectorAuthType'
+        connector_catalog_id:
+          $ref: '#/components/schemas/ConnectorCatalogId'
+        is_active:
+          type: boolean
+        label:
+          type:
+          - string
+          - 'null'
+        nango_integration_key:
+          type:
+          - string
+          - 'null'
+        priority:
+          format: int32
+          type: integer
+      required:
+      - connector_catalog_id
+      - auth_type
+      - is_active
+      - priority
+      type: object
+    UserJobCount:
+      properties:
+        email:
+          type: string
+        queued:
+          format: int64
+          type: integer
+        running:
+          format: int64
+          type: integer
+        user_id:
+          type: string
+      required:
+      - user_id
+      - email
+      - running
+      - queued
+      type: object
+    UserListResponse:
+      allOf:
+      - $ref: '#/components/schemas/User'
+      - properties:
+          memberships:
+            items:
+              $ref: '#/components/schemas/UserMembershipInfo'
+            type: array
+        required:
+        - memberships
+        type: object
+    CreateJobSandboxResponse:
+      properties:
+        auth_token:
+          type: string
+        proxy_api_key:
+          type:
+          - string
+          - 'null'
+        sandbox_id:
+          type: string
+        tunnel_url:
+          type: string
+      required:
+      - sandbox_id
+      - tunnel_url
+      - auth_token
+      type: object
+    ListJobsResponse:
+      properties:
+        created_at:
           format: date-time
+          type: string
+        dataset_id:
+          allOf:
+          - $ref: '#/components/schemas/DatasetId'
+        id:
+          $ref: '#/components/schemas/JobId'
+        job_type:
+          $ref: '#/components/schemas/JobType'
+        message:
+          type:
+          - string
+          - 'null'
+        parameters:
+          allOf:
+          - $ref: '#/components/schemas/JobInput'
+        reason:
+          type:
+          - string
+          - 'null'
+        run_started_time:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        run_time_milliseconds:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        status:
+          $ref: '#/components/schemas/JobStatus'
+        user_id:
+          $ref: '#/components/schemas/UserId'
+      required:
+      - id
+      - status
+      - created_at
+      - job_type
+      - user_id
+      type: object
+    FunctionalTestResult:
+      properties:
+        chat_session_id:
+          $ref: '#/components/schemas/ChatSessionId'
+        results:
+          additionalProperties: true
+          type: object
+          x-stainless-empty-object: true
+        sample_name:
+          type: string
+      required:
+      - chat_session_id
+      - sample_name
+      - results
+      type: object
+    Team:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        daytona_credentials:
+          allOf:
+          - $ref: '#/components/schemas/DaytonaCredentials'
+        description:
+          type:
+          - string
+          - 'null'
+        id:
+          $ref: '#/components/schemas/TeamId'
+        name:
+          type: string
+        sandbox_provider:
+          type:
+          - string
+          - 'null'
+        seats_override:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        slack_team_icon:
+          type:
+          - string
+          - 'null'
+        slack_team_id:
+          type:
+          - string
+          - 'null'
+        slack_team_name:
+          type:
+          - string
+          - 'null'
+        teams_app_id:
+          type:
+          - string
+          - 'null'
+        teams_service_url:
+          type:
+          - string
+          - 'null'
+        teams_tenant_id:
+          type:
+          - string
+          - 'null'
+        updated_at:
+          format: date-time
+          type: string
+        workflow_bucket:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowBucket'
+      required:
+      - id
+      - name
+      - created_at
+      - updated_at
+      type: object
+    JobType:
+      enum:
+      - Web
+      - Pdf
+      - Derive
+      - Scrape
+      - Match
+      - ConnectorExplore
+      - DatahubIngestion
+      type: string
+    FlushResponse:
+      properties:
+        message:
+          type: string
+        success:
+          type: boolean
+      required:
+      - success
+      - message
+      type: object
+    ChatSessionId:
+      format: uuid
+      type: string
+    CreateConnectorCredentialFieldRequest:
+      properties:
+        auth_method_id:
+          $ref: '#/components/schemas/ConnectorAuthMethodId'
+        default_value:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        display_order:
+          format: int32
+          type: integer
+        field_type:
+          type: string
+        is_optional:
+          type: boolean
+        label:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        options: {}
+      required:
+      - auth_method_id
+      - name
+      - is_optional
+      - field_type
+      - display_order
+      type: object
+    AdminCreateSubscriptionRequest:
+      properties:
+        billing_interval:
+          type: string
+        external_customer_id:
+          type:
+          - string
+          - 'null'
+        external_price_id:
+          type:
+          - string
+          - 'null'
+        external_subscription_id:
+          type:
+          - string
+          - 'null'
+        is_active:
+          type: boolean
+        subscription_tier:
+          $ref: '#/components/schemas/SubscriptionTier'
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+      required:
+      - team_id
+      - subscription_tier
+      - billing_interval
+      - is_active
+      type: object
+    AdminCreateSubscriptionResponse:
+      properties:
+        is_active:
+          type: boolean
+        subscription_tier:
           type: string
         team_id:
           $ref: '#/components/schemas/TeamId'
       required:
       - team_id
-      - new_expires_at
-      - grant_id
+      - subscription_tier
+      - is_active
       type: object
+    AdminDeleteJobsResponse:
+      properties:
+        deleted_jobs:
+          minimum: 0
+          type: integer
+      required:
+      - deleted_jobs
+      type: object
+    RelationshipMergeStrategy:
+      oneOf:
+      - $ref: '#/components/schemas/RelationshipMergeProbability'
+    ScrapePageUrlInput:
+      properties:
+        batch_scrape:
+          type: boolean
+        url:
+          type: string
+        use_markdown:
+          type: boolean
+      required:
+      - url
+      - batch_scrape
+      - use_markdown
+      type: object
+    ConnectorAuthType:
+      enum:
+      - credentials
+      - oauth_nango
+      type: string
+    ConnectorAuthMethodScopeId:
+      format: uuid
+      type: string
+    DatasetId:
+      format: uuid
+      type: string
+    DatahubSecretMap:
+      additionalProperties:
+        type: string
+      description: Maps DatahubIngestionKey to the name of the connector secret that holds the value.
+      type: object
+    TableDescriptor:
+      additionalProperties: false
+      description: The full definition of what a schema is - without duplicate information.
+      properties:
+        description:
+          type: string
+        expected_cardinality:
+          description: 'Expected number of unique values in the complete dataset.
+
+
+            This is used for our probabilistic merge strategy.'
+          format: int64
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        name:
+          description: Organized in a name, description format.
+          type: string
+        primary_column:
+          type:
+          - string
+          - 'null'
+        properties:
+          description: Organized in a name, description format.
+          items:
+            $ref: '#/components/schemas/PropertyDescriptor'
+          type: array
+      required:
+      - name
+      - description
+      - properties
+      type: object
+    CreditGrantId:
+      format: uuid
+      type: string
+    TokenResponse:
+      properties:
+        permissions:
+          items:
+            $ref: '#/components/schemas/Permission'
+          type: array
+        refresh_token:
+          type: string
+        session_expires_at:
+          type: string
+        session_token:
+          type: string
+      required:
+      - permissions
+      - session_token
+      - refresh_token
+      - session_expires_at
+      type: object
+    TeamListResponse:
+      allOf:
+      - $ref: '#/components/schemas/Team'
+      - properties:
+          grants:
+            items:
+              $ref: '#/components/schemas/CreditGrant'
+            type: array
+          member_count:
+            format: int64
+            type: integer
+          subscription:
+            $ref: '#/components/schemas/TeamSubscriptionInfo'
+        required:
+        - subscription
+        - member_count
+        - grants
+        type: object
+    SandboxStatus:
+      enum:
+      - alive
+      - paused
+      - terminated
+      type: string
+    ChatTemplateId:
+      format: uuid
+      type: string
+    UpdateConnectorAuthMethodRequest:
+      properties:
+        is_active:
+          type:
+          - boolean
+          - 'null'
+        label:
+          type:
+          - string
+          - 'null'
+        priority:
+          format: int32
+          type:
+          - integer
+          - 'null'
+      type: object
+    ConnectorTableId:
+      format: uuid
+      type: string
     AdminDatasetReturn:
       allOf:
       - $ref: '#/components/schemas/DatasetDescriptor'
@@ -3249,23 +2439,86 @@ components:
         - created_timestamp
         - user_id
         type: object
-    GetUserStatsParams:
+    DatasetDescriptor:
+      additionalProperties: false
+      description: 'A dataset is where you put multiple referential schemas.
+
+
+        A dataset is a complete namespace where all references between schemas
+
+        are held within the dataset.'
       properties:
-        bucket:
-          $ref: '#/components/schemas/TimeBucket'
-        end_date:
-          format: date-time
+        description:
           type: string
-        start_date:
-          format: date-time
+        llm_override_field:
+          type:
+          - string
+          - 'null'
+        name:
           type: string
-        user_email:
-          nullable: true
-          type: string
-        user_token:
-          nullable: true
-          type: string
+        relationships:
+          items:
+            $ref: '#/components/schemas/RelationshipDescriptor'
+          type: array
+        tables:
+          items:
+            $ref: '#/components/schemas/TableDescriptor'
+          type: array
+      required:
+      - name
+      - description
+      - tables
+      - relationships
       type: object
+    CloneConnectorsResponse:
+      properties:
+        connectors:
+          items:
+            $ref: '#/components/schemas/Connector'
+          type: array
+      required:
+      - connectors
+      type: object
+    TimeBucket:
+      enum:
+      - Second
+      - Minute
+      - Hour
+      - Day
+      - Week
+      - Month
+      - Quarter
+      - Year
+      - Decade
+      type: string
+    JobTypeCount:
+      properties:
+        count:
+          format: int64
+          type: integer
+        job_type:
+          type: string
+      required:
+      - job_type
+      - count
+      type: object
+    TeamId:
+      format: uuid
+      type: string
+    Input:
+      oneOf:
+      - properties:
+          PDF:
+            $ref: '#/components/schemas/PDFIngestor'
+        required:
+        - PDF
+        type: object
+      - properties:
+          Web:
+            $ref: '#/components/schemas/WebSearch'
+        required:
+        - Web
+        type: object
     ExpireGrantsResponse:
       properties:
         expired_count:
@@ -3277,55 +2530,653 @@ components:
       - team_id
       - expired_count
       type: object
-    DatahubIngestionInput:
+    RequiredProperty:
+      additionalProperties: false
       properties:
-        connector_id:
-          $ref: '#/components/schemas/ConnectorId'
-        exploration_run_id:
-          $ref: '#/components/schemas/ExplorationRunId'
-        only_do_datahub:
-          type: boolean
-      required:
-      - connector_id
-      - exploration_run_id
-      - only_do_datahub
-      type: object
-    ConnectorCatalogId:
-      format: uuid
-      type: string
-    TeamId:
-      format: uuid
-      type: string
-    CreateConnectorCredentialFieldRequest:
-      properties:
-        auth_method_id:
-          $ref: '#/components/schemas/ConnectorAuthMethodId'
-        default_value:
-          nullable: true
+        property_names:
+          description: If there are multiple properties, it can match just one of them
+          items:
+            type: string
+          type: array
+        table_name:
+          description: The table name of the entity to update
           type: string
+      required:
+      - table_name
+      - property_names
+      type: object
+    TeamMember:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        email:
+          type: string
+        pending:
+          type: boolean
+        role:
+          $ref: '#/components/schemas/TeamRole'
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+        user_id:
+          allOf:
+          - $ref: '#/components/schemas/UserId'
+      required:
+      - team_id
+      - role
+      - created_at
+      - email
+      - pending
+      type: object
+    JobStatus:
+      enum:
+      - Queued
+      - Running
+      - Completed
+      - Failed
+      type: string
+    ExtendTrialResponse:
+      properties:
+        grant_id:
+          type: string
+        new_expires_at:
+          format: date-time
+          type: string
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+      required:
+      - team_id
+      - new_expires_at
+      - grant_id
+      type: object
+    ConnectorId:
+      format: uuid
+      type: string
+    UpdateSeatsOverrideRequest:
+      properties:
+        seats_override:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+      required:
+      - team_id
+      type: object
+    TeamSubscriptionInfo:
+      properties:
+        has_active_subscription:
+          type: boolean
+        is_trial:
+          type: boolean
+        remaining_credits:
+          format: int64
+          type: integer
+        subscription_tier:
+          $ref: '#/components/schemas/SubscriptionTier'
+        trial_expires_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+      required:
+      - subscription_tier
+      - is_trial
+      - has_active_subscription
+      - remaining_credits
+      type: object
+    EntityId:
+      format: uuid
+      type: string
+    CloneConnectorItem:
+      properties:
+        known_connector_type:
+          type: string
+        name:
+          type: string
+        source_connector_id:
+          $ref: '#/components/schemas/ConnectorId'
+      required:
+      - source_connector_id
+      - name
+      - known_connector_type
+      type: object
+    ImpersonateResponse:
+      properties:
+        expires_at:
+          format: date-time
+          type: string
+        refresh_token:
+          type: string
+        refresh_token_expires_at:
+          format: date-time
+          type: string
+        session_token:
+          type: string
+      required:
+      - session_token
+      - refresh_token
+      - expires_at
+      - refresh_token_expires_at
+      type: object
+    WorkflowBucket:
+      properties:
+        bucket_url:
+          type: string
+        gcp_credentials_json:
+          type:
+          - string
+          - 'null'
+      required:
+      - bucket_url
+      type: object
+    FeatureFlag:
+      enum:
+      - functional_test
+      - pdf_parsing
+      - boredm_construction_model
+      - generic_suspicious_queue
+      - new_use_case_preview
+      - bedrock_codegen
+      - cerebras_codegen
+      - gemini25pro
+      - claude_sonnet4
+      - allow_job_deletion
+      - none
+      type: string
+    CreateConnectorCatalogRequest:
+      properties:
+        categories:
+          items:
+            type: string
+          type: array
         description:
-          nullable: true
+          type:
+          - string
+          - 'null'
+        enterprise_only:
+          type: boolean
+        name:
+          type: string
+        onboarding_priority:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        priority:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        slug:
+          type: string
+      required:
+      - slug
+      - name
+      type: object
+    PendingNangoIntegration:
+      properties:
+        display_name:
+          type:
+          - string
+          - 'null'
+        logo_url:
+          type:
+          - string
+          - 'null'
+        provider:
+          type: string
+        unique_key:
+          type: string
+      required:
+      - unique_key
+      - provider
+      type: object
+    ReportCriticalRequest:
+      properties:
+        message:
+          type: string
+      required:
+      - message
+      type: object
+    ConnectorSchemaId:
+      format: uuid
+      type: string
+    User:
+      properties:
+        apollo_data: {}
+        company_description:
+          type:
+          - string
+          - 'null'
+        company_name:
+          type:
+          - string
+          - 'null'
+        completed_onboarding:
+          type: boolean
+        cost_confirmation_threshold:
+          description: Cost confirmation threshold in credits (thousandth of a cent).
+          format: int64
+          type:
+          - integer
+          - 'null'
+        created_at:
+          format: date-time
+          type: string
+        cufinder_data: {}
+        email:
+          type: string
+        feature_flags:
+          items:
+            allOf:
+            - $ref: '#/components/schemas/FeatureFlag'
+          type: array
+        feature_overrides:
+          additionalProperties: true
+          type: object
+          x-stainless-empty-object: true
+        full_name:
+          type: string
+        id:
+          $ref: '#/components/schemas/UserId'
+        job_title:
+          type:
+          - string
+          - 'null'
+        last_activity:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        last_selected_team_id:
+          allOf:
+          - $ref: '#/components/schemas/TeamId'
+        linkedin_url:
+          type:
+          - string
+          - 'null'
+        notify_for_interaction:
+          type: boolean
+        permissions:
+          items:
+            allOf:
+            - $ref: '#/components/schemas/Permission'
+          type: array
+        slack_user_id:
+          type:
+          - string
+          - 'null'
+        slack_username:
+          type:
+          - string
+          - 'null'
+        survey_completed_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        survey_response: {}
+        teams_user_id:
+          type:
+          - string
+          - 'null'
+        teams_user_name:
+          type:
+          - string
+          - 'null'
+        updated_at:
+          format: date-time
+          type: string
+        user_type:
+          $ref: '#/components/schemas/UserType'
+      required:
+      - id
+      - email
+      - feature_flags
+      - permissions
+      - user_type
+      - created_at
+      - updated_at
+      - full_name
+      - feature_overrides
+      - completed_onboarding
+      - notify_for_interaction
+      type: object
+    FunctionalTestId:
+      format: uuid
+      type: string
+    CancelSubscriptionRequest:
+      properties:
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+      required:
+      - team_id
+      type: object
+    ConnectorAuthMethod:
+      properties:
+        auth_type:
+          $ref: '#/components/schemas/ConnectorAuthType'
+        connector_catalog_id:
+          $ref: '#/components/schemas/ConnectorCatalogId'
+        created_at:
+          format: date-time
+          type: string
+        id:
+          $ref: '#/components/schemas/ConnectorAuthMethodId'
+        is_active:
+          type: boolean
+        label:
+          type:
+          - string
+          - 'null'
+        nango_integration_key:
+          type:
+          - string
+          - 'null'
+        priority:
+          format: int32
+          type: integer
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - id
+      - connector_catalog_id
+      - auth_type
+      - is_active
+      - priority
+      - created_at
+      - updated_at
+      type: object
+    UserType:
+      enum:
+      - admin
+      - public
+      - end_user
+      type: string
+    ExtendTrialRequest:
+      properties:
+        new_expires_at:
+          format: date-time
+          type: string
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+      required:
+      - team_id
+      - new_expires_at
+      type: object
+    ListScopesResponse:
+      properties:
+        scopes:
+          items:
+            $ref: '#/components/schemas/ConnectorAuthMethodScope'
+          type: array
+      required:
+      - scopes
+      type: object
+    UpdateJobConcurrencyLimits:
+      properties:
+        max_connector_explore_jobs:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        max_derive_jobs:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        max_match_jobs:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        max_pdf_jobs:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        max_scrape_jobs:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        max_total_jobs:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        max_web_jobs:
+          format: int32
+          type:
+          - integer
+          - 'null'
+      type: object
+    UploadConnectorLogoResponse:
+      properties:
+        slug:
+          type: string
+      required:
+      - slug
+      type: object
+    UpdateConnectorAuthMethodScope:
+      properties:
+        is_recommended:
+          type:
+          - boolean
+          - 'null'
+        is_required:
+          type:
+          - boolean
+          - 'null'
+        query_parameter:
+          type:
+          - string
+          - 'null'
+        scope_value:
+          type:
+          - string
+          - 'null'
+      type: object
+    JobInput:
+      properties:
+        allow_extra_entities:
+          type: boolean
+        extraction_criteria:
+          items:
+            $ref: '#/components/schemas/SaveRequirement'
+          type: array
+        instructions:
+          type:
+          - string
+          - 'null'
+        model:
+          type:
+          - string
+          - 'null'
+        seeded_kg:
+          allOf:
+          - $ref: '#/components/schemas/LLMKnowledgeGraph'
+        structuring_input:
+          $ref: '#/components/schemas/InputType'
+      required:
+      - structuring_input
+      - extraction_criteria
+      - allow_extra_entities
+      type: object
+    BatchCreateScopesResponse:
+      properties:
+        scopes:
+          items:
+            $ref: '#/components/schemas/ConnectorAuthMethodScope'
+          type: array
+      required:
+      - scopes
+      type: object
+    ChatTemplate:
+      properties:
+        chat_session_id:
+          $ref: '#/components/schemas/ChatSessionId'
+        created_at:
+          format: date-time
+          type: string
+        created_by:
+          $ref: '#/components/schemas/UserId'
+        description:
           type: string
         display_order:
           format: int32
           type: integer
-        field_type:
+        id:
+          $ref: '#/components/schemas/ChatTemplateId'
+        image_url:
           type: string
-        is_optional:
+        is_active:
           type: boolean
-        label:
-          nullable: true
+        questions:
+          items:
+            $ref: '#/components/schemas/TemplateQuestion'
+          type: array
+        title:
           type: string
+        updated_at:
+          format: date-time
+          type: string
+        updated_by:
+          $ref: '#/components/schemas/UserId'
+      required:
+      - id
+      - chat_session_id
+      - title
+      - description
+      - image_url
+      - display_order
+      - is_active
+      - created_by
+      - updated_by
+      - created_at
+      - updated_at
+      - questions
+      type: object
+    UpdateSeatsOverrideResponse:
+      properties:
+        seats_override:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+      required:
+      - team_id
+      type: object
+    CreateJobSandboxRequest:
+      properties:
+        structify_session_token:
+          type: string
+      required:
+      - structify_session_token
+      type: object
+    AdminRemoveMemberResponse:
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      type: object
+    MergeConfig:
+      description: The configuration for a probabilistic merge strategy
+      properties:
+        baseline_cardinality:
+          description: 'The number of unique values that are expected to be present in the complete dataset
+
+
+            This is used for merging to determine how significant a match is. (i.e. if there are
+
+            only 2 possible values, a match gives less confidence than if there are 100)'
+          format: int64
+          minimum: 0
+          type: integer
+        comparison_strategy:
+          $ref: '#/components/schemas/ComparisonStrategy'
+        match_transfer_probability:
+          description: 'The estimated probability that, given an entity match, the properties also match
+
+
+            For a person''s full name, this would be quite high. For a person''s job title, it
+
+            would be lower because people can have multiple job titles over time or at different
+
+            companies at the same time.'
+          format: float
+          type: number
+      required:
+      - baseline_cardinality
+      - match_transfer_probability
+      type: object
+    AdminListConnectorsResponse:
+      properties:
+        connectors:
+          items:
+            $ref: '#/components/schemas/Connector'
+          type: array
+      required:
+      - connectors
+      type: object
+    RelationshipDescriptor:
+      additionalProperties: false
+      properties:
+        description:
+          type: string
+        merge_strategy:
+          allOf:
+          - $ref: '#/components/schemas/RelationshipMergeStrategy'
         name:
           type: string
-        options:
-          nullable: true
+        properties:
+          items:
+            $ref: '#/components/schemas/PropertyDescriptor'
+          type: array
+        source_table:
+          type: string
+        target_table:
+          type: string
       required:
-      - auth_method_id
       - name
-      - is_optional
-      - field_type
-      - display_order
+      - description
+      - source_table
+      - target_table
+      type: object
+    ConnectorAuthMethodId:
+      format: uuid
+      type: string
+    TeamRole:
+      enum:
+      - read_only
+      - member
+      - admin
+      - owner
+      type: string
+    GetUserStatsParams:
+      properties:
+        bucket:
+          $ref: '#/components/schemas/TimeBucket'
+        end_date:
+          format: date-time
+          type: string
+        start_date:
+          format: date-time
+          type: string
+        user_email:
+          type:
+          - string
+          - 'null'
+        user_token:
+          type:
+          - string
+          - 'null'
       type: object
     CloneConnectorsRequest:
       properties:
@@ -3345,9 +3196,783 @@ components:
       - target_team_id
       - connectors
       type: object
-    EntityId:
+    InputType:
+      oneOf:
+      - properties:
+          Agent:
+            $ref: '#/components/schemas/Input'
+        required:
+        - Agent
+        type: object
+      - properties:
+          TransformationPrompt:
+            type: string
+        required:
+        - TransformationPrompt
+        type: object
+      - properties:
+          ScrapeFromUrlProperty:
+            $ref: '#/components/schemas/ScrapePageInput'
+        required:
+        - ScrapeFromUrlProperty
+        type: object
+      - properties:
+          ScrapeUrl:
+            $ref: '#/components/schemas/ScrapePageUrlInput'
+        required:
+        - ScrapeUrl
+        type: object
+      - properties:
+          DatahubIngestion:
+            $ref: '#/components/schemas/DatahubIngestionInput'
+        required:
+        - DatahubIngestion
+        type: object
+      - properties:
+          ConnectorExploration:
+            $ref: '#/components/schemas/ConnectorExplorationInput'
+        required:
+        - ConnectorExploration
+        type: object
+    LinkChatToFunctionalTestRequest:
+      properties:
+        chat_session_id:
+          $ref: '#/components/schemas/ChatSessionId'
+        functional_test_id:
+          $ref: '#/components/schemas/FunctionalTestId'
+        results:
+          additionalProperties: true
+          type: object
+          x-stainless-empty-object: true
+        sample_name:
+          type: string
+      required:
+      - chat_session_id
+      - functional_test_id
+      - sample_name
+      - results
+      type: object
+    MergeStrategy:
+      oneOf:
+      - description: 'Property with unique 1:1 correspondence to its parent.
+
+
+          Merge based on this property 100% of the time'
+        enum:
+        - Unique
+        type: string
+      - properties:
+          Probabilistic:
+            $ref: '#/components/schemas/MergeConfig'
+        required:
+        - Probabilistic
+        type: object
+      - enum:
+        - NoSignal
+        type: string
+    FunctionalTestListItem:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        created_by:
+          $ref: '#/components/schemas/UserId'
+        created_by_email:
+          type: string
+        id:
+          $ref: '#/components/schemas/FunctionalTestId'
+        model_override:
+          type:
+          - string
+          - 'null'
+        prompt_override:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - created_at
+      - created_by
+      - created_by_email
+      type: object
+    PropertyDescriptor:
+      additionalProperties: false
+      properties:
+        description:
+          type: string
+        merge_strategy:
+          $ref: '#/components/schemas/MergeStrategy'
+        name:
+          type: string
+        prop_type:
+          $ref: '#/components/schemas/PropertyType'
+      required:
+      - name
+      - description
+      type: object
+    LLMKnowledgeGraph:
+      additionalProperties: false
+      description: 'Knowledge graph info structured to deserialize and display
+
+        in the same format that the LLM outputs.
+
+        Also the first representation of an LLM output in the pipeline from raw tool output to being merged into a DB'
+      properties:
+        entities:
+          items:
+            $ref: '#/components/schemas/LLMEntity'
+          type: array
+        relationships:
+          items:
+            $ref: '#/components/schemas/LLMRelationship'
+          type: array
+      required:
+      - entities
+      type: object
+    ConnectorAuthMethodScope:
+      properties:
+        connector_auth_method_id:
+          $ref: '#/components/schemas/ConnectorAuthMethodId'
+        created_at:
+          format: date-time
+          type: string
+        id:
+          $ref: '#/components/schemas/ConnectorAuthMethodScopeId'
+        is_recommended:
+          type: boolean
+        is_required:
+          type: boolean
+        query_parameter:
+          type: string
+        scope_value:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - id
+      - connector_auth_method_id
+      - scope_value
+      - query_parameter
+      - is_required
+      - is_recommended
+      - created_at
+      - updated_at
+      type: object
+    ScrapePageInput:
+      properties:
+        batch_scrape:
+          type: boolean
+        url_property_name:
+          type: string
+        use_markdown:
+          type: boolean
+      required:
+      - url_property_name
+      - batch_scrape
+      - use_markdown
+      type: object
+    GrantCreditsResponse:
+      properties:
+        amount:
+          format: int64
+          type: integer
+        grant_id:
+          type: string
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+      required:
+      - grant_id
+      - amount
+      - team_id
+      type: object
+    ConnectorCatalog:
+      properties:
+        categories:
+          items:
+            type:
+            - string
+            - 'null'
+          type: array
+        created_at:
+          format: date-time
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        enterprise_only:
+          type: boolean
+        id:
+          $ref: '#/components/schemas/ConnectorCatalogId'
+        name:
+          type: string
+        onboarding_priority:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        priority:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        slug:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - id
+      - slug
+      - name
+      - categories
+      - created_at
+      - updated_at
+      - enterprise_only
+      type: object
+    JobId:
       format: uuid
       type: string
+    Connector:
+      properties:
+        connector_category:
+          allOf:
+          - $ref: '#/components/schemas/ConnectorCategory'
+        created_at:
+          format: date-time
+          type: string
+        datahub_ingestion_type:
+          type:
+          - string
+          - 'null'
+        datahub_secret_map:
+          allOf:
+          - $ref: '#/components/schemas/DatahubSecretMap'
+        datahub_urn:
+          type:
+          - string
+          - 'null'
+        deleted_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        id:
+          $ref: '#/components/schemas/ConnectorId'
+        known_connector_type:
+          type: string
+        name:
+          type: string
+        nango_connection_id:
+          type:
+          - string
+          - 'null'
+        oauth_scopes:
+          items:
+            type:
+            - string
+            - 'null'
+          type:
+          - array
+          - 'null'
+        owner_user_id:
+          $ref: '#/components/schemas/UserId'
+        refresh_cron_schedule:
+          type:
+          - string
+          - 'null'
+        refresh_next_run_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+        team_visibility:
+          $ref: '#/components/schemas/TeamVisibility'
+        updated_at:
+          format: date-time
+          type: string
+        usage_snippet_override:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - name
+      - created_at
+      - updated_at
+      - known_connector_type
+      - team_id
+      - team_visibility
+      - owner_user_id
+      type: object
+    Membership:
+      description: Contains membership information and API token value
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        id:
+          $ref: '#/components/schemas/MembershipId'
+        invitation_expires_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        invitation_token:
+          format: uuid
+          type:
+          - string
+          - 'null'
+        invited_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        invited_by_user_id:
+          allOf:
+          - $ref: '#/components/schemas/UserId'
+        invitee_email:
+          type:
+          - string
+          - 'null'
+        pending:
+          type: boolean
+        role:
+          $ref: '#/components/schemas/TeamRole'
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+        user_id:
+          allOf:
+          - $ref: '#/components/schemas/UserId'
+        value:
+          format: binary
+          type: string
+      required:
+      - id
+      - value
+      - created_at
+      - team_id
+      - role
+      - pending
+      type: object
+    PDFIngestor:
+      additionalProperties: false
+      description: Ingest all pages of a PDF and process them independently.
+      properties:
+        page:
+          format: int32
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        path:
+          type: string
+      required:
+      - path
+      type: object
+    BatchCreateCredentialFieldsRequest:
+      properties:
+        fields:
+          items:
+            $ref: '#/components/schemas/CreateConnectorCredentialFieldRequest'
+          type: array
+      required:
+      - fields
+      type: object
+    UploadConnectorLogoForm:
+      properties:
+        file:
+          format: binary
+          type: string
+      required:
+      - file
+      type: object
+    DatahubIngestionInput:
+      properties:
+        connector_id:
+          $ref: '#/components/schemas/ConnectorId'
+        exploration_run_id:
+          $ref: '#/components/schemas/ExplorationRunId'
+        only_do_datahub:
+          type: boolean
+      required:
+      - connector_id
+      - exploration_run_id
+      - only_do_datahub
+      type: object
+    WorkflowSessionNodeId:
+      format: uuid
+      type: string
+    ExpireGrantsRequest:
+      properties:
+        source_type:
+          type: string
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+      required:
+      - team_id
+      - source_type
+      type: object
+    CancelSubscriptionResponse:
+      properties:
+        canceled:
+          type: boolean
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+      required:
+      - team_id
+      - canceled
+      type: object
+    SandboxId:
+      format: uuid
+      type: string
+    CreateFunctionalTestRequest:
+      properties:
+        model_override:
+          type:
+          - string
+          - 'null'
+        prompt_override:
+          type:
+          - string
+          - 'null'
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+      required:
+      - team_id
+      type: object
+    UpdateConnectorCredentialFieldRequest:
+      properties:
+        default_value:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        display_order:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        field_type:
+          type:
+          - string
+          - 'null'
+        is_optional:
+          type:
+          - boolean
+          - 'null'
+        label:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        options: {}
+      type: object
+    LLMRelationship:
+      additionalProperties: false
+      properties:
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/BasicPropValue'
+          type: object
+        source:
+          minimum: 0
+          type: integer
+        target:
+          minimum: 0
+          type: integer
+        type:
+          type: string
+      required:
+      - type
+      - source
+      - target
+      type: object
+    JobConcurrencyLimits:
+      properties:
+        id:
+          format: int32
+          type: integer
+        max_connector_explore_jobs:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        max_derive_jobs:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        max_match_jobs:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        max_pdf_jobs:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        max_scrape_jobs:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        max_total_jobs:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        max_web_jobs:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - id
+      - updated_at
+      type: object
+    CreateChatTemplateRequest:
+      properties:
+        chat_session_id:
+          $ref: '#/components/schemas/ChatSessionId'
+        description:
+          type: string
+        display_order:
+          format: int32
+          type: integer
+        image_url:
+          type: string
+        is_active:
+          type: boolean
+        questions:
+          items:
+            $ref: '#/components/schemas/TemplateQuestion'
+          type: array
+        title:
+          type: string
+      required:
+      - chat_session_id
+      - title
+      - description
+      - image_url
+      - questions
+      - display_order
+      - is_active
+      type: object
+    ConnectorCredentialField:
+      properties:
+        auth_method_id:
+          $ref: '#/components/schemas/ConnectorAuthMethodId'
+        created_at:
+          format: date-time
+          type: string
+        default_value:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        display_order:
+          format: int32
+          type: integer
+        field_type:
+          type: string
+        id:
+          $ref: '#/components/schemas/ConnectorCredentialFieldId'
+        is_optional:
+          type: boolean
+        label:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        options: {}
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - id
+      - auth_method_id
+      - name
+      - is_optional
+      - field_type
+      - display_order
+      - created_at
+      - updated_at
+      type: object
+    AdminRemoveMemberRequest:
+      properties:
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+        user_id:
+          $ref: '#/components/schemas/UserId'
+      required:
+      - team_id
+      - user_id
+      type: object
+    BasicPropValue:
+      oneOf:
+      - type: string
+      - format: int64
+        type: integer
+      - type: boolean
+      - format: double
+        type: number
+    ImpersonateRequest:
+      properties:
+        membership_id:
+          $ref: '#/components/schemas/MembershipId'
+      required:
+      - membership_id
+      type: object
+    JobStats:
+      properties:
+        job_count:
+          format: int64
+          type: integer
+        period:
+          format: date-time
+          type: string
+      required:
+      - period
+      - job_count
+      type: object
+    UserId:
+      format: uuid
+      type: string
+    ConnectorCategory:
+      enum:
+      - RelationalDatabase
+      - ApiTabular
+      type: string
+    ExplorationRunId:
+      format: uuid
+      type: string
+    LLMEntity:
+      additionalProperties: false
+      properties:
+        id:
+          minimum: 0
+          type: integer
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/BasicPropValue'
+          type: object
+        type:
+          type: string
+      required:
+      - id
+      - type
+      - properties
+      type: object
+    AdminAddMemberRequest:
+      properties:
+        email:
+          type: string
+        role:
+          $ref: '#/components/schemas/TeamRole'
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+      required:
+      - team_id
+      - email
+      - role
+      type: object
+    UserMembershipInfo:
+      properties:
+        membership_id:
+          $ref: '#/components/schemas/MembershipId'
+        role:
+          $ref: '#/components/schemas/TeamRole'
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+        team_name:
+          type: string
+      required:
+      - membership_id
+      - team_id
+      - team_name
+      - role
+      type: object
+    TemplateQuestion:
+      properties:
+        options:
+          items:
+            type: string
+          type:
+          - array
+          - 'null'
+        prompt:
+          type: string
+      required:
+      - prompt
+      type: object
+    RunningJobStats:
+      properties:
+        by_type:
+          items:
+            $ref: '#/components/schemas/JobTypeCount'
+          type: array
+        by_user:
+          items:
+            $ref: '#/components/schemas/UserJobCount'
+          type: array
+        completed_last_hour:
+          format: int64
+          type: integer
+        failed_last_hour:
+          format: int64
+          type: integer
+        total_queued:
+          format: int64
+          type: integer
+        total_running:
+          format: int64
+          type: integer
+      required:
+      - total_running
+      - total_queued
+      - completed_last_hour
+      - failed_last_hour
+      - by_type
+      - by_user
+      type: object
+    ConnectorExplorationInput:
+      properties:
+        connector_id:
+          $ref: '#/components/schemas/ConnectorId'
+        exploration_phase_id:
+          $ref: '#/components/schemas/ExplorationPhaseId'
+        exploration_run_id:
+          $ref: '#/components/schemas/ExplorationRunId'
+        strategy:
+          $ref: '#/components/schemas/ExplorationStrategy'
+      required:
+      - connector_id
+      - exploration_phase_id
+      - exploration_run_id
+      - strategy
+      type: object
     PropertyType:
       oneOf:
       - enum:
@@ -3388,464 +4013,21 @@ components:
       - enum:
         - Address
         type: string
-    UpdateConnectorAuthMethodRequest:
+    AdminAddMemberResponse:
       properties:
-        is_active:
-          nullable: true
-          type: boolean
-        label:
-          nullable: true
-          type: string
-        priority:
-          format: int32
-          nullable: true
-          type: integer
-      type: object
-    UpdateConnectorAuthMethodScope:
-      properties:
-        is_recommended:
-          nullable: true
-          type: boolean
-        is_required:
-          nullable: true
-          type: boolean
-        query_parameter:
-          nullable: true
-          type: string
-        scope_value:
-          nullable: true
-          type: string
-      type: object
-    RelationshipMergeProbability:
-      properties:
-        source_cardinality_given_target_match:
-          description: 'Describes the expected cardinality of the source table when a match is found in the target table
-
-
-            For example, if we have a source company and a target funding round, we expect the source company
-
-            to appear in multiple funding rounds, but not *too* many.
-
-            So if we have a funding round match, the expected number of unique companies is relatively small.
-
-            This is an estimate of that number.'
-          format: int64
-          minimum: 0
-          nullable: true
-          type: integer
-        target_cardinality_given_source_match:
-          description: 'Describes the expected cardinality of the target table when a match is found in the source table
-
-
-            For example, if we have a source company and a target funding round, we usually expect
-
-            some number of funding rounds to be associated with a single company but not *too* many.
-
-            So if we have a company match, the expected number of unique funding rounds is relatively small.
-
-            This is an estimate of that number.'
-          format: int64
-          minimum: 0
-          nullable: true
-          type: integer
-      type: object
-    WorkflowSessionNodeId:
-      format: uuid
-      type: string
-    PendingNangoIntegration:
-      properties:
-        display_name:
-          nullable: true
-          type: string
-        logo_url:
-          nullable: true
-          type: string
-        provider:
-          type: string
-        unique_key:
-          type: string
+        membership:
+          $ref: '#/components/schemas/Membership'
       required:
-      - unique_key
-      - provider
+      - membership
       type: object
-    RunningJobStats:
-      properties:
-        by_type:
-          items:
-            $ref: '#/components/schemas/JobTypeCount'
-          type: array
-        by_user:
-          items:
-            $ref: '#/components/schemas/UserJobCount'
-          type: array
-        completed_last_hour:
-          format: int64
-          type: integer
-        failed_last_hour:
-          format: int64
-          type: integer
-        total_queued:
-          format: int64
-          type: integer
-        total_running:
-          format: int64
-          type: integer
-      required:
-      - total_running
-      - total_queued
-      - completed_last_hour
-      - failed_last_hour
-      - by_type
-      - by_user
-      type: object
-    ExplorationStrategy:
+    DatahubIngestionType:
       enum:
-      - full
-      - diff
+      - postgres
+      - snowflake
+      - salesforce
+      - hubspot
+      - bigquery
       type: string
-    CreateJobSandboxRequest:
-      properties:
-        structify_session_token:
-          type: string
-      required:
-      - structify_session_token
-      type: object
-    ExpireGrantsRequest:
-      properties:
-        source_type:
-          type: string
-        team_id:
-          $ref: '#/components/schemas/TeamId'
-      required:
-      - team_id
-      - source_type
-      type: object
-    ConnectorDatabaseId:
-      format: uuid
-      type: string
-    ConnectorAuthMethodId:
-      format: uuid
-      type: string
-    UploadConnectorLogoResponse:
-      properties:
-        slug:
-          type: string
-      required:
-      - slug
-      type: object
-    PaginatedTeamListResponse:
-      properties:
-        items:
-          items:
-            $ref: '#/components/schemas/TeamListResponse'
-          type: array
-        total_count:
-          format: int64
-          type: integer
-      required:
-      - items
-      - total_count
-      type: object
-    AdminRemoveMemberResponse:
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      type: object
-    FlushResponse:
-      properties:
-        message:
-          type: string
-        success:
-          type: boolean
-      required:
-      - success
-      - message
-      type: object
-    SaveRequirement:
-      description: It's an OR statement across these.
-      oneOf:
-      - $ref: '#/components/schemas/RequiredRelationship'
-      - $ref: '#/components/schemas/RequiredEntity'
-      - $ref: '#/components/schemas/RequiredProperty'
-    AdminRemoveMemberRequest:
-      properties:
-        team_id:
-          $ref: '#/components/schemas/TeamId'
-        user_id:
-          $ref: '#/components/schemas/UserId'
-      required:
-      - team_id
-      - user_id
-      type: object
-    ReportCriticalRequest:
-      properties:
-        message:
-          type: string
-      required:
-      - message
-      type: object
-    ConnectorAuthMethodScopeId:
-      format: uuid
-      type: string
-    ListScopesResponse:
-      properties:
-        scopes:
-          items:
-            $ref: '#/components/schemas/ConnectorAuthMethodScope'
-          type: array
-      required:
-      - scopes
-      type: object
-    ScrapePageUrlInput:
-      properties:
-        batch_scrape:
-          type: boolean
-        url:
-          type: string
-        use_markdown:
-          type: boolean
-      required:
-      - url
-      - batch_scrape
-      - use_markdown
-      type: object
-    ExtendTrialRequest:
-      properties:
-        new_expires_at:
-          format: date-time
-          type: string
-        team_id:
-          $ref: '#/components/schemas/TeamId'
-      required:
-      - team_id
-      - new_expires_at
-      type: object
-    DatasetDescriptor:
-      additionalProperties: false
-      description: 'A dataset is where you put multiple referential schemas.
-
-
-        A dataset is a complete namespace where all references between schemas
-
-        are held within the dataset.'
-      properties:
-        description:
-          type: string
-        llm_override_field:
-          nullable: true
-          type: string
-        name:
-          type: string
-        relationships:
-          items:
-            $ref: '#/components/schemas/RelationshipDescriptor'
-          type: array
-        tables:
-          items:
-            $ref: '#/components/schemas/TableDescriptor'
-          type: array
-      required:
-      - name
-      - description
-      - tables
-      - relationships
-      type: object
-    CancelSubscriptionRequest:
-      properties:
-        team_id:
-          $ref: '#/components/schemas/TeamId'
-      required:
-      - team_id
-      type: object
-    CreditGrantId:
-      format: uuid
-      type: string
-    RelationshipDescriptor:
-      additionalProperties: false
-      properties:
-        description:
-          type: string
-        merge_strategy:
-          allOf:
-          - $ref: '#/components/schemas/RelationshipMergeStrategy'
-          nullable: true
-        name:
-          type: string
-        properties:
-          items:
-            $ref: '#/components/schemas/PropertyDescriptor'
-          type: array
-        source_table:
-          type: string
-        target_table:
-          type: string
-      required:
-      - name
-      - description
-      - source_table
-      - target_table
-      type: object
-    InputType:
-      oneOf:
-      - properties:
-          Agent:
-            $ref: '#/components/schemas/Input'
-        required:
-        - Agent
-        type: object
-      - properties:
-          TransformationPrompt:
-            type: string
-        required:
-        - TransformationPrompt
-        type: object
-      - properties:
-          ScrapeFromUrlProperty:
-            $ref: '#/components/schemas/ScrapePageInput'
-        required:
-        - ScrapeFromUrlProperty
-        type: object
-      - properties:
-          ScrapeUrl:
-            $ref: '#/components/schemas/ScrapePageUrlInput'
-        required:
-        - ScrapeUrl
-        type: object
-      - properties:
-          DatahubIngestion:
-            $ref: '#/components/schemas/DatahubIngestionInput'
-        required:
-        - DatahubIngestion
-        type: object
-      - properties:
-          ConnectorExploration:
-            $ref: '#/components/schemas/ConnectorExplorationInput'
-        required:
-        - ConnectorExploration
-        type: object
-    ExplorationRunId:
-      format: uuid
-      type: string
-    RequiredRelationship:
-      additionalProperties: false
-      properties:
-        relationship_name:
-          type: string
-      required:
-      - relationship_name
-      type: object
-    ListJobsResponse:
-      properties:
-        created_at:
-          format: date-time
-          type: string
-        dataset_id:
-          allOf:
-          - $ref: '#/components/schemas/DatasetId'
-          nullable: true
-        id:
-          $ref: '#/components/schemas/JobId'
-        job_type:
-          $ref: '#/components/schemas/JobType'
-        message:
-          nullable: true
-          type: string
-        parameters:
-          allOf:
-          - $ref: '#/components/schemas/JobInput'
-          nullable: true
-        reason:
-          nullable: true
-          type: string
-        run_started_time:
-          format: date-time
-          nullable: true
-          type: string
-        run_time_milliseconds:
-          format: int64
-          nullable: true
-          type: integer
-        status:
-          $ref: '#/components/schemas/JobStatus'
-        user_id:
-          $ref: '#/components/schemas/UserId'
-      required:
-      - id
-      - status
-      - created_at
-      - job_type
-      - user_id
-      type: object
-    MergeConfig:
-      description: The configuration for a probabilistic merge strategy
-      properties:
-        baseline_cardinality:
-          description: 'The number of unique values that are expected to be present in the complete dataset
-
-
-            This is used for merging to determine how significant a match is. (i.e. if there are
-
-            only 2 possible values, a match gives less confidence than if there are 100)'
-          format: int64
-          minimum: 0
-          type: integer
-        comparison_strategy:
-          $ref: '#/components/schemas/ComparisonStrategy'
-        match_transfer_probability:
-          description: 'The estimated probability that, given an entity match, the properties also match
-
-
-            For a person''s full name, this would be quite high. For a person''s job title, it
-
-            would be lower because people can have multiple job titles over time or at different
-
-            companies at the same time.'
-          format: float
-          type: number
-      required:
-      - baseline_cardinality
-      - match_transfer_probability
-      type: object
-    PropertyDescriptor:
-      additionalProperties: false
-      properties:
-        description:
-          type: string
-        merge_strategy:
-          $ref: '#/components/schemas/MergeStrategy'
-        name:
-          type: string
-        prop_type:
-          $ref: '#/components/schemas/PropertyType'
-      required:
-      - name
-      - description
-      type: object
-    FunctionalTestListItem:
-      properties:
-        created_at:
-          format: date-time
-          type: string
-        created_by:
-          $ref: '#/components/schemas/UserId'
-        created_by_email:
-          type: string
-        id:
-          $ref: '#/components/schemas/FunctionalTestId'
-        model_override:
-          nullable: true
-          type: string
-        prompt_override:
-          nullable: true
-          type: string
-      required:
-      - id
-      - created_at
-      - created_by
-      - created_by_email
-      type: object
   securitySchemes:
     api_key:
       in: header

@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   contact:
     email: team@structify.ai
@@ -7,7 +7,7 @@ info:
   license:
     name: Discuss directly with founders for license.
     url: https://structify.ai
-  title: Structify account webhook API
+  title: Structify Webhook API
   version: 0.1.0
 servers:
 - description: Production server
@@ -18,7 +18,7 @@ security:
 - api_key: []
 - session_token: []
 tags:
-- name: webhook
+- name: Webhook
 paths:
   /webhook/trigger:
     post:
@@ -69,25 +69,11 @@ paths:
       security:
       - api_key: []
       tags:
-      - webhook
+      - Webhook
+      summary: Webhook trigger
+      x-summary-source: derived
 components:
   schemas:
-    WebhookTriggerRequest:
-      properties:
-        workflow_parameters:
-          additionalProperties:
-            additionalProperties: true
-            type: object
-            x-stainless-empty-object: true
-          type: object
-        workflow_schedule_id:
-          $ref: '#/components/schemas/WorkflowScheduleId'
-      required:
-      - workflow_schedule_id
-      type: object
-    WorkflowScheduleId:
-      format: uuid
-      type: string
     ErrorResponse:
       description: Standard error response
       properties:
@@ -101,16 +87,34 @@ components:
         message:
           type: string
         sandbox_id:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         success:
           type: boolean
         tunnel_url:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       required:
       - success
       - message
+      type: object
+    WorkflowScheduleId:
+      format: uuid
+      type: string
+    WebhookTriggerRequest:
+      properties:
+        workflow_parameters:
+          additionalProperties:
+            additionalProperties: true
+            type: object
+            x-stainless-empty-object: true
+          type: object
+        workflow_schedule_id:
+          $ref: '#/components/schemas/WorkflowScheduleId'
+      required:
+      - workflow_schedule_id
       type: object
   securitySchemes:
     api_key:

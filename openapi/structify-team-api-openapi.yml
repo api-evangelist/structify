@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   contact:
     email: team@structify.ai
@@ -7,7 +7,7 @@ info:
   license:
     name: Discuss directly with founders for license.
     url: https://structify.ai
-  title: Structify account team API
+  title: Structify Team API
   version: 0.1.0
 servers:
 - description: Production server
@@ -19,7 +19,7 @@ security:
 - session_token: []
 tags:
 - description: Team management endpoints
-  name: team
+  name: Team
 paths:
   /team/create:
     post:
@@ -53,7 +53,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - team
+      - Team
+      summary: Team create
+      x-summary-source: derived
   /team/invitations/accept:
     post:
       operationId: team_accept_invitation
@@ -92,7 +94,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - team
+      - Team
+      summary: Team accept invitation
+      x-summary-source: derived
   /team/invitations/details/{token}:
     get:
       operationId: team_invitation_details
@@ -130,7 +134,9 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Internal server error
       tags:
-      - team
+      - Team
+      summary: Team invitation details
+      x-summary-source: derived
   /team/list:
     get:
       operationId: team_list
@@ -151,7 +157,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - team
+      - Team
+      summary: Team list
+      x-summary-source: derived
   /team/{team_id}:
     get:
       operationId: team_get
@@ -191,7 +199,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - team
+      - Team
+      summary: Team get
+      x-summary-source: derived
     put:
       operationId: team_update
       parameters:
@@ -236,7 +246,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - team
+      - Team
+      summary: Team update
+      x-summary-source: derived
   /team/{team_id}/credits/usage:
     get:
       operationId: team_credits_usage
@@ -272,8 +284,9 @@ paths:
         name: token
         required: false
         schema:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       responses:
         '200':
           content:
@@ -303,7 +316,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - team
+      - Team
+      summary: Team credits usage
+      x-summary-source: derived
   /team/{team_id}/invitations:
     delete:
       operationId: team_cancel_invitation
@@ -344,7 +359,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - team
+      - Team
+      summary: Team cancel invitation
+      x-summary-source: derived
   /team/{team_id}/members:
     get:
       operationId: team_list_members
@@ -384,7 +401,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - team
+      - Team
+      summary: Team list members
+      x-summary-source: derived
     post:
       operationId: team_add_member
       parameters:
@@ -429,7 +448,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - team
+      - Team
+      summary: Team add member
+      x-summary-source: derived
   /team/{team_id}/members/{user_id}:
     delete:
       operationId: team_remove_member
@@ -475,7 +496,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - team
+      - Team
+      summary: Team remove member
+      x-summary-source: derived
   /team/{team_id}/members/{user_id}/role:
     patch:
       operationId: team_update_member_role
@@ -527,7 +550,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - team
+      - Team
+      summary: Team update member role
+      x-summary-source: derived
   /team/{team_id}/select:
     post:
       operationId: team_select
@@ -567,34 +592,207 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - team
+      - Team
+      summary: Team select
+      x-summary-source: derived
 components:
   schemas:
-    TeamRole:
+    Granularity:
       enum:
-      - read_only
-      - member
-      - admin
-      - owner
+      - hour
+      - day
+      - week
+      - month
       type: string
-    AddMemberRequest:
+    Team:
       properties:
-        email:
+        created_at:
+          format: date-time
           type: string
+        daytona_credentials:
+          allOf:
+          - $ref: '#/components/schemas/DaytonaCredentials'
+        description:
+          type:
+          - string
+          - 'null'
+        id:
+          $ref: '#/components/schemas/TeamId'
+        name:
+          type: string
+        sandbox_provider:
+          type:
+          - string
+          - 'null'
+        seats_override:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        slack_team_icon:
+          type:
+          - string
+          - 'null'
+        slack_team_id:
+          type:
+          - string
+          - 'null'
+        slack_team_name:
+          type:
+          - string
+          - 'null'
+        teams_app_id:
+          type:
+          - string
+          - 'null'
+        teams_service_url:
+          type:
+          - string
+          - 'null'
+        teams_tenant_id:
+          type:
+          - string
+          - 'null'
+        updated_at:
+          format: date-time
+          type: string
+        workflow_bucket:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowBucket'
+      required:
+      - id
+      - name
+      - created_at
+      - updated_at
+      type: object
+    WorkflowBucket:
+      properties:
+        bucket_url:
+          type: string
+        gcp_credentials_json:
+          type:
+          - string
+          - 'null'
+      required:
+      - bucket_url
+      type: object
+    CreateTeamRequest:
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+      required:
+      - name
+      type: object
+    Membership:
+      description: Contains membership information and API token value
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        id:
+          $ref: '#/components/schemas/MembershipId'
+        invitation_expires_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        invitation_token:
+          format: uuid
+          type:
+          - string
+          - 'null'
+        invited_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        invited_by_user_id:
+          allOf:
+          - $ref: '#/components/schemas/UserId'
+        invitee_email:
+          type:
+          - string
+          - 'null'
+        pending:
+          type: boolean
         role:
           $ref: '#/components/schemas/TeamRole'
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+        user_id:
+          allOf:
+          - $ref: '#/components/schemas/UserId'
+        value:
+          format: binary
+          type: string
       required:
-      - email
+      - id
+      - value
+      - created_at
+      - team_id
       - role
+      - pending
       type: object
-    DaytonaCredentials:
+    CreditsUsageResponse:
       properties:
-        api_key:
-          nullable: true
-          type: string
-        api_url:
-          nullable: true
-          type: string
+        timeseries:
+          items:
+            $ref: '#/components/schemas/CreditsUsageTimeseriesPoint'
+          type: array
+        total_credits_added:
+          format: int64
+          type: integer
+        total_spent:
+          format: int64
+          type: integer
+      required:
+      - total_spent
+      - total_credits_added
+      - timeseries
+      type: object
+    TeamSubscriptionStatus:
+      properties:
+        has_active_subscription:
+          type: boolean
+        is_trial:
+          type: boolean
+        payment_provider:
+          type:
+          - string
+          - 'null'
+        remaining_credits:
+          format: int64
+          type: integer
+        subscription_tier:
+          $ref: '#/components/schemas/SubscriptionTier'
+        trial_expires_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+      required:
+      - subscription_tier
+      - is_trial
+      - has_active_subscription
+      - remaining_credits
+      type: object
+    GetTeamResponse:
+      properties:
+        max_seats:
+          format: int32
+          type: integer
+        subscription_status:
+          $ref: '#/components/schemas/TeamSubscriptionStatus'
+        team:
+          $ref: '#/components/schemas/Team'
+      required:
+      - team
+      - subscription_status
+      - max_seats
       type: object
     ListTeamsResponse:
       properties:
@@ -605,51 +803,33 @@ components:
       required:
       - teams
       type: object
-    RemoveMemberResponse:
+    AddMemberResponse:
       properties:
-        success:
+        invitation_sent:
           type: boolean
+        membership:
+          $ref: '#/components/schemas/Membership'
       required:
-      - success
+      - membership
+      - invitation_sent
       type: object
-    CreditsUsageTimeseriesPoint:
+    AcceptInvitationRequest:
       properties:
-        bucket_start:
-          format: date-time
-          type: string
-        groups:
-          additionalProperties:
-            format: int64
-            type: integer
-          type: object
-      required:
-      - bucket_start
-      - groups
-      type: object
-    TeamSubscriptionStatus:
-      properties:
-        has_active_subscription:
-          type: boolean
-        is_trial:
-          type: boolean
-        payment_provider:
-          nullable: true
-          type: string
-        remaining_credits:
-          format: int64
-          type: integer
-        subscription_tier:
-          $ref: '#/components/schemas/SubscriptionTier'
-        trial_expires_at:
-          format: date-time
-          nullable: true
+        token:
+          format: uuid
           type: string
       required:
-      - subscription_tier
-      - is_trial
-      - has_active_subscription
-      - remaining_credits
+      - token
       type: object
+    SubscriptionTier:
+      description: Represents the different subscription tiers available
+      enum:
+      - free
+      - free_trial
+      - pro
+      - team
+      - enterprise
+      type: string
     UpdateTeamResponse:
       properties:
         team:
@@ -657,57 +837,133 @@ components:
       required:
       - team
       type: object
-    CreateTeamRequest:
+    AddMemberRequest:
       properties:
-        description:
-          nullable: true
-          type: string
-        name:
-          type: string
-      required:
-      - name
-      type: object
-    InvitationDetailsResponse:
-      properties:
-        invitee_email:
-          type: string
-        team_name:
-          type: string
-        user_exists:
-          type: boolean
-      required:
-      - team_name
-      - invitee_email
-      - user_exists
-      type: object
-    TeamMember:
-      properties:
-        created_at:
-          format: date-time
-          type: string
         email:
           type: string
-        pending:
-          type: boolean
         role:
           $ref: '#/components/schemas/TeamRole'
-        team_id:
-          $ref: '#/components/schemas/TeamId'
-        user_id:
-          allOf:
-          - $ref: '#/components/schemas/UserId'
-          nullable: true
       required:
-      - team_id
-      - role
-      - created_at
       - email
-      - pending
+      - role
       type: object
-    MembershipId:
+    ListMembersResponse:
+      properties:
+        members:
+          items:
+            $ref: '#/components/schemas/TeamMember'
+          type: array
+      required:
+      - members
+      type: object
+    UpdateTeamRequest:
+      properties:
+        daytona_credentials:
+          allOf:
+          - $ref: '#/components/schemas/DaytonaCredentials'
+        description:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        sandbox_provider:
+          allOf:
+          - $ref: '#/components/schemas/SandboxProvider'
+        slack_bot_token:
+          type:
+          - string
+          - 'null'
+        slack_team_icon:
+          type:
+          - string
+          - 'null'
+        slack_team_id:
+          type:
+          - string
+          - 'null'
+        slack_team_name:
+          type:
+          - string
+          - 'null'
+        teams_app_id:
+          type:
+          - string
+          - 'null'
+        teams_app_password:
+          type:
+          - string
+          - 'null'
+        teams_tenant_id:
+          type:
+          - string
+          - 'null'
+        workflow_bucket:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowBucket'
+      type: object
+    TeamWithRole:
+      allOf:
+      - $ref: '#/components/schemas/Team'
+      - properties:
+          max_seats:
+            format: int32
+            type: integer
+          role:
+            $ref: '#/components/schemas/TeamRole'
+          subscription_status:
+            $ref: '#/components/schemas/TeamSubscriptionStatus'
+        required:
+        - role
+        - subscription_status
+        - max_seats
+        type: object
+    UserId:
       format: uuid
       type: string
-    UserId:
+    RemoveMemberResponse:
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      type: object
+    ErrorResponse:
+      description: Standard error response
+      properties:
+        error:
+          type: string
+      required:
+      - error
+      type: object
+    DaytonaCredentials:
+      properties:
+        api_key:
+          type:
+          - string
+          - 'null'
+        api_url:
+          type:
+          - string
+          - 'null'
+      type: object
+    TeamRole:
+      enum:
+      - read_only
+      - member
+      - admin
+      - owner
+      type: string
+    UpdateMemberRoleRequest:
+      properties:
+        role:
+          $ref: '#/components/schemas/TeamRole'
+      required:
+      - role
+      type: object
+    TeamId:
       format: uuid
       type: string
     CreateTeamResponse:
@@ -730,68 +986,9 @@ components:
       - team_id
       - team_name
       type: object
-    GetTeamResponse:
-      properties:
-        max_seats:
-          format: int32
-          type: integer
-        subscription_status:
-          $ref: '#/components/schemas/TeamSubscriptionStatus'
-        team:
-          $ref: '#/components/schemas/Team'
-      required:
-      - team
-      - subscription_status
-      - max_seats
-      type: object
-    Membership:
-      description: Contains membership information and API token value
-      properties:
-        created_at:
-          format: date-time
-          type: string
-        id:
-          $ref: '#/components/schemas/MembershipId'
-        invitation_expires_at:
-          format: date-time
-          nullable: true
-          type: string
-        invitation_token:
-          format: uuid
-          nullable: true
-          type: string
-        invited_at:
-          format: date-time
-          nullable: true
-          type: string
-        invited_by_user_id:
-          allOf:
-          - $ref: '#/components/schemas/UserId'
-          nullable: true
-        invitee_email:
-          nullable: true
-          type: string
-        pending:
-          type: boolean
-        role:
-          $ref: '#/components/schemas/TeamRole'
-        team_id:
-          $ref: '#/components/schemas/TeamId'
-        user_id:
-          allOf:
-          - $ref: '#/components/schemas/UserId'
-          nullable: true
-        value:
-          format: binary
-          type: string
-      required:
-      - id
-      - value
-      - created_at
-      - team_id
-      - role
-      - pending
-      type: object
+    MembershipId:
+      format: uuid
+      type: string
     SelectTeamResponse:
       properties:
         refresh_token:
@@ -805,193 +1002,60 @@ components:
       - session_token
       - refresh_token
       type: object
-    Granularity:
-      enum:
-      - hour
-      - day
-      - week
-      - month
-      type: string
-    ErrorResponse:
-      description: Standard error response
+    CreditsUsageTimeseriesPoint:
       properties:
-        error:
+        bucket_start:
+          format: date-time
           type: string
-      required:
-      - error
-      type: object
-    AddMemberResponse:
-      properties:
-        invitation_sent:
-          type: boolean
-        membership:
-          $ref: '#/components/schemas/Membership'
-      required:
-      - membership
-      - invitation_sent
-      type: object
-    UpdateMemberRoleRequest:
-      properties:
-        role:
-          $ref: '#/components/schemas/TeamRole'
-      required:
-      - role
-      type: object
-    WorkflowBucket:
-      properties:
-        bucket_url:
-          type: string
-        gcp_credentials_json:
-          nullable: true
-          type: string
-      required:
-      - bucket_url
-      type: object
-    UpdateTeamRequest:
-      properties:
-        daytona_credentials:
-          allOf:
-          - $ref: '#/components/schemas/DaytonaCredentials'
-          nullable: true
-        description:
-          nullable: true
-          type: string
-        name:
-          nullable: true
-          type: string
-        sandbox_provider:
-          allOf:
-          - $ref: '#/components/schemas/SandboxProvider'
-          nullable: true
-        slack_bot_token:
-          nullable: true
-          type: string
-        slack_team_icon:
-          nullable: true
-          type: string
-        slack_team_id:
-          nullable: true
-          type: string
-        slack_team_name:
-          nullable: true
-          type: string
-        teams_app_id:
-          nullable: true
-          type: string
-        teams_app_password:
-          nullable: true
-          type: string
-        teams_tenant_id:
-          nullable: true
-          type: string
-        workflow_bucket:
-          allOf:
-          - $ref: '#/components/schemas/WorkflowBucket'
-          nullable: true
-      type: object
-    CreditsUsageResponse:
-      properties:
-        timeseries:
-          items:
-            $ref: '#/components/schemas/CreditsUsageTimeseriesPoint'
-          type: array
-        total_credits_added:
-          format: int64
-          type: integer
-        total_spent:
-          format: int64
-          type: integer
-      required:
-      - total_spent
-      - total_credits_added
-      - timeseries
-      type: object
-    AcceptInvitationRequest:
-      properties:
-        token:
-          format: uuid
-          type: string
-      required:
-      - token
-      type: object
-    TeamWithRole:
-      allOf:
-      - $ref: '#/components/schemas/Team'
-      - properties:
-          max_seats:
-            format: int32
+        groups:
+          additionalProperties:
+            format: int64
             type: integer
-          role:
-            $ref: '#/components/schemas/TeamRole'
-          subscription_status:
-            $ref: '#/components/schemas/TeamSubscriptionStatus'
-        required:
-        - role
-        - subscription_status
-        - max_seats
-        type: object
-    SubscriptionTier:
-      description: Represents the different subscription tiers available
-      enum:
-      - free
-      - free_trial
-      - pro
-      - team
-      - enterprise
-      type: string
-    Team:
+          type: object
+      required:
+      - bucket_start
+      - groups
+      type: object
+    TeamMember:
       properties:
         created_at:
           format: date-time
           type: string
-        daytona_credentials:
-          allOf:
-          - $ref: '#/components/schemas/DaytonaCredentials'
-          nullable: true
-        description:
-          nullable: true
+        email:
           type: string
-        id:
+        pending:
+          type: boolean
+        role:
+          $ref: '#/components/schemas/TeamRole'
+        team_id:
           $ref: '#/components/schemas/TeamId'
-        name:
-          type: string
-        sandbox_provider:
-          nullable: true
-          type: string
-        seats_override:
-          format: int32
-          nullable: true
-          type: integer
-        slack_team_icon:
-          nullable: true
-          type: string
-        slack_team_id:
-          nullable: true
-          type: string
-        slack_team_name:
-          nullable: true
-          type: string
-        teams_app_id:
-          nullable: true
-          type: string
-        teams_service_url:
-          nullable: true
-          type: string
-        teams_tenant_id:
-          nullable: true
-          type: string
-        updated_at:
-          format: date-time
-          type: string
-        workflow_bucket:
+        user_id:
           allOf:
-          - $ref: '#/components/schemas/WorkflowBucket'
-          nullable: true
+          - $ref: '#/components/schemas/UserId'
       required:
-      - id
-      - name
+      - team_id
+      - role
       - created_at
-      - updated_at
+      - email
+      - pending
+      type: object
+    SandboxProvider:
+      enum:
+      - modal
+      - daytona
+      type: string
+    InvitationDetailsResponse:
+      properties:
+        invitee_email:
+          type: string
+        team_name:
+          type: string
+        user_exists:
+          type: boolean
+      required:
+      - team_name
+      - invitee_email
+      - user_exists
       type: object
     UpdateMemberRoleResponse:
       properties:
@@ -1000,23 +1064,6 @@ components:
       required:
       - success
       type: object
-    SandboxProvider:
-      enum:
-      - modal
-      - daytona
-      type: string
-    ListMembersResponse:
-      properties:
-        members:
-          items:
-            $ref: '#/components/schemas/TeamMember'
-          type: array
-      required:
-      - members
-      type: object
-    TeamId:
-      format: uuid
-      type: string
   securitySchemes:
     api_key:
       in: header

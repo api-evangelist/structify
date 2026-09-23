@@ -1,36 +1,26 @@
 generated: '2026-08-14'
 method: probed
 source: https://docs.structify.ai/mcp
-summary: >-
-  Structify serves a live, anonymous, remote MCP server from its documentation
-  host. It answered a real tools/list on 2026-08-14 and returned three tools
-  with full JSON Schema inputSchemas. It is a DOCUMENTATION-PLANE server: the
-  tools search, read and give feedback on the Structify docs. None of them call
-  the Structify data platform. Structify publishes no MCP server for its REST
-  API, so an agent can read Structify's documentation over MCP but must fall
-  back to the REST API (openapi/) to actually create a dataset, scrape a page or
-  run a job.
+summary: 'Structify serves a live, anonymous, remote MCP server from its documentation host. It answered
+  a real tools/list on 2026-08-14 and returned three tools with full JSON Schema inputSchemas. It is a
+  DOCUMENTATION-PLANE server: the tools search, read and give feedback on the Structify docs. None of
+  them call the Structify data platform. Structify publishes no MCP server for its REST API, so an agent
+  can read Structify''s documentation over MCP but must fall back to the REST API (openapi/) to actually
+  create a dataset, scrape a page or run a job.'
 deployment:
-  mode: remote
-  endpoint: https://docs.structify.ai/mcp
-  auth: none
-  verified: probed
-  checked: '2026-08-14'
-  transport: streamable-http
-  note: >-
-    No stdio package is published — nothing on npm or PyPI under a Structify
-    scope ships an MCP server, and the StructifyAI GitHub org contains only the
-    two SDK repos. Mode is therefore remote, not both.
+  mode: none
+  verified: derived
+  tools: 10
+  checked: '2026-08-12'
+  source: catalog MCP census
 discovery:
   well_known: https://docs.structify.ai/.well-known/mcp.json
   well_known_status: 200
   declared_url: https://structify.main-kill-isr.mintlify.me/mcp
-  declared_url_note: >-
-    The published /.well-known/mcp.json advertises a Mintlify preview hostname
-    (structify.main-kill-isr.mintlify.me) rather than the customer domain. That
-    URL is not a Structify-controlled host and should not be used as the client
-    endpoint. The working, first-party endpoint is https://docs.structify.ai/mcp,
-    which is the one recorded above and the one that was probed.
+  declared_url_note: The published /.well-known/mcp.json advertises a Mintlify preview hostname (structify.main-kill-isr.mintlify.me)
+    rather than the customer domain. That URL is not a Structify-controlled host and should not be used
+    as the client endpoint. The working, first-party endpoint is https://docs.structify.ai/mcp, which
+    is the one recorded above and the one that was probed.
 server:
   name: structify
   vendor_platform: Mintlify docs MCP
@@ -46,33 +36,28 @@ x-evidence:
 tools:
 - name: search_structify
   title: Search documentation
-  description: >-
-    Search across the Structify knowledge base to find relevant information,
-    code examples, API references, and guides. Returns contextual content with
-    titles and direct links to documentation pages.
+  description: Search across the Structify knowledge base to find relevant information, code examples,
+    API references, and guides. Returns contextual content with titles and direct links to documentation
+    pages.
   input_schema:
     query:
       type: string
       required: true
       description: Search query
 - name: query_docs_filesystem_structify
-  description: >-
-    Run a read-only shell-like query (rg / tree / ls / head / cat) against a
-    virtualized in-memory filesystem containing only the Structify documentation
-    pages and OpenAPI specs. Nothing executes on any real machine.
+  description: Run a read-only shell-like query (rg / tree / ls / head / cat) against a virtualized in-memory
+    filesystem containing only the Structify documentation pages and OpenAPI specs. Nothing executes on
+    any real machine.
   input_schema:
     command:
       type: string
       required: true
-      description: >-
-        A shell command to run against the virtualized documentation
-        filesystem, e.g. `rg -il "keyword" /`, `tree / -L 2`,
-        `head -80 /path/file.mdx`.
+      description: A shell command to run against the virtualized documentation filesystem, e.g. `rg -il
+        "keyword" /`, `tree / -L 2`, `head -80 /path/file.mdx`.
 - name: submit_feedback
   title: Submit documentation feedback
-  description: >-
-    Report a problem with the documentation site so the docs team can fix it.
-    For documentation content only, not product support.
+  description: Report a problem with the documentation site so the docs team can fix it. For documentation
+    content only, not product support.
   input_schema:
     path:
       type: string
@@ -86,11 +71,9 @@ candidate_tools:
   status: candidate
   method: derived
   source: openapi/_original/structify-openapi-original.json
-  note: >-
-    NOT PUBLISHED BY STRUCTIFY. This is the API-plane tool set the pipeline
-    derived from marquee OpenAPI operations in an earlier round, retained as a
-    gap record: it is what a Structify data-platform MCP server would expose,
-    and none of it is reachable over the live documentation-plane server above.
+  note: 'NOT PUBLISHED BY STRUCTIFY. This is the API-plane tool set the pipeline derived from marquee
+    OpenAPI operations in an earlier round, retained as a gap record: it is what a Structify data-platform
+    MCP server would expose, and none of it is reachable over the live documentation-plane server above.'
   tools:
   - name: create_dataset
     description: Create a dataset (schema container).

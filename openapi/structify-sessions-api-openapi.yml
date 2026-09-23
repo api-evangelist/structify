@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   contact:
     email: team@structify.ai
@@ -7,7 +7,7 @@ info:
   license:
     name: Discuss directly with founders for license.
     url: https://structify.ai
-  title: Structify account sessions API
+  title: Structify Sessions API
   version: 0.1.0
 servers:
 - description: Production server
@@ -18,7 +18,7 @@ security:
 - api_key: []
 - session_token: []
 tags:
-- name: sessions
+- name: Sessions
 paths:
   /sessions:
     post:
@@ -39,7 +39,9 @@ paths:
         '400':
           description: Invalid request.
       tags:
-      - sessions
+      - Sessions
+      summary: Create session
+      x-summary-source: derived
   /sessions/estimate_cost:
     post:
       operationId: estimate_cost
@@ -59,7 +61,9 @@ paths:
         '400':
           description: Invalid request.
       tags:
-      - sessions
+      - Sessions
+      summary: Estimate cost
+      x-summary-source: derived
   /sessions/nodes/{node_id}:
     get:
       operationId: get_node
@@ -79,7 +83,9 @@ paths:
         '404':
           description: Node not found.
       tags:
-      - sessions
+      - Sessions
+      summary: Get node
+      x-summary-source: derived
     patch:
       operationId: update_workflow_node
       parameters:
@@ -107,7 +113,9 @@ paths:
         '404':
           description: Node not found.
       tags:
-      - sessions
+      - Sessions
+      summary: Update workflow node
+      x-summary-source: derived
   /sessions/nodes/{node_id}/confirm:
     post:
       operationId: confirm_node
@@ -135,7 +143,9 @@ paths:
         '404':
           description: Node not found.
       tags:
-      - sessions
+      - Sessions
+      summary: Confirm node
+      x-summary-source: derived
   /sessions/nodes/{node_id}/edit_output:
     post:
       operationId: edit_workflow_node_output
@@ -160,7 +170,9 @@ paths:
                 $ref: '#/components/schemas/EditNodeOutputResponse'
           description: Edit completed.
       tags:
-      - sessions
+      - Sessions
+      summary: Edit workflow node output
+      x-summary-source: derived
   /sessions/nodes/{node_id}/events:
     get:
       operationId: get_node_events
@@ -175,15 +187,15 @@ paths:
         name: search_term
         required: false
         schema:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - in: query
         name: status
         required: false
         schema:
           allOf:
           - $ref: '#/components/schemas/JobStatus'
-          nullable: true
       - in: query
         name: offset
         required: false
@@ -207,9 +219,9 @@ paths:
           description: Access denied.
         '404':
           description: Node not found.
-      summary: Get events from all jobs for a specific workflow node.
+      summary: Get events from all jobs for a specific workflow node
       tags:
-      - sessions
+      - Sessions
   /sessions/nodes/{node_id}/output_data:
     get:
       operationId: get_workflow_node_output_data
@@ -233,7 +245,9 @@ paths:
         '404':
           description: Node not found.
       tags:
-      - sessions
+      - Sessions
+      summary: Get workflow node output data
+      x-summary-source: derived
     post:
       operationId: upload_workflow_node_output_data
       parameters:
@@ -262,7 +276,9 @@ paths:
         '404':
           description: Node not found.
       tags:
-      - sessions
+      - Sessions
+      summary: Upload workflow node output data
+      x-summary-source: derived
   /sessions/nodes/{node_id}/progress:
     get:
       operationId: get_workflow_node_progress
@@ -285,7 +301,9 @@ paths:
         '404':
           description: Node not found.
       tags:
-      - sessions
+      - Sessions
+      summary: Get workflow node progress
+      x-summary-source: derived
     patch:
       operationId: update_workflow_node_progress
       parameters:
@@ -313,7 +331,9 @@ paths:
         '404':
           description: Node not found.
       tags:
-      - sessions
+      - Sessions
+      summary: Update workflow node progress
+      x-summary-source: derived
   /sessions/nodes/{node_id}/request_confirmation:
     post:
       operationId: request_node_confirmation
@@ -341,7 +361,9 @@ paths:
         '404':
           description: Node not found.
       tags:
-      - sessions
+      - Sessions
+      summary: Request node confirmation
+      x-summary-source: derived
   /sessions/nodes/{node_id}/visualization_output:
     post:
       operationId: upload_node_visualization_output
@@ -370,7 +392,9 @@ paths:
         '404':
           description: Node not found.
       tags:
-      - sessions
+      - Sessions
+      summary: Upload node visualization output
+      x-summary-source: derived
   /sessions/{session_id}/dag:
     get:
       operationId: get_workflow_dag
@@ -393,7 +417,9 @@ paths:
         '404':
           description: Session not found.
       tags:
-      - sessions
+      - Sessions
+      summary: Get workflow dag
+      x-summary-source: derived
   /sessions/{session_id}/dag_ready:
     post:
       operationId: finalize_dag
@@ -421,9 +447,9 @@ paths:
           description: DAG validation failed
         '500':
           description: Internal server error
-      summary: Finalize a workflow session DAG by creating all nodes/edges and marking it as ready
+      summary: Finalize a workflow session DAG by creating all nodes/edges and marking it as…
       tags:
-      - sessions
+      - Sessions
   /sessions/{session_id}/dashboard_layout:
     post:
       operationId: upload_dashboard_layout
@@ -452,7 +478,9 @@ paths:
         '404':
           description: Session not found.
       tags:
-      - sessions
+      - Sessions
+      summary: Upload dashboard layout
+      x-summary-source: derived
   /sessions/{session_id}/error:
     patch:
       operationId: mark_workflow_session_errored
@@ -481,7 +509,9 @@ paths:
         '404':
           description: Session not found.
       tags:
-      - sessions
+      - Sessions
+      summary: Mark workflow session errored
+      x-summary-source: derived
   /sessions/{session_id}/kill_jobs:
     post:
       operationId: kill_all_jobs_for_workflow
@@ -510,7 +540,9 @@ paths:
         '403':
           description: Access denied.
       tags:
-      - sessions
+      - Sessions
+      summary: Kill all jobs for workflow
+      x-summary-source: derived
   /sessions/{session_id}/trigger_review:
     post:
       operationId: trigger_workflow_review
@@ -533,228 +565,22 @@ paths:
         '404':
           description: Session not found.
       tags:
-      - sessions
+      - Sessions
+      summary: Trigger workflow review
+      x-summary-source: derived
 components:
   schemas:
-    ConfirmNodeRequest:
+    KillAllJobsResponse:
       properties:
-        confirmed:
-          type: boolean
-      required:
-      - confirmed
-      type: object
-    KillAllJobsRequest:
-      properties:
+        killed_jobs:
+          items:
+            $ref: '#/components/schemas/JobId'
+          type: array
         message:
-          nullable: true
-          type: string
-      type: object
-    WorkflowScheduleId:
-      format: uuid
-      type: string
-    LLMEntity:
-      additionalProperties: false
-      properties:
-        id:
-          minimum: 0
-          type: integer
-        properties:
-          additionalProperties:
-            $ref: '#/components/schemas/BasicPropValue'
-          type: object
-        type:
           type: string
       required:
-      - id
-      - type
-      - properties
-      type: object
-    EdgeSpec:
-      properties:
-        source_node_index:
-          format: int32
-          type: integer
-        target_node_index:
-          format: int32
-          type: integer
-      required:
-      - source_node_index
-      - target_node_index
-      type: object
-    GetNodeEventsResponse:
-      properties:
-        count:
-          minimum: 0
-          type: integer
-        events:
-          items:
-            $ref: '#/components/schemas/JobWithEvents'
-          type: array
-      required:
-      - events
-      - count
-      type: object
-    TimeStampedJobEvent:
-      properties:
-        body:
-          $ref: '#/components/schemas/JobEventBody'
-        created_at:
-          format: date-time
-          type: string
-      required:
-      - created_at
-      - body
-      type: object
-    FinalizeDagResponse:
-      properties:
-        node_ids:
-          items:
-            $ref: '#/components/schemas/WorkflowSessionNodeId'
-          type: array
-      required:
-      - node_ids
-      type: object
-    WorkflowSession:
-      properties:
-        aborted:
-          type: boolean
-        chat_session_id:
-          $ref: '#/components/schemas/ChatSessionId'
-        created_at:
-          format: date-time
-          nullable: true
-          type: string
-        dag_ready:
-          type: boolean
-        dag_ready_at:
-          format: date-time
-          nullable: true
-          type: string
-        dashboard_layout_proto:
-          format: binary
-          nullable: true
-          type: string
-        error_message:
-          nullable: true
-          type: string
-        error_traceback:
-          nullable: true
-          type: string
-        id:
-          $ref: '#/components/schemas/WorkflowSessionId'
-        parent_chat_message_id:
-          allOf:
-          - $ref: '#/components/schemas/ChatMessageId'
-          nullable: true
-        updated_at:
-          format: date-time
-          type: string
-        workflow_schedule_id:
-          allOf:
-          - $ref: '#/components/schemas/WorkflowScheduleId'
-          nullable: true
-      required:
-      - id
-      - chat_session_id
-      - updated_at
-      - dag_ready
-      - aborted
-      type: object
-    NodeSpec:
-      properties:
-        code:
-          type: string
-        code_md5_hash:
-          type: string
-        connector_id:
-          allOf:
-          - $ref: '#/components/schemas/ConnectorId'
-          nullable: true
-        docstring:
-          type: string
-        function_name:
-          type: string
-      required:
-      - function_name
-      - docstring
-      - code_md5_hash
-      - code
-      type: object
-    VizDateControlType:
-      enum:
-      - date
-      type: string
-    CostEstimateRequest:
-      properties:
-        avg_pages_per_doc:
-          format: int64
-          nullable: true
-          type: integer
-        num_documents:
-          format: int64
-          nullable: true
-          type: integer
-        num_properties:
-          format: int64
-          nullable: true
-          type: integer
-        operation:
-          $ref: '#/components/schemas/CostOperation'
-        row_count:
-          format: int64
-          nullable: true
-          type: integer
-        source_count:
-          format: int64
-          nullable: true
-          type: integer
-        target_count:
-          format: int64
-          nullable: true
-          type: integer
-        use_proxy:
-          nullable: true
-          type: boolean
-      required:
-      - operation
-      type: object
-    VizBooleanControlType:
-      enum:
-      - checkbox
-      type: string
-    WorkflowNodeOutputUpload:
-      properties:
-        cache_final_rows:
-          format: int64
-          nullable: true
-          type: integer
-        cache_final_size_bytes:
-          format: int64
-          nullable: true
-          type: integer
-        cache_max_bytes:
-          format: int64
-          nullable: true
-          type: integer
-        cache_original_rows:
-          format: int64
-          nullable: true
-          type: integer
-        cache_original_size_bytes:
-          format: int64
-          nullable: true
-          type: integer
-        cache_truncated:
-          nullable: true
-          type: boolean
-        content:
-          format: binary
-          type: string
-        output_schema:
-          nullable: true
-          type: string
-      required:
-      - content
+      - killed_jobs
+      - message
       type: object
     VizQuery:
       additionalProperties: false
@@ -767,6 +593,42 @@ components:
       - id
       - sql
       type: object
+    Dashboard:
+      description: 'A page is the top-level container with title/description
+
+        Can contain multiple dashboards with different datasets'
+      properties:
+        dashboards:
+          description: One or more dashboards on this page
+          items:
+            $ref: '#/components/schemas/DashboardPage'
+          type: array
+        description:
+          description: Optional page description
+          type:
+          - string
+          - 'null'
+        title:
+          description: Page title
+          type: string
+      required:
+      - title
+      - dashboards
+      type: object
+    CostOperation:
+      enum:
+      - tag
+      - pdf
+      - web
+      - match
+      type: string
+    VizNumberControlType:
+      enum:
+      - range
+      type: string
+    JobId:
+      format: uuid
+      type: string
     VizBooleanControl:
       additionalProperties: false
       properties:
@@ -778,32 +640,23 @@ components:
       - type
       - label
       type: object
-    VizFigureDefinition:
-      additionalProperties: false
-      properties:
-        expression:
-          type: string
-        kind:
-          $ref: '#/components/schemas/VizFigureKind'
-      required:
-      - kind
-      - expression
-      type: object
     DashboardComponent:
       description: A component references a viz node and optional display metadata.
       properties:
         description:
           description: Optional description shown under the component title.
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         node_name:
           description: Function name of the viz node that outputs the chart spec.
           type: string
         span:
           description: 'Grid span: 1 (quarter), 2 (half), 3 (three-quarters), 4 (full width).'
           format: int32
-          nullable: true
-          type: integer
+          type:
+          - integer
+          - 'null'
         title:
           description: Display title shown in the dashboard layout.
           type: string
@@ -811,353 +664,19 @@ components:
       - node_name
       - title
       type: object
-    WorkflowSessionNodeId:
+    ChatSessionId:
       format: uuid
       type: string
-    WorkflowDAG:
-      properties:
-        aborted:
-          type: boolean
-        dag_ready_at:
-          format: date-time
-          nullable: true
-          type: string
-        dashboard_layout:
-          allOf:
-          - $ref: '#/components/schemas/Dashboard'
-          nullable: true
-        dashboard_specs:
-          items:
-            $ref: '#/components/schemas/DashboardItem'
-          type: array
-        edges:
-          items:
-            $ref: '#/components/schemas/WorkflowSessionEdge'
-          type: array
-        error:
-          nullable: true
-          type: string
-        error_traceback:
-          nullable: true
-          type: string
-        is_ready:
-          type: boolean
-        nodes:
-          items:
-            $ref: '#/components/schemas/WorkflowSessionNode'
-          type: array
-        session_id:
-          $ref: '#/components/schemas/WorkflowSessionId'
-      required:
-      - session_id
-      - aborted
-      - nodes
-      - edges
-      - is_ready
-      - dashboard_specs
-      type: object
-    FinalizeDagRequest:
-      properties:
-        dashboard_layout:
-          allOf:
-          - $ref: '#/components/schemas/Dashboard'
-          nullable: true
-        edges:
-          items:
-            $ref: '#/components/schemas/EdgeSpec'
-          type: array
-        nodes:
-          items:
-            $ref: '#/components/schemas/NodeSpec'
-          type: array
-      required:
-      - nodes
-      - edges
-      type: object
-    JobStatus:
+    VizDateControlType:
       enum:
-      - Queued
-      - Running
-      - Completed
-      - Failed
+      - date
       type: string
-    CostOperation:
+    AutofixContext:
       enum:
-      - tag
-      - pdf
-      - web
-      - match
+      - creation
+      - execution
+      - visualization
       type: string
-    WorkflowNodeExecutionStatus:
-      enum:
-      - Unexecuted
-      - Success
-      - Failure
-      - Running
-      - Aborted
-      - PendingConfirmation
-      type: string
-    ConnectorId:
-      format: uuid
-      type: string
-    VizControlOption:
-      additionalProperties: false
-      properties:
-        label:
-          type: string
-        value:
-          type: string
-      required:
-      - label
-      - value
-      type: object
-    TriggerReviewResponse:
-      properties:
-        triggered:
-          type: boolean
-      required:
-      - triggered
-      type: object
-    DashboardItem:
-      properties:
-        file_name:
-          description: File path relative to repository root.
-          type: string
-        spec:
-          $ref: '#/components/schemas/DashboardSpec'
-      required:
-      - file_name
-      - spec
-      type: object
-    JobId:
-      format: uuid
-      type: string
-    UpdateWorkflowNodeProgressRequest:
-      properties:
-        current:
-          format: int32
-          minimum: 0
-          type: integer
-        elapsed_seconds:
-          format: double
-          type: number
-        title:
-          type: string
-        total:
-          format: int32
-          minimum: 0
-          nullable: true
-          type: integer
-      required:
-      - title
-      - current
-      - elapsed_seconds
-      type: object
-    ProgressStatus:
-      properties:
-        current:
-          format: int32
-          minimum: 0
-          type: integer
-        elapsed_seconds:
-          format: double
-          type: number
-        started_at:
-          format: date-time
-          type: string
-        total:
-          format: int32
-          minimum: 0
-          nullable: true
-          type: integer
-      required:
-      - started_at
-      - current
-      - elapsed_seconds
-      type: object
-    WorkflowSessionNode:
-      properties:
-        cache_final_rows:
-          format: int64
-          nullable: true
-          type: integer
-        cache_final_size_bytes:
-          format: int64
-          nullable: true
-          type: integer
-        cache_max_bytes:
-          format: int64
-          nullable: true
-          type: integer
-        cache_original_rows:
-          format: int64
-          nullable: true
-          type: integer
-        cache_original_size_bytes:
-          format: int64
-          nullable: true
-          type: integer
-        cache_truncated:
-          type: boolean
-        code:
-          nullable: true
-          type: string
-        code_md5_hash:
-          type: string
-        confirmation_status:
-          nullable: true
-          type: string
-        connector_id:
-          allOf:
-          - $ref: '#/components/schemas/ConnectorId'
-          nullable: true
-        created_at:
-          format: date-time
-          nullable: true
-          type: string
-        docstring:
-          type: string
-        error_message:
-          nullable: true
-          type: string
-        error_traceback:
-          nullable: true
-          type: string
-        estimated_cost:
-          format: int64
-          nullable: true
-          type: integer
-        execution_status:
-          $ref: '#/components/schemas/WorkflowNodeExecutionStatus'
-        execution_time_ms:
-          format: int64
-          nullable: true
-          type: integer
-        function_name:
-          type: string
-        id:
-          $ref: '#/components/schemas/WorkflowSessionNodeId'
-        input_row_count:
-          format: int64
-          nullable: true
-          type: integer
-        manually_edited:
-          type: boolean
-        node_index:
-          format: int32
-          type: integer
-        node_name:
-          type: string
-        original_node:
-          allOf:
-          - $ref: '#/components/schemas/WorkflowSessionNodeId'
-          nullable: true
-        output_blob_name:
-          nullable: true
-          type: string
-        output_schema:
-          nullable: true
-        progress:
-          nullable: true
-        reviewed:
-          type: boolean
-        session_id:
-          $ref: '#/components/schemas/WorkflowSessionId'
-        updated_at:
-          format: date-time
-          type: string
-        visualization_output:
-          nullable: true
-      required:
-      - id
-      - node_index
-      - node_name
-      - session_id
-      - function_name
-      - docstring
-      - execution_status
-      - updated_at
-      - code_md5_hash
-      - reviewed
-      type: object
-    ControlOption:
-      properties:
-        label:
-          type: string
-        value:
-          type: string
-      required:
-      - value
-      - label
-      type: object
-    VizStringControl:
-      additionalProperties: false
-      properties:
-        label:
-          type: string
-        options:
-          items:
-            $ref: '#/components/schemas/VizControlOption'
-          type: array
-        type:
-          $ref: '#/components/schemas/VizStringControlType'
-      required:
-      - type
-      - label
-      - options
-      type: object
-    CostEstimateResponse:
-      properties:
-        estimated_credits:
-          format: int64
-          type: integer
-        estimated_dollars:
-          format: double
-          type: number
-      required:
-      - estimated_credits
-      - estimated_dollars
-      type: object
-    UploadDashboardLayoutRequest:
-      oneOf:
-      - properties:
-          layout:
-            $ref: '#/components/schemas/Dashboard'
-        required:
-        - layout
-        type: object
-      - properties:
-          dashboard_specs:
-            items:
-              $ref: '#/components/schemas/DashboardSpecUpload'
-            type: array
-        required:
-        - dashboard_specs
-        type: object
-    JobWithEvents:
-      description: A job paired with all its associated events
-      properties:
-        events:
-          items:
-            $ref: '#/components/schemas/TimeStampedJobEvent'
-          type: array
-        id:
-          $ref: '#/components/schemas/JobId'
-        run_started_time:
-          format: date-time
-          type: string
-        seeded_kg:
-          allOf:
-          - $ref: '#/components/schemas/LLMKnowledgeGraph'
-          nullable: true
-        status:
-          $ref: '#/components/schemas/JobStatus'
-      required:
-      - id
-      - status
-      - run_started_time
-      - events
-      type: object
     VizFigure:
       additionalProperties: false
       properties:
@@ -1176,426 +695,259 @@ components:
       - id
       - figure
       type: object
-    UpdateWorkflowNodeRequest:
+    WorkflowSessionNode:
       properties:
+        cache_final_rows:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        cache_final_size_bytes:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        cache_max_bytes:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        cache_original_rows:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        cache_original_size_bytes:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        cache_truncated:
+          type: boolean
+        code:
+          type:
+          - string
+          - 'null'
+        code_md5_hash:
+          type: string
+        confirmation_status:
+          type:
+          - string
+          - 'null'
+        connector_id:
+          allOf:
+          - $ref: '#/components/schemas/ConnectorId'
+        created_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        docstring:
+          type: string
         error_message:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         error_traceback:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
+        estimated_cost:
+          format: int64
+          type:
+          - integer
+          - 'null'
         execution_status:
           $ref: '#/components/schemas/WorkflowNodeExecutionStatus'
         execution_time_ms:
           format: int64
-          nullable: true
-          type: integer
-      required:
-      - execution_status
-      type: object
-    EditNodeOutputResponse:
-      properties:
-        error_message:
-          nullable: true
-          type: string
-      type: object
-    WorkflowSessionEdge:
-      properties:
-        created_at:
-          format: date-time
+          type:
+          - integer
+          - 'null'
+        function_name:
           type: string
         id:
-          $ref: '#/components/schemas/WorkflowSessionEdgeId'
+          $ref: '#/components/schemas/WorkflowSessionNodeId'
+        input_row_count:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        manually_edited:
+          type: boolean
+        node_index:
+          format: int32
+          type: integer
+        node_name:
+          type: string
+        original_node:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowSessionNodeId'
+        output_blob_name:
+          type:
+          - string
+          - 'null'
+        output_schema: {}
+        progress: {}
+        reviewed:
+          type: boolean
         session_id:
           $ref: '#/components/schemas/WorkflowSessionId'
-        source_node_id:
-          $ref: '#/components/schemas/WorkflowSessionNodeId'
-        target_node_id:
-          $ref: '#/components/schemas/WorkflowSessionNodeId'
+        updated_at:
+          format: date-time
+          type: string
+        visualization_output: {}
       required:
       - id
+      - node_index
+      - node_name
       - session_id
-      - source_node_id
-      - target_node_id
-      - created_at
+      - function_name
+      - docstring
+      - execution_status
+      - updated_at
+      - code_md5_hash
+      - reviewed
       type: object
-    WorkflowSessionEdgeId:
-      format: uuid
-      type: string
-    VizNumberControlType:
-      enum:
-      - range
-      type: string
-    ParquetEdit:
-      discriminator:
-        propertyName: type
-      oneOf:
-      - allOf:
-        - $ref: '#/components/schemas/CellEdit'
-        - properties:
-            type:
-              enum:
-              - edit_cell
-              type: string
-          required:
-          - type
-          type: object
-      - properties:
-          row_index:
-            minimum: 0
-            type: integer
-          type:
-            enum:
-            - delete_row
-            type: string
-        required:
-        - row_index
-        - type
-        type: object
-      - properties:
-          type:
-            enum:
-            - add_row
-            type: string
-          values:
-            additionalProperties:
-              type: string
-            type: object
-        required:
-        - values
-        - type
-        type: object
-    CreateWorkflowSessionRequest:
+    NodeSpec:
       properties:
-        chat_session_id:
-          $ref: '#/components/schemas/ChatSessionId'
-        parent_chat_message_id:
+        code:
+          type: string
+        code_md5_hash:
+          type: string
+        connector_id:
           allOf:
-          - $ref: '#/components/schemas/ChatMessageId'
-          nullable: true
-        workflow_schedule_id:
-          allOf:
-          - $ref: '#/components/schemas/WorkflowScheduleId'
-          nullable: true
+          - $ref: '#/components/schemas/ConnectorId'
+        docstring:
+          type: string
+        function_name:
+          type: string
       required:
-      - chat_session_id
+      - function_name
+      - docstring
+      - code_md5_hash
+      - code
       type: object
-    DashboardPage:
-      description: 'A dashboard groups components that share a common dataset.
-
-        If dataset_node_name is None, components render static viz without Mosaic cross-filtering.'
+    CostEstimateRequest:
       properties:
-        components:
-          description: Components (charts) in this dashboard
-          items:
-            $ref: '#/components/schemas/DashboardComponent'
-          type: array
-        controls:
-          description: Control filters (dropdowns, checkboxes, ranges) for this dashboard
-          items:
-            $ref: '#/components/schemas/DashboardControl'
-          nullable: true
-          type: array
-        datasetNodeName:
-          description: 'Function name of the node that returns the dataset (DataFrame/Parquet).
-
-            If None, no cross-filtering is available.'
-          nullable: true
-          type: string
-        description:
-          description: Optional description
-          nullable: true
-          type: string
-        title:
-          description: Title for this dashboard section
-          nullable: true
-          type: string
-      required:
-      - components
-      type: object
-    VizStringControlType:
-      enum:
-      - dropdown
-      type: string
-    Dashboard:
-      description: 'A page is the top-level container with title/description
-
-        Can contain multiple dashboards with different datasets'
-      properties:
-        dashboards:
-          description: One or more dashboards on this page
-          items:
-            $ref: '#/components/schemas/DashboardPage'
-          type: array
-        description:
-          description: Optional page description
-          nullable: true
-          type: string
-        title:
-          description: Page title
-          type: string
-      required:
-      - title
-      - dashboards
-      type: object
-    DashboardControl:
-      discriminator:
-        propertyName: type
-      oneOf:
-      - properties:
-          default_value:
-            nullable: true
-            type: string
-          field:
-            type: string
-          id:
-            type: string
-          label:
-            type: string
-          options:
-            items:
-              $ref: '#/components/schemas/ControlOption'
-            type: array
+        avg_pages_per_doc:
+          format: int64
           type:
-            enum:
-            - dropdown
-            type: string
-        required:
-        - id
-        - label
-        - field
-        - options
-        - type
-        type: object
-      - properties:
-          default_value:
-            items:
-              allOf:
-              - format: double
-                type: number
-              - format: double
-                type: number
-            nullable: true
-            type: array
-          field:
-            type: string
-          id:
-            type: string
-          label:
-            type: string
-          max:
-            format: double
-            type: number
-          min:
-            format: double
-            type: number
-          step:
-            format: double
-            nullable: true
-            type: number
+          - integer
+          - 'null'
+        num_documents:
+          format: int64
           type:
-            enum:
-            - range
-            type: string
-        required:
-        - id
-        - label
-        - field
-        - min
-        - max
-        - type
-        type: object
-      - properties:
-          default_value:
-            items:
-              type: string
-            nullable: true
-            type: array
-          field:
-            type: string
-          id:
-            type: string
-          label:
-            type: string
-          options:
-            items:
-              $ref: '#/components/schemas/ControlOption'
-            type: array
+          - integer
+          - 'null'
+        num_properties:
+          format: int64
           type:
-            enum:
-            - checkbox
-            type: string
-        required:
-        - id
-        - label
-        - field
-        - options
-        - type
-        type: object
-    LLMRelationship:
-      additionalProperties: false
-      properties:
-        properties:
-          additionalProperties:
-            $ref: '#/components/schemas/BasicPropValue'
-          type: object
-        source:
-          minimum: 0
-          type: integer
-        target:
-          minimum: 0
-          type: integer
-        type:
-          type: string
-      required:
-      - type
-      - source
-      - target
-      type: object
-    LLMKnowledgeGraph:
-      additionalProperties: false
-      description: 'Knowledge graph info structured to deserialize and display
-
-        in the same format that the LLM outputs.
-
-        Also the first representation of an LLM output in the pipeline from raw tool output to being merged into a DB'
-      properties:
-        entities:
-          items:
-            $ref: '#/components/schemas/LLMEntity'
-          type: array
-        relationships:
-          items:
-            $ref: '#/components/schemas/LLMRelationship'
-          type: array
-      required:
-      - entities
-      type: object
-    NavigationType:
-      enum:
-      - visual
-      - text
-      type: string
-    RequestConfirmationRequest:
-      properties:
+          - integer
+          - 'null'
         operation:
           $ref: '#/components/schemas/CostOperation'
         row_count:
           format: int64
-          type: integer
+          type:
+          - integer
+          - 'null'
+        source_count:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        target_count:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        use_proxy:
+          type:
+          - boolean
+          - 'null'
       required:
-      - row_count
       - operation
       type: object
-    DashboardSpecUpload:
-      properties:
-        file_name:
-          type: string
-        spec:
-          $ref: '#/components/schemas/DashboardSpec'
-      required:
-      - file_name
-      - spec
-      type: object
-    VizParam:
-      discriminator:
-        propertyName: type
-      oneOf:
-      - properties:
-          control:
-            $ref: '#/components/schemas/VizStringControl'
-          type:
-            enum:
-            - string
-            type: string
-          value:
-            type: string
-        required:
-        - value
-        - type
-        type: object
-      - properties:
-          control:
-            $ref: '#/components/schemas/VizNumberControl'
-          type:
-            enum:
-            - number
-            type: string
-          value:
-            format: double
-            type: number
-        required:
-        - value
-        - type
-        type: object
-      - properties:
-          control:
-            $ref: '#/components/schemas/VizBooleanControl'
-          type:
-            enum:
-            - boolean
-            type: string
-          value:
-            type: boolean
-        required:
-        - value
-        - type
-        type: object
-      - properties:
-          control:
-            $ref: '#/components/schemas/VizDateControl'
-          type:
-            enum:
-            - date
-            type: string
-          value:
-            type: string
-        required:
-        - value
-        - type
-        type: object
-    ChatMessageId:
+    WorkflowScheduleId:
       format: uuid
       type: string
-    BasicPropValue:
-      oneOf:
-      - type: string
-      - format: int64
-        type: integer
-      - type: boolean
-      - format: double
-        type: number
-    DashboardSpec:
+    WorkflowSessionId:
+      format: uuid
+      type: string
+    FinalizeDagRequest:
+      properties:
+        dashboard_layout:
+          allOf:
+          - $ref: '#/components/schemas/Dashboard'
+        edges:
+          items:
+            $ref: '#/components/schemas/EdgeSpec'
+          type: array
+        nodes:
+          items:
+            $ref: '#/components/schemas/NodeSpec'
+          type: array
+      required:
+      - nodes
+      - edges
+      type: object
+    WorkflowNodeOutputUpload:
+      properties:
+        cache_final_rows:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        cache_final_size_bytes:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        cache_max_bytes:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        cache_original_rows:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        cache_original_size_bytes:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        cache_truncated:
+          type:
+          - boolean
+          - 'null'
+        content:
+          format: binary
+          type: string
+        output_schema:
+          type:
+          - string
+          - 'null'
+      required:
+      - content
+      type: object
+    VizStringControl:
       additionalProperties: false
       properties:
-        dataset:
+        label:
           type: string
-        description:
-          type: string
-        figures:
+        options:
           items:
-            $ref: '#/components/schemas/VizFigure'
+            $ref: '#/components/schemas/VizControlOption'
           type: array
-        params:
-          additionalProperties:
-            $ref: '#/components/schemas/VizParam'
-          type: object
-        queries:
-          items:
-            $ref: '#/components/schemas/VizQuery'
-          type: array
-        title:
-          type: string
-        version:
-          type: string
+        type:
+          $ref: '#/components/schemas/VizStringControlType'
       required:
-      - version
-      - title
-      - description
-      - dataset
-      - params
-      - queries
-      - figures
+      - type
+      - label
+      - options
       type: object
     EditNodeOutputRequest:
       properties:
@@ -1605,39 +957,6 @@ components:
           type: array
       required:
       - edits
-      type: object
-    VizDateControl:
-      additionalProperties: false
-      properties:
-        label:
-          type: string
-        type:
-          $ref: '#/components/schemas/VizDateControlType'
-      required:
-      - type
-      - label
-      type: object
-    AutofixContext:
-      enum:
-      - creation
-      - execution
-      - visualization
-      type: string
-    MarkWorkflowSessionErroredRequest:
-      properties:
-        autofix:
-          type: boolean
-        autofix_context:
-          allOf:
-          - $ref: '#/components/schemas/AutofixContext'
-          nullable: true
-        error_message:
-          type: string
-        error_traceback:
-          nullable: true
-          type: string
-      required:
-      - error_message
       type: object
     JobEventBody:
       description: The body content of a job event
@@ -1688,11 +1007,13 @@ components:
           page:
             format: int32
             minimum: 0
-            nullable: true
-            type: integer
+            type:
+            - integer
+            - 'null'
           reason:
-            nullable: true
-            type: string
+            type:
+            - string
+            - 'null'
           sources:
             items:
               type: string
@@ -1708,8 +1029,9 @@ components:
             - agent_exited
             type: string
           reason:
-            nullable: true
-            type: string
+            type:
+            - string
+            - 'null'
         required:
         - event_type
         type: object
@@ -1768,8 +1090,9 @@ components:
             - failed
             type: string
           summary:
-            nullable: true
-            type: string
+            type:
+            - string
+            - 'null'
         required:
         - error
         - event_type
@@ -1780,8 +1103,9 @@ components:
             - completed
             type: string
           message:
-            nullable: true
-            type: string
+            type:
+            - string
+            - 'null'
         required:
         - event_type
         type: object
@@ -1793,8 +1117,9 @@ components:
             - cache_hit
             type: string
           message:
-            nullable: true
-            type: string
+            type:
+            - string
+            - 'null'
         required:
         - cached_from_job_id
         - event_type
@@ -1817,17 +1142,20 @@ components:
             type: string
           match_idx:
             minimum: 0
-            nullable: true
-            type: integer
+            type:
+            - integer
+            - 'null'
           raw_text:
-            nullable: true
-            type: string
+            type:
+            - string
+            - 'null'
           reason:
             type: string
           source_entity_index:
             minimum: 0
-            nullable: true
-            type: integer
+            type:
+            - integer
+            - 'null'
           target:
             additionalProperties:
               $ref: '#/components/schemas/BasicPropValue'
@@ -1975,6 +1303,142 @@ components:
         - page_index
         - event_type
         type: object
+    WorkflowDAG:
+      properties:
+        aborted:
+          type: boolean
+        dag_ready_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        dashboard_layout:
+          allOf:
+          - $ref: '#/components/schemas/Dashboard'
+        dashboard_specs:
+          items:
+            $ref: '#/components/schemas/DashboardItem'
+          type: array
+        edges:
+          items:
+            $ref: '#/components/schemas/WorkflowSessionEdge'
+          type: array
+        error:
+          type:
+          - string
+          - 'null'
+        error_traceback:
+          type:
+          - string
+          - 'null'
+        is_ready:
+          type: boolean
+        nodes:
+          items:
+            $ref: '#/components/schemas/WorkflowSessionNode'
+          type: array
+        session_id:
+          $ref: '#/components/schemas/WorkflowSessionId'
+      required:
+      - session_id
+      - aborted
+      - nodes
+      - edges
+      - is_ready
+      - dashboard_specs
+      type: object
+    WorkflowSessionNodeId:
+      format: uuid
+      type: string
+    VizDateControl:
+      additionalProperties: false
+      properties:
+        label:
+          type: string
+        type:
+          $ref: '#/components/schemas/VizDateControlType'
+      required:
+      - type
+      - label
+      type: object
+    TimeStampedJobEvent:
+      properties:
+        body:
+          $ref: '#/components/schemas/JobEventBody'
+        created_at:
+          format: date-time
+          type: string
+      required:
+      - created_at
+      - body
+      type: object
+    VizFigureKind:
+      enum:
+      - js
+      - vega-lite
+      - data-table
+      type: string
+    GetNodeResponse:
+      properties:
+        node:
+          $ref: '#/components/schemas/WorkflowSessionNode'
+      required:
+      - node
+      type: object
+    LLMRelationship:
+      additionalProperties: false
+      properties:
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/BasicPropValue'
+          type: object
+        source:
+          minimum: 0
+          type: integer
+        target:
+          minimum: 0
+          type: integer
+        type:
+          type: string
+      required:
+      - type
+      - source
+      - target
+      type: object
+    DashboardItem:
+      properties:
+        file_name:
+          description: File path relative to repository root.
+          type: string
+        spec:
+          $ref: '#/components/schemas/DashboardSpec'
+      required:
+      - file_name
+      - spec
+      type: object
+    MarkWorkflowSessionErroredRequest:
+      properties:
+        autofix:
+          type: boolean
+        autofix_context:
+          allOf:
+          - $ref: '#/components/schemas/AutofixContext'
+        error_message:
+          type: string
+        error_traceback:
+          type:
+          - string
+          - 'null'
+      required:
+      - error_message
+      type: object
+    ConfirmNodeRequest:
+      properties:
+        confirmed:
+          type: boolean
+      required:
+      - confirmed
+      type: object
     UploadNodeVisualizationOutputRequest:
       properties:
         visualization_output:
@@ -1984,11 +1448,381 @@ components:
       required:
       - visualization_output
       type: object
-    WorkflowSessionId:
+    UpdateWorkflowNodeProgressRequest:
+      properties:
+        current:
+          format: int32
+          minimum: 0
+          type: integer
+        elapsed_seconds:
+          format: double
+          type: number
+        title:
+          type: string
+        total:
+          format: int32
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+      required:
+      - title
+      - current
+      - elapsed_seconds
+      type: object
+    ChatMessageId:
       format: uuid
       type: string
-    ChatSessionId:
+    DashboardControl:
+      discriminator:
+        propertyName: type
+      oneOf:
+      - properties:
+          default_value:
+            type:
+            - string
+            - 'null'
+          field:
+            type: string
+          id:
+            type: string
+          label:
+            type: string
+          options:
+            items:
+              $ref: '#/components/schemas/ControlOption'
+            type: array
+          type:
+            enum:
+            - dropdown
+            type: string
+        required:
+        - id
+        - label
+        - field
+        - options
+        - type
+        type: object
+      - properties:
+          default_value:
+            items:
+              allOf:
+              - format: double
+                type: number
+              - format: double
+                type: number
+            type:
+            - array
+            - 'null'
+          field:
+            type: string
+          id:
+            type: string
+          label:
+            type: string
+          max:
+            format: double
+            type: number
+          min:
+            format: double
+            type: number
+          step:
+            format: double
+            type:
+            - number
+            - 'null'
+          type:
+            enum:
+            - range
+            type: string
+        required:
+        - id
+        - label
+        - field
+        - min
+        - max
+        - type
+        type: object
+      - properties:
+          default_value:
+            items:
+              type: string
+            type:
+            - array
+            - 'null'
+          field:
+            type: string
+          id:
+            type: string
+          label:
+            type: string
+          options:
+            items:
+              $ref: '#/components/schemas/ControlOption'
+            type: array
+          type:
+            enum:
+            - checkbox
+            type: string
+        required:
+        - id
+        - label
+        - field
+        - options
+        - type
+        type: object
+    DashboardSpec:
+      additionalProperties: false
+      properties:
+        dataset:
+          type: string
+        description:
+          type: string
+        figures:
+          items:
+            $ref: '#/components/schemas/VizFigure'
+          type: array
+        params:
+          additionalProperties:
+            $ref: '#/components/schemas/VizParam'
+          type: object
+        queries:
+          items:
+            $ref: '#/components/schemas/VizQuery'
+          type: array
+        title:
+          type: string
+        version:
+          type: string
+      required:
+      - version
+      - title
+      - description
+      - dataset
+      - params
+      - queries
+      - figures
+      type: object
+    WorkflowSession:
+      properties:
+        aborted:
+          type: boolean
+        chat_session_id:
+          $ref: '#/components/schemas/ChatSessionId'
+        created_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        dag_ready:
+          type: boolean
+        dag_ready_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        dashboard_layout_proto:
+          format: binary
+          type:
+          - string
+          - 'null'
+        error_message:
+          type:
+          - string
+          - 'null'
+        error_traceback:
+          type:
+          - string
+          - 'null'
+        id:
+          $ref: '#/components/schemas/WorkflowSessionId'
+        parent_chat_message_id:
+          allOf:
+          - $ref: '#/components/schemas/ChatMessageId'
+        updated_at:
+          format: date-time
+          type: string
+        workflow_schedule_id:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowScheduleId'
+      required:
+      - id
+      - chat_session_id
+      - updated_at
+      - dag_ready
+      - aborted
+      type: object
+    GetNodeEventsResponse:
+      properties:
+        count:
+          minimum: 0
+          type: integer
+        events:
+          items:
+            $ref: '#/components/schemas/JobWithEvents'
+          type: array
+      required:
+      - events
+      - count
+      type: object
+    FinalizeDagResponse:
+      properties:
+        node_ids:
+          items:
+            $ref: '#/components/schemas/WorkflowSessionNodeId'
+          type: array
+      required:
+      - node_ids
+      type: object
+    EdgeSpec:
+      properties:
+        source_node_index:
+          format: int32
+          type: integer
+        target_node_index:
+          format: int32
+          type: integer
+      required:
+      - source_node_index
+      - target_node_index
+      type: object
+    TriggerReviewResponse:
+      properties:
+        triggered:
+          type: boolean
+      required:
+      - triggered
+      type: object
+    BasicPropValue:
+      oneOf:
+      - type: string
+      - format: int64
+        type: integer
+      - type: boolean
+      - format: double
+        type: number
+    CellEdit:
+      properties:
+        column_name:
+          type: string
+        row_index:
+          minimum: 0
+          type: integer
+        value:
+          type: string
+      required:
+      - row_index
+      - column_name
+      - value
+      type: object
+    ProgressStatus:
+      properties:
+        current:
+          format: int32
+          minimum: 0
+          type: integer
+        elapsed_seconds:
+          format: double
+          type: number
+        started_at:
+          format: date-time
+          type: string
+        total:
+          format: int32
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+      required:
+      - started_at
+      - current
+      - elapsed_seconds
+      type: object
+    ControlOption:
+      properties:
+        label:
+          type: string
+        value:
+          type: string
+      required:
+      - value
+      - label
+      type: object
+    VizControlOption:
+      additionalProperties: false
+      properties:
+        label:
+          type: string
+        value:
+          type: string
+      required:
+      - label
+      - value
+      type: object
+    EditNodeOutputResponse:
+      properties:
+        error_message:
+          type:
+          - string
+          - 'null'
+      type: object
+    WorkflowNodeExecutionStatus:
+      enum:
+      - Unexecuted
+      - Success
+      - Failure
+      - Running
+      - Aborted
+      - PendingConfirmation
+      type: string
+    UpdateWorkflowNodeRequest:
+      properties:
+        error_message:
+          type:
+          - string
+          - 'null'
+        error_traceback:
+          type:
+          - string
+          - 'null'
+        execution_status:
+          $ref: '#/components/schemas/WorkflowNodeExecutionStatus'
+        execution_time_ms:
+          format: int64
+          type:
+          - integer
+          - 'null'
+      required:
+      - execution_status
+      type: object
+    WorkflowSessionEdgeId:
       format: uuid
+      type: string
+    DashboardSpecUpload:
+      properties:
+        file_name:
+          type: string
+        spec:
+          $ref: '#/components/schemas/DashboardSpec'
+      required:
+      - file_name
+      - spec
+      type: object
+    CostEstimateResponse:
+      properties:
+        estimated_credits:
+          format: int64
+          type: integer
+        estimated_dollars:
+          format: double
+          type: number
+      required:
+      - estimated_credits
+      - estimated_dollars
+      type: object
+    VizBooleanControlType:
+      enum:
+      - checkbox
       type: string
     VizNumberControl:
       additionalProperties: false
@@ -2012,45 +1846,295 @@ components:
       - min
       - max
       type: object
-    KillAllJobsResponse:
+    UploadDashboardLayoutRequest:
+      oneOf:
+      - properties:
+          layout:
+            $ref: '#/components/schemas/Dashboard'
+        required:
+        - layout
+        type: object
+      - properties:
+          dashboard_specs:
+            items:
+              $ref: '#/components/schemas/DashboardSpecUpload'
+            type: array
+        required:
+        - dashboard_specs
+        type: object
+    NavigationType:
+      enum:
+      - visual
+      - text
+      type: string
+    JobWithEvents:
+      description: A job paired with all its associated events
       properties:
-        killed_jobs:
+        events:
           items:
-            $ref: '#/components/schemas/JobId'
+            $ref: '#/components/schemas/TimeStampedJobEvent'
           type: array
-        message:
+        id:
+          $ref: '#/components/schemas/JobId'
+        run_started_time:
+          format: date-time
           type: string
+        seeded_kg:
+          allOf:
+          - $ref: '#/components/schemas/LLMKnowledgeGraph'
+        status:
+          $ref: '#/components/schemas/JobStatus'
       required:
-      - killed_jobs
-      - message
+      - id
+      - status
+      - run_started_time
+      - events
       type: object
-    GetNodeResponse:
+    LLMEntity:
+      additionalProperties: false
       properties:
-        node:
-          $ref: '#/components/schemas/WorkflowSessionNode'
-      required:
-      - node
-      type: object
-    CellEdit:
-      properties:
-        column_name:
-          type: string
-        row_index:
+        id:
           minimum: 0
           type: integer
-        value:
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/BasicPropValue'
+          type: object
+        type:
           type: string
       required:
-      - row_index
-      - column_name
-      - value
+      - id
+      - type
+      - properties
       type: object
-    VizFigureKind:
+    VizParam:
+      discriminator:
+        propertyName: type
+      oneOf:
+      - properties:
+          control:
+            $ref: '#/components/schemas/VizStringControl'
+          type:
+            enum:
+            - string
+            type: string
+          value:
+            type: string
+        required:
+        - value
+        - type
+        type: object
+      - properties:
+          control:
+            $ref: '#/components/schemas/VizNumberControl'
+          type:
+            enum:
+            - number
+            type: string
+          value:
+            format: double
+            type: number
+        required:
+        - value
+        - type
+        type: object
+      - properties:
+          control:
+            $ref: '#/components/schemas/VizBooleanControl'
+          type:
+            enum:
+            - boolean
+            type: string
+          value:
+            type: boolean
+        required:
+        - value
+        - type
+        type: object
+      - properties:
+          control:
+            $ref: '#/components/schemas/VizDateControl'
+          type:
+            enum:
+            - date
+            type: string
+          value:
+            type: string
+        required:
+        - value
+        - type
+        type: object
+    ParquetEdit:
+      discriminator:
+        propertyName: type
+      oneOf:
+      - allOf:
+        - $ref: '#/components/schemas/CellEdit'
+        - properties:
+            type:
+              enum:
+              - edit_cell
+              type: string
+          required:
+          - type
+          type: object
+      - properties:
+          row_index:
+            minimum: 0
+            type: integer
+          type:
+            enum:
+            - delete_row
+            type: string
+        required:
+        - row_index
+        - type
+        type: object
+      - properties:
+          type:
+            enum:
+            - add_row
+            type: string
+          values:
+            additionalProperties:
+              type: string
+            type: object
+        required:
+        - values
+        - type
+        type: object
+    VizFigureDefinition:
+      additionalProperties: false
+      properties:
+        expression:
+          type: string
+        kind:
+          $ref: '#/components/schemas/VizFigureKind'
+      required:
+      - kind
+      - expression
+      type: object
+    CreateWorkflowSessionRequest:
+      properties:
+        chat_session_id:
+          $ref: '#/components/schemas/ChatSessionId'
+        parent_chat_message_id:
+          allOf:
+          - $ref: '#/components/schemas/ChatMessageId'
+        workflow_schedule_id:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowScheduleId'
+      required:
+      - chat_session_id
+      type: object
+    KillAllJobsRequest:
+      properties:
+        message:
+          type:
+          - string
+          - 'null'
+      type: object
+    DashboardPage:
+      description: 'A dashboard groups components that share a common dataset.
+
+        If dataset_node_name is None, components render static viz without Mosaic cross-filtering.'
+      properties:
+        components:
+          description: Components (charts) in this dashboard
+          items:
+            $ref: '#/components/schemas/DashboardComponent'
+          type: array
+        controls:
+          description: Control filters (dropdowns, checkboxes, ranges) for this dashboard
+          items:
+            $ref: '#/components/schemas/DashboardControl'
+          type:
+          - array
+          - 'null'
+        datasetNodeName:
+          description: 'Function name of the node that returns the dataset (DataFrame/Parquet).
+
+            If None, no cross-filtering is available.'
+          type:
+          - string
+          - 'null'
+        description:
+          description: Optional description
+          type:
+          - string
+          - 'null'
+        title:
+          description: Title for this dashboard section
+          type:
+          - string
+          - 'null'
+      required:
+      - components
+      type: object
+    VizStringControlType:
       enum:
-      - js
-      - vega-lite
-      - data-table
+      - dropdown
       type: string
+    JobStatus:
+      enum:
+      - Queued
+      - Running
+      - Completed
+      - Failed
+      type: string
+    RequestConfirmationRequest:
+      properties:
+        operation:
+          $ref: '#/components/schemas/CostOperation'
+        row_count:
+          format: int64
+          type: integer
+      required:
+      - row_count
+      - operation
+      type: object
+    ConnectorId:
+      format: uuid
+      type: string
+    LLMKnowledgeGraph:
+      additionalProperties: false
+      description: 'Knowledge graph info structured to deserialize and display
+
+        in the same format that the LLM outputs.
+
+        Also the first representation of an LLM output in the pipeline from raw tool output to being merged into a DB'
+      properties:
+        entities:
+          items:
+            $ref: '#/components/schemas/LLMEntity'
+          type: array
+        relationships:
+          items:
+            $ref: '#/components/schemas/LLMRelationship'
+          type: array
+      required:
+      - entities
+      type: object
+    WorkflowSessionEdge:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        id:
+          $ref: '#/components/schemas/WorkflowSessionEdgeId'
+        session_id:
+          $ref: '#/components/schemas/WorkflowSessionId'
+        source_node_id:
+          $ref: '#/components/schemas/WorkflowSessionNodeId'
+        target_node_id:
+          $ref: '#/components/schemas/WorkflowSessionNodeId'
+      required:
+      - id
+      - session_id
+      - source_node_id
+      - target_node_id
+      - created_at
+      type: object
   securitySchemes:
     api_key:
       in: header

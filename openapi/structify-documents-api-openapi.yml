@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   contact:
     email: team@structify.ai
@@ -7,7 +7,7 @@ info:
   license:
     name: Discuss directly with founders for license.
     url: https://structify.ai
-  title: Structify account documents API
+  title: Structify Documents API
   version: 0.1.0
 servers:
 - description: Production server
@@ -18,7 +18,7 @@ security:
 - api_key: []
 - session_token: []
 tags:
-- name: documents
+- name: Documents
 paths:
   /documents/delete:
     delete:
@@ -34,7 +34,7 @@ paths:
           description: Document deleted successfully
       summary: Delete a file from the database
       tags:
-      - documents
+      - Documents
   /documents/download:
     post:
       operationId: documents_download
@@ -55,7 +55,7 @@ paths:
           description: Failed to download document
       summary: Download a file from the database
       tags:
-      - documents
+      - Documents
   /documents/list:
     get:
       operationId: documents_list
@@ -64,15 +64,15 @@ paths:
         name: dataset
         required: false
         schema:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - in: query
         name: project_id
         required: false
         schema:
           allOf:
           - $ref: '#/components/schemas/ProjectId'
-          nullable: true
       responses:
         '200':
           content:
@@ -82,9 +82,9 @@ paths:
                   $ref: '#/components/schemas/File'
                 type: array
           description: Listed all files
-      summary: List all files for your user account in the database.
+      summary: List all files for your user account in the database
       tags:
-      - documents
+      - Documents
   /documents/upload:
     post:
       operationId: documents_upload
@@ -93,15 +93,15 @@ paths:
         name: dataset
         required: false
         schema:
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
       - in: query
         name: project_id
         required: false
         schema:
           allOf:
           - $ref: '#/components/schemas/ProjectId'
-          nullable: true
       requestBody:
         content:
           multipart/form-data:
@@ -114,29 +114,15 @@ paths:
           description: Document added successfully
       summary: Add a new file to the database
       tags:
-      - documents
+      - Documents
 components:
   schemas:
-    UserId:
+    DocumentId:
       format: uuid
-      type: string
-    FileType:
-      enum:
-      - Text
-      - PDF
-      - SEC
       type: string
     JobId:
       format: uuid
       type: string
-    DownloadResponse:
-      properties:
-        content:
-          format: binary
-          type: string
-      required:
-      - content
-      type: object
     File:
       properties:
         created_at:
@@ -145,11 +131,9 @@ components:
         created_from_job:
           allOf:
           - $ref: '#/components/schemas/JobId'
-          nullable: true
         dataset_id:
           allOf:
           - $ref: '#/components/schemas/DatasetId'
-          nullable: true
         file_bytes:
           format: binary
           type: string
@@ -162,7 +146,6 @@ components:
         project_id:
           allOf:
           - $ref: '#/components/schemas/ProjectId'
-          nullable: true
         user_id:
           $ref: '#/components/schemas/UserId'
       required:
@@ -173,6 +156,9 @@ components:
       - created_at
       - user_id
       type: object
+    DatasetId:
+      format: uuid
+      type: string
     UserFileMultipart:
       properties:
         content:
@@ -189,9 +175,23 @@ components:
       - content
       title: FileMultipart
       type: object
-    ProjectId:
+    UserId:
       format: uuid
       type: string
+    FileType:
+      enum:
+      - Text
+      - PDF
+      - SEC
+      type: string
+    DownloadResponse:
+      properties:
+        content:
+          format: binary
+          type: string
+      required:
+      - content
+      type: object
     FilePath:
       properties:
         file_path:
@@ -200,10 +200,7 @@ components:
       required:
       - file_path
       type: object
-    DocumentId:
-      format: uuid
-      type: string
-    DatasetId:
+    ProjectId:
       format: uuid
       type: string
   securitySchemes:

@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   contact:
     email: team@structify.ai
@@ -7,7 +7,7 @@ info:
   license:
     name: Discuss directly with founders for license.
     url: https://structify.ai
-  title: Structify account connectors API
+  title: Structify Connectors API
   version: 0.1.0
 servers:
 - description: Production server
@@ -18,7 +18,7 @@ security:
 - api_key: []
 - session_token: []
 tags:
-- name: connectors
+- name: Connectors
 paths:
   /connector-type-snippets/{connector_type}:
     put:
@@ -49,7 +49,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - connectors
+      - Connectors
+      summary: Upsert connector type snippet
+      x-summary-source: derived
   /connectors:
     get:
       operationId: list_connectors
@@ -83,7 +85,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - connectors
+      - Connectors
+      summary: List connectors
+      x-summary-source: derived
     post:
       operationId: create_connector
       requestBody:
@@ -119,7 +123,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - connectors
+      - Connectors
+      summary: Create connector
+      x-summary-source: derived
   /connectors/clarification-requests/{clarification_id}/resolve:
     patch:
       operationId: resolve_clarification
@@ -143,7 +149,7 @@ paths:
       - session_token: []
       summary: Mark a clarification request as resolved
       tags:
-      - connectors
+      - Connectors
   /connectors/columns/{column_id}:
     patch:
       operationId: update_column
@@ -173,7 +179,7 @@ paths:
       - session_token: []
       summary: Update column metadata (notes)
       tags:
-      - connectors
+      - Connectors
   /connectors/search-tables:
     get:
       operationId: search_tables
@@ -203,7 +209,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - connectors
+      - Connectors
+      summary: Search tables
+      x-summary-source: derived
   /connectors/stores:
     get:
       operationId: list_connector_stores
@@ -222,7 +230,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - connectors
+      - Connectors
+      summary: List connector stores
+      x-summary-source: derived
   /connectors/summaries:
     post:
       operationId: list_connector_summaries
@@ -259,7 +269,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - connectors
+      - Connectors
+      summary: List connector summaries
+      x-summary-source: derived
   /connectors/tables/{table_id}:
     patch:
       operationId: update_table
@@ -293,7 +305,7 @@ paths:
       - session_token: []
       summary: Update table metadata (description or notes)
       tags:
-      - connectors
+      - Connectors
   /connectors/tables/{table_id}/lineage:
     get:
       operationId: get_table_lineage
@@ -317,7 +329,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - connectors
+      - Connectors
+      summary: Get table lineage
+      x-summary-source: derived
   /connectors/tables/{table_id}/path:
     get:
       operationId: get_connector_table_path
@@ -340,7 +354,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - connectors
+      - Connectors
+      summary: Get connector table path
+      x-summary-source: derived
   /connectors/with-snippets:
     get:
       operationId: list_connectors_with_snippets
@@ -359,7 +375,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - connectors
+      - Connectors
+      summary: List connectors with snippets
+      x-summary-source: derived
   /connectors/{connector_id}:
     delete:
       operationId: delete_connector
@@ -383,7 +401,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - connectors
+      - Connectors
+      summary: Delete connector
+      x-summary-source: derived
     get:
       operationId: get_connector
       parameters:
@@ -410,7 +430,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - connectors
+      - Connectors
+      summary: Get connector
+      x-summary-source: derived
     patch:
       operationId: update_connector
       parameters:
@@ -441,7 +463,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - connectors
+      - Connectors
+      summary: Update connector
+      x-summary-source: derived
   /connectors/{connector_id}/clarification-requests:
     get:
       operationId: get_connector_clarification_requests
@@ -468,7 +492,7 @@ paths:
       - session_token: []
       summary: Get all clarification requests for a connector
       tags:
-      - connectors
+      - Connectors
   /connectors/{connector_id}/explore:
     post:
       operationId: explore_connector
@@ -502,7 +526,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - connectors
+      - Connectors
+      summary: Explore connector
+      x-summary-source: derived
   /connectors/{connector_id}/explore/active-run:
     get:
       operationId: get_active_exploration_run
@@ -520,7 +546,6 @@ paths:
               schema:
                 allOf:
                 - $ref: '#/components/schemas/ExplorationRun'
-                nullable: true
           description: Active exploration run retrieved successfully
         '403':
           description: Forbidden - user does not have access to connector
@@ -530,7 +555,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - connectors
+      - Connectors
+      summary: Get active exploration run
+      x-summary-source: derived
   /connectors/{connector_id}/explore/chat:
     get:
       description: Optionally filter by run, database, schema, or table
@@ -548,28 +575,24 @@ paths:
         schema:
           allOf:
           - $ref: '#/components/schemas/ExplorationRunId'
-          nullable: true
       - in: query
         name: database_id
         required: false
         schema:
           allOf:
           - $ref: '#/components/schemas/ConnectorDatabaseId'
-          nullable: true
       - in: query
         name: schema_id
         required: false
         schema:
           allOf:
           - $ref: '#/components/schemas/ConnectorSchemaId'
-          nullable: true
       - in: query
         name: table_id
         required: false
         schema:
           allOf:
           - $ref: '#/components/schemas/ConnectorTableId'
-          nullable: true
       responses:
         '200':
           content:
@@ -588,7 +611,7 @@ paths:
       - session_token: []
       summary: Get chats from connector exploration (requires debug permission)
       tags:
-      - connectors
+      - Connectors
   /connectors/{connector_id}/explore/runs:
     get:
       operationId: get_connector_exploration_runs
@@ -615,7 +638,7 @@ paths:
       - session_token: []
       summary: Get all exploration runs for a connector (requires debug permission)
       tags:
-      - connectors
+      - Connectors
   /connectors/{connector_id}/explore/runs/{run_id}/progress:
     get:
       operationId: get_exploration_run_progress
@@ -645,7 +668,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - connectors
+      - Connectors
+      summary: Get exploration run progress
+      x-summary-source: derived
   /connectors/{connector_id}/schema_object:
     delete:
       operationId: delete_connector_schema_object
@@ -678,7 +703,9 @@ paths:
       security:
       - api_key: []
       tags:
-      - connectors
+      - Connectors
+      summary: Delete connector schema object
+      x-summary-source: derived
     post:
       operationId: add_connector_schema_object
       parameters:
@@ -711,7 +738,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - connectors
+      - Connectors
+      summary: Add connector schema object
+      x-summary-source: derived
   /connectors/{connector_id}/secrets:
     post:
       operationId: create_connector_secret
@@ -740,7 +769,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - connectors
+      - Connectors
+      summary: Create connector secret
+      x-summary-source: derived
   /connectors/{connector_id}/secrets/{secret_name}:
     delete:
       operationId: delete_connector_secret
@@ -766,7 +797,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - connectors
+      - Connectors
+      summary: Delete connector secret
+      x-summary-source: derived
   /connectors/{connector_id}/store:
     get:
       operationId: get_connector_store
@@ -794,7 +827,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - connectors
+      - Connectors
+      summary: Get connector store
+      x-summary-source: derived
   /connectors/{connector_id}/tables:
     get:
       description: 'Returns all tables across all databases and schemas for the given connector.
@@ -824,7 +859,7 @@ paths:
       - session_token: []
       summary: List all tables for a connector
       tags:
-      - connectors
+      - Connectors
   /internal/connectors/{connector_id}/datahub-artifacts/{kind}:
     get:
       operationId: connectors_download_datahub_artifact
@@ -845,7 +880,6 @@ paths:
         schema:
           allOf:
           - $ref: '#/components/schemas/ExplorationRunId'
-          nullable: true
       responses:
         '200':
           content:
@@ -862,7 +896,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - connectors
+      - Connectors
+      summary: Connectors download datahub artifact
+      x-summary-source: derived
     put:
       operationId: connectors_upload_datahub_artifact
       parameters:
@@ -904,9 +940,597 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - connectors
+      - Connectors
+      summary: Connectors upload datahub artifact
+      x-summary-source: derived
 components:
   schemas:
+    PhaseActivity:
+      properties:
+        chat_id:
+          allOf:
+          - $ref: '#/components/schemas/ConnectorExplorerChatId'
+        job_id:
+          $ref: '#/components/schemas/JobId'
+        phase_id:
+          $ref: '#/components/schemas/ExplorationPhaseId'
+        status:
+          $ref: '#/components/schemas/JobStatus'
+      required:
+      - job_id
+      - phase_id
+      - status
+      type: object
+    UpdateColumnRequest:
+      properties:
+        notes:
+          type:
+          - string
+          - 'null'
+      type: object
+    ConnectorColumnResult:
+      properties:
+        name:
+          type: string
+        notes:
+          type:
+          - string
+          - 'null'
+        type:
+          type: string
+      required:
+      - name
+      - type
+      type: object
+    WebNavigateInput:
+      properties:
+        output_format:
+          allOf:
+          - $ref: '#/components/schemas/WebNavigateOutput'
+        url:
+          type: string
+      required:
+      - url
+      type: object
+    UpdateConnectorRequest:
+      allOf:
+      - $ref: '#/components/schemas/UpdateConnector'
+      - properties:
+          shared_user_roles:
+            additionalProperties:
+              $ref: '#/components/schemas/ChatSessionRole'
+            type:
+            - object
+            - 'null'
+        type: object
+    AddDependencyInput:
+      properties:
+        package_name:
+          type: string
+        version_spec:
+          type:
+          - string
+          - 'null'
+      required:
+      - package_name
+      type: object
+    Flag:
+      properties:
+        ariaLabel:
+          type: string
+        height:
+          format: double
+          type: number
+        href:
+          type:
+          - string
+          - 'null'
+        isInteractive:
+          type:
+          - boolean
+          - 'null'
+        number:
+          description: The number by which the flag is referred in image, prompt, and tool calls.
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        text:
+          type: string
+        type:
+          type: string
+        width:
+          description: 'The serde default here is to give us backwards compatibility
+
+            it''s fine for these to be anything as long as the image isn''t
+
+            given since it won''t regenerate.'
+          format: double
+          type: number
+        x:
+          format: double
+          type: number
+        y:
+          format: double
+          type: number
+      required:
+      - x
+      - y
+      - type
+      - ariaLabel
+      type: object
+    TeamVisibility:
+      enum:
+      - Team
+      - Private
+      type: string
+    ConnectorTableResult:
+      properties:
+        columns:
+          items:
+            $ref: '#/components/schemas/ConnectorColumnResult'
+          type: array
+        database:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        notes:
+          type:
+          - string
+          - 'null'
+        schema:
+          type: string
+        table_name:
+          type: string
+      required:
+      - schema
+      - database
+      - table_name
+      - columns
+      type: object
+    TableLineageResponse:
+      description: Response for table lineage queries containing both upstream and downstream dependencies
+      properties:
+        downstream:
+          items:
+            $ref: '#/components/schemas/TableLineageItem'
+          type: array
+        upstream:
+          items:
+            $ref: '#/components/schemas/TableLineageItem'
+          type: array
+      required:
+      - upstream
+      - downstream
+      type: object
+    ConnectorTablePathResponse:
+      properties:
+        connector_id:
+          $ref: '#/components/schemas/ConnectorId'
+        database_name:
+          type: string
+        schema_name:
+          type: string
+        table_name:
+          type: string
+      required:
+      - connector_id
+      - database_name
+      - schema_name
+      - table_name
+      type: object
+    RequiredRelationship:
+      additionalProperties: false
+      properties:
+        relationship_name:
+          type: string
+      required:
+      - relationship_name
+      type: object
+    RunBashInput:
+      properties:
+        command:
+          type: string
+        connector:
+          type:
+          - string
+          - 'null'
+        working_dir:
+          type:
+          - string
+          - 'null'
+      required:
+      - command
+      type: object
+    ConnectorDatabaseId:
+      format: uuid
+      type: string
+    SaveSchemaInput:
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        notes:
+          type:
+          - string
+          - 'null'
+      required:
+      - name
+      type: object
+    ApplyPatchInput:
+      properties:
+        apply_all:
+          type: boolean
+        edits:
+          items:
+            $ref: '#/components/schemas/ApplyPatchEdit'
+          type: array
+        file:
+          type: string
+      required:
+      - file
+      - edits
+      - apply_all
+      type: object
+    NavigateToIFrameInput:
+      properties:
+        index:
+          format: int32
+          minimum: 0
+          type: integer
+      required:
+      - index
+      type: object
+    RelationshipMergeProbability:
+      properties:
+        source_cardinality_given_target_match:
+          description: 'Describes the expected cardinality of the source table when a match is found in the target table
+
+
+            For example, if we have a source company and a target funding round, we expect the source company
+
+            to appear in multiple funding rounds, but not *too* many.
+
+            So if we have a funding round match, the expected number of unique companies is relatively small.
+
+            This is an estimate of that number.'
+          format: int64
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        target_cardinality_given_source_match:
+          description: 'Describes the expected cardinality of the target table when a match is found in the source table
+
+
+            For example, if we have a source company and a target funding round, we usually expect
+
+            some number of funding rounds to be associated with a single company but not *too* many.
+
+            So if we have a company match, the expected number of unique funding rounds is relatively small.
+
+            This is an estimate of that number.'
+          format: int64
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+      type: object
+    ConnectorWithSecrets:
+      allOf:
+      - $ref: '#/components/schemas/Connector'
+      - properties:
+          secrets:
+            items:
+              $ref: '#/components/schemas/SecretSummary'
+            type: array
+        required:
+        - secrets
+        type: object
+    DeleteFileInput:
+      properties:
+        file:
+          type: string
+      required:
+      - file
+      type: object
+    ClarificationRequestsResponse:
+      properties:
+        requests:
+          items:
+            $ref: '#/components/schemas/ClarificationRequest'
+          type: array
+      required:
+      - requests
+      type: object
+    ExplorationRun:
+      properties:
+        checkpoint_blob_name:
+          type:
+          - string
+          - 'null'
+        connector_id:
+          $ref: '#/components/schemas/ConnectorId'
+        created_at:
+          format: date-time
+          type: string
+        id:
+          $ref: '#/components/schemas/ExplorationRunId'
+        latest_snapshot_blob_name:
+          type:
+          - string
+          - 'null'
+        status:
+          $ref: '#/components/schemas/ExplorationStatus'
+        triggered_by:
+          allOf:
+          - $ref: '#/components/schemas/MembershipId'
+      required:
+      - id
+      - connector_id
+      - created_at
+      - status
+      type: object
+    ImageResult:
+      properties:
+        image_bytes:
+          format: binary
+          type: string
+        ocr_text:
+          type:
+          - string
+          - 'null'
+      required:
+      - image_bytes
+      type: object
+    UpdateTableResponse:
+      properties:
+        table:
+          $ref: '#/components/schemas/ConnectorTable'
+      required:
+      - table
+      type: object
+    ClarificationRequest:
+      properties:
+        column_id:
+          allOf:
+          - $ref: '#/components/schemas/ConnectorColumnId'
+        column_name:
+          type:
+          - string
+          - 'null'
+        created_at:
+          format: date-time
+          type: string
+        database_name:
+          type:
+          - string
+          - 'null'
+        id:
+          $ref: '#/components/schemas/ClarificationRequestId'
+        question:
+          type: string
+        resolved:
+          type: boolean
+        schema_name:
+          type:
+          - string
+          - 'null'
+        table_id:
+          $ref: '#/components/schemas/ConnectorTableId'
+        table_name:
+          type:
+          - string
+          - 'null'
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - id
+      - table_id
+      - question
+      - resolved
+      - created_at
+      - updated_at
+      type: object
+    SaveColumnInput:
+      properties:
+        column_name:
+          type: string
+        column_type:
+          type: string
+        notes:
+          type:
+          - string
+          - 'null'
+      required:
+      - column_name
+      - column_type
+      type: object
+    MessageContent:
+      oneOf:
+      - properties:
+          Text:
+            type: string
+        required:
+        - Text
+        type: object
+      - properties:
+          Image:
+            format: binary
+            type: string
+        required:
+        - Image
+        type: object
+    ExplorationProgress:
+      properties:
+        datahub:
+          allOf:
+          - $ref: '#/components/schemas/DatahubProgress'
+        phases:
+          items:
+            $ref: '#/components/schemas/PhaseActivity'
+          type: array
+      required:
+      - phases
+      type: object
+    MoveFileInput:
+      properties:
+        file:
+          type: string
+        new_path:
+          type: string
+      required:
+      - file
+      - new_path
+      type: object
+    JavascriptInput:
+      properties:
+        code:
+          type: string
+      required:
+      - code
+      type: object
+    SaveApiResourceInput:
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+        endpoint:
+          type: string
+        name:
+          type: string
+        notes:
+          type:
+          - string
+          - 'null'
+      required:
+      - name
+      - endpoint
+      type: object
+    ConnectorExplorerChatId:
+      format: uuid
+      type: string
+    RequestClarificationInput:
+      properties:
+        column_name:
+          type:
+          - string
+          - 'null'
+        question:
+          type: string
+        table_name:
+          type: string
+      required:
+      - table_name
+      - question
+      type: object
+    ExplorationPhaseId:
+      description: 'Identifies the phase of connector exploration
+
+
+        This enum is used to track which phase of exploration a chat session belongs to.
+
+        It''s stored as JSONB in the database to allow for flexible phase identification.'
+      discriminator:
+        propertyName: type
+      oneOf:
+      - description: 'First phase: discovering all databases in the connector'
+        properties:
+          connector_id:
+            $ref: '#/components/schemas/ConnectorId'
+          type:
+            enum:
+            - discover_databases
+            type: string
+        required:
+        - connector_id
+        - type
+        type: object
+      - description: 'Second phase: discovering all schemas in a database'
+        properties:
+          database_id:
+            $ref: '#/components/schemas/ConnectorDatabaseId'
+          database_name:
+            type: string
+          type:
+            enum:
+            - discover_schemas
+            type: string
+        required:
+        - database_id
+        - database_name
+        - type
+        type: object
+      - description: 'Third phase: discovering all tables in a schema'
+        properties:
+          schema_id:
+            $ref: '#/components/schemas/ConnectorSchemaId'
+          schema_name:
+            type: string
+          type:
+            enum:
+            - discover_tables
+            type: string
+        required:
+        - schema_id
+        - schema_name
+        - type
+        type: object
+      - description: 'Fourth phase: discovering columns for a specific table'
+        properties:
+          table_id:
+            $ref: '#/components/schemas/ConnectorTableId'
+          table_name:
+            type: string
+          type:
+            enum:
+            - discover_columns
+            type: string
+        required:
+        - table_id
+        - table_name
+        - type
+        type: object
+      - description: 'Initial phase: discovering all API resources'
+        properties:
+          connector_id:
+            $ref: '#/components/schemas/ConnectorId'
+          type:
+            enum:
+            - discover_api_resources
+            type: string
+        required:
+        - connector_id
+        - type
+        type: object
+      - description: 'Second phase: discovering fields for a specific API resource'
+        properties:
+          resource_name:
+            type: string
+          table_id:
+            $ref: '#/components/schemas/ConnectorTableId'
+          type:
+            enum:
+            - discover_api_fields
+            type: string
+        required:
+        - table_id
+        - resource_name
+        - type
+        type: object
+    SaveRequirement:
+      description: It's an OR statement across these.
+      oneOf:
+      - $ref: '#/components/schemas/RequiredRelationship'
+      - $ref: '#/components/schemas/RequiredEntity'
+      - $ref: '#/components/schemas/RequiredProperty'
     PinPreviousToolInput:
       properties:
         path:
@@ -914,55 +1538,70 @@ components:
       required:
       - path
       type: object
-    RunPythonInput:
-      properties:
-        code:
-          type: string
-        connector:
-          nullable: true
-          type: string
-        timeout_seconds:
-          format: int64
-          minimum: 0
-          nullable: true
-          type: integer
-        working_dir:
-          nullable: true
-          type: string
-      required:
-      - code
-      type: object
-    TableDescriptor:
-      additionalProperties: false
-      description: The full definition of what a schema is - without duplicate information.
+    ReasoningEffort:
+      enum:
+      - low
+      - medium
+      - high
+      - minimal
+      type: string
+    ConnectorSchemaInfo:
+      description: Schema within a database
       properties:
         description:
-          type: string
-        expected_cardinality:
-          description: 'Expected number of unique values in the complete dataset.
-
-
-            This is used for our probabilistic merge strategy.'
-          format: int64
-          minimum: 0
-          nullable: true
-          type: integer
+          type:
+          - string
+          - 'null'
+        id:
+          $ref: '#/components/schemas/ConnectorSchemaId'
         name:
-          description: Organized in a name, description format.
           type: string
-        primary_column:
-          nullable: true
-          type: string
-        properties:
-          description: Organized in a name, description format.
+        notes:
+          type:
+          - string
+          - 'null'
+        tables:
           items:
-            $ref: '#/components/schemas/PropertyDescriptor'
+            $ref: '#/components/schemas/ConnectorTable'
           type: array
       required:
+      - id
       - name
-      - description
-      - properties
+      - tables
       type: object
+    MembershipId:
+      format: uuid
+      type: string
+    ClarificationRequestId:
+      format: uuid
+      type: string
+    Verbosity:
+      enum:
+      - low
+      - medium
+      - high
+      type: string
+    RequiredEntity:
+      additionalProperties: false
+      properties:
+        entity_id:
+          allOf:
+          - $ref: '#/components/schemas/EntityId'
+        seeded_entity_id:
+          description: The integer id corresponding to an entity in the seeded entity graph (different from the global dataset entity id)
+          minimum: 0
+          type: integer
+      required:
+      - seeded_entity_id
+      type: object
+    LineageType:
+      description: Lineage type for table-to-table relationships
+      enum:
+      - COPY
+      - TRANSFORMED
+      - VIEW
+      - FOREIGN_KEY
+      type: string
     ScraperMeta:
       properties:
         html_content:
@@ -972,6 +1611,237 @@ components:
       required:
       - html_content
       - url
+      type: object
+    ConnectorTable:
+      description: Represents a table (for relational databases) or resource (for APIs)
+      properties:
+        columns:
+          description: List of columns in this table/resource
+          items:
+            $ref: '#/components/schemas/ConnectorColumn'
+          type: array
+        description:
+          description: Optional description
+          type:
+          - string
+          - 'null'
+        endpoint:
+          description: API endpoint (None for relational DB tables, Some for API resources)
+          type:
+          - string
+          - 'null'
+        id:
+          $ref: '#/components/schemas/ConnectorTableId'
+        name:
+          description: Name of the table or resource
+          type: string
+        notes:
+          description: Optional notes
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - name
+      - columns
+      type: object
+    NodeSummary:
+      properties:
+        data_preview:
+          type:
+          - string
+          - 'null'
+        image:
+          format: binary
+          type:
+          - string
+          - 'null'
+        in_dashboard:
+          type: boolean
+        name:
+          type: string
+      required:
+      - name
+      - in_dashboard
+      type: object
+    ReadNodeLogsInput:
+      properties:
+        log_type:
+          type:
+          - string
+          - 'null'
+        node_function_name:
+          type: string
+      required:
+      - node_function_name
+      type: object
+    GetSecretResult:
+      description: Result of getting a secret
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        secret_name:
+          type: string
+        secret_value:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - secret_name
+      - secret_value
+      - created_at
+      - updated_at
+      type: object
+    SaveInput:
+      properties:
+        knowledge_graph:
+          $ref: '#/components/schemas/LLMKnowledgeGraph'
+        reason:
+          type: string
+        sources:
+          items:
+            type: string
+          type: array
+      required:
+      - knowledge_graph
+      - sources
+      - reason
+      type: object
+    RerankResult:
+      properties:
+        index:
+          format: int32
+          type: integer
+        relevance_score:
+          format: float
+          type: number
+        text:
+          type:
+          - string
+          - 'null'
+      required:
+      - index
+      - relevance_score
+      type: object
+    WebNavigateOutput:
+      enum:
+      - Text
+      - Visual
+      type: string
+    ComparisonStrategy:
+      enum:
+      - Default
+      - EnforceUniqueness
+      type: string
+    JobType:
+      enum:
+      - Web
+      - Pdf
+      - Derive
+      - Scrape
+      - Match
+      - ConnectorExplore
+      - DatahubIngestion
+      type: string
+    ExplorationStatus:
+      enum:
+      - NotStarted
+      - Running
+      - Completed
+      - Failed
+      type: string
+    DeleteSchemaObjectRequest:
+      allOf:
+      - $ref: '#/components/schemas/SchemaObjectId'
+      - type: object
+    ToolResult:
+      oneOf:
+      - enum:
+        - Pending
+        type: string
+      - enum:
+        - NoResult
+        type: string
+      - properties:
+          Error:
+            type: string
+        required:
+        - Error
+        type: object
+      - properties:
+          Text:
+            type: string
+        required:
+        - Text
+        type: object
+      - properties:
+          CodeExecution:
+            $ref: '#/components/schemas/CodeExecutionResult'
+        required:
+        - CodeExecution
+        type: object
+      - properties:
+          WebMarkdown:
+            type: string
+        required:
+        - WebMarkdown
+        type: object
+      - properties:
+          WebSearch:
+            items:
+              $ref: '#/components/schemas/DocSnippet'
+            type: array
+        required:
+        - WebSearch
+        type: object
+      - properties:
+          ConnectorSearch:
+            items:
+              $ref: '#/components/schemas/ConnectorTableResult'
+            type: array
+        required:
+        - ConnectorSearch
+        type: object
+      - properties:
+          NodeLogs:
+            items:
+              type: string
+            type: array
+        required:
+        - NodeLogs
+        type: object
+      - enum:
+        - Completed
+        type: string
+      - properties:
+          Image:
+            $ref: '#/components/schemas/ImageResult'
+        required:
+        - Image
+        type: object
+      - properties:
+          Pinned:
+            type: string
+        required:
+        - Pinned
+        type: object
+    SecretSummary:
+      description: Response model for listing secrets (without sensitive data)
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        secret_name:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - secret_name
+      - created_at
+      - updated_at
       type: object
     SchemaObjectId:
       discriminator:
@@ -1021,27 +1891,212 @@ components:
         - id
         - type
         type: object
-    CreateConnectorRequest:
+    RelationshipMergeStrategy:
+      oneOf:
+      - $ref: '#/components/schemas/RelationshipMergeProbability'
+    PromptMeta:
+      description: All metadata required to generate a prompt for the LLM
+      properties:
+        dataset_descriptor:
+          $ref: '#/components/schemas/DatasetDescriptor'
+        extracted_entities:
+          items:
+            $ref: '#/components/schemas/LLMKnowledgeGraph'
+          type: array
+        extraction_criteria:
+          items:
+            $ref: '#/components/schemas/SaveRequirement'
+          type: array
+        formatter_specific:
+          $ref: '#/components/schemas/FormatterMeta'
+        qa_potentially_sus_response:
+          type:
+          - string
+          - 'null'
+      required:
+      - dataset_descriptor
+      - extracted_entities
+      - extraction_criteria
+      - formatter_specific
+      type: object
+    ConnectorTypeSnippet:
+      properties:
+        connector_type:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        id:
+          format: uuid
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+        usage_snippet:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - connector_type
+      - created_at
+      - updated_at
+      type: object
+    DatasetId:
+      format: uuid
+      type: string
+    DatahubSecretMap:
+      additionalProperties:
+        type: string
+      description: Maps DatahubIngestionKey to the name of the connector secret that holds the value.
+      type: object
+    TableDescriptor:
+      additionalProperties: false
+      description: The full definition of what a schema is - without duplicate information.
       properties:
         description:
-          nullable: true
           type: string
-        known_connector_type:
-          type: string
+        expected_cardinality:
+          description: 'Expected number of unique values in the complete dataset.
+
+
+            This is used for our probabilistic merge strategy.'
+          format: int64
+          minimum: 0
+          type:
+          - integer
+          - 'null'
         name:
+          description: Organized in a name, description format.
           type: string
-        nango_connection_id:
-          description: Nango connection ID for OAuth token management
-          nullable: true
-          type: string
-        secrets:
-          additionalProperties:
-            type: string
-          description: Optional secrets/environment variables for the connector
-          type: object
+        primary_column:
+          type:
+          - string
+          - 'null'
+        properties:
+          description: Organized in a name, description format.
+          items:
+            $ref: '#/components/schemas/PropertyDescriptor'
+          type: array
       required:
       - name
-      - known_connector_type
+      - description
+      - properties
+      type: object
+    InspectStepInput:
+      properties:
+        step_name:
+          type: string
+      required:
+      - step_name
+      type: object
+    DatahubProgress:
+      properties:
+        databases_created:
+          minimum: 0
+          type: integer
+        job_id:
+          $ref: '#/components/schemas/JobId'
+        job_status:
+          $ref: '#/components/schemas/JobStatus'
+        pages_fetched:
+          format: int32
+          type: integer
+        records_written:
+          minimum: 0
+          type: integer
+        schemas_created:
+          minimum: 0
+          type: integer
+        tables_processed:
+          minimum: 0
+          type: integer
+        total_datasets:
+          minimum: 0
+          type: integer
+      required:
+      - job_id
+      - job_status
+      - records_written
+      - pages_fetched
+      - total_datasets
+      - databases_created
+      - schemas_created
+      - tables_processed
+      type: object
+    UpdateTableRequest:
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+        notes:
+          type:
+          - string
+          - 'null'
+      type: object
+    ConnectorTableId:
+      format: uuid
+      type: string
+    ConnectorStoreResponse:
+      properties:
+        store:
+          allOf:
+          - $ref: '#/components/schemas/LlmInformationStore'
+      type: object
+    SearchConnectorTypesInput:
+      properties:
+        query:
+          type:
+          - string
+          - 'null'
+      type: object
+    RunPipelineInput:
+      properties:
+        rerun_all_steps:
+          type: boolean
+      type: object
+    InternalErrorKind:
+      description: 'Categorizes the kind of internal error that occurred during LLM generation.
+
+        This allows the frontend to render appropriate error messages without regex matching.'
+      enum:
+      - unknown
+      - context_limit
+      - rate_limited
+      - timeout
+      - connection_error
+      type: string
+    DatasetDescriptor:
+      additionalProperties: false
+      description: 'A dataset is where you put multiple referential schemas.
+
+
+        A dataset is a complete namespace where all references between schemas
+
+        are held within the dataset.'
+      properties:
+        description:
+          type: string
+        llm_override_field:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        relationships:
+          items:
+            $ref: '#/components/schemas/RelationshipDescriptor'
+          type: array
+        tables:
+          items:
+            $ref: '#/components/schemas/TableDescriptor'
+          type: array
+      required:
+      - name
+      - description
+      - tables
+      - relationships
       type: object
     ChatEvent:
       description: Events in a chat session timeline, including messages and unified tool calls/results
@@ -1089,8 +2144,9 @@ components:
               complete:
                 type: boolean
               content:
-                nullable: true
-                type: string
+                type:
+                - string
+                - 'null'
               path:
                 type: string
             required:
@@ -1126,8 +2182,9 @@ components:
           Connector:
             properties:
               description:
-                nullable: true
-                type: string
+                type:
+                - string
+                - 'null'
               env_vars:
                 items:
                   type: string
@@ -1218,8 +2275,9 @@ components:
             properties:
               image_bytes:
                 format: binary
-                nullable: true
-                type: string
+                type:
+                - string
+                - 'null'
               path:
                 type: string
             required:
@@ -1262,43 +2320,75 @@ components:
         required:
         - IssueFound
         type: object
-    ReasoningEffort:
-      enum:
-      - low
-      - medium
-      - high
-      - minimal
-      type: string
-    MergeStrategy:
-      oneOf:
-      - description: 'Property with unique 1:1 correspondence to its parent.
-
-
-          Merge based on this property 100% of the time'
-        enum:
-        - Unique
-        type: string
-      - properties:
-          Probabilistic:
-            $ref: '#/components/schemas/MergeConfig'
-        required:
-        - Probabilistic
-        type: object
-      - enum:
-        - NoSignal
-        type: string
-    DecodingParams:
-      properties:
-        parameters:
-          items:
-            $ref: '#/components/schemas/DecodingParamEnum'
-          type: array
-      required:
-      - parameters
-      type: object
-    ConnectorTableId:
+    TeamId:
       format: uuid
       type: string
+    ConnectorExplorerChat:
+      description: Connector explorer chat with deserialized ChatPrompt for API responses
+      properties:
+        chat_events:
+          items:
+            $ref: '#/components/schemas/ChatEvent'
+          type: array
+        chat_prompt:
+          $ref: '#/components/schemas/ChatPrompt'
+        connector_id:
+          $ref: '#/components/schemas/ConnectorId'
+        created_at:
+          format: date-time
+          type: string
+        exploration_run_id:
+          $ref: '#/components/schemas/ExplorationRunId'
+        id:
+          $ref: '#/components/schemas/ConnectorExplorerChatId'
+        phase_id:
+          $ref: '#/components/schemas/ExplorationPhaseId'
+      required:
+      - id
+      - connector_id
+      - exploration_run_id
+      - phase_id
+      - chat_prompt
+      - chat_events
+      - created_at
+      type: object
+    RequiredProperty:
+      additionalProperties: false
+      properties:
+        property_names:
+          description: If there are multiple properties, it can match just one of them
+          items:
+            type: string
+          type: array
+        table_name:
+          description: The table name of the entity to update
+          type: string
+      required:
+      - table_name
+      - property_names
+      type: object
+    DocSnippet:
+      properties:
+        snippet:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+      required:
+      - title
+      - url
+      - snippet
+      type: object
+    ViewPageInput:
+      properties:
+        page_number:
+          format: int32
+          minimum: 0
+          type: integer
+      required:
+      - page_number
+      type: object
     JobStatus:
       enum:
       - Queued
@@ -1306,16 +2396,405 @@ components:
       - Completed
       - Failed
       type: string
-    ApplyPatchEdit:
+    ConnectorId:
+      format: uuid
+      type: string
+    ExplorerChatResponse:
       properties:
-        new_string:
-          type: string
-        old_string:
+        chats:
+          items:
+            $ref: '#/components/schemas/ConnectorExplorerChat'
+          type: array
+      required:
+      - chats
+      type: object
+    WebSearchInput:
+      properties:
+        query:
           type: string
       required:
-      - old_string
-      - new_string
+      - query
       type: object
+    EntityId:
+      format: uuid
+      type: string
+    ConnectorDatabaseInfo:
+      description: Database within a connector
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+        id:
+          $ref: '#/components/schemas/ConnectorDatabaseId'
+        name:
+          type: string
+        notes:
+          type:
+          - string
+          - 'null'
+        schemas:
+          items:
+            $ref: '#/components/schemas/ConnectorSchemaInfo'
+          type: array
+      required:
+      - id
+      - name
+      - schemas
+      type: object
+    WebMeta:
+      properties:
+        flags:
+          items:
+            $ref: '#/components/schemas/Flag'
+          type: array
+        ocr_content:
+          type:
+          - string
+          - 'null'
+        screenshot:
+          format: binary
+          type:
+          - string
+          - 'null'
+        url:
+          type: string
+      required:
+      - url
+      - flags
+      type: object
+    NewSchemaObject:
+      discriminator:
+        propertyName: type
+      oneOf:
+      - properties:
+          description:
+            type:
+            - string
+            - 'null'
+          name:
+            type: string
+          notes:
+            type:
+            - string
+            - 'null'
+          type:
+            enum:
+            - database
+            type: string
+        required:
+        - name
+        - type
+        type: object
+      - properties:
+          database_id:
+            $ref: '#/components/schemas/ConnectorDatabaseId'
+          description:
+            type:
+            - string
+            - 'null'
+          name:
+            type: string
+          notes:
+            type:
+            - string
+            - 'null'
+          type:
+            enum:
+            - schema
+            type: string
+        required:
+        - database_id
+        - name
+        - type
+        type: object
+      - properties:
+          description:
+            type:
+            - string
+            - 'null'
+          endpoint:
+            type:
+            - string
+            - 'null'
+          name:
+            type: string
+          notes:
+            type:
+            - string
+            - 'null'
+          schema_id:
+            $ref: '#/components/schemas/ConnectorSchemaId'
+          type:
+            enum:
+            - table
+            type: string
+        required:
+        - schema_id
+        - name
+        - type
+        type: object
+      - properties:
+          column_type:
+            type: string
+          name:
+            type: string
+          notes:
+            type:
+            - string
+            - 'null'
+          table_id:
+            $ref: '#/components/schemas/ConnectorTableId'
+          type:
+            enum:
+            - column
+            type: string
+        required:
+        - table_id
+        - name
+        - column_type
+        - type
+        type: object
+    CreateConnectorInput:
+      properties:
+        connector_type:
+          type: string
+        description:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        secrets:
+          items:
+            type: string
+          type: array
+      required:
+      - name
+      - connector_type
+      type: object
+    ConnectorSchemaId:
+      format: uuid
+      type: string
+    ConnectorTableInfo:
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+        id:
+          $ref: '#/components/schemas/ConnectorTableId'
+        name:
+          type: string
+      required:
+      - id
+      - name
+      type: object
+    CreateSecretRequest:
+      properties:
+        secret_name:
+          type: string
+        secret_value:
+          type: string
+      required:
+      - secret_name
+      - secret_value
+      type: object
+    CreateConnectorRequest:
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+        known_connector_type:
+          type: string
+        name:
+          type: string
+        nango_connection_id:
+          description: Nango connection ID for OAuth token management
+          type:
+          - string
+          - 'null'
+        secrets:
+          additionalProperties:
+            type: string
+          description: Optional secrets/environment variables for the connector
+          type: object
+      required:
+      - name
+      - known_connector_type
+      type: object
+    ImageMeta:
+      properties:
+        document_name:
+          type:
+          - string
+          - 'null'
+        document_page:
+          format: int32
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        image:
+          type:
+          - string
+          - 'null'
+        ocr_content:
+          type:
+          - string
+          - 'null'
+      required:
+      - image
+      type: object
+    ConnectorColumnId:
+      format: uuid
+      type: string
+    AddSchemaObjectRequest:
+      allOf:
+      - $ref: '#/components/schemas/NewSchemaObject'
+      - type: object
+    ConnectorSummariesRequest:
+      properties:
+        connector_ids:
+          items:
+            $ref: '#/components/schemas/ConnectorId'
+          type: array
+      required:
+      - connector_ids
+      type: object
+    TableLineageItem:
+      description: A single table in a lineage relationship
+      properties:
+        database_name:
+          type: string
+        lineage_type:
+          $ref: '#/components/schemas/LineageType'
+        schema_name:
+          type: string
+        table_id:
+          $ref: '#/components/schemas/ConnectorTableId'
+        table_name:
+          type: string
+      required:
+      - table_id
+      - table_name
+      - database_name
+      - schema_name
+      - lineage_type
+      type: object
+    MergeConfig:
+      description: The configuration for a probabilistic merge strategy
+      properties:
+        baseline_cardinality:
+          description: 'The number of unique values that are expected to be present in the complete dataset
+
+
+            This is used for merging to determine how significant a match is. (i.e. if there are
+
+            only 2 possible values, a match gives less confidence than if there are 100)'
+          format: int64
+          minimum: 0
+          type: integer
+        comparison_strategy:
+          $ref: '#/components/schemas/ComparisonStrategy'
+        match_transfer_probability:
+          description: 'The estimated probability that, given an entity match, the properties also match
+
+
+            For a person''s full name, this would be quite high. For a person''s job title, it
+
+            would be lower because people can have multiple job titles over time or at different
+
+            companies at the same time.'
+          format: float
+          type: number
+      required:
+      - baseline_cardinality
+      - match_transfer_probability
+      type: object
+    ConnectorColumn:
+      description: Represents a column in a table or API resource
+      properties:
+        id:
+          $ref: '#/components/schemas/ConnectorColumnId'
+        name:
+          description: Name of the column
+          type: string
+        notes:
+          description: Additional notes about the column
+          type:
+          - string
+          - 'null'
+        type:
+          description: SQL type of the column (e.g., "VARCHAR(255)", "INTEGER") or API field type
+          type: string
+      required:
+      - id
+      - name
+      - type
+      type: object
+    Message:
+      description: Our generic definition of a message to a chat agent.
+      properties:
+        content:
+          description: 'We want this to be a vec of contents so we can accurately
+
+            capture an interleaving of images and text.
+
+
+            This is meant to be a completely raw, unprocessed representation
+
+            of the text. Don''t take stuff out.'
+          items:
+            $ref: '#/components/schemas/MessageContent'
+          type: array
+        role:
+          $ref: '#/components/schemas/SpeakerTag'
+      required:
+      - role
+      - content
+      type: object
+    RelationshipDescriptor:
+      additionalProperties: false
+      properties:
+        description:
+          type: string
+        merge_strategy:
+          allOf:
+          - $ref: '#/components/schemas/RelationshipMergeStrategy'
+        name:
+          type: string
+        properties:
+          items:
+            $ref: '#/components/schemas/PropertyDescriptor'
+          type: array
+        source_table:
+          type: string
+        target_table:
+          type: string
+      required:
+      - name
+      - description
+      - source_table
+      - target_table
+      type: object
+    SaveMemoryInput:
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      required:
+      - key
+      - value
+      type: object
+    ChatSessionRole:
+      enum:
+      - viewer
+      - editor
+      - owner
+      type: string
     DecodingParamEnum:
       oneOf:
       - properties:
@@ -1440,11 +2919,533 @@ components:
         required:
         - ReasoningEffort
         type: object
-    SearchConnectorTypesInput:
+    AddSchemaObjectResponse:
+      allOf:
+      - $ref: '#/components/schemas/CreatedSchemaObject'
+      - type: object
+    FormatterMeta:
+      oneOf:
+      - properties:
+          ImageMeta:
+            $ref: '#/components/schemas/ImageMeta'
+        required:
+        - ImageMeta
+        type: object
+      - properties:
+          WebMeta:
+            $ref: '#/components/schemas/WebMeta'
+        required:
+        - WebMeta
+        type: object
+      - properties:
+          TextMeta:
+            $ref: '#/components/schemas/TextMeta'
+        required:
+        - TextMeta
+        type: object
+      - properties:
+          ScraperMeta:
+            $ref: '#/components/schemas/ScraperMeta'
+        required:
+        - ScraperMeta
+        type: object
+    ConnectorWithSecretsAndValues:
+      allOf:
+      - $ref: '#/components/schemas/Connector'
+      - properties:
+          secrets:
+            items:
+              $ref: '#/components/schemas/GetSecretResult'
+            type: array
+          shared_user_roles:
+            additionalProperties:
+              $ref: '#/components/schemas/ChatSessionRole'
+            type: object
+        required:
+        - secrets
+        - shared_user_roles
+        type: object
+    LlmInformationStore:
+      description: 'Information store for connector schema
+
+
+        Hierarchical structure: Connector → Database → Schema → Table → Column
+
+        Works for both relational databases and API-based data.
+
+        Distinguishes between the two by presence of `endpoint` on tables:
+
+        - Relational DB: all tables have `endpoint: None`
+
+        - API: all tables have `endpoint: Some(...)`'
+      properties:
+        databases:
+          description: List of databases in this connector
+          items:
+            $ref: '#/components/schemas/ConnectorDatabaseInfo'
+          type: array
+        uses_default_hierarchy:
+          description: 'Whether this store uses default auto-generated database/schema names
+
+            (i.e., database and schema names match the connector name).
+
+            When true, UIs should hide the database/schema hierarchy.
+
+            When false, UIs should show the full database → schema → table hierarchy.'
+          type: boolean
+      required:
+      - databases
+      - uses_default_hierarchy
+      type: object
+    TableSearchResults:
+      properties:
+        ranked_results:
+          items:
+            $ref: '#/components/schemas/ConnectorTableSearchResult'
+          type: array
+        raw_results:
+          items:
+            $ref: '#/components/schemas/ConnectorTableSearchResult'
+          type: array
+        rerank_scores:
+          items:
+            $ref: '#/components/schemas/RerankResult'
+          type: array
+      required:
+      - raw_results
+      - rerank_scores
+      - ranked_results
+      type: object
+    SaveTableInput:
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        notes:
+          type:
+          - string
+          - 'null'
+      required:
+      - name
+      type: object
+    PropertyDescriptor:
+      additionalProperties: false
+      properties:
+        description:
+          type: string
+        merge_strategy:
+          $ref: '#/components/schemas/MergeStrategy'
+        name:
+          type: string
+        prop_type:
+          $ref: '#/components/schemas/PropertyType'
+      required:
+      - name
+      - description
+      type: object
+    LLMKnowledgeGraph:
+      additionalProperties: false
+      description: 'Knowledge graph info structured to deserialize and display
+
+        in the same format that the LLM outputs.
+
+        Also the first representation of an LLM output in the pipeline from raw tool output to being merged into a DB'
+      properties:
+        entities:
+          items:
+            $ref: '#/components/schemas/LLMEntity'
+          type: array
+        relationships:
+          items:
+            $ref: '#/components/schemas/LLMRelationship'
+          type: array
+      required:
+      - entities
+      type: object
+    MergeStrategy:
+      oneOf:
+      - description: 'Property with unique 1:1 correspondence to its parent.
+
+
+          Merge based on this property 100% of the time'
+        enum:
+        - Unique
+        type: string
+      - properties:
+          Probabilistic:
+            $ref: '#/components/schemas/MergeConfig'
+        required:
+        - Probabilistic
+        type: object
+      - enum:
+        - NoSignal
+        type: string
+    ListTablesResponse:
+      properties:
+        tables:
+          items:
+            $ref: '#/components/schemas/ConnectorTableInfo'
+          type: array
+      required:
+      - tables
+      type: object
+    CreatedSchemaObject:
+      discriminator:
+        propertyName: type
+      oneOf:
+      - properties:
+          id:
+            $ref: '#/components/schemas/ConnectorDatabaseId'
+          type:
+            enum:
+            - database
+            type: string
+        required:
+        - id
+        - type
+        type: object
+      - properties:
+          id:
+            $ref: '#/components/schemas/ConnectorSchemaId'
+          type:
+            enum:
+            - schema
+            type: string
+        required:
+        - id
+        - type
+        type: object
+      - properties:
+          id:
+            $ref: '#/components/schemas/ConnectorTableId'
+          type:
+            enum:
+            - table
+            type: string
+        required:
+        - id
+        - type
+        type: object
+      - properties:
+          id:
+            $ref: '#/components/schemas/ConnectorColumnId'
+          type:
+            enum:
+            - column
+            type: string
+        required:
+        - id
+        - type
+        type: object
+    ExitInput:
+      properties:
+        reason:
+          type: string
+      required:
+      - reason
+      type: object
+    TextMeta:
+      properties:
+        text:
+          type: string
+      required:
+      - text
+      type: object
+    ExplorationRunsResponse:
+      properties:
+        runs:
+          items:
+            $ref: '#/components/schemas/ExplorationRun'
+          type: array
+      required:
+      - runs
+      type: object
+    JobId:
+      format: uuid
+      type: string
+    Connector:
+      properties:
+        connector_category:
+          allOf:
+          - $ref: '#/components/schemas/ConnectorCategory'
+        created_at:
+          format: date-time
+          type: string
+        datahub_ingestion_type:
+          type:
+          - string
+          - 'null'
+        datahub_secret_map:
+          allOf:
+          - $ref: '#/components/schemas/DatahubSecretMap'
+        datahub_urn:
+          type:
+          - string
+          - 'null'
+        deleted_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        id:
+          $ref: '#/components/schemas/ConnectorId'
+        known_connector_type:
+          type: string
+        name:
+          type: string
+        nango_connection_id:
+          type:
+          - string
+          - 'null'
+        oauth_scopes:
+          items:
+            type:
+            - string
+            - 'null'
+          type:
+          - array
+          - 'null'
+        owner_user_id:
+          $ref: '#/components/schemas/UserId'
+        refresh_cron_schedule:
+          type:
+          - string
+          - 'null'
+        refresh_next_run_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+        team_visibility:
+          $ref: '#/components/schemas/TeamVisibility'
+        updated_at:
+          format: date-time
+          type: string
+        usage_snippet_override:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - name
+      - created_at
+      - updated_at
+      - known_connector_type
+      - team_id
+      - team_visibility
+      - owner_user_id
+      type: object
+    UpsertConnectorTypeSnippetRequest:
+      properties:
+        usage_snippet:
+          type:
+          - string
+          - 'null'
+      type: object
+    UpdateConnector:
+      properties:
+        connector_category:
+          allOf:
+          - $ref: '#/components/schemas/ConnectorCategory'
+        datahub_ingestion_type:
+          type:
+          - string
+          - 'null'
+        datahub_secret_map:
+          allOf:
+          - $ref: '#/components/schemas/DatahubSecretMap'
+        datahub_urn:
+          type:
+          - string
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        known_connector_type:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        nango_connection_id:
+          type:
+          - string
+          - 'null'
+        oauth_scopes:
+          items:
+            type:
+            - string
+            - 'null'
+          type:
+          - array
+          - 'null'
+        owner_user_id:
+          allOf:
+          - $ref: '#/components/schemas/UserId'
+        refresh_cron_schedule:
+          type:
+          - string
+          - 'null'
+        team_visibility:
+          allOf:
+          - $ref: '#/components/schemas/TeamVisibility'
+        usage_snippet_override:
+          type:
+          - string
+          - 'null'
+      type: object
+    DecodingParams:
+      properties:
+        parameters:
+          items:
+            $ref: '#/components/schemas/DecodingParamEnum'
+          type: array
+      required:
+      - parameters
+      type: object
+    IssueFoundInput:
+      properties:
+        admin_override:
+          type: boolean
+        description:
+          type: string
+        title:
+          type: string
+      required:
+      - title
+      - description
+      - admin_override
+      type: object
+    RunPythonInput:
+      properties:
+        code:
+          type: string
+        connector:
+          type:
+          - string
+          - 'null'
+        timeout_seconds:
+          format: int64
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        working_dir:
+          type:
+          - string
+          - 'null'
+      required:
+      - code
+      type: object
+    ConnectorWithSnippets:
+      allOf:
+      - $ref: '#/components/schemas/Connector'
+      - properties:
+          usage_snippet_global:
+            type:
+            - string
+            - 'null'
+        type: object
+    WorkflowSessionNodeId:
+      format: uuid
+      type: string
+    SearchConnectorTablesInput:
       properties:
         query:
-          nullable: true
           type: string
+        wiki_tag:
+          type:
+          - string
+          - 'null'
+      required:
+      - query
+      type: object
+    ConnectorSummary:
+      properties:
+        id:
+          $ref: '#/components/schemas/ConnectorId'
+        logo_url:
+          description: Base64 data URI for the logo (e.g., "data:image/svg+xml;base64,...")
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+      required:
+      - id
+      - name
+      type: object
+    LLMRelationship:
+      additionalProperties: false
+      properties:
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/BasicPropValue'
+          type: object
+        source:
+          minimum: 0
+          type: integer
+        target:
+          minimum: 0
+          type: integer
+        type:
+          type: string
+      required:
+      - type
+      - source
+      - target
+      type: object
+    ApiExecuteInput:
+      properties:
+        code:
+          type: string
+      required:
+      - code
+      type: object
+    SpeakerTag:
+      enum:
+      - user
+      - system
+      - assistant
+      type: string
+    ExploreConnectorRequest:
+      properties:
+        database_id:
+          allOf:
+          - $ref: '#/components/schemas/ConnectorDatabaseId'
+        only_do_datahub:
+          description: If true, run only DataHub ingestion without queuing Diego annotation jobs.
+          type:
+          - boolean
+          - 'null'
+        schema_id:
+          allOf:
+          - $ref: '#/components/schemas/ConnectorSchemaId'
+        table_id:
+          allOf:
+          - $ref: '#/components/schemas/ConnectorTableId'
+      type: object
+    ApplyPatchEdit:
+      properties:
+        new_string:
+          type: string
+        old_string:
+          type: string
+      required:
+      - old_string
+      - new_string
       type: object
     ToolInvocation:
       discriminator:
@@ -1802,222 +3803,29 @@ components:
         - name
         - input
         type: object
-    UpdateConnectorRequest:
-      allOf:
-      - $ref: '#/components/schemas/UpdateConnector'
-      - properties:
-          shared_user_roles:
-            additionalProperties:
-              $ref: '#/components/schemas/ChatSessionRole'
-            nullable: true
-            type: object
-        type: object
-    ExplorationStatus:
-      enum:
-      - NotStarted
-      - Running
-      - Completed
-      - Failed
-      type: string
-    UpdateColumnRequest:
+    CodeExecutionResult:
       properties:
-        notes:
-          nullable: true
-          type: string
-      type: object
-    UserId:
-      format: uuid
-      type: string
-    DatahubSecretMap:
-      additionalProperties:
-        type: string
-      description: Maps DatahubIngestionKey to the name of the connector secret that holds the value.
-      type: object
-    ApiExecuteInput:
-      properties:
-        code:
-          type: string
-      required:
-      - code
-      type: object
-    ToolResult:
-      oneOf:
-      - enum:
-        - Pending
-        type: string
-      - enum:
-        - NoResult
-        type: string
-      - properties:
-          Error:
-            type: string
-        required:
-        - Error
-        type: object
-      - properties:
-          Text:
-            type: string
-        required:
-        - Text
-        type: object
-      - properties:
-          CodeExecution:
-            $ref: '#/components/schemas/CodeExecutionResult'
-        required:
-        - CodeExecution
-        type: object
-      - properties:
-          WebMarkdown:
-            type: string
-        required:
-        - WebMarkdown
-        type: object
-      - properties:
-          WebSearch:
-            items:
-              $ref: '#/components/schemas/DocSnippet'
-            type: array
-        required:
-        - WebSearch
-        type: object
-      - properties:
-          ConnectorSearch:
-            items:
-              $ref: '#/components/schemas/ConnectorTableResult'
-            type: array
-        required:
-        - ConnectorSearch
-        type: object
-      - properties:
-          NodeLogs:
-            items:
-              type: string
-            type: array
-        required:
-        - NodeLogs
-        type: object
-      - enum:
-        - Completed
-        type: string
-      - properties:
-          Image:
-            $ref: '#/components/schemas/ImageResult'
-        required:
-        - Image
-        type: object
-      - properties:
-          Pinned:
-            type: string
-        required:
-        - Pinned
-        type: object
-    ErrorResponse:
-      description: Standard error response
-      properties:
-        error:
-          type: string
-      required:
-      - error
-      type: object
-    NavigateToIFrameInput:
-      properties:
-        index:
+        return_code:
           format: int32
-          minimum: 0
           type: integer
+        stderr:
+          type: string
+        stdout:
+          type: string
       required:
-      - index
+      - stdout
+      - stderr
+      - return_code
       type: object
-    TableLineageItem:
-      description: A single table in a lineage relationship
-      properties:
-        database_name:
-          type: string
-        lineage_type:
-          $ref: '#/components/schemas/LineageType'
-        schema_name:
-          type: string
-        table_id:
-          $ref: '#/components/schemas/ConnectorTableId'
-        table_name:
-          type: string
-      required:
-      - table_id
-      - table_name
-      - database_name
-      - schema_name
-      - lineage_type
-      type: object
-    SaveMemoryInput:
-      properties:
-        key:
-          type: string
-        value:
-          type: string
-      required:
-      - key
-      - value
-      type: object
-    ClarificationRequestsResponse:
-      properties:
-        requests:
-          items:
-            $ref: '#/components/schemas/ClarificationRequest'
-          type: array
-      required:
-      - requests
-      type: object
-    ConnectorExplorerChatId:
-      format: uuid
-      type: string
-    SaveSchemaInput:
-      properties:
-        description:
-          nullable: true
-          type: string
-        name:
-          type: string
-        notes:
-          nullable: true
-          type: string
-      required:
-      - name
-      type: object
-    RequiredEntity:
-      additionalProperties: false
-      properties:
-        entity_id:
-          allOf:
-          - $ref: '#/components/schemas/EntityId'
-          nullable: true
-        seeded_entity_id:
-          description: The integer id corresponding to an entity in the seeded entity graph (different from the global dataset entity id)
-          minimum: 0
-          type: integer
-      required:
-      - seeded_entity_id
-      type: object
-    ConnectorSchemaInfo:
-      description: Schema within a database
-      properties:
-        description:
-          nullable: true
-          type: string
-        id:
-          $ref: '#/components/schemas/ConnectorSchemaId'
-        name:
-          type: string
-        notes:
-          nullable: true
-          type: string
-        tables:
-          items:
-            $ref: '#/components/schemas/ConnectorTable'
-          type: array
-      required:
-      - id
-      - name
-      - tables
+    BasicPropValue:
+      oneOf:
+      - type: string
+      - format: int64
+        type: integer
+      - type: boolean
+      - format: double
+        type: number
+    InfiniteScrollInput:
       type: object
     ActionDef:
       description: Action definition
@@ -2030,50 +3838,186 @@ components:
       - name
       - description
       type: object
-    ConnectorColumnResult:
+    SelectDataInput:
       properties:
+        node_ids:
+          items:
+            type: string
+          type: array
+      required:
+      - node_ids
+      type: object
+    ChatPrompt:
+      properties:
+        decoding_params:
+          $ref: '#/components/schemas/DecodingParams'
+        messages:
+          items:
+            $ref: '#/components/schemas/Message'
+          type: array
+        metadata:
+          $ref: '#/components/schemas/PromptMeta'
+      required:
+      - metadata
+      - messages
+      - decoding_params
+      type: object
+    Job:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        dataset_id:
+          allOf:
+          - $ref: '#/components/schemas/DatasetId'
+        exploration_run_id:
+          allOf:
+          - $ref: '#/components/schemas/ExplorationRunId'
+        id:
+          $ref: '#/components/schemas/JobId'
+        job_type:
+          $ref: '#/components/schemas/JobType'
+        max_errors:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        max_execution_time_secs:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        max_steps_without_save:
+          format: int32
+          type: integer
+        max_total_steps:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        membership_id:
+          $ref: '#/components/schemas/MembershipId'
+        message:
+          description: A message about the status of the job at completion
+          type:
+          - string
+          - 'null'
+        node_id:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowSessionNodeId'
+        parameters:
+          description: Proto for JobInput
+          format: binary
+          type:
+          - string
+          - 'null'
+        reason:
+          description: A reason for the job's existence
+          type:
+          - string
+          - 'null'
+        run_started_time:
+          description: What time did the job start running?
+          format: date-time
+          type:
+          - string
+          - 'null'
+        run_time_milliseconds:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        seeded_kg_search_term:
+          type:
+          - string
+          - 'null'
+        status:
+          $ref: '#/components/schemas/JobStatus'
+        updated_at:
+          format: date-time
+          type: string
+        use_proxy:
+          type: boolean
+        user_id:
+          $ref: '#/components/schemas/UserId'
+      required:
+      - id
+      - status
+      - created_at
+      - user_id
+      - membership_id
+      - job_type
+      - max_steps_without_save
+      - use_proxy
+      - updated_at
+      type: object
+    DeleteSchemaObjectResponse:
+      properties:
+        object_id:
+          description: The ID of the schema object that was deleted
+          type: string
+        object_type:
+          description: The type of schema object that was deleted
+          type: string
+      required:
+      - object_type
+      - object_id
+      type: object
+    SaveDatabaseInput:
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
         name:
           type: string
         notes:
-          nullable: true
-          type: string
-        type:
-          type: string
+          type:
+          - string
+          - 'null'
       required:
       - name
-      - type
       type: object
-    DatasetId:
+    UserId:
       format: uuid
       type: string
-    MessageContent:
-      oneOf:
-      - properties:
-          Text:
-            type: string
-        required:
-        - Text
-        type: object
-      - properties:
-          Image:
-            format: binary
-            type: string
-        required:
-        - Image
-        type: object
-    RequestClarificationInput:
+    ErrorResponse:
+      description: Standard error response
       properties:
-        column_name:
-          nullable: true
-          type: string
-        question:
-          type: string
-        table_name:
+        error:
           type: string
       required:
-      - table_name
-      - question
+      - error
       type: object
+    ConnectorCategory:
+      enum:
+      - RelationalDatabase
+      - ApiTabular
+      type: string
+    SaveEntitiesInput:
+      properties:
+        entities:
+          items:
+            additionalProperties:
+              additionalProperties: true
+              type: object
+              x-stainless-empty-object: true
+            type: object
+          type: array
+        reason:
+          type: string
+        sources:
+          items:
+            type: string
+          type: array
+      required:
+      - entities
+      - sources
+      - reason
+      type: object
+    ExplorationRunId:
+      format: uuid
+      type: string
     LLMEntity:
       additionalProperties: false
       properties:
@@ -2091,362 +4035,6 @@ components:
       - type
       - properties
       type: object
-    CodeExecutionResult:
-      properties:
-        return_code:
-          format: int32
-          type: integer
-        stderr:
-          type: string
-        stdout:
-          type: string
-      required:
-      - stdout
-      - stderr
-      - return_code
-      type: object
-    ConnectorTableInfo:
-      properties:
-        description:
-          nullable: true
-          type: string
-        id:
-          $ref: '#/components/schemas/ConnectorTableId'
-        name:
-          type: string
-      required:
-      - id
-      - name
-      type: object
-    DeleteSchemaObjectResponse:
-      properties:
-        object_id:
-          description: The ID of the schema object that was deleted
-          type: string
-        object_type:
-          description: The type of schema object that was deleted
-          type: string
-      required:
-      - object_type
-      - object_id
-      type: object
-    ExplorationRunsResponse:
-      properties:
-        runs:
-          items:
-            $ref: '#/components/schemas/ExplorationRun'
-          type: array
-      required:
-      - runs
-      type: object
-    InfiniteScrollInput:
-      type: object
-    TeamVisibility:
-      enum:
-      - Team
-      - Private
-      type: string
-    ExploreConnectorRequest:
-      properties:
-        database_id:
-          allOf:
-          - $ref: '#/components/schemas/ConnectorDatabaseId'
-          nullable: true
-        only_do_datahub:
-          description: If true, run only DataHub ingestion without queuing Diego annotation jobs.
-          nullable: true
-          type: boolean
-        schema_id:
-          allOf:
-          - $ref: '#/components/schemas/ConnectorSchemaId'
-          nullable: true
-        table_id:
-          allOf:
-          - $ref: '#/components/schemas/ConnectorTableId'
-          nullable: true
-      type: object
-    ConnectorStoreResponse:
-      properties:
-        store:
-          allOf:
-          - $ref: '#/components/schemas/LlmInformationStore'
-          nullable: true
-      type: object
-    ConnectorId:
-      format: uuid
-      type: string
-    SaveTableInput:
-      properties:
-        description:
-          nullable: true
-          type: string
-        name:
-          type: string
-        notes:
-          nullable: true
-          type: string
-      required:
-      - name
-      type: object
-    DatahubProgress:
-      properties:
-        databases_created:
-          minimum: 0
-          type: integer
-        job_id:
-          $ref: '#/components/schemas/JobId'
-        job_status:
-          $ref: '#/components/schemas/JobStatus'
-        pages_fetched:
-          format: int32
-          type: integer
-        records_written:
-          minimum: 0
-          type: integer
-        schemas_created:
-          minimum: 0
-          type: integer
-        tables_processed:
-          minimum: 0
-          type: integer
-        total_datasets:
-          minimum: 0
-          type: integer
-      required:
-      - job_id
-      - job_status
-      - records_written
-      - pages_fetched
-      - total_datasets
-      - databases_created
-      - schemas_created
-      - tables_processed
-      type: object
-    ConnectorColumnId:
-      format: uuid
-      type: string
-    TextMeta:
-      properties:
-        text:
-          type: string
-      required:
-      - text
-      type: object
-    UpdateTableResponse:
-      properties:
-        table:
-          $ref: '#/components/schemas/ConnectorTable'
-      required:
-      - table
-      type: object
-    InternalErrorKind:
-      description: 'Categorizes the kind of internal error that occurred during LLM generation.
-
-        This allows the frontend to render appropriate error messages without regex matching.'
-      enum:
-      - unknown
-      - context_limit
-      - rate_limited
-      - timeout
-      - connection_error
-      type: string
-    MembershipId:
-      format: uuid
-      type: string
-    LlmInformationStore:
-      description: 'Information store for connector schema
-
-
-        Hierarchical structure: Connector → Database → Schema → Table → Column
-
-        Works for both relational databases and API-based data.
-
-        Distinguishes between the two by presence of `endpoint` on tables:
-
-        - Relational DB: all tables have `endpoint: None`
-
-        - API: all tables have `endpoint: Some(...)`'
-      properties:
-        databases:
-          description: List of databases in this connector
-          items:
-            $ref: '#/components/schemas/ConnectorDatabaseInfo'
-          type: array
-        uses_default_hierarchy:
-          description: 'Whether this store uses default auto-generated database/schema names
-
-            (i.e., database and schema names match the connector name).
-
-            When true, UIs should hide the database/schema hierarchy.
-
-            When false, UIs should show the full database → schema → table hierarchy.'
-          type: boolean
-      required:
-      - databases
-      - uses_default_hierarchy
-      type: object
-    ConnectorTable:
-      description: Represents a table (for relational databases) or resource (for APIs)
-      properties:
-        columns:
-          description: List of columns in this table/resource
-          items:
-            $ref: '#/components/schemas/ConnectorColumn'
-          type: array
-        description:
-          description: Optional description
-          nullable: true
-          type: string
-        endpoint:
-          description: API endpoint (None for relational DB tables, Some for API resources)
-          nullable: true
-          type: string
-        id:
-          $ref: '#/components/schemas/ConnectorTableId'
-        name:
-          description: Name of the table or resource
-          type: string
-        notes:
-          description: Optional notes
-          nullable: true
-          type: string
-      required:
-      - id
-      - name
-      - columns
-      type: object
-    ConnectorTypeSnippet:
-      properties:
-        connector_type:
-          type: string
-        created_at:
-          format: date-time
-          type: string
-        id:
-          format: uuid
-          type: string
-        updated_at:
-          format: date-time
-          type: string
-        usage_snippet:
-          nullable: true
-          type: string
-      required:
-      - id
-      - connector_type
-      - created_at
-      - updated_at
-      type: object
-    JobType:
-      enum:
-      - Web
-      - Pdf
-      - Derive
-      - Scrape
-      - Match
-      - ConnectorExplore
-      - DatahubIngestion
-      type: string
-    LLMKnowledgeGraph:
-      additionalProperties: false
-      description: 'Knowledge graph info structured to deserialize and display
-
-        in the same format that the LLM outputs.
-
-        Also the first representation of an LLM output in the pipeline from raw tool output to being merged into a DB'
-      properties:
-        entities:
-          items:
-            $ref: '#/components/schemas/LLMEntity'
-          type: array
-        relationships:
-          items:
-            $ref: '#/components/schemas/LLMRelationship'
-          type: array
-      required:
-      - entities
-      type: object
-    WebNavigateInput:
-      properties:
-        output_format:
-          allOf:
-          - $ref: '#/components/schemas/WebNavigateOutput'
-          nullable: true
-        url:
-          type: string
-      required:
-      - url
-      type: object
-    ListTablesResponse:
-      properties:
-        tables:
-          items:
-            $ref: '#/components/schemas/ConnectorTableInfo'
-          type: array
-      required:
-      - tables
-      type: object
-    ExplorationProgress:
-      properties:
-        datahub:
-          allOf:
-          - $ref: '#/components/schemas/DatahubProgress'
-          nullable: true
-        phases:
-          items:
-            $ref: '#/components/schemas/PhaseActivity'
-          type: array
-      required:
-      - phases
-      type: object
-    ConnectorSummariesRequest:
-      properties:
-        connector_ids:
-          items:
-            $ref: '#/components/schemas/ConnectorId'
-          type: array
-      required:
-      - connector_ids
-      type: object
-    SaveApiResourceInput:
-      properties:
-        description:
-          nullable: true
-          type: string
-        endpoint:
-          type: string
-        name:
-          type: string
-        notes:
-          nullable: true
-          type: string
-      required:
-      - name
-      - endpoint
-      type: object
-    RequiredProperty:
-      additionalProperties: false
-      properties:
-        property_names:
-          description: If there are multiple properties, it can match just one of them
-          items:
-            type: string
-          type: array
-        table_name:
-          description: The table name of the entity to update
-          type: string
-      required:
-      - table_name
-      - property_names
-      type: object
-    BasicPropValue:
-      oneOf:
-      - type: string
-      - format: int64
-        type: integer
-      - type: boolean
-      - format: double
-        type: number
     ConnectorTableSearchResult:
       description: Result struct for connector table search
       properties:
@@ -2471,945 +4059,6 @@ components:
       - columns
       - score
       type: object
-    RunBashInput:
-      properties:
-        command:
-          type: string
-        connector:
-          nullable: true
-          type: string
-        working_dir:
-          nullable: true
-          type: string
-      required:
-      - command
-      type: object
-    SaveEntitiesInput:
-      properties:
-        entities:
-          items:
-            additionalProperties:
-              additionalProperties: true
-              type: object
-              x-stainless-empty-object: true
-            type: object
-          type: array
-        reason:
-          type: string
-        sources:
-          items:
-            type: string
-          type: array
-      required:
-      - entities
-      - sources
-      - reason
-      type: object
-    ConnectorWithSecretsAndValues:
-      allOf:
-      - $ref: '#/components/schemas/Connector'
-      - properties:
-          secrets:
-            items:
-              $ref: '#/components/schemas/GetSecretResult'
-            type: array
-          shared_user_roles:
-            additionalProperties:
-              $ref: '#/components/schemas/ChatSessionRole'
-            type: object
-        required:
-        - secrets
-        - shared_user_roles
-        type: object
-    ConnectorSchemaId:
-      format: uuid
-      type: string
-    ClarificationRequest:
-      properties:
-        column_id:
-          allOf:
-          - $ref: '#/components/schemas/ConnectorColumnId'
-          nullable: true
-        column_name:
-          nullable: true
-          type: string
-        created_at:
-          format: date-time
-          type: string
-        database_name:
-          nullable: true
-          type: string
-        id:
-          $ref: '#/components/schemas/ClarificationRequestId'
-        question:
-          type: string
-        resolved:
-          type: boolean
-        schema_name:
-          nullable: true
-          type: string
-        table_id:
-          $ref: '#/components/schemas/ConnectorTableId'
-        table_name:
-          nullable: true
-          type: string
-        updated_at:
-          format: date-time
-          type: string
-      required:
-      - id
-      - table_id
-      - question
-      - resolved
-      - created_at
-      - updated_at
-      type: object
-    InspectStepInput:
-      properties:
-        step_name:
-          type: string
-      required:
-      - step_name
-      type: object
-    ReadNodeLogsInput:
-      properties:
-        log_type:
-          nullable: true
-          type: string
-        node_function_name:
-          type: string
-      required:
-      - node_function_name
-      type: object
-    ExplorerChatResponse:
-      properties:
-        chats:
-          items:
-            $ref: '#/components/schemas/ConnectorExplorerChat'
-          type: array
-      required:
-      - chats
-      type: object
-    TableLineageResponse:
-      description: Response for table lineage queries containing both upstream and downstream dependencies
-      properties:
-        downstream:
-          items:
-            $ref: '#/components/schemas/TableLineageItem'
-          type: array
-        upstream:
-          items:
-            $ref: '#/components/schemas/TableLineageItem'
-          type: array
-      required:
-      - upstream
-      - downstream
-      type: object
-    DeleteFileInput:
-      properties:
-        file:
-          type: string
-      required:
-      - file
-      type: object
-    LineageType:
-      description: Lineage type for table-to-table relationships
-      enum:
-      - COPY
-      - TRANSFORMED
-      - VIEW
-      - FOREIGN_KEY
-      type: string
-    SaveDatabaseInput:
-      properties:
-        description:
-          nullable: true
-          type: string
-        name:
-          type: string
-        notes:
-          nullable: true
-          type: string
-      required:
-      - name
-      type: object
-    ConnectorWithSnippets:
-      allOf:
-      - $ref: '#/components/schemas/Connector'
-      - properties:
-          usage_snippet_global:
-            nullable: true
-            type: string
-        type: object
-    ComparisonStrategy:
-      enum:
-      - Default
-      - EnforceUniqueness
-      type: string
-    ImageResult:
-      properties:
-        image_bytes:
-          format: binary
-          type: string
-        ocr_text:
-          nullable: true
-          type: string
-      required:
-      - image_bytes
-      type: object
-    LLMRelationship:
-      additionalProperties: false
-      properties:
-        properties:
-          additionalProperties:
-            $ref: '#/components/schemas/BasicPropValue'
-          type: object
-        source:
-          minimum: 0
-          type: integer
-        target:
-          minimum: 0
-          type: integer
-        type:
-          type: string
-      required:
-      - type
-      - source
-      - target
-      type: object
-    AddDependencyInput:
-      properties:
-        package_name:
-          type: string
-        version_spec:
-          nullable: true
-          type: string
-      required:
-      - package_name
-      type: object
-    SearchConnectorTablesInput:
-      properties:
-        query:
-          type: string
-        wiki_tag:
-          nullable: true
-          type: string
-      required:
-      - query
-      type: object
-    GetSecretResult:
-      description: Result of getting a secret
-      properties:
-        created_at:
-          format: date-time
-          type: string
-        secret_name:
-          type: string
-        secret_value:
-          type: string
-        updated_at:
-          format: date-time
-          type: string
-      required:
-      - secret_name
-      - secret_value
-      - created_at
-      - updated_at
-      type: object
-    ImageMeta:
-      properties:
-        document_name:
-          nullable: true
-          type: string
-        document_page:
-          format: int32
-          minimum: 0
-          nullable: true
-          type: integer
-        image:
-          nullable: true
-          type: string
-        ocr_content:
-          nullable: true
-          type: string
-      required:
-      - image
-      type: object
-    Connector:
-      properties:
-        connector_category:
-          allOf:
-          - $ref: '#/components/schemas/ConnectorCategory'
-          nullable: true
-        created_at:
-          format: date-time
-          type: string
-        datahub_ingestion_type:
-          nullable: true
-          type: string
-        datahub_secret_map:
-          allOf:
-          - $ref: '#/components/schemas/DatahubSecretMap'
-          nullable: true
-        datahub_urn:
-          nullable: true
-          type: string
-        deleted_at:
-          format: date-time
-          nullable: true
-          type: string
-        description:
-          nullable: true
-          type: string
-        id:
-          $ref: '#/components/schemas/ConnectorId'
-        known_connector_type:
-          type: string
-        name:
-          type: string
-        nango_connection_id:
-          nullable: true
-          type: string
-        oauth_scopes:
-          items:
-            nullable: true
-            type: string
-          nullable: true
-          type: array
-        owner_user_id:
-          $ref: '#/components/schemas/UserId'
-        refresh_cron_schedule:
-          nullable: true
-          type: string
-        refresh_next_run_at:
-          format: date-time
-          nullable: true
-          type: string
-        team_id:
-          $ref: '#/components/schemas/TeamId'
-        team_visibility:
-          $ref: '#/components/schemas/TeamVisibility'
-        updated_at:
-          format: date-time
-          type: string
-        usage_snippet_override:
-          nullable: true
-          type: string
-      required:
-      - id
-      - name
-      - created_at
-      - updated_at
-      - known_connector_type
-      - team_id
-      - team_visibility
-      - owner_user_id
-      type: object
-    JobId:
-      format: uuid
-      type: string
-    RunPipelineInput:
-      properties:
-        rerun_all_steps:
-          type: boolean
-      type: object
-    DeleteSchemaObjectRequest:
-      allOf:
-      - $ref: '#/components/schemas/SchemaObjectId'
-      - type: object
-    NodeSummary:
-      properties:
-        data_preview:
-          nullable: true
-          type: string
-        image:
-          format: binary
-          nullable: true
-          type: string
-        in_dashboard:
-          type: boolean
-        name:
-          type: string
-      required:
-      - name
-      - in_dashboard
-      type: object
-    Flag:
-      properties:
-        ariaLabel:
-          type: string
-        height:
-          format: double
-          type: number
-        href:
-          nullable: true
-          type: string
-        isInteractive:
-          nullable: true
-          type: boolean
-        number:
-          description: The number by which the flag is referred in image, prompt, and tool calls.
-          minimum: 0
-          nullable: true
-          type: integer
-        text:
-          type: string
-        type:
-          type: string
-        width:
-          description: 'The serde default here is to give us backwards compatibility
-
-            it''s fine for these to be anything as long as the image isn''t
-
-            given since it won''t regenerate.'
-          format: double
-          type: number
-        x:
-          format: double
-          type: number
-        y:
-          format: double
-          type: number
-      required:
-      - x
-      - y
-      - type
-      - ariaLabel
-      type: object
-    ConnectorCategory:
-      enum:
-      - RelationalDatabase
-      - ApiTabular
-      type: string
-    PromptMeta:
-      description: All metadata required to generate a prompt for the LLM
-      properties:
-        dataset_descriptor:
-          $ref: '#/components/schemas/DatasetDescriptor'
-        extracted_entities:
-          items:
-            $ref: '#/components/schemas/LLMKnowledgeGraph'
-          type: array
-        extraction_criteria:
-          items:
-            $ref: '#/components/schemas/SaveRequirement'
-          type: array
-        formatter_specific:
-          $ref: '#/components/schemas/FormatterMeta'
-        qa_potentially_sus_response:
-          nullable: true
-          type: string
-      required:
-      - dataset_descriptor
-      - extracted_entities
-      - extraction_criteria
-      - formatter_specific
-      type: object
-    ClarificationRequestId:
-      format: uuid
-      type: string
-    WebNavigateOutput:
-      enum:
-      - Text
-      - Visual
-      type: string
-    RelationshipMergeStrategy:
-      oneOf:
-      - $ref: '#/components/schemas/RelationshipMergeProbability'
-    ConnectorTablePathResponse:
-      properties:
-        connector_id:
-          $ref: '#/components/schemas/ConnectorId'
-        database_name:
-          type: string
-        schema_name:
-          type: string
-        table_name:
-          type: string
-      required:
-      - connector_id
-      - database_name
-      - schema_name
-      - table_name
-      type: object
-    ExplorationPhaseId:
-      description: 'Identifies the phase of connector exploration
-
-
-        This enum is used to track which phase of exploration a chat session belongs to.
-
-        It''s stored as JSONB in the database to allow for flexible phase identification.'
-      discriminator:
-        propertyName: type
-      oneOf:
-      - description: 'First phase: discovering all databases in the connector'
-        properties:
-          connector_id:
-            $ref: '#/components/schemas/ConnectorId'
-          type:
-            enum:
-            - discover_databases
-            type: string
-        required:
-        - connector_id
-        - type
-        type: object
-      - description: 'Second phase: discovering all schemas in a database'
-        properties:
-          database_id:
-            $ref: '#/components/schemas/ConnectorDatabaseId'
-          database_name:
-            type: string
-          type:
-            enum:
-            - discover_schemas
-            type: string
-        required:
-        - database_id
-        - database_name
-        - type
-        type: object
-      - description: 'Third phase: discovering all tables in a schema'
-        properties:
-          schema_id:
-            $ref: '#/components/schemas/ConnectorSchemaId'
-          schema_name:
-            type: string
-          type:
-            enum:
-            - discover_tables
-            type: string
-        required:
-        - schema_id
-        - schema_name
-        - type
-        type: object
-      - description: 'Fourth phase: discovering columns for a specific table'
-        properties:
-          table_id:
-            $ref: '#/components/schemas/ConnectorTableId'
-          table_name:
-            type: string
-          type:
-            enum:
-            - discover_columns
-            type: string
-        required:
-        - table_id
-        - table_name
-        - type
-        type: object
-      - description: 'Initial phase: discovering all API resources'
-        properties:
-          connector_id:
-            $ref: '#/components/schemas/ConnectorId'
-          type:
-            enum:
-            - discover_api_resources
-            type: string
-        required:
-        - connector_id
-        - type
-        type: object
-      - description: 'Second phase: discovering fields for a specific API resource'
-        properties:
-          resource_name:
-            type: string
-          table_id:
-            $ref: '#/components/schemas/ConnectorTableId'
-          type:
-            enum:
-            - discover_api_fields
-            type: string
-        required:
-        - table_id
-        - resource_name
-        - type
-        type: object
-    NewSchemaObject:
-      discriminator:
-        propertyName: type
-      oneOf:
-      - properties:
-          description:
-            nullable: true
-            type: string
-          name:
-            type: string
-          notes:
-            nullable: true
-            type: string
-          type:
-            enum:
-            - database
-            type: string
-        required:
-        - name
-        - type
-        type: object
-      - properties:
-          database_id:
-            $ref: '#/components/schemas/ConnectorDatabaseId'
-          description:
-            nullable: true
-            type: string
-          name:
-            type: string
-          notes:
-            nullable: true
-            type: string
-          type:
-            enum:
-            - schema
-            type: string
-        required:
-        - database_id
-        - name
-        - type
-        type: object
-      - properties:
-          description:
-            nullable: true
-            type: string
-          endpoint:
-            nullable: true
-            type: string
-          name:
-            type: string
-          notes:
-            nullable: true
-            type: string
-          schema_id:
-            $ref: '#/components/schemas/ConnectorSchemaId'
-          type:
-            enum:
-            - table
-            type: string
-        required:
-        - schema_id
-        - name
-        - type
-        type: object
-      - properties:
-          column_type:
-            type: string
-          name:
-            type: string
-          notes:
-            nullable: true
-            type: string
-          table_id:
-            $ref: '#/components/schemas/ConnectorTableId'
-          type:
-            enum:
-            - column
-            type: string
-        required:
-        - table_id
-        - name
-        - column_type
-        - type
-        type: object
-    FormatterMeta:
-      oneOf:
-      - properties:
-          ImageMeta:
-            $ref: '#/components/schemas/ImageMeta'
-        required:
-        - ImageMeta
-        type: object
-      - properties:
-          WebMeta:
-            $ref: '#/components/schemas/WebMeta'
-        required:
-        - WebMeta
-        type: object
-      - properties:
-          TextMeta:
-            $ref: '#/components/schemas/TextMeta'
-        required:
-        - TextMeta
-        type: object
-      - properties:
-          ScraperMeta:
-            $ref: '#/components/schemas/ScraperMeta'
-        required:
-        - ScraperMeta
-        type: object
-    ConnectorWithSecrets:
-      allOf:
-      - $ref: '#/components/schemas/Connector'
-      - properties:
-          secrets:
-            items:
-              $ref: '#/components/schemas/SecretSummary'
-            type: array
-        required:
-        - secrets
-        type: object
-    UpdateTableRequest:
-      properties:
-        description:
-          nullable: true
-          type: string
-        notes:
-          nullable: true
-          type: string
-      type: object
-    DocSnippet:
-      properties:
-        snippet:
-          type: string
-        title:
-          type: string
-        url:
-          type: string
-      required:
-      - title
-      - url
-      - snippet
-      type: object
-    CreateSecretRequest:
-      properties:
-        secret_name:
-          type: string
-        secret_value:
-          type: string
-      required:
-      - secret_name
-      - secret_value
-      type: object
-    SelectDataInput:
-      properties:
-        node_ids:
-          items:
-            type: string
-          type: array
-      required:
-      - node_ids
-      type: object
-    SaveColumnInput:
-      properties:
-        column_name:
-          type: string
-        column_type:
-          type: string
-        notes:
-          nullable: true
-          type: string
-      required:
-      - column_name
-      - column_type
-      type: object
-    SpeakerTag:
-      enum:
-      - user
-      - system
-      - assistant
-      type: string
-    RerankResult:
-      properties:
-        index:
-          format: int32
-          type: integer
-        relevance_score:
-          format: float
-          type: number
-        text:
-          nullable: true
-          type: string
-      required:
-      - index
-      - relevance_score
-      type: object
-    ExplorationRun:
-      properties:
-        checkpoint_blob_name:
-          nullable: true
-          type: string
-        connector_id:
-          $ref: '#/components/schemas/ConnectorId'
-        created_at:
-          format: date-time
-          type: string
-        id:
-          $ref: '#/components/schemas/ExplorationRunId'
-        latest_snapshot_blob_name:
-          nullable: true
-          type: string
-        status:
-          $ref: '#/components/schemas/ExplorationStatus'
-        triggered_by:
-          allOf:
-          - $ref: '#/components/schemas/MembershipId'
-          nullable: true
-      required:
-      - id
-      - connector_id
-      - created_at
-      - status
-      type: object
-    WebMeta:
-      properties:
-        flags:
-          items:
-            $ref: '#/components/schemas/Flag'
-          type: array
-        ocr_content:
-          nullable: true
-          type: string
-        screenshot:
-          format: binary
-          nullable: true
-          type: string
-        url:
-          type: string
-      required:
-      - url
-      - flags
-      type: object
-    AddSchemaObjectRequest:
-      allOf:
-      - $ref: '#/components/schemas/NewSchemaObject'
-      - type: object
-    ConnectorColumn:
-      description: Represents a column in a table or API resource
-      properties:
-        id:
-          $ref: '#/components/schemas/ConnectorColumnId'
-        name:
-          description: Name of the column
-          type: string
-        notes:
-          description: Additional notes about the column
-          nullable: true
-          type: string
-        type:
-          description: SQL type of the column (e.g., "VARCHAR(255)", "INTEGER") or API field type
-          type: string
-      required:
-      - id
-      - name
-      - type
-      type: object
-    TeamId:
-      format: uuid
-      type: string
-    ChatPrompt:
-      properties:
-        decoding_params:
-          $ref: '#/components/schemas/DecodingParams'
-        messages:
-          items:
-            $ref: '#/components/schemas/Message'
-          type: array
-        metadata:
-          $ref: '#/components/schemas/PromptMeta'
-      required:
-      - metadata
-      - messages
-      - decoding_params
-      type: object
-    EntityId:
-      format: uuid
-      type: string
-    UpdateConnector:
-      properties:
-        connector_category:
-          allOf:
-          - $ref: '#/components/schemas/ConnectorCategory'
-          nullable: true
-        datahub_ingestion_type:
-          nullable: true
-          type: string
-        datahub_secret_map:
-          allOf:
-          - $ref: '#/components/schemas/DatahubSecretMap'
-          nullable: true
-        datahub_urn:
-          nullable: true
-          type: string
-        description:
-          nullable: true
-          type: string
-        known_connector_type:
-          nullable: true
-          type: string
-        name:
-          nullable: true
-          type: string
-        nango_connection_id:
-          nullable: true
-          type: string
-        oauth_scopes:
-          items:
-            nullable: true
-            type: string
-          nullable: true
-          type: array
-        owner_user_id:
-          allOf:
-          - $ref: '#/components/schemas/UserId'
-          nullable: true
-        refresh_cron_schedule:
-          nullable: true
-          type: string
-        team_visibility:
-          allOf:
-          - $ref: '#/components/schemas/TeamVisibility'
-          nullable: true
-        usage_snippet_override:
-          nullable: true
-          type: string
-      type: object
-    CreatedSchemaObject:
-      discriminator:
-        propertyName: type
-      oneOf:
-      - properties:
-          id:
-            $ref: '#/components/schemas/ConnectorDatabaseId'
-          type:
-            enum:
-            - database
-            type: string
-        required:
-        - id
-        - type
-        type: object
-      - properties:
-          id:
-            $ref: '#/components/schemas/ConnectorSchemaId'
-          type:
-            enum:
-            - schema
-            type: string
-        required:
-        - id
-        - type
-        type: object
-      - properties:
-          id:
-            $ref: '#/components/schemas/ConnectorTableId'
-          type:
-            enum:
-            - table
-            type: string
-        required:
-        - id
-        - type
-        type: object
-      - properties:
-          id:
-            $ref: '#/components/schemas/ConnectorColumnId'
-          type:
-            enum:
-            - column
-            type: string
-        required:
-        - id
-        - type
-        type: object
     PropertyType:
       oneOf:
       - enum:
@@ -3450,529 +4099,6 @@ components:
       - enum:
         - Address
         type: string
-    Message:
-      description: Our generic definition of a message to a chat agent.
-      properties:
-        content:
-          description: 'We want this to be a vec of contents so we can accurately
-
-            capture an interleaving of images and text.
-
-
-            This is meant to be a completely raw, unprocessed representation
-
-            of the text. Don''t take stuff out.'
-          items:
-            $ref: '#/components/schemas/MessageContent'
-          type: array
-        role:
-          $ref: '#/components/schemas/SpeakerTag'
-      required:
-      - role
-      - content
-      type: object
-    RelationshipMergeProbability:
-      properties:
-        source_cardinality_given_target_match:
-          description: 'Describes the expected cardinality of the source table when a match is found in the target table
-
-
-            For example, if we have a source company and a target funding round, we expect the source company
-
-            to appear in multiple funding rounds, but not *too* many.
-
-            So if we have a funding round match, the expected number of unique companies is relatively small.
-
-            This is an estimate of that number.'
-          format: int64
-          minimum: 0
-          nullable: true
-          type: integer
-        target_cardinality_given_source_match:
-          description: 'Describes the expected cardinality of the target table when a match is found in the source table
-
-
-            For example, if we have a source company and a target funding round, we usually expect
-
-            some number of funding rounds to be associated with a single company but not *too* many.
-
-            So if we have a company match, the expected number of unique funding rounds is relatively small.
-
-            This is an estimate of that number.'
-          format: int64
-          minimum: 0
-          nullable: true
-          type: integer
-      type: object
-    WorkflowSessionNodeId:
-      format: uuid
-      type: string
-    ConnectorExplorerChat:
-      description: Connector explorer chat with deserialized ChatPrompt for API responses
-      properties:
-        chat_events:
-          items:
-            $ref: '#/components/schemas/ChatEvent'
-          type: array
-        chat_prompt:
-          $ref: '#/components/schemas/ChatPrompt'
-        connector_id:
-          $ref: '#/components/schemas/ConnectorId'
-        created_at:
-          format: date-time
-          type: string
-        exploration_run_id:
-          $ref: '#/components/schemas/ExplorationRunId'
-        id:
-          $ref: '#/components/schemas/ConnectorExplorerChatId'
-        phase_id:
-          $ref: '#/components/schemas/ExplorationPhaseId'
-      required:
-      - id
-      - connector_id
-      - exploration_run_id
-      - phase_id
-      - chat_prompt
-      - chat_events
-      - created_at
-      type: object
-    IssueFoundInput:
-      properties:
-        admin_override:
-          type: boolean
-        description:
-          type: string
-        title:
-          type: string
-      required:
-      - title
-      - description
-      - admin_override
-      type: object
-    ApplyPatchInput:
-      properties:
-        apply_all:
-          type: boolean
-        edits:
-          items:
-            $ref: '#/components/schemas/ApplyPatchEdit'
-          type: array
-        file:
-          type: string
-      required:
-      - file
-      - edits
-      - apply_all
-      type: object
-    ConnectorDatabaseInfo:
-      description: Database within a connector
-      properties:
-        description:
-          nullable: true
-          type: string
-        id:
-          $ref: '#/components/schemas/ConnectorDatabaseId'
-        name:
-          type: string
-        notes:
-          nullable: true
-          type: string
-        schemas:
-          items:
-            $ref: '#/components/schemas/ConnectorSchemaInfo'
-          type: array
-      required:
-      - id
-      - name
-      - schemas
-      type: object
-    MoveFileInput:
-      properties:
-        file:
-          type: string
-        new_path:
-          type: string
-      required:
-      - file
-      - new_path
-      type: object
-    WebSearchInput:
-      properties:
-        query:
-          type: string
-      required:
-      - query
-      type: object
-    ConnectorDatabaseId:
-      format: uuid
-      type: string
-    PhaseActivity:
-      properties:
-        chat_id:
-          allOf:
-          - $ref: '#/components/schemas/ConnectorExplorerChatId'
-          nullable: true
-        job_id:
-          $ref: '#/components/schemas/JobId'
-        phase_id:
-          $ref: '#/components/schemas/ExplorationPhaseId'
-        status:
-          $ref: '#/components/schemas/JobStatus'
-      required:
-      - job_id
-      - phase_id
-      - status
-      type: object
-    ChatSessionRole:
-      enum:
-      - viewer
-      - editor
-      - owner
-      type: string
-    AddSchemaObjectResponse:
-      allOf:
-      - $ref: '#/components/schemas/CreatedSchemaObject'
-      - type: object
-    Verbosity:
-      enum:
-      - low
-      - medium
-      - high
-      type: string
-    UpsertConnectorTypeSnippetRequest:
-      properties:
-        usage_snippet:
-          nullable: true
-          type: string
-      type: object
-    Job:
-      properties:
-        created_at:
-          format: date-time
-          type: string
-        dataset_id:
-          allOf:
-          - $ref: '#/components/schemas/DatasetId'
-          nullable: true
-        exploration_run_id:
-          allOf:
-          - $ref: '#/components/schemas/ExplorationRunId'
-          nullable: true
-        id:
-          $ref: '#/components/schemas/JobId'
-        job_type:
-          $ref: '#/components/schemas/JobType'
-        max_errors:
-          format: int32
-          nullable: true
-          type: integer
-        max_execution_time_secs:
-          format: int32
-          nullable: true
-          type: integer
-        max_steps_without_save:
-          format: int32
-          type: integer
-        max_total_steps:
-          format: int32
-          nullable: true
-          type: integer
-        membership_id:
-          $ref: '#/components/schemas/MembershipId'
-        message:
-          description: A message about the status of the job at completion
-          nullable: true
-          type: string
-        node_id:
-          allOf:
-          - $ref: '#/components/schemas/WorkflowSessionNodeId'
-          nullable: true
-        parameters:
-          description: Proto for JobInput
-          format: binary
-          nullable: true
-          type: string
-        reason:
-          description: A reason for the job's existence
-          nullable: true
-          type: string
-        run_started_time:
-          description: What time did the job start running?
-          format: date-time
-          nullable: true
-          type: string
-        run_time_milliseconds:
-          format: int64
-          nullable: true
-          type: integer
-        seeded_kg_search_term:
-          nullable: true
-          type: string
-        status:
-          $ref: '#/components/schemas/JobStatus'
-        updated_at:
-          format: date-time
-          type: string
-        use_proxy:
-          type: boolean
-        user_id:
-          $ref: '#/components/schemas/UserId'
-      required:
-      - id
-      - status
-      - created_at
-      - user_id
-      - membership_id
-      - job_type
-      - max_steps_without_save
-      - use_proxy
-      - updated_at
-      type: object
-    ViewPageInput:
-      properties:
-        page_number:
-          format: int32
-          minimum: 0
-          type: integer
-      required:
-      - page_number
-      type: object
-    SaveRequirement:
-      description: It's an OR statement across these.
-      oneOf:
-      - $ref: '#/components/schemas/RequiredRelationship'
-      - $ref: '#/components/schemas/RequiredEntity'
-      - $ref: '#/components/schemas/RequiredProperty'
-    SecretSummary:
-      description: Response model for listing secrets (without sensitive data)
-      properties:
-        created_at:
-          format: date-time
-          type: string
-        secret_name:
-          type: string
-        updated_at:
-          format: date-time
-          type: string
-      required:
-      - secret_name
-      - created_at
-      - updated_at
-      type: object
-    TableSearchResults:
-      properties:
-        ranked_results:
-          items:
-            $ref: '#/components/schemas/ConnectorTableSearchResult'
-          type: array
-        raw_results:
-          items:
-            $ref: '#/components/schemas/ConnectorTableSearchResult'
-          type: array
-        rerank_scores:
-          items:
-            $ref: '#/components/schemas/RerankResult'
-          type: array
-      required:
-      - raw_results
-      - rerank_scores
-      - ranked_results
-      type: object
-    DatasetDescriptor:
-      additionalProperties: false
-      description: 'A dataset is where you put multiple referential schemas.
-
-
-        A dataset is a complete namespace where all references between schemas
-
-        are held within the dataset.'
-      properties:
-        description:
-          type: string
-        llm_override_field:
-          nullable: true
-          type: string
-        name:
-          type: string
-        relationships:
-          items:
-            $ref: '#/components/schemas/RelationshipDescriptor'
-          type: array
-        tables:
-          items:
-            $ref: '#/components/schemas/TableDescriptor'
-          type: array
-      required:
-      - name
-      - description
-      - tables
-      - relationships
-      type: object
-    RelationshipDescriptor:
-      additionalProperties: false
-      properties:
-        description:
-          type: string
-        merge_strategy:
-          allOf:
-          - $ref: '#/components/schemas/RelationshipMergeStrategy'
-          nullable: true
-        name:
-          type: string
-        properties:
-          items:
-            $ref: '#/components/schemas/PropertyDescriptor'
-          type: array
-        source_table:
-          type: string
-        target_table:
-          type: string
-      required:
-      - name
-      - description
-      - source_table
-      - target_table
-      type: object
-    JavascriptInput:
-      properties:
-        code:
-          type: string
-      required:
-      - code
-      type: object
-    SaveInput:
-      properties:
-        knowledge_graph:
-          $ref: '#/components/schemas/LLMKnowledgeGraph'
-        reason:
-          type: string
-        sources:
-          items:
-            type: string
-          type: array
-      required:
-      - knowledge_graph
-      - sources
-      - reason
-      type: object
-    ExplorationRunId:
-      format: uuid
-      type: string
-    CreateConnectorInput:
-      properties:
-        connector_type:
-          type: string
-        description:
-          nullable: true
-          type: string
-        name:
-          type: string
-        secrets:
-          items:
-            type: string
-          type: array
-      required:
-      - name
-      - connector_type
-      type: object
-    ExitInput:
-      properties:
-        reason:
-          type: string
-      required:
-      - reason
-      type: object
-    RequiredRelationship:
-      additionalProperties: false
-      properties:
-        relationship_name:
-          type: string
-      required:
-      - relationship_name
-      type: object
-    ConnectorSummary:
-      properties:
-        id:
-          $ref: '#/components/schemas/ConnectorId'
-        logo_url:
-          description: Base64 data URI for the logo (e.g., "data:image/svg+xml;base64,...")
-          nullable: true
-          type: string
-        name:
-          type: string
-      required:
-      - id
-      - name
-      type: object
-    ConnectorTableResult:
-      properties:
-        columns:
-          items:
-            $ref: '#/components/schemas/ConnectorColumnResult'
-          type: array
-        database:
-          type: string
-        description:
-          nullable: true
-          type: string
-        notes:
-          nullable: true
-          type: string
-        schema:
-          type: string
-        table_name:
-          type: string
-      required:
-      - schema
-      - database
-      - table_name
-      - columns
-      type: object
-    MergeConfig:
-      description: The configuration for a probabilistic merge strategy
-      properties:
-        baseline_cardinality:
-          description: 'The number of unique values that are expected to be present in the complete dataset
-
-
-            This is used for merging to determine how significant a match is. (i.e. if there are
-
-            only 2 possible values, a match gives less confidence than if there are 100)'
-          format: int64
-          minimum: 0
-          type: integer
-        comparison_strategy:
-          $ref: '#/components/schemas/ComparisonStrategy'
-        match_transfer_probability:
-          description: 'The estimated probability that, given an entity match, the properties also match
-
-
-            For a person''s full name, this would be quite high. For a person''s job title, it
-
-            would be lower because people can have multiple job titles over time or at different
-
-            companies at the same time.'
-          format: float
-          type: number
-      required:
-      - baseline_cardinality
-      - match_transfer_probability
-      type: object
-    PropertyDescriptor:
-      additionalProperties: false
-      properties:
-        description:
-          type: string
-        merge_strategy:
-          $ref: '#/components/schemas/MergeStrategy'
-        name:
-          type: string
-        prop_type:
-          $ref: '#/components/schemas/PropertyType'
-      required:
-      - name
-      - description
-      type: object
   securitySchemes:
     api_key:
       in: header

@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   contact:
     email: team@structify.ai
@@ -7,7 +7,7 @@ info:
   license:
     name: Discuss directly with founders for license.
     url: https://structify.ai
-  title: Structify account workflow API
+  title: Structify Workflow API
   version: 0.1.0
 servers:
 - description: Production server
@@ -18,7 +18,7 @@ security:
 - api_key: []
 - session_token: []
 tags:
-- name: workflow
+- name: Workflow
 paths:
   /sessions/node/{node_id}/logs:
     get:
@@ -43,7 +43,7 @@ paths:
           description: Internal server error
       summary: Get terminal logs for a workflow node
       tags:
-      - workflow
+      - Workflow
   /workflow/run:
     post:
       operationId: run_workflow
@@ -84,7 +84,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - workflow
+      - Workflow
+      summary: Run workflow
+      x-summary-source: derived
   /workflow/stop:
     post:
       operationId: stop_workflow
@@ -125,10 +127,26 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - workflow
+      - Workflow
+      summary: Stop workflow
+      x-summary-source: derived
 components:
   schemas:
-    WorkflowNodeLogId:
+    RunWorkflowRequest:
+      properties:
+        chat_session_id:
+          $ref: '#/components/schemas/ChatSessionId'
+        edited_node_name:
+          type:
+          - string
+          - 'null'
+        use_node_cache:
+          type: boolean
+      required:
+      - chat_session_id
+      - use_node_cache
+      type: object
+    WorkflowSessionNodeId:
       format: uuid
       type: string
     WorkflowNodeLog:
@@ -151,9 +169,16 @@ components:
       - is_stderr
       - content
       type: object
-    WorkflowSessionId:
+    WorkflowNodeLogId:
       format: uuid
       type: string
+    StopWorkflowRequest:
+      properties:
+        workflow_session_id:
+          $ref: '#/components/schemas/WorkflowSessionId'
+      required:
+      - workflow_session_id
+      type: object
     ChatSessionId:
       format: uuid
       type: string
@@ -165,27 +190,7 @@ components:
       required:
       - error
       type: object
-    RunWorkflowRequest:
-      properties:
-        chat_session_id:
-          $ref: '#/components/schemas/ChatSessionId'
-        edited_node_name:
-          nullable: true
-          type: string
-        use_node_cache:
-          type: boolean
-      required:
-      - chat_session_id
-      - use_node_cache
-      type: object
-    StopWorkflowRequest:
-      properties:
-        workflow_session_id:
-          $ref: '#/components/schemas/WorkflowSessionId'
-      required:
-      - workflow_session_id
-      type: object
-    WorkflowSessionNodeId:
+    WorkflowSessionId:
       format: uuid
       type: string
     GetNodeLogsResponse:

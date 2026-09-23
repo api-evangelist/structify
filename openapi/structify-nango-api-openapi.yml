@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   contact:
     email: team@structify.ai
@@ -7,7 +7,7 @@ info:
   license:
     name: Discuss directly with founders for license.
     url: https://structify.ai
-  title: Structify account Nango API
+  title: Structify Nango API
   version: 0.1.0
 servers:
 - description: Production server
@@ -35,11 +35,13 @@ paths:
                       format: date-time
                       type: string
                     display_name:
-                      nullable: true
-                      type: string
+                      type:
+                      - string
+                      - 'null'
                     logo:
-                      nullable: true
-                      type: string
+                      type:
+                      - string
+                      - 'null'
                     provider:
                       type: string
                     unique_key:
@@ -62,6 +64,8 @@ paths:
       - bearer_token: []
       tags:
       - Nango
+      summary: List integrations
+      x-summary-source: derived
   /nango/session:
     post:
       operationId: nango_create_session
@@ -97,11 +101,10 @@ paths:
       - bearer_token: []
       tags:
       - Nango
+      summary: Nango create session
+      x-summary-source: derived
 components:
   schemas:
-    ConnectorAuthMethodScopeId:
-      format: uuid
-      type: string
     CreateNangoSessionRequest:
       description: Request body for creating a Nango session with optional scope selection
       properties:
@@ -113,12 +116,16 @@ components:
             If the auth method has no scopes in the database, Nango''s default scopes are used.'
           items:
             $ref: '#/components/schemas/ConnectorAuthMethodScopeId'
-          nullable: true
-          type: array
+          type:
+          - array
+          - 'null'
       required:
       - connector_auth_method_id
       type: object
     ConnectorAuthMethodId:
+      format: uuid
+      type: string
+    ConnectorAuthMethodScopeId:
       format: uuid
       type: string
   securitySchemes:

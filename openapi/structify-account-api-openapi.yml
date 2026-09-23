@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   contact:
     email: team@structify.ai
@@ -7,7 +7,7 @@ info:
   license:
     name: Discuss directly with founders for license.
     url: https://structify.ai
-  title: Structify account API
+  title: Structify Account API
   version: 0.1.0
 servers:
 - description: Production server
@@ -19,7 +19,7 @@ security:
 - session_token: []
 tags:
 - description: All the accessible information about your account through our API
-  name: account
+  name: Account
 paths:
   /user/api_keys:
     get:
@@ -39,7 +39,9 @@ paths:
       - session_token: []
       - api_key: []
       tags:
-      - account
+      - Account
+      summary: Api keys list
+      x-summary-source: derived
     post:
       operationId: api_keys_create
       requestBody:
@@ -65,7 +67,9 @@ paths:
       - session_token: []
       - api_key: []
       tags:
-      - account
+      - Account
+      summary: Api keys create
+      x-summary-source: derived
   /user/api_keys/{id}:
     delete:
       operationId: api_keys_revoke
@@ -89,7 +93,9 @@ paths:
       - session_token: []
       - api_key: []
       tags:
-      - account
+      - Account
+      summary: Api keys revoke
+      x-summary-source: derived
     get:
       operationId: api_keys_get
       parameters:
@@ -116,7 +122,9 @@ paths:
       - session_token: []
       - api_key: []
       tags:
-      - account
+      - Account
+      summary: Api keys get
+      x-summary-source: derived
   /user/info:
     get:
       operationId: user_info
@@ -132,7 +140,7 @@ paths:
       - api_key: []
       summary: Enable a source
       tags:
-      - account
+      - Account
   /user/jwt_to_api_token/{jwt}:
     post:
       description: 'JWTs are commonly used for authentication in web applications. They contain
@@ -173,9 +181,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/TokenResponse'
           description: Converted JWT to API token
-      summary: Converts a JWT (JSON Web Token) to an API token.
+      summary: Converts a JWT (JSON Web Token) to an API token
       tags:
-      - account
+      - Account
   /user/onboarding/answers:
     get:
       operationId: get_onboarding_answers
@@ -192,7 +200,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - account
+      - Account
+      summary: Get onboarding answers
+      x-summary-source: derived
     put:
       operationId: save_onboarding_answers
       requestBody:
@@ -214,7 +224,9 @@ paths:
       - api_key: []
       - session_token: []
       tags:
-      - account
+      - Account
+      summary: Save onboarding answers
+      x-summary-source: derived
   /user/refresh:
     post:
       description: 'This endpoint allows clients to extend their session by providing both the current
@@ -236,9 +248,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/RefreshSessionResponse'
           description: Session refreshed successfully
-      summary: Refreshes an expired or expiring session token.
+      summary: Refreshes an expired or expiring session token
       tags:
-      - account
+      - Account
   /user/survey/submit:
     post:
       operationId: submit_survey
@@ -264,86 +276,22 @@ paths:
       - session_token: []
       summary: Submit user onboarding survey
       tags:
-      - account
+      - Account
 components:
   schemas:
-    SaveOnboardingAnswersRequest:
-      properties:
-        answers:
-          $ref: '#/components/schemas/OnboardingAnswers'
-      required:
-      - answers
-      type: object
-    CreateApiKeyResponse:
-      properties:
-        api_key:
-          $ref: '#/components/schemas/ApiKeyInfo'
-        raw_key:
-          type: string
-      required:
-      - api_key
-      - raw_key
-      type: object
-    SaveOnboardingAnswersResponse:
-      properties:
-        answers:
-          $ref: '#/components/schemas/OnboardingAnswers'
-      required:
-      - answers
-      type: object
-    UserType:
+    FeatureFlag:
       enum:
-      - admin
-      - public
-      - end_user
-      type: string
-    JwtToApiTokenRequest:
-      properties:
-        full_name:
-          nullable: true
-          type: string
-        invitation_token:
-          format: uuid
-          nullable: true
-          type: string
-      type: object
-    ApiKeyId:
-      format: uuid
-      type: string
-    MembershipId:
-      format: uuid
-      type: string
-    ApiKeyInfo:
-      properties:
-        created_at:
-          format: date-time
-          type: string
-        expires_at:
-          format: date-time
-          nullable: true
-          type: string
-        id:
-          $ref: '#/components/schemas/ApiKeyId'
-        last_used_at:
-          format: date-time
-          nullable: true
-          type: string
-        membership_id:
-          $ref: '#/components/schemas/MembershipId'
-        name:
-          nullable: true
-          type: string
-        revoked_at:
-          format: date-time
-          nullable: true
-          type: string
-      required:
-      - id
-      - membership_id
-      - created_at
-      type: object
-    UserId:
-      format: uuid
+      - functional_test
+      - pdf_parsing
+      - boredm_construction_model
+      - generic_suspicious_queue
+      - new_use_case_preview
+      - bedrock_codegen
+      - cerebras_codegen
+      - gemini25pro
+      - claude_sonnet4
+      - allow_job_deletion
+      - none
       type: string
     RefreshSessionResponse:
       properties:
@@ -361,15 +309,58 @@ components:
       - expires_at
       - refresh_token_expires_at
       type: object
-    RefreshSessionRequest:
+    Permission:
+      enum:
+      - labeler
+      - qa_labeler
+      - debug
+      - human_llm
+      - none
+      type: string
+    UserType:
+      enum:
+      - admin
+      - public
+      - end_user
+      type: string
+    SurveySubmissionRequest:
       properties:
-        refresh_token:
-          type: string
-        session_token:
-          type: string
+        survey_response:
+          additionalProperties: true
+          type: object
+          x-stainless-empty-object: true
       required:
-      - session_token
-      - refresh_token
+      - survey_response
+      type: object
+    JwtToApiTokenRequest:
+      properties:
+        full_name:
+          type:
+          - string
+          - 'null'
+        invitation_token:
+          format: uuid
+          type:
+          - string
+          - 'null'
+      type: object
+    ApiKeyId:
+      format: uuid
+      type: string
+    CreateApiKeyRequest:
+      properties:
+        expires_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        membership_id:
+          allOf:
+          - $ref: '#/components/schemas/MembershipId'
+        name:
+          type:
+          - string
+          - 'null'
       type: object
     SurveySubmissionResponse:
       properties:
@@ -380,95 +371,6 @@ components:
       required:
       - success
       - message
-      type: object
-    Permission:
-      enum:
-      - labeler
-      - qa_labeler
-      - debug
-      - human_llm
-      - none
-      type: string
-    UserInfoResponse:
-      properties:
-        company_description:
-          nullable: true
-          type: string
-        company_name:
-          nullable: true
-          type: string
-        completed_onboarding:
-          type: boolean
-        cost_confirmation_threshold:
-          description: Cost confirmation threshold in credits (thousandth of a cent).
-          format: int64
-          nullable: true
-          type: integer
-        credits_remaining:
-          format: int64
-          type: integer
-        credits_used:
-          format: int32
-          minimum: 0
-          type: integer
-        feature_flags:
-          items:
-            $ref: '#/components/schemas/FeatureFlag'
-          type: array
-        full_name:
-          type: string
-        impersonated_by_email:
-          nullable: true
-          type: string
-        job_title:
-          nullable: true
-          type: string
-        last_selected_team_id:
-          allOf:
-          - $ref: '#/components/schemas/TeamId'
-          nullable: true
-        linkedin_url:
-          nullable: true
-          type: string
-        notify_for_interaction:
-          type: boolean
-        permissions:
-          items:
-            $ref: '#/components/schemas/Permission'
-          type: array
-        slack_user_id:
-          nullable: true
-          type: string
-        slack_username:
-          nullable: true
-          type: string
-        survey_completed_at:
-          format: date-time
-          nullable: true
-          type: string
-        teams_user_id:
-          nullable: true
-          type: string
-        teams_user_name:
-          nullable: true
-          type: string
-        user_id:
-          $ref: '#/components/schemas/UserId'
-        user_type:
-          $ref: '#/components/schemas/UserType'
-        username:
-          type: string
-      required:
-      - user_id
-      - username
-      - user_type
-      - credits_used
-      - credits_remaining
-      - permissions
-      - feature_flags
-      - full_name
-      - completed_onboarding
-      - notify_for_interaction
       type: object
     TokenResponse:
       properties:
@@ -488,41 +390,6 @@ components:
       - refresh_token
       - session_expires_at
       type: object
-    OnboardingAnswers:
-      properties:
-        company_name:
-          nullable: true
-          type: string
-        connected_connector_ids:
-          items:
-            type: string
-          nullable: true
-          type: array
-        full_name:
-          nullable: true
-          type: string
-        primary_goal:
-          nullable: true
-          type: string
-        recommended_template_id:
-          nullable: true
-          type: string
-        role:
-          nullable: true
-          type: string
-        systems_to_connect:
-          items:
-            type: string
-          nullable: true
-          type: array
-      type: object
-    GetOnboardingAnswersResponse:
-      properties:
-        answers:
-          $ref: '#/components/schemas/OnboardingAnswers'
-      required:
-      - answers
-      type: object
     ListApiKeysResponse:
       properties:
         api_keys:
@@ -532,46 +399,215 @@ components:
       required:
       - api_keys
       type: object
-    CreateApiKeyRequest:
+    RefreshSessionRequest:
       properties:
-        expires_at:
-          format: date-time
-          nullable: true
+        refresh_token:
           type: string
-        membership_id:
-          allOf:
-          - $ref: '#/components/schemas/MembershipId'
-          nullable: true
-        name:
-          nullable: true
+        session_token:
           type: string
-      type: object
-    FeatureFlag:
-      enum:
-      - functional_test
-      - pdf_parsing
-      - boredm_construction_model
-      - generic_suspicious_queue
-      - new_use_case_preview
-      - bedrock_codegen
-      - cerebras_codegen
-      - gemini25pro
-      - claude_sonnet4
-      - allow_job_deletion
-      - none
-      type: string
-    SurveySubmissionRequest:
-      properties:
-        survey_response:
-          additionalProperties: true
-          type: object
-          x-stainless-empty-object: true
       required:
-      - survey_response
+      - session_token
+      - refresh_token
+      type: object
+    UserId:
+      format: uuid
+      type: string
+    SaveOnboardingAnswersResponse:
+      properties:
+        answers:
+          $ref: '#/components/schemas/OnboardingAnswers'
+      required:
+      - answers
       type: object
     TeamId:
       format: uuid
       type: string
+    CreateApiKeyResponse:
+      properties:
+        api_key:
+          $ref: '#/components/schemas/ApiKeyInfo'
+        raw_key:
+          type: string
+      required:
+      - api_key
+      - raw_key
+      type: object
+    MembershipId:
+      format: uuid
+      type: string
+    OnboardingAnswers:
+      properties:
+        company_name:
+          type:
+          - string
+          - 'null'
+        connected_connector_ids:
+          items:
+            type: string
+          type:
+          - array
+          - 'null'
+        full_name:
+          type:
+          - string
+          - 'null'
+        primary_goal:
+          type:
+          - string
+          - 'null'
+        recommended_template_id:
+          type:
+          - string
+          - 'null'
+        role:
+          type:
+          - string
+          - 'null'
+        systems_to_connect:
+          items:
+            type: string
+          type:
+          - array
+          - 'null'
+      type: object
+    SaveOnboardingAnswersRequest:
+      properties:
+        answers:
+          $ref: '#/components/schemas/OnboardingAnswers'
+      required:
+      - answers
+      type: object
+    ApiKeyInfo:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        expires_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        id:
+          $ref: '#/components/schemas/ApiKeyId'
+        last_used_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        membership_id:
+          $ref: '#/components/schemas/MembershipId'
+        name:
+          type:
+          - string
+          - 'null'
+        revoked_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - membership_id
+      - created_at
+      type: object
+    GetOnboardingAnswersResponse:
+      properties:
+        answers:
+          $ref: '#/components/schemas/OnboardingAnswers'
+      required:
+      - answers
+      type: object
+    UserInfoResponse:
+      properties:
+        company_description:
+          type:
+          - string
+          - 'null'
+        company_name:
+          type:
+          - string
+          - 'null'
+        completed_onboarding:
+          type: boolean
+        cost_confirmation_threshold:
+          description: Cost confirmation threshold in credits (thousandth of a cent).
+          format: int64
+          type:
+          - integer
+          - 'null'
+        credits_remaining:
+          format: int64
+          type: integer
+        credits_used:
+          format: int32
+          minimum: 0
+          type: integer
+        feature_flags:
+          items:
+            $ref: '#/components/schemas/FeatureFlag'
+          type: array
+        full_name:
+          type: string
+        impersonated_by_email:
+          type:
+          - string
+          - 'null'
+        job_title:
+          type:
+          - string
+          - 'null'
+        last_selected_team_id:
+          allOf:
+          - $ref: '#/components/schemas/TeamId'
+        linkedin_url:
+          type:
+          - string
+          - 'null'
+        notify_for_interaction:
+          type: boolean
+        permissions:
+          items:
+            $ref: '#/components/schemas/Permission'
+          type: array
+        slack_user_id:
+          type:
+          - string
+          - 'null'
+        slack_username:
+          type:
+          - string
+          - 'null'
+        survey_completed_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        teams_user_id:
+          type:
+          - string
+          - 'null'
+        teams_user_name:
+          type:
+          - string
+          - 'null'
+        user_id:
+          $ref: '#/components/schemas/UserId'
+        user_type:
+          $ref: '#/components/schemas/UserType'
+        username:
+          type: string
+      required:
+      - user_id
+      - username
+      - user_type
+      - credits_used
+      - credits_remaining
+      - permissions
+      - feature_flags
+      - full_name
+      - completed_onboarding
+      - notify_for_interaction
+      type: object
   securitySchemes:
     api_key:
       in: header
