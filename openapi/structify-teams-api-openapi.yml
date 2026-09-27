@@ -79,21 +79,6 @@ components:
       required:
       - ok
       type: object
-    TeamsChannelAccount:
-      properties:
-        aadObjectId:
-          type:
-          - string
-          - 'null'
-        id:
-          type: string
-        name:
-          type:
-          - string
-          - 'null'
-      required:
-      - id
-      type: object
     TeamsAttachment:
       properties:
         content: {}
@@ -110,30 +95,15 @@ components:
       required:
       - contentType
       type: object
-    TeamsActivityType:
-      enum:
-      - message
-      - invoke
-      - conversationUpdate
-      - other
-      type: string
-    TeamsConversationAccount:
+    TeamsChannelAccount:
       properties:
-        conversationType:
+        aadObjectId:
           type:
           - string
           - 'null'
         id:
           type: string
-        isGroup:
-          type:
-          - boolean
-          - 'null'
         name:
-          type:
-          - string
-          - 'null'
-        tenantId:
           type:
           - string
           - 'null'
@@ -193,6 +163,36 @@ components:
       required:
       - type
       type: object
+    TeamsConversationAccount:
+      properties:
+        conversationType:
+          type:
+          - string
+          - 'null'
+        id:
+          type: string
+        isGroup:
+          type:
+          - boolean
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        tenantId:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      type: object
+    TeamsActivityType:
+      enum:
+      - message
+      - invoke
+      - conversationUpdate
+      - other
+      type: string
   securitySchemes:
     api_key:
       in: header

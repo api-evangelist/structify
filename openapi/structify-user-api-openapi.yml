@@ -67,6 +67,93 @@ paths:
       - User
 components:
   schemas:
+    UserType:
+      enum:
+      - admin
+      - public
+      - end_user
+      type: string
+    UserChangeset:
+      properties:
+        apollo_data: {}
+        company_description:
+          type:
+          - string
+          - 'null'
+        company_name:
+          type:
+          - string
+          - 'null'
+        completed_onboarding:
+          type:
+          - boolean
+          - 'null'
+        cost_confirmation_threshold:
+          description: Cost confirmation threshold in credits (thousandth of a cent).
+          format: int64
+          type:
+          - integer
+          - 'null'
+        cufinder_data: {}
+        email:
+          type:
+          - string
+          - 'null'
+        feature_flags:
+          items:
+            allOf:
+            - $ref: '#/components/schemas/FeatureFlag'
+          type:
+          - array
+          - 'null'
+        feature_overrides: {}
+        full_name:
+          type:
+          - string
+          - 'null'
+        job_title:
+          type:
+          - string
+          - 'null'
+        last_selected_team_id:
+          allOf:
+          - $ref: '#/components/schemas/TeamId'
+        linkedin_url:
+          type:
+          - string
+          - 'null'
+        notify_for_interaction:
+          type:
+          - boolean
+          - 'null'
+        permissions:
+          items:
+            allOf:
+            - $ref: '#/components/schemas/Permission'
+          type:
+          - array
+          - 'null'
+        slack_user_id:
+          type:
+          - string
+          - 'null'
+        slack_username:
+          type:
+          - string
+          - 'null'
+        survey_response: {}
+        teams_user_id:
+          type:
+          - string
+          - 'null'
+        teams_user_name:
+          type:
+          - string
+          - 'null'
+        user_type:
+          allOf:
+          - $ref: '#/components/schemas/UserType'
+      type: object
     FeatureFlag:
       enum:
       - functional_test
@@ -81,13 +168,6 @@ components:
       - allow_job_deletion
       - none
       type: string
-    EnrichUserParams:
-      properties:
-        email:
-          type: string
-      required:
-      - email
-      type: object
     Permission:
       enum:
       - labeler
@@ -200,15 +280,16 @@ components:
       - completed_onboarding
       - notify_for_interaction
       type: object
-    UserType:
-      enum:
-      - admin
-      - public
-      - end_user
-      type: string
     TeamId:
       format: uuid
       type: string
+    EnrichUserParams:
+      properties:
+        email:
+          type: string
+      required:
+      - email
+      type: object
     UpdateUserParams:
       properties:
         current_email:
@@ -219,87 +300,6 @@ components:
           $ref: '#/components/schemas/UserChangeset'
       required:
       - updates
-      type: object
-    UserChangeset:
-      properties:
-        apollo_data: {}
-        company_description:
-          type:
-          - string
-          - 'null'
-        company_name:
-          type:
-          - string
-          - 'null'
-        completed_onboarding:
-          type:
-          - boolean
-          - 'null'
-        cost_confirmation_threshold:
-          description: Cost confirmation threshold in credits (thousandth of a cent).
-          format: int64
-          type:
-          - integer
-          - 'null'
-        cufinder_data: {}
-        email:
-          type:
-          - string
-          - 'null'
-        feature_flags:
-          items:
-            allOf:
-            - $ref: '#/components/schemas/FeatureFlag'
-          type:
-          - array
-          - 'null'
-        feature_overrides: {}
-        full_name:
-          type:
-          - string
-          - 'null'
-        job_title:
-          type:
-          - string
-          - 'null'
-        last_selected_team_id:
-          allOf:
-          - $ref: '#/components/schemas/TeamId'
-        linkedin_url:
-          type:
-          - string
-          - 'null'
-        notify_for_interaction:
-          type:
-          - boolean
-          - 'null'
-        permissions:
-          items:
-            allOf:
-            - $ref: '#/components/schemas/Permission'
-          type:
-          - array
-          - 'null'
-        slack_user_id:
-          type:
-          - string
-          - 'null'
-        slack_username:
-          type:
-          - string
-          - 'null'
-        survey_response: {}
-        teams_user_id:
-          type:
-          - string
-          - 'null'
-        teams_user_name:
-          type:
-          - string
-          - 'null'
-        user_type:
-          allOf:
-          - $ref: '#/components/schemas/UserType'
       type: object
   securitySchemes:
     api_key:

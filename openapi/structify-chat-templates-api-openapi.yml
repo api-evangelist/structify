@@ -70,28 +70,9 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ChatTemplateId:
-      format: uuid
-      type: string
-    ChatSessionId:
-      format: uuid
-      type: string
     UserId:
       format: uuid
       type: string
-    TemplateQuestion:
-      properties:
-        options:
-          items:
-            type: string
-          type:
-          - array
-          - 'null'
-        prompt:
-          type: string
-      required:
-      - prompt
-      type: object
     ChatTemplate:
       properties:
         chat_session_id:
@@ -137,6 +118,25 @@ components:
       - updated_at
       - questions
       type: object
+    TemplateQuestion:
+      properties:
+        options:
+          items:
+            type: string
+          type:
+          - array
+          - 'null'
+        prompt:
+          type: string
+      required:
+      - prompt
+      type: object
+    ChatTemplateId:
+      format: uuid
+      type: string
+    ChatSessionId:
+      format: uuid
+      type: string
   securitySchemes:
     api_key:
       in: header

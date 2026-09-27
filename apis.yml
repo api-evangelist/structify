@@ -58,6 +58,7 @@ tags:
 - Knowledge Graph
 - ETL
 - Data Enrichment
+- A2A
 tags_raw:
 - Company
 - AI
@@ -67,9 +68,10 @@ tags_raw:
 - Knowledge Graph
 - ETL
 - Data Enrichment
+- A2A
 apis:
 - aid: structify:structify-account-api
-  name: Structify account API
+  name: Structify Account API
   description: All the accessible information about your account through our API
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
@@ -83,7 +85,7 @@ apis:
   - type: DataModel
     url: data-model/structify-data-model.yml
 - aid: structify:structify-admin-api
-  name: Structify admin API
+  name: Structify Admin API
   description: Admin endpoints
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
@@ -97,7 +99,7 @@ apis:
   - type: DataModel
     url: data-model/structify-data-model.yml
 - aid: structify:structify-chat-api
-  name: Structify chat API
+  name: Structify Chat API
   description: Chat session management endpoints
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
@@ -111,7 +113,7 @@ apis:
   - type: DataModel
     url: data-model/structify-data-model.yml
 - aid: structify:structify-chat-templates-api
-  name: Structify chat_templates API
+  name: Structify Chat Templates API
   description: The chat_templates API from Structify — 2 operation(s) for chat_templates.
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
@@ -124,7 +126,7 @@ apis:
   - type: DataModel
     url: data-model/structify-data-model.yml
 - aid: structify:structify-code-api
-  name: Structify code API
+  name: Structify Code API
   description: Code generation endpoints
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
@@ -138,7 +140,7 @@ apis:
   - type: DataModel
     url: data-model/structify-data-model.yml
 - aid: structify:structify-connector-catalog-api
-  name: Structify connector_catalog API
+  name: Structify Connector Catalog API
   description: The connector_catalog API from Structify — 3 operation(s) for connector_catalog.
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
@@ -152,7 +154,7 @@ apis:
   - type: DataModel
     url: data-model/structify-data-model.yml
 - aid: structify:structify-connectors-api
-  name: Structify connectors API
+  name: Structify Connectors API
   description: The connectors API from Structify — 24 operation(s) for connectors.
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
@@ -166,7 +168,7 @@ apis:
   - type: DataModel
     url: data-model/structify-data-model.yml
 - aid: structify:structify-dataset-api
-  name: Structify dataset API
+  name: Structify Dataset API
   description: Dataset management endpoints
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
@@ -180,7 +182,7 @@ apis:
   - type: DataModel
     url: data-model/structify-data-model.yml
 - aid: structify:structify-documents-api
-  name: Structify documents API
+  name: Structify Documents API
   description: The documents API from Structify — 4 operation(s) for documents.
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
@@ -194,7 +196,7 @@ apis:
   - type: DataModel
     url: data-model/structify-data-model.yml
 - aid: structify:structify-entity-api
-  name: Structify entity API
+  name: Structify Entity API
   description: The entity API from Structify — 21 operation(s) for entity.
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
@@ -208,7 +210,7 @@ apis:
   - type: DataModel
     url: data-model/structify-data-model.yml
 - aid: structify:structify-jobs-api
-  name: Structify jobs API
+  name: Structify Jobs API
   description: The jobs API from Structify — 5 operation(s) for jobs.
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
@@ -222,7 +224,7 @@ apis:
   - type: DataModel
     url: data-model/structify-data-model.yml
 - aid: structify:structify-match-api
-  name: Structify match API
+  name: Structify Match API
   description: The match API from Structify — 2 operation(s) for match.
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
@@ -248,7 +250,7 @@ apis:
   - type: DataModel
     url: data-model/structify-data-model.yml
 - aid: structify:structify-project-api
-  name: Structify project API
+  name: Structify Project API
   description: Project management endpoints
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
@@ -262,7 +264,7 @@ apis:
   - type: DataModel
     url: data-model/structify-data-model.yml
 - aid: structify:structify-public-sessions-api
-  name: Structify public_sessions API
+  name: Structify Public Sessions API
   description: The public_sessions API from Structify — 2 operation(s) for public_sessions.
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
@@ -275,7 +277,7 @@ apis:
   - type: DataModel
     url: data-model/structify-data-model.yml
 - aid: structify:structify-sandbox-api
-  name: Structify sandbox API
+  name: Structify Sandbox API
   description: Sandbox management endpoints
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
@@ -289,7 +291,7 @@ apis:
   - type: DataModel
     url: data-model/structify-data-model.yml
 - aid: structify:structify-scrape-api
-  name: Structify scrape API
+  name: Structify Scrape API
   description: The scrape API from Structify — 2 operation(s) for scrape.
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
@@ -303,7 +305,7 @@ apis:
   - type: DataModel
     url: data-model/structify-data-model.yml
 - aid: structify:structify-server-api
-  name: Structify server API
+  name: Structify Server API
   description: The server API from Structify — 1 operation(s) for server.
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
@@ -317,7 +319,7 @@ apis:
   - type: DataModel
     url: data-model/structify-data-model.yml
 - aid: structify:structify-sessions-api
-  name: Structify sessions API
+  name: Structify Sessions API
   description: The sessions API from Structify — 16 operation(s) for sessions.
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
@@ -331,7 +333,7 @@ apis:
   - type: DataModel
     url: data-model/structify-data-model.yml
 - aid: structify:structify-slack-api
-  name: Structify slack API
+  name: Structify Slack API
   description: The slack API from Structify — 1 operation(s) for slack.
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
@@ -345,7 +347,7 @@ apis:
   - type: DataModel
     url: data-model/structify-data-model.yml
 - aid: structify:structify-source-api
-  name: Structify source API
+  name: Structify Source API
   description: The source API from Structify — 3 operation(s) for source.
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
@@ -359,7 +361,7 @@ apis:
   - type: DataModel
     url: data-model/structify-data-model.yml
 - aid: structify:structify-structure-api
-  name: Structify structure API
+  name: Structify Structure API
   description: The structure API from Structify — 8 operation(s) for structure.
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
@@ -373,7 +375,7 @@ apis:
   - type: DataModel
     url: data-model/structify-data-model.yml
 - aid: structify:structify-team-api
-  name: Structify team API
+  name: Structify Team API
   description: Team management endpoints
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
@@ -387,7 +389,7 @@ apis:
   - type: DataModel
     url: data-model/structify-data-model.yml
 - aid: structify:structify-teams-api
-  name: Structify teams API
+  name: Structify Teams API
   description: The teams API from Structify — 2 operation(s) for teams.
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
@@ -401,7 +403,7 @@ apis:
   - type: DataModel
     url: data-model/structify-data-model.yml
 - aid: structify:structify-transactions-api
-  name: Structify transactions API
+  name: Structify Transactions API
   description: The transactions API from Structify — 3 operation(s) for transactions.
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
@@ -415,7 +417,7 @@ apis:
   - type: DataModel
     url: data-model/structify-data-model.yml
 - aid: structify:structify-usage-api
-  name: Structify usage API
+  name: Structify Usage API
   description: The usage API from Structify — 2 operation(s) for usage.
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
@@ -429,7 +431,7 @@ apis:
   - type: DataModel
     url: data-model/structify-data-model.yml
 - aid: structify:structify-user-api
-  name: Structify user API
+  name: Structify User API
   description: The user API from Structify — 2 operation(s) for user.
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
@@ -443,7 +445,7 @@ apis:
   - type: DataModel
     url: data-model/structify-data-model.yml
 - aid: structify:structify-webhook-api
-  name: Structify webhook API
+  name: Structify Webhook API
   description: The webhook API from Structify — 1 operation(s) for webhook.
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
@@ -457,7 +459,7 @@ apis:
   - type: DataModel
     url: data-model/structify-data-model.yml
 - aid: structify:structify-whitelabel-api
-  name: Structify whitelabel API
+  name: Structify Whitelabel API
   description: Whitelabeled service proxy endpoints
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
@@ -471,7 +473,7 @@ apis:
   - type: DataModel
     url: data-model/structify-data-model.yml
 - aid: structify:structify-wiki-api
-  name: Structify wiki API
+  name: Structify Wiki API
   description: Team wiki page management endpoints
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
@@ -485,7 +487,7 @@ apis:
   - type: DataModel
     url: data-model/structify-data-model.yml
 - aid: structify:structify-workflow-api
-  name: Structify workflow API
+  name: Structify Workflow API
   description: The workflow API from Structify — 3 operation(s) for workflow.
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai
@@ -499,7 +501,7 @@ apis:
   - type: DataModel
     url: data-model/structify-data-model.yml
 - aid: structify:structify-workflow-schedule-api
-  name: Structify workflow_schedule API
+  name: Structify Workflow Schedule API
   description: The workflow_schedule API from Structify — 6 operation(s) for workflow_schedule.
   humanURL: https://docs.structify.ai/api-reference/introduction
   baseURL: https://api.structify.ai

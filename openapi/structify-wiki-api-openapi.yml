@@ -199,9 +199,113 @@ components:
     ConnectorTableId:
       format: uuid
       type: string
+    WikiConnectorReference:
+      properties:
+        is_deleted:
+          type: boolean
+        name:
+          type: string
+        path:
+          items:
+            type: string
+          type: array
+        reference_id:
+          $ref: '#/components/schemas/ReferenceId'
+      required:
+      - reference_id
+      - name
+      - is_deleted
+      - path
+      type: object
+    ConnectorColumnId:
+      format: uuid
+      type: string
+    ReferenceIdSchema:
+      properties:
+        id:
+          $ref: '#/components/schemas/ConnectorSchemaId'
+      required:
+      - id
+      type: object
     ConnectorDatabaseId:
       format: uuid
       type: string
+    ReferenceIdColumn:
+      properties:
+        id:
+          $ref: '#/components/schemas/ConnectorColumnId'
+      required:
+      - id
+      type: object
+    WikiPageWithReferences:
+      allOf:
+      - $ref: '#/components/schemas/WikiPage'
+      - properties:
+          references:
+            items:
+              $ref: '#/components/schemas/WikiConnectorReference'
+            type: array
+        required:
+        - references
+        type: object
+    ConnectorSchemaId:
+      format: uuid
+      type: string
+    WikiPage:
+      properties:
+        created_at:
+          type: string
+        id:
+          type: string
+        markdown:
+          type: string
+        slug:
+          type: string
+        team_id:
+          type: string
+        title:
+          type: string
+        updated_at:
+          type: string
+        version:
+          format: int32
+          type: integer
+      required:
+      - id
+      - team_id
+      - slug
+      - title
+      - markdown
+      - created_at
+      - updated_at
+      - version
+      type: object
+    ConnectorId:
+      format: uuid
+      type: string
+    ReferenceIdDatabase:
+      properties:
+        id:
+          $ref: '#/components/schemas/ConnectorDatabaseId'
+      required:
+      - id
+      type: object
+    UpdateWikiPageRequest:
+      properties:
+        base_version:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        markdown:
+          type: string
+        title:
+          type:
+          - string
+          - 'null'
+      required:
+      - markdown
+      type: object
     ReferenceId:
       discriminator:
         propertyName: reference_type
@@ -256,99 +360,9 @@ components:
           required:
           - reference_type
           type: object
-    ConnectorSchemaId:
+    TeamId:
       format: uuid
       type: string
-    WikiConnectorReference:
-      properties:
-        is_deleted:
-          type: boolean
-        name:
-          type: string
-        path:
-          items:
-            type: string
-          type: array
-        reference_id:
-          $ref: '#/components/schemas/ReferenceId'
-      required:
-      - reference_id
-      - name
-      - is_deleted
-      - path
-      type: object
-    WikiPage:
-      properties:
-        created_at:
-          type: string
-        id:
-          type: string
-        markdown:
-          type: string
-        slug:
-          type: string
-        team_id:
-          type: string
-        title:
-          type: string
-        updated_at:
-          type: string
-        version:
-          format: int32
-          type: integer
-      required:
-      - id
-      - team_id
-      - slug
-      - title
-      - markdown
-      - created_at
-      - updated_at
-      - version
-      type: object
-    ConnectorId:
-      format: uuid
-      type: string
-    ReferenceIdTable:
-      properties:
-        id:
-          $ref: '#/components/schemas/ConnectorTableId'
-      required:
-      - id
-      type: object
-    ConnectorColumnId:
-      format: uuid
-      type: string
-    UpdateWikiPageRequest:
-      properties:
-        base_version:
-          format: int32
-          type:
-          - integer
-          - 'null'
-        markdown:
-          type: string
-        title:
-          type:
-          - string
-          - 'null'
-      required:
-      - markdown
-      type: object
-    ReferenceIdDatabase:
-      properties:
-        id:
-          $ref: '#/components/schemas/ConnectorDatabaseId'
-      required:
-      - id
-      type: object
-    ReferenceIdColumn:
-      properties:
-        id:
-          $ref: '#/components/schemas/ConnectorColumnId'
-      required:
-      - id
-      type: object
     ReferenceIdConnector:
       properties:
         id:
@@ -356,17 +370,13 @@ components:
       required:
       - id
       type: object
-    WikiPageWithReferences:
-      allOf:
-      - $ref: '#/components/schemas/WikiPage'
-      - properties:
-          references:
-            items:
-              $ref: '#/components/schemas/WikiConnectorReference'
-            type: array
-        required:
-        - references
-        type: object
+    ReferenceIdTable:
+      properties:
+        id:
+          $ref: '#/components/schemas/ConnectorTableId'
+      required:
+      - id
+      type: object
     CreateWikiPageRequest:
       properties:
         markdown:
@@ -379,16 +389,6 @@ components:
       - title
       - slug
       - markdown
-      type: object
-    TeamId:
-      format: uuid
-      type: string
-    ReferenceIdSchema:
-      properties:
-        id:
-          $ref: '#/components/schemas/ConnectorSchemaId'
-      required:
-      - id
       type: object
   securitySchemes:
     api_key:

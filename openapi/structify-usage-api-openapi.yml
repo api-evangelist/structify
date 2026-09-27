@@ -62,6 +62,15 @@ paths:
       - Usage
 components:
   schemas:
+    TransactionId:
+      format: uuid
+      type: string
+    MembershipId:
+      format: uuid
+      type: string
+    CreditGrantId:
+      format: uuid
+      type: string
     Transaction:
       description: Represents a transaction in our database.
       properties:
@@ -90,9 +99,6 @@ components:
     JobId:
       format: uuid
       type: string
-    CreditGrantId:
-      format: uuid
-      type: string
     UsageStatistics:
       properties:
         credits_used:
@@ -109,12 +115,6 @@ components:
       - num_relationships
       - credits_used
       type: object
-    TransactionId:
-      format: uuid
-      type: string
-    MembershipId:
-      format: uuid
-      type: string
   securitySchemes:
     api_key:
       in: header

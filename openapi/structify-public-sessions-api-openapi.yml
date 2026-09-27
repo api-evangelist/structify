@@ -69,43 +69,98 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    VizQuery:
-      additionalProperties: false
-      properties:
-        id:
-          type: string
-        sql:
-          type: string
-      required:
-      - id
-      - sql
-      type: object
     VizNumberControlType:
       enum:
       - range
       type: string
-    Dashboard:
-      description: 'A page is the top-level container with title/description
-
-        Can contain multiple dashboards with different datasets'
+    VizStringControl:
+      additionalProperties: false
       properties:
-        dashboards:
-          description: One or more dashboards on this page
-          items:
-            $ref: '#/components/schemas/DashboardPage'
-          type: array
-        description:
-          description: Optional page description
-          type:
-          - string
-          - 'null'
-        title:
-          description: Page title
+        label:
           type: string
+        options:
+          items:
+            $ref: '#/components/schemas/VizControlOption'
+          type: array
+        type:
+          $ref: '#/components/schemas/VizStringControlType'
       required:
-      - title
-      - dashboards
+      - type
+      - label
+      - options
       type: object
+    VizBooleanControlType:
+      enum:
+      - checkbox
+      type: string
+    DashboardItem:
+      properties:
+        file_name:
+          description: File path relative to repository root.
+          type: string
+        spec:
+          $ref: '#/components/schemas/DashboardSpec'
+      required:
+      - file_name
+      - spec
+      type: object
+    VizParam:
+      discriminator:
+        propertyName: type
+      oneOf:
+      - properties:
+          control:
+            $ref: '#/components/schemas/VizStringControl'
+          type:
+            enum:
+            - string
+            type: string
+          value:
+            type: string
+        required:
+        - value
+        - type
+        type: object
+      - properties:
+          control:
+            $ref: '#/components/schemas/VizNumberControl'
+          type:
+            enum:
+            - number
+            type: string
+          value:
+            format: double
+            type: number
+        required:
+        - value
+        - type
+        type: object
+      - properties:
+          control:
+            $ref: '#/components/schemas/VizBooleanControl'
+          type:
+            enum:
+            - boolean
+            type: string
+          value:
+            type: boolean
+        required:
+        - value
+        - type
+        type: object
+      - properties:
+          control:
+            $ref: '#/components/schemas/VizDateControl'
+          type:
+            enum:
+            - date
+            type: string
+          value:
+            type: string
+        required:
+        - value
+        - type
+        type: object
     VizBooleanControl:
       additionalProperties: false
       properties:
@@ -117,6 +172,57 @@ components:
       - type
       - label
       type: object
+    ControlOption:
+      properties:
+        label:
+          type: string
+        value:
+          type: string
+      required:
+      - value
+      - label
+      type: object
+    DashboardSpec:
+      additionalProperties: false
+      properties:
+        dataset:
+          type: string
+        description:
+          type: string
+        figures:
+          items:
+            $ref: '#/components/schemas/VizFigure'
+          type: array
+        params:
+          additionalProperties:
+            $ref: '#/components/schemas/VizParam'
+          type: object
+        queries:
+          items:
+            $ref: '#/components/schemas/VizQuery'
+          type: array
+        title:
+          type: string
+        version:
+          type: string
+      required:
+      - version
+      - title
+      - description
+      - dataset
+      - params
+      - queries
+      - figures
+      type: object
+    WorkflowNodeExecutionStatus:
+      enum:
+      - Unexecuted
+      - Success
+      - Failure
+      - Running
+      - Aborted
+      - PendingConfirmation
+      type: string
     DashboardComponent:
       description: A component references a viz node and optional display metadata.
       properties:
@@ -141,12 +247,11 @@ components:
       - node_name
       - title
       type: object
-    ChatSessionId:
+    ConnectorId:
       format: uuid
       type: string
-    VizDateControlType:
-      enum:
-      - date
+    ChatSessionId:
+      format: uuid
       type: string
     WorkflowSessionNode:
       properties:
@@ -262,90 +367,17 @@ components:
       - code_md5_hash
       - reviewed
       type: object
-    VizFigure:
+    VizQuery:
       additionalProperties: false
       properties:
-        description:
-          type: string
-        figure:
-          $ref: '#/components/schemas/VizFigureDefinition'
         id:
           type: string
-        span:
-          format: int32
-          type: integer
-        title:
+        sql:
           type: string
       required:
       - id
-      - figure
+      - sql
       type: object
-    WorkflowSessionId:
-      format: uuid
-      type: string
-    VizStringControl:
-      additionalProperties: false
-      properties:
-        label:
-          type: string
-        options:
-          items:
-            $ref: '#/components/schemas/VizControlOption'
-          type: array
-        type:
-          $ref: '#/components/schemas/VizStringControlType'
-      required:
-      - type
-      - label
-      - options
-      type: object
-    WorkflowDAG:
-      properties:
-        aborted:
-          type: boolean
-        dag_ready_at:
-          format: date-time
-          type:
-          - string
-          - 'null'
-        dashboard_layout:
-          allOf:
-          - $ref: '#/components/schemas/Dashboard'
-        dashboard_specs:
-          items:
-            $ref: '#/components/schemas/DashboardItem'
-          type: array
-        edges:
-          items:
-            $ref: '#/components/schemas/WorkflowSessionEdge'
-          type: array
-        error:
-          type:
-          - string
-          - 'null'
-        error_traceback:
-          type:
-          - string
-          - 'null'
-        is_ready:
-          type: boolean
-        nodes:
-          items:
-            $ref: '#/components/schemas/WorkflowSessionNode'
-          type: array
-        session_id:
-          $ref: '#/components/schemas/WorkflowSessionId'
-      required:
-      - session_id
-      - aborted
-      - nodes
-      - edges
-      - is_ready
-      - dashboard_specs
-      type: object
-    WorkflowSessionNodeId:
-      format: uuid
-      type: string
     VizDateControl:
       additionalProperties: false
       properties:
@@ -357,23 +389,51 @@ components:
       - type
       - label
       type: object
-    DashboardItem:
-      properties:
-        file_name:
-          description: File path relative to repository root.
-          type: string
-        spec:
-          $ref: '#/components/schemas/DashboardSpec'
-      required:
-      - file_name
-      - spec
-      type: object
-    VizFigureKind:
-      enum:
-      - js
-      - vega-lite
-      - data-table
+    WorkflowSessionId:
+      format: uuid
       type: string
+    Dashboard:
+      description: 'A page is the top-level container with title/description
+
+        Can contain multiple dashboards with different datasets'
+      properties:
+        dashboards:
+          description: One or more dashboards on this page
+          items:
+            $ref: '#/components/schemas/DashboardPage'
+          type: array
+        description:
+          description: Optional page description
+          type:
+          - string
+          - 'null'
+        title:
+          description: Page title
+          type: string
+      required:
+      - title
+      - dashboards
+      type: object
+    WorkflowSessionEdge:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        id:
+          $ref: '#/components/schemas/WorkflowSessionEdgeId'
+        session_id:
+          $ref: '#/components/schemas/WorkflowSessionId'
+        source_node_id:
+          $ref: '#/components/schemas/WorkflowSessionNodeId'
+        target_node_id:
+          $ref: '#/components/schemas/WorkflowSessionNodeId'
+      required:
+      - id
+      - session_id
+      - source_node_id
+      - target_node_id
+      - created_at
+      type: object
     DashboardControl:
       discriminator:
         propertyName: type
@@ -472,74 +532,39 @@ components:
         - options
         - type
         type: object
-    DashboardSpec:
+    VizFigure:
       additionalProperties: false
       properties:
-        dataset:
-          type: string
         description:
           type: string
-        figures:
-          items:
-            $ref: '#/components/schemas/VizFigure'
-          type: array
-        params:
-          additionalProperties:
-            $ref: '#/components/schemas/VizParam'
-          type: object
-        queries:
-          items:
-            $ref: '#/components/schemas/VizQuery'
-          type: array
+        figure:
+          $ref: '#/components/schemas/VizFigureDefinition'
+        id:
+          type: string
+        span:
+          format: int32
+          type: integer
         title:
           type: string
-        version:
-          type: string
       required:
-      - version
-      - title
-      - description
-      - dataset
-      - params
-      - queries
-      - figures
+      - id
+      - figure
       type: object
-    ControlOption:
-      properties:
-        label:
-          type: string
-        value:
-          type: string
-      required:
-      - value
-      - label
-      type: object
-    VizControlOption:
-      additionalProperties: false
-      properties:
-        label:
-          type: string
-        value:
-          type: string
-      required:
-      - label
-      - value
-      type: object
-    WorkflowNodeExecutionStatus:
+    VizFigureKind:
       enum:
-      - Unexecuted
-      - Success
-      - Failure
-      - Running
-      - Aborted
-      - PendingConfirmation
+      - js
+      - vega-lite
+      - data-table
       type: string
     WorkflowSessionEdgeId:
       format: uuid
       type: string
-    VizBooleanControlType:
+    VizStringControlType:
       enum:
-      - checkbox
+      - dropdown
+      type: string
+    WorkflowSessionNodeId:
+      format: uuid
       type: string
     VizNumberControl:
       additionalProperties: false
@@ -563,63 +588,21 @@ components:
       - min
       - max
       type: object
-    VizParam:
-      discriminator:
-        propertyName: type
-      oneOf:
-      - properties:
-          control:
-            $ref: '#/components/schemas/VizStringControl'
-          type:
-            enum:
-            - string
-            type: string
-          value:
-            type: string
-        required:
-        - value
-        - type
-        type: object
-      - properties:
-          control:
-            $ref: '#/components/schemas/VizNumberControl'
-          type:
-            enum:
-            - number
-            type: string
-          value:
-            format: double
-            type: number
-        required:
-        - value
-        - type
-        type: object
-      - properties:
-          control:
-            $ref: '#/components/schemas/VizBooleanControl'
-          type:
-            enum:
-            - boolean
-            type: string
-          value:
-            type: boolean
-        required:
-        - value
-        - type
-        type: object
-      - properties:
-          control:
-            $ref: '#/components/schemas/VizDateControl'
-          type:
-            enum:
-            - date
-            type: string
-          value:
-            type: string
-        required:
-        - value
-        - type
-        type: object
+    VizDateControlType:
+      enum:
+      - date
+      type: string
+    VizControlOption:
+      additionalProperties: false
+      properties:
+        label:
+          type: string
+        value:
+          type: string
+      required:
+      - label
+      - value
+      type: object
     VizFigureDefinition:
       additionalProperties: false
       properties:
@@ -630,6 +613,50 @@ components:
       required:
       - kind
       - expression
+      type: object
+    WorkflowDAG:
+      properties:
+        aborted:
+          type: boolean
+        dag_ready_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        dashboard_layout:
+          allOf:
+          - $ref: '#/components/schemas/Dashboard'
+        dashboard_specs:
+          items:
+            $ref: '#/components/schemas/DashboardItem'
+          type: array
+        edges:
+          items:
+            $ref: '#/components/schemas/WorkflowSessionEdge'
+          type: array
+        error:
+          type:
+          - string
+          - 'null'
+        error_traceback:
+          type:
+          - string
+          - 'null'
+        is_ready:
+          type: boolean
+        nodes:
+          items:
+            $ref: '#/components/schemas/WorkflowSessionNode'
+          type: array
+        session_id:
+          $ref: '#/components/schemas/WorkflowSessionId'
+      required:
+      - session_id
+      - aborted
+      - nodes
+      - edges
+      - is_ready
+      - dashboard_specs
       type: object
     DashboardPage:
       description: 'A dashboard groups components that share a common dataset.
@@ -667,33 +694,6 @@ components:
           - 'null'
       required:
       - components
-      type: object
-    VizStringControlType:
-      enum:
-      - dropdown
-      type: string
-    ConnectorId:
-      format: uuid
-      type: string
-    WorkflowSessionEdge:
-      properties:
-        created_at:
-          format: date-time
-          type: string
-        id:
-          $ref: '#/components/schemas/WorkflowSessionEdgeId'
-        session_id:
-          $ref: '#/components/schemas/WorkflowSessionId'
-        source_node_id:
-          $ref: '#/components/schemas/WorkflowSessionNodeId'
-        target_node_id:
-          $ref: '#/components/schemas/WorkflowSessionNodeId'
-      required:
-      - id
-      - session_id
-      - source_node_id
-      - target_node_id
-      - created_at
       type: object
   securitySchemes:
     api_key:

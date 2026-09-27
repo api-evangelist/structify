@@ -216,23 +216,76 @@ paths:
       - Structure
 components:
   schemas:
-    JobId:
-      format: uuid
-      type: string
-    EnhanceRelationshipArgs:
+    FindRelationshipArgs:
       allOf:
       - $ref: '#/components/schemas/WebSearch'
       - properties:
           allow_extra_entities:
             type: boolean
-          entity_id:
+          from_id:
             $ref: '#/components/schemas/EntityId'
           relationship_name:
             type: string
+          to_id:
+            $ref: '#/components/schemas/EntityId'
         required:
-        - entity_id
+        - from_id
+        - to_id
         - relationship_name
         type: object
+    RequiredProperty:
+      additionalProperties: false
+      properties:
+        property_names:
+          description: If there are multiple properties, it can match just one of them
+          items:
+            type: string
+          type: array
+        table_name:
+          description: The table name of the entity to update
+          type: string
+      required:
+      - table_name
+      - property_names
+      type: object
+    JobNotification:
+      properties:
+        dataset_name:
+          type: string
+        job_id:
+          $ref: '#/components/schemas/JobId'
+        status:
+          allOf:
+          - $ref: '#/components/schemas/JobStatus'
+        target:
+          allOf:
+          - $ref: '#/components/schemas/JobTarget'
+      required:
+      - dataset_name
+      - job_id
+      type: object
+    JobStatus:
+      enum:
+      - Queued
+      - Running
+      - Completed
+      - Failed
+      type: string
+    WebSearch:
+      properties:
+        banned_domains:
+          items:
+            type: string
+          type: array
+        starting_searches:
+          items:
+            type: string
+          type: array
+        starting_urls:
+          items:
+            type: string
+          type: array
+      type: object
     PDFIngestor:
       additionalProperties: false
       description: Ingest all pages of a PDF and process them independently.
@@ -248,29 +301,27 @@ components:
       required:
       - path
       type: object
-    JobCount:
+    BasicPropValue:
+      oneOf:
+      - type: string
+      - format: int64
+        type: integer
+      - type: boolean
+      - format: double
+        type: number
+    SaveRequirement:
+      description: It's an OR statement across these.
+      oneOf:
+      - $ref: '#/components/schemas/RequiredRelationship'
+      - $ref: '#/components/schemas/RequiredEntity'
+      - $ref: '#/components/schemas/RequiredProperty'
+    RequiredRelationship:
+      additionalProperties: false
       properties:
-        completed:
-          format: int64
-          type: integer
-        failed:
-          format: int64
-          type: integer
-        queued:
-          format: int64
-          type: integer
-        running:
-          format: int64
-          type: integer
-        total:
-          format: int64
-          type: integer
+        relationship_name:
+          type: string
       required:
-      - total
-      - completed
-      - failed
-      - running
-      - queued
+      - relationship_name
       type: object
     StructurePdfRequest:
       additionalProperties: false
@@ -302,237 +353,6 @@ components:
       - path
       - dataset
       type: object
-    JobTarget:
-      properties:
-        entity_id:
-          $ref: '#/components/schemas/EntityId'
-        property_names:
-          items:
-            type: string
-          type:
-          - array
-          - 'null'
-        relationship_name:
-          type:
-          - string
-          - 'null'
-      required:
-      - entity_id
-      type: object
-    WebSearch:
-      properties:
-        banned_domains:
-          items:
-            type: string
-          type: array
-        starting_searches:
-          items:
-            type: string
-          type: array
-        starting_urls:
-          items:
-            type: string
-          type: array
-      type: object
-    RequiredRelationship:
-      additionalProperties: false
-      properties:
-        relationship_name:
-          type: string
-      required:
-      - relationship_name
-      type: object
-    WorkflowSessionNodeId:
-      format: uuid
-      type: string
-    LLMRelationship:
-      additionalProperties: false
-      properties:
-        properties:
-          additionalProperties:
-            $ref: '#/components/schemas/BasicPropValue'
-          type: object
-        source:
-          minimum: 0
-          type: integer
-        target:
-          minimum: 0
-          type: integer
-        type:
-          type: string
-      required:
-      - type
-      - source
-      - target
-      type: object
-    EnhancePropertyArgs:
-      allOf:
-      - $ref: '#/components/schemas/WebSearch'
-      - properties:
-          allow_extra_entities:
-            type: boolean
-          entity_id:
-            $ref: '#/components/schemas/EntityId'
-          property_name:
-            type: string
-        required:
-        - entity_id
-        - property_name
-        type: object
-    EnhancePropertyParams:
-      allOf:
-      - $ref: '#/components/schemas/EnhancePropertyArgs'
-      - properties:
-          node_id:
-            allOf:
-            - $ref: '#/components/schemas/WorkflowSessionNodeId'
-        type: object
-    BasicPropValue:
-      oneOf:
-      - type: string
-      - format: int64
-        type: integer
-      - type: boolean
-      - format: double
-        type: number
-    JobNotification:
-      properties:
-        dataset_name:
-          type: string
-        job_id:
-          $ref: '#/components/schemas/JobId'
-        status:
-          allOf:
-          - $ref: '#/components/schemas/JobStatus'
-        target:
-          allOf:
-          - $ref: '#/components/schemas/JobTarget'
-      required:
-      - dataset_name
-      - job_id
-      type: object
-    EnhanceRelationshipParams:
-      allOf:
-      - $ref: '#/components/schemas/EnhanceRelationshipArgs'
-      - properties:
-          node_id:
-            allOf:
-            - $ref: '#/components/schemas/WorkflowSessionNodeId'
-        type: object
-    FindRelationshipParams:
-      allOf:
-      - $ref: '#/components/schemas/FindRelationshipArgs'
-      - type: object
-    SaveRequirement:
-      description: It's an OR statement across these.
-      oneOf:
-      - $ref: '#/components/schemas/RequiredRelationship'
-      - $ref: '#/components/schemas/RequiredEntity'
-      - $ref: '#/components/schemas/RequiredProperty'
-    Input:
-      oneOf:
-      - properties:
-          PDF:
-            $ref: '#/components/schemas/PDFIngestor'
-        required:
-        - PDF
-        type: object
-      - properties:
-          Web:
-            $ref: '#/components/schemas/WebSearch'
-        required:
-        - Web
-        type: object
-    JobRequest:
-      properties:
-        dataset_name:
-          type:
-          - string
-          - 'null'
-        job_ids:
-          items:
-            $ref: '#/components/schemas/JobId'
-          type:
-          - array
-          - 'null'
-      type: object
-    LLMEntity:
-      additionalProperties: false
-      properties:
-        id:
-          minimum: 0
-          type: integer
-        properties:
-          additionalProperties:
-            $ref: '#/components/schemas/BasicPropValue'
-          type: object
-        type:
-          type: string
-      required:
-      - id
-      - type
-      - properties
-      type: object
-    RequiredEntity:
-      additionalProperties: false
-      properties:
-        entity_id:
-          allOf:
-          - $ref: '#/components/schemas/EntityId'
-        seeded_entity_id:
-          description: The integer id corresponding to an entity in the seeded entity graph (different from the global dataset entity id)
-          minimum: 0
-          type: integer
-      required:
-      - seeded_entity_id
-      type: object
-    RequiredProperty:
-      additionalProperties: false
-      properties:
-        property_names:
-          description: If there are multiple properties, it can match just one of them
-          items:
-            type: string
-          type: array
-        table_name:
-          description: The table name of the entity to update
-          type: string
-      required:
-      - table_name
-      - property_names
-      type: object
-    StructurePdfResponse:
-      properties:
-        job_ids:
-          items:
-            $ref: '#/components/schemas/JobId'
-          type: array
-      required:
-      - job_ids
-      type: object
-    JobStatus:
-      enum:
-      - Queued
-      - Running
-      - Completed
-      - Failed
-      type: string
-    AggregatedJobRequest:
-      properties:
-        dataset_name:
-          type:
-          - string
-          - 'null'
-        job_ids:
-          items:
-            $ref: '#/components/schemas/JobId'
-          type:
-          - array
-          - 'null'
-        node_id:
-          allOf:
-          - $ref: '#/components/schemas/WorkflowSessionNodeId'
-      type: object
     LLMKnowledgeGraph:
       additionalProperties: false
       description: 'Knowledge graph info structured to deserialize and display
@@ -552,26 +372,99 @@ components:
       required:
       - entities
       type: object
-    FindRelationshipArgs:
+    LLMEntity:
+      additionalProperties: false
+      properties:
+        id:
+          minimum: 0
+          type: integer
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/BasicPropValue'
+          type: object
+        type:
+          type: string
+      required:
+      - id
+      - type
+      - properties
+      type: object
+    JobRequest:
+      properties:
+        dataset_name:
+          type:
+          - string
+          - 'null'
+        job_ids:
+          items:
+            $ref: '#/components/schemas/JobId'
+          type:
+          - array
+          - 'null'
+      type: object
+    EntityId:
+      format: uuid
+      type: string
+    EnhancePropertyArgs:
       allOf:
       - $ref: '#/components/schemas/WebSearch'
       - properties:
           allow_extra_entities:
             type: boolean
-          from_id:
+          entity_id:
+            $ref: '#/components/schemas/EntityId'
+          property_name:
+            type: string
+        required:
+        - entity_id
+        - property_name
+        type: object
+    JobId:
+      format: uuid
+      type: string
+    FindRelationshipParams:
+      allOf:
+      - $ref: '#/components/schemas/FindRelationshipArgs'
+      - type: object
+    EnhanceRelationshipArgs:
+      allOf:
+      - $ref: '#/components/schemas/WebSearch'
+      - properties:
+          allow_extra_entities:
+            type: boolean
+          entity_id:
             $ref: '#/components/schemas/EntityId'
           relationship_name:
             type: string
-          to_id:
-            $ref: '#/components/schemas/EntityId'
         required:
-        - from_id
-        - to_id
+        - entity_id
         - relationship_name
         type: object
-    EntityId:
-      format: uuid
-      type: string
+    JobTarget:
+      properties:
+        entity_id:
+          $ref: '#/components/schemas/EntityId'
+        property_names:
+          items:
+            type: string
+          type:
+          - array
+          - 'null'
+        relationship_name:
+          type:
+          - string
+          - 'null'
+      required:
+      - entity_id
+      type: object
+    EnhancePropertyParams:
+      allOf:
+      - $ref: '#/components/schemas/EnhancePropertyArgs'
+      - properties:
+          node_id:
+            allOf:
+            - $ref: '#/components/schemas/WorkflowSessionNodeId'
+        type: object
     RunRequestParams:
       additionalProperties: false
       properties:
@@ -599,6 +492,113 @@ components:
       required:
       - source
       - dataset
+      type: object
+    EnhanceRelationshipParams:
+      allOf:
+      - $ref: '#/components/schemas/EnhanceRelationshipArgs'
+      - properties:
+          node_id:
+            allOf:
+            - $ref: '#/components/schemas/WorkflowSessionNodeId'
+        type: object
+    Input:
+      oneOf:
+      - properties:
+          PDF:
+            $ref: '#/components/schemas/PDFIngestor'
+        required:
+        - PDF
+        type: object
+      - properties:
+          Web:
+            $ref: '#/components/schemas/WebSearch'
+        required:
+        - Web
+        type: object
+    RequiredEntity:
+      additionalProperties: false
+      properties:
+        entity_id:
+          allOf:
+          - $ref: '#/components/schemas/EntityId'
+        seeded_entity_id:
+          description: The integer id corresponding to an entity in the seeded entity graph (different from the global dataset entity id)
+          minimum: 0
+          type: integer
+      required:
+      - seeded_entity_id
+      type: object
+    WorkflowSessionNodeId:
+      format: uuid
+      type: string
+    LLMRelationship:
+      additionalProperties: false
+      properties:
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/BasicPropValue'
+          type: object
+        source:
+          minimum: 0
+          type: integer
+        target:
+          minimum: 0
+          type: integer
+        type:
+          type: string
+      required:
+      - type
+      - source
+      - target
+      type: object
+    JobCount:
+      properties:
+        completed:
+          format: int64
+          type: integer
+        failed:
+          format: int64
+          type: integer
+        queued:
+          format: int64
+          type: integer
+        running:
+          format: int64
+          type: integer
+        total:
+          format: int64
+          type: integer
+      required:
+      - total
+      - completed
+      - failed
+      - running
+      - queued
+      type: object
+    StructurePdfResponse:
+      properties:
+        job_ids:
+          items:
+            $ref: '#/components/schemas/JobId'
+          type: array
+      required:
+      - job_ids
+      type: object
+    AggregatedJobRequest:
+      properties:
+        dataset_name:
+          type:
+          - string
+          - 'null'
+        job_ids:
+          items:
+            $ref: '#/components/schemas/JobId'
+          type:
+          - array
+          - 'null'
+        node_id:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowSessionNodeId'
       type: object
   securitySchemes:
     api_key:

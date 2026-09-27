@@ -130,6 +130,79 @@ paths:
       - Code
 components:
   schemas:
+    ErrorResponse:
+      description: Standard error response
+      properties:
+        error:
+          type: string
+      required:
+      - error
+      type: object
+    InterruptGenerationRequest:
+      properties:
+        chatSessionId:
+          $ref: '#/components/schemas/ChatSessionId'
+      required:
+      - chatSessionId
+      type: object
+    LLMKey:
+      description: 'LLM model keys available in the system. Format: <provider>.<model-name>'
+      enum:
+      - vllm.gpt-5-mini-2025-08-07
+      - vllm.gpt-4.1-mini-2025-04-14
+      - vllm.gpt-5-nano-2025-08-07
+      - vllm.gpt-5-2025-08-07
+      - vllm.ft:gpt-4o-2024-08-06:structify::ADrF00Gq
+      - vllm.ft:gpt-4o-mini-2024-07-18:structify::ABCLHTsN
+      - vllm.action
+      - vllm.dora
+      - vllm.boring_dora
+      - vllm.claude-3-7-sonnet-20250219
+      - vllm.claude-sonnet-4-20250514
+      - vllm.qwen-3-coder-480b
+      - test_llm.test
+      - bedrock.claude-sonnet-4-bedrock
+      - bedrock.claude-sonnet-4-5-bedrock
+      - bedrock.claude-opus-4-5-bedrock
+      - bedrock.claude-opus-4-6-bedrock
+      - bedrock.claude-haiku-4-5-bedrock
+      - gemini.gemini-2.5-pro
+      - gemini.gemini-2.5-flash
+      - gemini.gemini-3-flash-preview
+      - gemini.gemini-3.1-flash-lite-preview
+      - vertex_anthropic.claude-sonnet-4-5-vertex
+      - vertex_anthropic.claude-opus-4-5-vertex
+      type: string
+    ConnectorId:
+      format: uuid
+      type: string
+    ChatSessionId:
+      format: uuid
+      type: string
+    ChatMessageId:
+      format: uuid
+      type: string
+    ChatSessionConfig:
+      description: Configuration for chat session with system prompt and LLM key
+      properties:
+        llm_key:
+          allOf:
+          - $ref: '#/components/schemas/LLMKey'
+        max_steps:
+          format: int32
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        reminder_message:
+          type:
+          - string
+          - 'null'
+        system_prompt:
+          type:
+          - string
+          - 'null'
+      type: object
     GenerateCodeRequest:
       properties:
         assistantMessageId:
@@ -166,58 +239,6 @@ components:
       - prompt
       - chatSessionId
       type: object
-    ChatSessionId:
-      format: uuid
-      type: string
-    ConnectorId:
-      format: uuid
-      type: string
-    InterruptGenerationRequest:
-      properties:
-        chatSessionId:
-          $ref: '#/components/schemas/ChatSessionId'
-      required:
-      - chatSessionId
-      type: object
-    ErrorResponse:
-      description: Standard error response
-      properties:
-        error:
-          type: string
-      required:
-      - error
-      type: object
-    ChatMessageId:
-      format: uuid
-      type: string
-    LLMKey:
-      description: 'LLM model keys available in the system. Format: <provider>.<model-name>'
-      enum:
-      - vllm.gpt-5-mini-2025-08-07
-      - vllm.gpt-4.1-mini-2025-04-14
-      - vllm.gpt-5-nano-2025-08-07
-      - vllm.gpt-5-2025-08-07
-      - vllm.ft:gpt-4o-2024-08-06:structify::ADrF00Gq
-      - vllm.ft:gpt-4o-mini-2024-07-18:structify::ABCLHTsN
-      - vllm.action
-      - vllm.dora
-      - vllm.boring_dora
-      - vllm.claude-3-7-sonnet-20250219
-      - vllm.claude-sonnet-4-20250514
-      - vllm.qwen-3-coder-480b
-      - test_llm.test
-      - bedrock.claude-sonnet-4-bedrock
-      - bedrock.claude-sonnet-4-5-bedrock
-      - bedrock.claude-opus-4-5-bedrock
-      - bedrock.claude-opus-4-6-bedrock
-      - bedrock.claude-haiku-4-5-bedrock
-      - gemini.gemini-2.5-pro
-      - gemini.gemini-2.5-flash
-      - gemini.gemini-3-flash-preview
-      - gemini.gemini-3.1-flash-lite-preview
-      - vertex_anthropic.claude-sonnet-4-5-vertex
-      - vertex_anthropic.claude-opus-4-5-vertex
-      type: string
     ApplyManualEditRequest:
       properties:
         code:
@@ -227,27 +248,6 @@ components:
       required:
       - filename
       - code
-      type: object
-    ChatSessionConfig:
-      description: Configuration for chat session with system prompt and LLM key
-      properties:
-        llm_key:
-          allOf:
-          - $ref: '#/components/schemas/LLMKey'
-        max_steps:
-          format: int32
-          minimum: 0
-          type:
-          - integer
-          - 'null'
-        reminder_message:
-          type:
-          - string
-          - 'null'
-        system_prompt:
-          type:
-          - string
-          - 'null'
       type: object
   securitySchemes:
     api_key:

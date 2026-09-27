@@ -100,10 +100,15 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ScraperId:
-      format: uuid
-      type: string
-    DeleteSourceEntityResponse:
+    DeleteSourceEntityParams:
+      additionalProperties: false
+      properties:
+        source_entity_id:
+          $ref: '#/components/schemas/SourceEntityId'
+      required:
+      - source_entity_id
+      type: object
+    DeleteSourceRelationshipResponse:
       properties:
         message:
           description: Optional message about the deletion
@@ -115,6 +120,9 @@ components:
       - success
       - message
       type: object
+    SourceEntityId:
+      format: uuid
+      type: string
     Source:
       properties:
         created_at:
@@ -141,17 +149,6 @@ components:
       - is_summary
       - created_at
       type: object
-    DeleteSourceEntityParams:
-      additionalProperties: false
-      properties:
-        source_entity_id:
-          $ref: '#/components/schemas/SourceEntityId'
-      required:
-      - source_entity_id
-      type: object
-    SourceRelationshipId:
-      format: uuid
-      type: string
     SourceLocation:
       oneOf:
       - properties:
@@ -195,6 +192,17 @@ components:
         required:
         - Page
         type: object
+    DeleteSourceRelationshipParams:
+      additionalProperties: false
+      properties:
+        source_relationship_id:
+          $ref: '#/components/schemas/SourceRelationshipId'
+      required:
+      - source_relationship_id
+      type: object
+    ScraperId:
+      format: uuid
+      type: string
     SourceLink:
       oneOf:
       - properties:
@@ -233,18 +241,7 @@ components:
         required:
         - SecFiling
         type: object
-    DeleteSourceRelationshipParams:
-      additionalProperties: false
-      properties:
-        source_relationship_id:
-          $ref: '#/components/schemas/SourceRelationshipId'
-      required:
-      - source_relationship_id
-      type: object
-    SourceEntityId:
-      format: uuid
-      type: string
-    DeleteSourceRelationshipResponse:
+    DeleteSourceEntityResponse:
       properties:
         message:
           description: Optional message about the deletion
@@ -257,6 +254,9 @@ components:
       - message
       type: object
     EntityId:
+      format: uuid
+      type: string
+    SourceRelationshipId:
       format: uuid
       type: string
     SourceId:
