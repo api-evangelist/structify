@@ -120,30 +120,17 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ConnectorAuthMethodWithFields:
-      allOf:
-      - $ref: '#/components/schemas/ConnectorAuthMethod'
-      - properties:
-          credential_fields:
-            items:
-              $ref: '#/components/schemas/ConnectorCredentialField'
-            type: array
-          scopes:
-            items:
-              $ref: '#/components/schemas/ConnectorAuthMethodScope'
-            type: array
-        required:
-        - credential_fields
-        - scopes
-        type: object
-    ConnectorAuthMethodScopeId:
-      format: uuid
-      type: string
-    ConnectorAuthType:
-      enum:
-      - credentials
-      - oauth_nango
-      type: string
+    ConnectorCatalogCategoryCount:
+      properties:
+        category:
+          type: string
+        count:
+          format: int64
+          type: integer
+      required:
+      - category
+      - count
+      type: object
     ConnectorCatalog:
       properties:
         categories:
@@ -189,52 +176,12 @@ components:
       - updated_at
       - enterprise_only
       type: object
-    ConnectorAuthMethodScope:
-      properties:
-        connector_auth_method_id:
-          $ref: '#/components/schemas/ConnectorAuthMethodId'
-        created_at:
-          format: date-time
-          type: string
-        id:
-          $ref: '#/components/schemas/ConnectorAuthMethodScopeId'
-        is_recommended:
-          type: boolean
-        is_required:
-          type: boolean
-        query_parameter:
-          type: string
-        scope_value:
-          type: string
-        updated_at:
-          format: date-time
-          type: string
-      required:
-      - id
-      - connector_auth_method_id
-      - scope_value
-      - query_parameter
-      - is_required
-      - is_recommended
-      - created_at
-      - updated_at
-      type: object
-    ConnectorCatalogWithMethods:
-      allOf:
-      - $ref: '#/components/schemas/ConnectorCatalog'
-      - properties:
-          auth_methods:
-            items:
-              $ref: '#/components/schemas/ConnectorAuthMethodWithFields'
-            type: array
-          logo_url:
-            description: Base64 data URI for the logo (e.g., "data:image/svg+xml;base64,...")
-            type:
-            - string
-            - 'null'
-        required:
-        - auth_methods
-        type: object
+    ConnectorAuthMethodScopeId:
+      format: uuid
+      type: string
+    ConnectorCredentialFieldId:
+      format: uuid
+      type: string
     ConnectorAuthMethod:
       properties:
         auth_type:
@@ -271,20 +218,57 @@ components:
       - created_at
       - updated_at
       type: object
-    ConnectorCredentialFieldId:
-      format: uuid
-      type: string
-    ConnectorCatalogCategoryCount:
+    ListConnectorCatalogResponse:
       properties:
-        category:
-          type: string
-        count:
+        category_counts:
+          items:
+            $ref: '#/components/schemas/ConnectorCatalogCategoryCount'
+          type: array
+        items:
+          items:
+            $ref: '#/components/schemas/ConnectorCatalogWithMethods'
+          type: array
+        total_count:
           format: int64
           type: integer
       required:
-      - category
-      - count
+      - items
+      - total_count
+      - category_counts
       type: object
+    ConnectorAuthMethodScope:
+      properties:
+        connector_auth_method_id:
+          $ref: '#/components/schemas/ConnectorAuthMethodId'
+        created_at:
+          format: date-time
+          type: string
+        id:
+          $ref: '#/components/schemas/ConnectorAuthMethodScopeId'
+        is_recommended:
+          type: boolean
+        is_required:
+          type: boolean
+        query_parameter:
+          type: string
+        scope_value:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - id
+      - connector_auth_method_id
+      - scope_value
+      - query_parameter
+      - is_required
+      - is_recommended
+      - created_at
+      - updated_at
+      type: object
+    ConnectorCatalogId:
+      format: uuid
+      type: string
     ConnectorCredentialField:
       properties:
         auth_method_id:
@@ -329,30 +313,46 @@ components:
       - created_at
       - updated_at
       type: object
-    ConnectorCatalogId:
-      format: uuid
-      type: string
-    ListConnectorCatalogResponse:
-      properties:
-        category_counts:
-          items:
-            $ref: '#/components/schemas/ConnectorCatalogCategoryCount'
-          type: array
-        items:
-          items:
-            $ref: '#/components/schemas/ConnectorCatalogWithMethods'
-          type: array
-        total_count:
-          format: int64
-          type: integer
-      required:
-      - items
-      - total_count
-      - category_counts
-      type: object
+    ConnectorAuthMethodWithFields:
+      allOf:
+      - $ref: '#/components/schemas/ConnectorAuthMethod'
+      - properties:
+          credential_fields:
+            items:
+              $ref: '#/components/schemas/ConnectorCredentialField'
+            type: array
+          scopes:
+            items:
+              $ref: '#/components/schemas/ConnectorAuthMethodScope'
+            type: array
+        required:
+        - credential_fields
+        - scopes
+        type: object
     ConnectorAuthMethodId:
       format: uuid
       type: string
+    ConnectorAuthType:
+      enum:
+      - credentials
+      - oauth_nango
+      type: string
+    ConnectorCatalogWithMethods:
+      allOf:
+      - $ref: '#/components/schemas/ConnectorCatalog'
+      - properties:
+          auth_methods:
+            items:
+              $ref: '#/components/schemas/ConnectorAuthMethodWithFields'
+            type: array
+          logo_url:
+            description: Base64 data URI for the logo (e.g., "data:image/svg+xml;base64,...")
+            type:
+            - string
+            - 'null'
+        required:
+        - auth_methods
+        type: object
   securitySchemes:
     api_key:
       in: header

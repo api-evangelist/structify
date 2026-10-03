@@ -205,38 +205,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ExplorationRunId:
-      format: uuid
-      type: string
-    ErrorResponse:
-      description: Standard error response
-      properties:
-        error:
-          type: string
-      required:
-      - error
-      type: object
-    SandboxMetricsProcess:
-      properties:
-        cpu_percent:
-          format: double
-          type: number
-        memory_mb:
-          format: double
-          type: number
-      required:
-      - memory_mb
-      - cpu_percent
-      type: object
-    UserSessionId:
-      format: uuid
-      type: string
-    WorkflowSessionNodeId:
-      format: uuid
-      type: string
-    ChatSessionId:
-      format: uuid
-      type: string
     SandboxMetricsSandbox:
       properties:
         remaining_seconds:
@@ -256,6 +224,29 @@ components:
       - uptime_seconds
       - remaining_seconds
       - total_timeout_seconds
+      type: object
+    ExplorationRunId:
+      format: uuid
+      type: string
+    GetSandboxRequest:
+      properties:
+        modal_control_service_url_override:
+          description: Override URL for the modal control service (for testing/development)
+          type:
+          - string
+          - 'null'
+      type: object
+    SandboxMetricsProcess:
+      properties:
+        cpu_percent:
+          format: double
+          type: number
+        memory_mb:
+          format: double
+          type: number
+      required:
+      - memory_mb
+      - cpu_percent
       type: object
     Sandbox:
       properties:
@@ -309,6 +300,41 @@ components:
       - updated_at
       - provider
       type: object
+    UserSessionId:
+      format: uuid
+      type: string
+    SandboxMetricsResponse:
+      properties:
+        cpu_percent:
+          format: double
+          type: number
+        memory:
+          $ref: '#/components/schemas/SandboxMetricsMemory'
+        process:
+          $ref: '#/components/schemas/SandboxMetricsProcess'
+        sandbox:
+          $ref: '#/components/schemas/SandboxMetricsSandbox'
+      required:
+      - cpu_percent
+      - memory
+      - process
+      - sandbox
+      type: object
+    UpdateSandboxStatusRequest:
+      properties:
+        status:
+          type: string
+      required:
+      - status
+      type: object
+    ErrorResponse:
+      description: Standard error response
+      properties:
+        error:
+          type: string
+      required:
+      - error
+      type: object
     SandboxMetricsMemory:
       properties:
         available_mb:
@@ -329,55 +355,29 @@ components:
       - percent
       - available_mb
       type: object
+    TeamId:
+      format: uuid
+      type: string
+    ChatSessionId:
+      format: uuid
+      type: string
+    SandboxProvider:
+      enum:
+      - modal
+      - daytona
+      type: string
+    WorkflowSessionNodeId:
+      format: uuid
+      type: string
     SandboxStatus:
       enum:
       - alive
       - paused
       - terminated
       type: string
-    TeamId:
-      format: uuid
-      type: string
     SandboxId:
       format: uuid
       type: string
-    UpdateSandboxStatusRequest:
-      properties:
-        status:
-          type: string
-      required:
-      - status
-      type: object
-    SandboxProvider:
-      enum:
-      - modal
-      - daytona
-      type: string
-    GetSandboxRequest:
-      properties:
-        modal_control_service_url_override:
-          description: Override URL for the modal control service (for testing/development)
-          type:
-          - string
-          - 'null'
-      type: object
-    SandboxMetricsResponse:
-      properties:
-        cpu_percent:
-          format: double
-          type: number
-        memory:
-          $ref: '#/components/schemas/SandboxMetricsMemory'
-        process:
-          $ref: '#/components/schemas/SandboxMetricsProcess'
-        sandbox:
-          $ref: '#/components/schemas/SandboxMetricsSandbox'
-      required:
-      - cpu_percent
-      - memory
-      - process
-      - sandbox
-      type: object
   securitySchemes:
     api_key:
       in: header

@@ -130,21 +130,6 @@ paths:
       - Code
 components:
   schemas:
-    ErrorResponse:
-      description: Standard error response
-      properties:
-        error:
-          type: string
-      required:
-      - error
-      type: object
-    InterruptGenerationRequest:
-      properties:
-        chatSessionId:
-          $ref: '#/components/schemas/ChatSessionId'
-      required:
-      - chatSessionId
-      type: object
     LLMKey:
       description: 'LLM model keys available in the system. Format: <provider>.<model-name>'
       enum:
@@ -173,36 +158,29 @@ components:
       - vertex_anthropic.claude-sonnet-4-5-vertex
       - vertex_anthropic.claude-opus-4-5-vertex
       type: string
+    ApplyManualEditRequest:
+      properties:
+        code:
+          type: string
+        filename:
+          type: string
+      required:
+      - filename
+      - code
+      type: object
     ConnectorId:
       format: uuid
       type: string
-    ChatSessionId:
-      format: uuid
-      type: string
+    InterruptGenerationRequest:
+      properties:
+        chatSessionId:
+          $ref: '#/components/schemas/ChatSessionId'
+      required:
+      - chatSessionId
+      type: object
     ChatMessageId:
       format: uuid
       type: string
-    ChatSessionConfig:
-      description: Configuration for chat session with system prompt and LLM key
-      properties:
-        llm_key:
-          allOf:
-          - $ref: '#/components/schemas/LLMKey'
-        max_steps:
-          format: int32
-          minimum: 0
-          type:
-          - integer
-          - 'null'
-        reminder_message:
-          type:
-          - string
-          - 'null'
-        system_prompt:
-          type:
-          - string
-          - 'null'
-      type: object
     GenerateCodeRequest:
       properties:
         assistantMessageId:
@@ -239,15 +217,37 @@ components:
       - prompt
       - chatSessionId
       type: object
-    ApplyManualEditRequest:
+    ErrorResponse:
+      description: Standard error response
       properties:
-        code:
-          type: string
-        filename:
+        error:
           type: string
       required:
-      - filename
-      - code
+      - error
+      type: object
+    ChatSessionId:
+      format: uuid
+      type: string
+    ChatSessionConfig:
+      description: Configuration for chat session with system prompt and LLM key
+      properties:
+        llm_key:
+          allOf:
+          - $ref: '#/components/schemas/LLMKey'
+        max_steps:
+          format: int32
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        reminder_message:
+          type:
+          - string
+          - 'null'
+        system_prompt:
+          type:
+          - string
+          - 'null'
       type: object
   securitySchemes:
     api_key:

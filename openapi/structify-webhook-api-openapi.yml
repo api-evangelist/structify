@@ -74,13 +74,21 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ErrorResponse:
-      description: Standard error response
+    WorkflowScheduleId:
+      format: uuid
+      type: string
+    WebhookTriggerRequest:
       properties:
-        error:
-          type: string
+        workflow_parameters:
+          additionalProperties:
+            additionalProperties: true
+            type: object
+            x-stainless-empty-object: true
+          type: object
+        workflow_schedule_id:
+          $ref: '#/components/schemas/WorkflowScheduleId'
       required:
-      - error
+      - workflow_schedule_id
       type: object
     WebhookTriggerResponse:
       properties:
@@ -100,21 +108,13 @@ components:
       - success
       - message
       type: object
-    WorkflowScheduleId:
-      format: uuid
-      type: string
-    WebhookTriggerRequest:
+    ErrorResponse:
+      description: Standard error response
       properties:
-        workflow_parameters:
-          additionalProperties:
-            additionalProperties: true
-            type: object
-            x-stainless-empty-object: true
-          type: object
-        workflow_schedule_id:
-          $ref: '#/components/schemas/WorkflowScheduleId'
+        error:
+          type: string
       required:
-      - workflow_schedule_id
+      - error
       type: object
   securitySchemes:
     api_key:

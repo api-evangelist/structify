@@ -177,724 +177,10 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    Money:
-      oneOf:
-      - description: 'Money string that includes currency and amount: $10k, £100.00, 1 million CAD, ¥1e8 etc.'
-        title: MoneyString
-        type: string
-      - properties:
-          amount:
-            type: number
-          currency_code:
-            enum:
-            - USD
-            - EUR
-            - GBP
-            - JPY
-            - CNY
-            - INR
-            - RUB
-            - CAD
-            - AUD
-            - CHF
-            - ILS
-            - NZD
-            - SGD
-            - HKD
-            - NOK
-            - SEK
-            - PLN
-            - TRY
-            - DKK
-            - MXN
-            - ZAR
-            - PHP
-            - VND
-            - THB
-            - BRL
-            - KRW
-            type: string
-          original_string:
-            type: string
-        required:
-        - currency_code
-        - amount
-        - original_string
-        title: MoneyObject
-        type: object
-      title: MoneyProperty
-    ScraperMeta:
+    SaveInput:
       properties:
-        html_content:
-          type: string
-        url:
-          type: string
-      required:
-      - html_content
-      - url
-      type: object
-    ListJobsResponse:
-      properties:
-        created_at:
-          format: date-time
-          type: string
-        dataset_id:
-          allOf:
-          - $ref: '#/components/schemas/DatasetId'
-        id:
-          $ref: '#/components/schemas/JobId'
-        job_type:
-          $ref: '#/components/schemas/JobType'
-        message:
-          type:
-          - string
-          - 'null'
-        parameters:
-          allOf:
-          - $ref: '#/components/schemas/JobInput'
-        reason:
-          type:
-          - string
-          - 'null'
-        run_started_time:
-          format: date-time
-          type:
-          - string
-          - 'null'
-        run_time_milliseconds:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        status:
-          $ref: '#/components/schemas/JobStatus'
-        user_id:
-          $ref: '#/components/schemas/UserId'
-      required:
-      - id
-      - status
-      - created_at
-      - job_type
-      - user_id
-      type: object
-    ScrapePageUrlInput:
-      properties:
-        batch_scrape:
-          type: boolean
-        url:
-          type: string
-        use_markdown:
-          type: boolean
-      required:
-      - url
-      - batch_scrape
-      - use_markdown
-      type: object
-    DatasetId:
-      format: uuid
-      type: string
-    ExitInput:
-      properties:
-        reason:
-          type: string
-      required:
-      - reason
-      type: object
-    NodeSummary:
-      properties:
-        data_preview:
-          type:
-          - string
-          - 'null'
-        image:
-          format: binary
-          type:
-          - string
-          - 'null'
-        in_dashboard:
-          type: boolean
-        name:
-          type: string
-      required:
-      - name
-      - in_dashboard
-      type: object
-    SaveRequirement:
-      description: It's an OR statement across these.
-      oneOf:
-      - $ref: '#/components/schemas/RequiredRelationship'
-      - $ref: '#/components/schemas/RequiredEntity'
-      - $ref: '#/components/schemas/RequiredProperty'
-    ReadNodeLogsInput:
-      properties:
-        log_type:
-          type:
-          - string
-          - 'null'
-        node_function_name:
-          type: string
-      required:
-      - node_function_name
-      type: object
-    SourceEntityId:
-      format: uuid
-      type: string
-    ApiExecuteInput:
-      properties:
-        code:
-          type: string
-      required:
-      - code
-      type: object
-    EntityId:
-      format: uuid
-      type: string
-    JobId:
-      format: uuid
-      type: string
-    IssueFoundInput:
-      properties:
-        admin_override:
-          type: boolean
-        description:
-          type: string
-        title:
-          type: string
-      required:
-      - title
-      - description
-      - admin_override
-      type: object
-    Flag:
-      properties:
-        ariaLabel:
-          type: string
-        height:
-          format: double
-          type: number
-        href:
-          type:
-          - string
-          - 'null'
-        isInteractive:
-          type:
-          - boolean
-          - 'null'
-        number:
-          description: The number by which the flag is referred in image, prompt, and tool calls.
-          minimum: 0
-          type:
-          - integer
-          - 'null'
-        text:
-          type: string
-        type:
-          type: string
-        width:
-          description: 'The serde default here is to give us backwards compatibility
-
-            it''s fine for these to be anything as long as the image isn''t
-
-            given since it won''t regenerate.'
-          format: double
-          type: number
-        x:
-          format: double
-          type: number
-        y:
-          format: double
-          type: number
-      required:
-      - x
-      - y
-      - type
-      - ariaLabel
-      type: object
-    PinPreviousToolInput:
-      properties:
-        path:
-          type: string
-      required:
-      - path
-      type: object
-    MessageContent:
-      oneOf:
-      - properties:
-          Text:
-            type: string
-        required:
-        - Text
-        type: object
-      - properties:
-          Image:
-            format: binary
-            type: string
-        required:
-        - Image
-        type: object
-    PartialDate:
-      oneOf:
-      - properties:
-          day:
-            type:
-            - integer
-            - 'null'
-          month:
-            type:
-            - integer
-            - 'null'
-          original_string:
-            type: string
-          year:
-            type: integer
-        required:
-        - year
-        - original_string
-        title: PartialDateObject
-        type: object
-      - description: 'Date string in formats: ''YYYY'', ''YYYY-MM'', ''YYYY-MM-DD'', ''DD-MM-YYYY'', ''MM-DD-YYYY'', ''Jan 3, 2023'', ''3 Jan 2023'', ''2023 Apr 3'', etc.'
-        title: PartialDateString
-        type: string
-      title: PartialDateProperty
-    DatasetDescriptor:
-      additionalProperties: false
-      description: 'A dataset is where you put multiple referential schemas.
-
-
-        A dataset is a complete namespace where all references between schemas
-
-        are held within the dataset.'
-      properties:
-        description:
-          type: string
-        llm_override_field:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-        relationships:
-          items:
-            $ref: '#/components/schemas/RelationshipDescriptor'
-          type: array
-        tables:
-          items:
-            $ref: '#/components/schemas/TableDescriptor'
-          type: array
-      required:
-      - name
-      - description
-      - tables
-      - relationships
-      type: object
-    SearchConnectorTypesInput:
-      properties:
-        query:
-          type:
-          - string
-          - 'null'
-      type: object
-    InfiniteScrollInput:
-      type: object
-    ChatEvent:
-      description: Events in a chat session timeline, including messages and unified tool calls/results
-      oneOf:
-      - properties:
-          TextMessage:
-            properties:
-              message:
-                type: string
-            required:
-            - message
-            type: object
-        required:
-        - TextMessage
-        type: object
-      - properties:
-          Thinking:
-            properties:
-              block_id:
-                format: int64
-                minimum: 0
-                type: integer
-              complete:
-                type: boolean
-              content:
-                type: string
-            required:
-            - content
-            - complete
-            - block_id
-            type: object
-        required:
-        - Thinking
-        type: object
-      - properties:
-          File:
-            description: 'The file event can''t be serialized to the database safely without the content.
-
-              When streaming, we start with the path only, then add the content as we go.'
-            properties:
-              block_id:
-                format: int64
-                minimum: 0
-                type: integer
-              complete:
-                type: boolean
-              content:
-                type:
-                - string
-                - 'null'
-              path:
-                type: string
-            required:
-            - path
-            - complete
-            - block_id
-            type: object
-        required:
-        - File
-        type: object
-      - properties:
-          Action:
-            properties:
-              actions:
-                items:
-                  $ref: '#/components/schemas/ActionDef'
-                type: array
-              block_id:
-                format: int64
-                minimum: 0
-                type: integer
-              complete:
-                type: boolean
-            required:
-            - actions
-            - complete
-            - block_id
-            type: object
-        required:
-        - Action
-        type: object
-      - properties:
-          Connector:
-            properties:
-              description:
-                type:
-                - string
-                - 'null'
-              env_vars:
-                items:
-                  type: string
-                type: array
-              name:
-                type: string
-            required:
-            - name
-            - env_vars
-            type: object
-        required:
-        - Connector
-        type: object
-      - properties:
-          ToolCall:
-            properties:
-              block_id:
-                format: int64
-                minimum: 0
-                type: integer
-              complete:
-                type: boolean
-              invocation:
-                $ref: '#/components/schemas/ToolInvocation'
-              tool_result:
-                $ref: '#/components/schemas/ToolResult'
-            required:
-            - invocation
-            - tool_result
-            - block_id
-            - complete
-            type: object
-        required:
-        - ToolCall
-        type: object
-      - properties:
-          Question:
-            properties:
-              block_id:
-                format: int64
-                minimum: 0
-                type: integer
-              complete:
-                type: boolean
-              content:
-                type: string
-              options:
-                items:
-                  type: string
-                type: array
-            required:
-            - content
-            - complete
-            - options
-            - block_id
-            type: object
-        required:
-        - Question
-        type: object
-      - properties:
-          InternalError:
-            properties:
-              error_kind:
-                $ref: '#/components/schemas/InternalErrorKind'
-              message:
-                type: string
-            required:
-            - message
-            type: object
-        required:
-        - InternalError
-        type: object
-      - properties:
-          ReviewRequest:
-            properties:
-              node_summaries:
-                items:
-                  $ref: '#/components/schemas/NodeSummary'
-                type: array
-            required:
-            - node_summaries
-            type: object
-        required:
-        - ReviewRequest
-        type: object
-      - properties:
-          AttachedFile:
-            properties:
-              image_bytes:
-                format: binary
-                type:
-                - string
-                - 'null'
-              path:
-                type: string
-            required:
-            - path
-            type: object
-        required:
-        - AttachedFile
-        type: object
-      - properties:
-          ConnectorRequest:
-            properties:
-              connector_id:
-                $ref: '#/components/schemas/ConnectorId'
-            required:
-            - connector_id
-            type: object
-        required:
-        - ConnectorRequest
-        type: object
-      - properties:
-          UserInterrupted:
-            type: object
-        required:
-        - UserInterrupted
-        type: object
-      - properties:
-          IssueFound:
-            properties:
-              admin_override:
-                type: boolean
-              description:
-                type: string
-              title:
-                type: string
-            required:
-            - title
-            - description
-            - admin_override
-            type: object
-        required:
-        - IssueFound
-        type: object
-    SourceLink:
-      oneOf:
-      - properties:
-          Web:
-            properties:
-              url:
-                type: string
-            required:
-            - url
-            type: object
-        required:
-        - Web
-        type: object
-      - properties:
-          Document:
-            properties:
-              name:
-                type: string
-            required:
-            - name
-            type: object
-        required:
-        - Document
-        type: object
-      - properties:
-          SecFiling:
-            properties:
-              accession_number:
-                type: string
-              cik_number:
-                type: string
-            required:
-            - accession_number
-            - cik_number
-            type: object
-        required:
-        - SecFiling
-        type: object
-    TextMeta:
-      properties:
-        text:
-          type: string
-      required:
-      - text
-      type: object
-    ScrapePageInput:
-      properties:
-        batch_scrape:
-          type: boolean
-        url_property_name:
-          type: string
-        use_markdown:
-          type: boolean
-      required:
-      - url_property_name
-      - batch_scrape
-      - use_markdown
-      type: object
-    ActionDef:
-      description: Action definition
-      properties:
-        description:
-          type: string
-        name:
-          type: string
-      required:
-      - name
-      - description
-      type: object
-    NavigateToIFrameInput:
-      properties:
-        index:
-          format: int32
-          minimum: 0
-          type: integer
-      required:
-      - index
-      type: object
-    ConnectorColumnResult:
-      properties:
-        name:
-          type: string
-        notes:
-          type:
-          - string
-          - 'null'
-        type:
-          type: string
-      required:
-      - name
-      - type
-      type: object
-    RequiredEntity:
-      additionalProperties: false
-      properties:
-        entity_id:
-          allOf:
-          - $ref: '#/components/schemas/EntityId'
-        seeded_entity_id:
-          description: The integer id corresponding to an entity in the seeded entity graph (different from the global dataset entity id)
-          minimum: 0
-          type: integer
-      required:
-      - seeded_entity_id
-      type: object
-    SpeakerTag:
-      enum:
-      - user
-      - system
-      - assistant
-      type: string
-    SearchConnectorTablesInput:
-      properties:
-        query:
-          type: string
-        wiki_tag:
-          type:
-          - string
-          - 'null'
-      required:
-      - query
-      type: object
-    CodeExecutionResult:
-      properties:
-        return_code:
-          format: int32
-          type: integer
-        stderr:
-          type: string
-        stdout:
-          type: string
-      required:
-      - stdout
-      - stderr
-      - return_code
-      type: object
-    ScraperId:
-      format: uuid
-      type: string
-    WebMeta:
-      properties:
-        flags:
-          items:
-            $ref: '#/components/schemas/Flag'
-          type: array
-        ocr_content:
-          type:
-          - string
-          - 'null'
-        screenshot:
-          format: binary
-          type:
-          - string
-          - 'null'
-        url:
-          type: string
-      required:
-      - url
-      - flags
-      type: object
-    ReasoningEffort:
-      enum:
-      - low
-      - medium
-      - high
-      - minimal
-      type: string
-    SaveEntitiesInput:
-      properties:
-        entities:
-          items:
-            additionalProperties:
-              additionalProperties: true
-              type: object
-              x-stainless-empty-object: true
-            type: object
-          type: array
+        knowledge_graph:
+          $ref: '#/components/schemas/LLMKnowledgeGraph'
         reason:
           type: string
         sources:
@@ -902,145 +188,9 @@ components:
             type: string
           type: array
       required:
-      - entities
+      - knowledge_graph
       - sources
       - reason
-      type: object
-    RequiredProperty:
-      additionalProperties: false
-      properties:
-        property_names:
-          description: If there are multiple properties, it can match just one of them
-          items:
-            type: string
-          type: array
-        table_name:
-          description: The table name of the entity to update
-          type: string
-      required:
-      - table_name
-      - property_names
-      type: object
-    WebNavigateOutput:
-      enum:
-      - Text
-      - Visual
-      type: string
-    JobInput:
-      properties:
-        allow_extra_entities:
-          type: boolean
-        extraction_criteria:
-          items:
-            $ref: '#/components/schemas/SaveRequirement'
-          type: array
-        instructions:
-          type:
-          - string
-          - 'null'
-        model:
-          type:
-          - string
-          - 'null'
-        seeded_kg:
-          allOf:
-          - $ref: '#/components/schemas/LLMKnowledgeGraph'
-        structuring_input:
-          $ref: '#/components/schemas/InputType'
-      required:
-      - structuring_input
-      - extraction_criteria
-      - allow_extra_entities
-      type: object
-    Source:
-      properties:
-        created_at:
-          format: date-time
-          type: string
-        id:
-          $ref: '#/components/schemas/SourceId'
-        is_summary:
-          type: boolean
-        link:
-          allOf:
-          - $ref: '#/components/schemas/SourceLink'
-        location:
-          allOf:
-          - $ref: '#/components/schemas/SourceLocation'
-        scraper_id:
-          allOf:
-          - $ref: '#/components/schemas/ScraperId'
-        user_specified:
-          type: boolean
-      required:
-      - id
-      - user_specified
-      - is_summary
-      - created_at
-      type: object
-    SaveColumnInput:
-      properties:
-        column_name:
-          type: string
-        column_type:
-          type: string
-        notes:
-          type:
-          - string
-          - 'null'
-      required:
-      - column_name
-      - column_type
-      type: object
-    ConnectorId:
-      format: uuid
-      type: string
-    ImageMeta:
-      properties:
-        document_name:
-          type:
-          - string
-          - 'null'
-        document_page:
-          format: int32
-          minimum: 0
-          type:
-          - integer
-          - 'null'
-        image:
-          type:
-          - string
-          - 'null'
-        ocr_content:
-          type:
-          - string
-          - 'null'
-      required:
-      - image
-      type: object
-    RelationshipDescriptor:
-      additionalProperties: false
-      properties:
-        description:
-          type: string
-        merge_strategy:
-          allOf:
-          - $ref: '#/components/schemas/RelationshipMergeStrategy'
-        name:
-          type: string
-        properties:
-          items:
-            $ref: '#/components/schemas/PropertyDescriptor'
-          type: array
-        source_table:
-          type: string
-        target_table:
-          type: string
-      required:
-      - name
-      - description
-      - source_table
-      - target_table
       type: object
     RunBashInput:
       properties:
@@ -1057,218 +207,23 @@ components:
       required:
       - command
       type: object
-    SaveInput:
-      properties:
-        knowledge_graph:
-          $ref: '#/components/schemas/LLMKnowledgeGraph'
-        reason:
-          type: string
-        sources:
-          items:
-            type: string
-          type: array
-      required:
-      - knowledge_graph
-      - sources
-      - reason
-      type: object
-    MembershipId:
-      format: uuid
-      type: string
-    PromptMeta:
-      description: All metadata required to generate a prompt for the LLM
-      properties:
-        dataset_descriptor:
-          $ref: '#/components/schemas/DatasetDescriptor'
-        extracted_entities:
-          items:
-            $ref: '#/components/schemas/LLMKnowledgeGraph'
-          type: array
-        extraction_criteria:
-          items:
-            $ref: '#/components/schemas/SaveRequirement'
-          type: array
-        formatter_specific:
-          $ref: '#/components/schemas/FormatterMeta'
-        qa_potentially_sus_response:
-          type:
-          - string
-          - 'null'
-      required:
-      - dataset_descriptor
-      - extracted_entities
-      - extraction_criteria
-      - formatter_specific
-      type: object
-    Input:
-      oneOf:
-      - properties:
-          PDF:
-            $ref: '#/components/schemas/PDFIngestor'
-        required:
-        - PDF
-        type: object
-      - properties:
-          Web:
-            $ref: '#/components/schemas/WebSearch'
-        required:
-        - Web
-        type: object
-    PropertyDescriptor:
+    LLMEntity:
       additionalProperties: false
       properties:
-        description:
-          type: string
-        merge_strategy:
-          $ref: '#/components/schemas/MergeStrategy'
-        name:
-          type: string
-        prop_type:
-          $ref: '#/components/schemas/PropertyType'
-      required:
-      - name
-      - description
-      type: object
-    InternalErrorKind:
-      description: 'Categorizes the kind of internal error that occurred during LLM generation.
-
-        This allows the frontend to render appropriate error messages without regex matching.'
-      enum:
-      - unknown
-      - context_limit
-      - rate_limited
-      - timeout
-      - connection_error
-      type: string
-    SelectDataInput:
-      properties:
-        node_ids:
-          items:
-            type: string
-          type: array
-      required:
-      - node_ids
-      type: object
-    DeleteFileInput:
-      properties:
-        file:
-          type: string
-      required:
-      - file
-      type: object
-    ComplexPropValue:
-      oneOf:
-      - type: string
-      - format: int64
-        type: integer
-      - type: boolean
-      - format: double
-        type: number
-      - $ref: '#/components/schemas/PartialDate'
-      - $ref: '#/components/schemas/Url'
-      - $ref: '#/components/schemas/Money'
-      - $ref: '#/components/schemas/LLMImage'
-      - $ref: '#/components/schemas/PersonName'
-      - $ref: '#/components/schemas/Address'
-    LLMImage:
-      properties:
-        flag_number:
+        id:
           minimum: 0
-          type:
-          - integer
-          - 'null'
-        image:
-          format: binary
-          type:
-          - string
-          - 'null'
-      type: object
-    ScraperWithJobInfo:
-      properties:
-        base_url:
-          type: string
-        chat:
-          allOf:
-          - $ref: '#/components/schemas/ChatPrompt'
-        code:
-          type:
-          - string
-          - 'null'
-        events:
-          items:
-            $ref: '#/components/schemas/ChatEvent'
-          type:
-          - array
-          - 'null'
-        is_newly_created:
-          type: boolean
-        next_page_code:
-          type:
-          - string
-          - 'null'
-        scraper_created_at:
-          format: date-time
-          type: string
-        scraper_id:
-          $ref: '#/components/schemas/ScraperId'
-        scraper_updated_at:
-          format: date-time
+          type: integer
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/BasicPropValue'
+          type: object
+        type:
           type: string
       required:
-      - scraper_id
-      - base_url
-      - scraper_created_at
-      - scraper_updated_at
-      - is_newly_created
+      - id
+      - type
+      - properties
       type: object
-    NavigationType:
-      enum:
-      - visual
-      - text
-      type: string
-    SourceLocation:
-      oneOf:
-      - properties:
-          Text:
-            properties:
-              byte_offset:
-                minimum: 0
-                type: integer
-            required:
-            - byte_offset
-            type: object
-        required:
-        - Text
-        type: object
-      - properties:
-          Visual:
-            properties:
-              x:
-                minimum: 0
-                type: integer
-              y:
-                minimum: 0
-                type: integer
-            required:
-            - x
-            - y
-            type: object
-        required:
-        - Visual
-        type: object
-      - properties:
-          Page:
-            properties:
-              page_number:
-                format: int32
-                minimum: 0
-                type: integer
-            required:
-            - page_number
-            type: object
-        required:
-        - Page
-        type: object
     PDFIngestor:
       additionalProperties: false
       description: Ingest all pages of a PDF and process them independently.
@@ -1284,225 +239,45 @@ components:
       required:
       - path
       type: object
-    JavascriptInput:
+    DecodingParams:
       properties:
-        code:
-          type: string
-      required:
-      - code
-      type: object
-    WebSearch:
-      properties:
-        banned_domains:
+        parameters:
           items:
-            type: string
+            $ref: '#/components/schemas/DecodingParamEnum'
           type: array
-        starting_searches:
-          items:
-            type: string
-          type: array
-        starting_urls:
-          items:
-            type: string
-          type: array
-      type: object
-    ExplorationRunId:
-      format: uuid
-      type: string
-    AddDependencyInput:
-      properties:
-        package_name:
-          type: string
-        version_spec:
-          type:
-          - string
-          - 'null'
       required:
-      - package_name
+      - parameters
       type: object
-    BasicPropValue:
-      oneOf:
-      - type: string
-      - format: int64
-        type: integer
-      - type: boolean
-      - format: double
-        type: number
-    RequiredRelationship:
-      additionalProperties: false
+    ScrapePageUrlInput:
       properties:
-        relationship_name:
-          type: string
-      required:
-      - relationship_name
-      type: object
-    WebNavigateInput:
-      properties:
-        output_format:
-          allOf:
-          - $ref: '#/components/schemas/WebNavigateOutput'
+        batch_scrape:
+          type: boolean
         url:
           type: string
+        use_markdown:
+          type: boolean
       required:
       - url
+      - batch_scrape
+      - use_markdown
       type: object
-    SourceEntity:
+    CreateConnectorInput:
       properties:
-        created_at:
-          format: date-time
+        connector_type:
           type: string
-        id:
-          $ref: '#/components/schemas/SourceEntityId'
-        job_id:
-          allOf:
-          - $ref: '#/components/schemas/JobId'
-        kg_entity_id:
-          allOf:
-          - $ref: '#/components/schemas/EntityId'
-        label:
+        description:
+          type:
+          - string
+          - 'null'
+        name:
           type: string
-        llm_id:
-          format: int32
-          type: integer
-        properties:
-          additionalProperties:
-            $ref: '#/components/schemas/ComplexPropValue'
-          type: object
-        source_id:
-          $ref: '#/components/schemas/SourceId'
-      required:
-      - id
-      - label
-      - llm_id
-      - created_at
-      - properties
-      - source_id
-      type: object
-    UserId:
-      format: uuid
-      type: string
-    LLMKnowledgeGraph:
-      additionalProperties: false
-      description: 'Knowledge graph info structured to deserialize and display
-
-        in the same format that the LLM outputs.
-
-        Also the first representation of an LLM output in the pipeline from raw tool output to being merged into a DB'
-      properties:
-        entities:
+        secrets:
           items:
-            $ref: '#/components/schemas/LLMEntity'
-          type: array
-        relationships:
-          items:
-            $ref: '#/components/schemas/LLMRelationship'
+            type: string
           type: array
       required:
-      - entities
-      type: object
-    Job:
-      properties:
-        created_at:
-          format: date-time
-          type: string
-        dataset_id:
-          allOf:
-          - $ref: '#/components/schemas/DatasetId'
-        exploration_run_id:
-          allOf:
-          - $ref: '#/components/schemas/ExplorationRunId'
-        id:
-          $ref: '#/components/schemas/JobId'
-        job_type:
-          $ref: '#/components/schemas/JobType'
-        max_errors:
-          format: int32
-          type:
-          - integer
-          - 'null'
-        max_execution_time_secs:
-          format: int32
-          type:
-          - integer
-          - 'null'
-        max_steps_without_save:
-          format: int32
-          type: integer
-        max_total_steps:
-          format: int32
-          type:
-          - integer
-          - 'null'
-        membership_id:
-          $ref: '#/components/schemas/MembershipId'
-        message:
-          description: A message about the status of the job at completion
-          type:
-          - string
-          - 'null'
-        node_id:
-          allOf:
-          - $ref: '#/components/schemas/WorkflowSessionNodeId'
-        parameters:
-          description: Proto for JobInput
-          format: binary
-          type:
-          - string
-          - 'null'
-        reason:
-          description: A reason for the job's existence
-          type:
-          - string
-          - 'null'
-        run_started_time:
-          description: What time did the job start running?
-          format: date-time
-          type:
-          - string
-          - 'null'
-        run_time_milliseconds:
-          format: int64
-          type:
-          - integer
-          - 'null'
-        seeded_kg_search_term:
-          type:
-          - string
-          - 'null'
-        status:
-          $ref: '#/components/schemas/JobStatus'
-        updated_at:
-          format: date-time
-          type: string
-        use_proxy:
-          type: boolean
-        user_id:
-          $ref: '#/components/schemas/UserId'
-      required:
-      - id
-      - status
-      - created_at
-      - user_id
-      - membership_id
-      - job_type
-      - max_steps_without_save
-      - use_proxy
-      - updated_at
-      type: object
-    ChatPrompt:
-      properties:
-        decoding_params:
-          $ref: '#/components/schemas/DecodingParams'
-        messages:
-          items:
-            $ref: '#/components/schemas/Message'
-          type: array
-        metadata:
-          $ref: '#/components/schemas/PromptMeta'
-      required:
-      - metadata
-      - messages
-      - decoding_params
+      - name
+      - connector_type
       type: object
     RelationshipMergeProbability:
       properties:
@@ -1539,60 +314,6 @@ components:
           - integer
           - 'null'
       type: object
-    RunPythonInput:
-      properties:
-        code:
-          type: string
-        connector:
-          type:
-          - string
-          - 'null'
-        timeout_seconds:
-          format: int64
-          minimum: 0
-          type:
-          - integer
-          - 'null'
-        working_dir:
-          type:
-          - string
-          - 'null'
-      required:
-      - code
-      type: object
-    JobType:
-      enum:
-      - Web
-      - Pdf
-      - Derive
-      - Scrape
-      - Match
-      - ConnectorExplore
-      - DatahubIngestion
-      type: string
-    ComparisonStrategy:
-      enum:
-      - Default
-      - EnforceUniqueness
-      type: string
-    Address:
-      oneOf:
-      - properties:
-          components:
-            additionalProperties:
-              type: string
-            type: object
-          original_address:
-            type: string
-        required:
-        - original_address
-        - components
-        title: AddressObject
-        type: object
-      - description: 'Address string in formats: ''123 Main St, Springfield, IL 62701, USA'', ''1600 Amphitheatre Parkway, Mountain View, California 94043'', ''1600 Pennsylvania Ave NW, Washington, DC 20500'', ''NYC, NY'', ''Oahu, Hawaii'''
-        title: AddressString
-        type: string
-      title: AddressProperty
     ApplyPatchEdit:
       properties:
         new_string:
@@ -1603,1031 +324,53 @@ components:
       - old_string
       - new_string
       type: object
-    InputType:
-      oneOf:
-      - properties:
-          Agent:
-            $ref: '#/components/schemas/Input'
-        required:
-        - Agent
-        type: object
-      - properties:
-          TransformationPrompt:
-            type: string
-        required:
-        - TransformationPrompt
-        type: object
-      - properties:
-          ScrapeFromUrlProperty:
-            $ref: '#/components/schemas/ScrapePageInput'
-        required:
-        - ScrapeFromUrlProperty
-        type: object
-      - properties:
-          ScrapeUrl:
-            $ref: '#/components/schemas/ScrapePageUrlInput'
-        required:
-        - ScrapeUrl
-        type: object
-      - properties:
-          DatahubIngestion:
-            $ref: '#/components/schemas/DatahubIngestionInput'
-        required:
-        - DatahubIngestion
-        type: object
-      - properties:
-          ConnectorExploration:
-            $ref: '#/components/schemas/ConnectorExplorationInput'
-        required:
-        - ConnectorExploration
-        type: object
-    SourceId:
-      format: uuid
-      type: string
-    FormatterMeta:
-      oneOf:
-      - properties:
-          ImageMeta:
-            $ref: '#/components/schemas/ImageMeta'
-        required:
-        - ImageMeta
-        type: object
-      - properties:
-          WebMeta:
-            $ref: '#/components/schemas/WebMeta'
-        required:
-        - WebMeta
-        type: object
-      - properties:
-          TextMeta:
-            $ref: '#/components/schemas/TextMeta'
-        required:
-        - TextMeta
-        type: object
-      - properties:
-          ScraperMeta:
-            $ref: '#/components/schemas/ScraperMeta'
-        required:
-        - ScraperMeta
-        type: object
-    ExplorationPhaseId:
-      description: 'Identifies the phase of connector exploration
-
-
-        This enum is used to track which phase of exploration a chat session belongs to.
-
-        It''s stored as JSONB in the database to allow for flexible phase identification.'
-      discriminator:
-        propertyName: type
-      oneOf:
-      - description: 'First phase: discovering all databases in the connector'
-        properties:
-          connector_id:
-            $ref: '#/components/schemas/ConnectorId'
-          type:
-            enum:
-            - discover_databases
-            type: string
-        required:
-        - connector_id
-        - type
-        type: object
-      - description: 'Second phase: discovering all schemas in a database'
-        properties:
-          database_id:
-            $ref: '#/components/schemas/ConnectorDatabaseId'
-          database_name:
-            type: string
-          type:
-            enum:
-            - discover_schemas
-            type: string
-        required:
-        - database_id
-        - database_name
-        - type
-        type: object
-      - description: 'Third phase: discovering all tables in a schema'
-        properties:
-          schema_id:
-            $ref: '#/components/schemas/ConnectorSchemaId'
-          schema_name:
-            type: string
-          type:
-            enum:
-            - discover_tables
-            type: string
-        required:
-        - schema_id
-        - schema_name
-        - type
-        type: object
-      - description: 'Fourth phase: discovering columns for a specific table'
-        properties:
-          table_id:
-            $ref: '#/components/schemas/ConnectorTableId'
-          table_name:
-            type: string
-          type:
-            enum:
-            - discover_columns
-            type: string
-        required:
-        - table_id
-        - table_name
-        - type
-        type: object
-      - description: 'Initial phase: discovering all API resources'
-        properties:
-          connector_id:
-            $ref: '#/components/schemas/ConnectorId'
-          type:
-            enum:
-            - discover_api_resources
-            type: string
-        required:
-        - connector_id
-        - type
-        type: object
-      - description: 'Second phase: discovering fields for a specific API resource'
-        properties:
-          resource_name:
-            type: string
-          table_id:
-            $ref: '#/components/schemas/ConnectorTableId'
-          type:
-            enum:
-            - discover_api_fields
-            type: string
-        required:
-        - table_id
-        - resource_name
-        - type
-        type: object
-    TableDescriptor:
-      additionalProperties: false
-      description: The full definition of what a schema is - without duplicate information.
+    TextMeta:
       properties:
+        text:
+          type: string
+      required:
+      - text
+      type: object
+    IssueFoundInput:
+      properties:
+        admin_override:
+          type: boolean
         description:
           type: string
-        expected_cardinality:
-          description: 'Expected number of unique values in the complete dataset.
-
-
-            This is used for our probabilistic merge strategy.'
-          format: int64
-          minimum: 0
-          type:
-          - integer
-          - 'null'
-        name:
-          description: Organized in a name, description format.
+        title:
           type: string
-        primary_column:
-          type:
-          - string
-          - 'null'
-        properties:
-          description: Organized in a name, description format.
-          items:
-            $ref: '#/components/schemas/PropertyDescriptor'
-          type: array
       required:
-      - name
+      - title
       - description
-      - properties
+      - admin_override
       type: object
-    GetJobEventsResponse:
+    ScrapePageInput:
       properties:
-        events:
-          items:
-            $ref: '#/components/schemas/TimeStampedJobEvent'
-          type: array
+        batch_scrape:
+          type: boolean
+        url_property_name:
+          type: string
+        use_markdown:
+          type: boolean
       required:
-      - events
+      - url_property_name
+      - batch_scrape
+      - use_markdown
       type: object
-    LLMRelationship:
+    RequiredProperty:
       additionalProperties: false
       properties:
-        properties:
-          additionalProperties:
-            $ref: '#/components/schemas/BasicPropValue'
-          type: object
-        source:
-          minimum: 0
-          type: integer
-        target:
-          minimum: 0
-          type: integer
-        type:
-          type: string
-      required:
-      - type
-      - source
-      - target
-      type: object
-    InspectStepInput:
-      properties:
-        step_name:
-          type: string
-      required:
-      - step_name
-      type: object
-    MoveFileInput:
-      properties:
-        file:
-          type: string
-        new_path:
-          type: string
-      required:
-      - file
-      - new_path
-      type: object
-    RequestClarificationInput:
-      properties:
-        column_name:
-          type:
-          - string
-          - 'null'
-        question:
-          type: string
+        property_names:
+          description: If there are multiple properties, it can match just one of them
+          items:
+            type: string
+          type: array
         table_name:
+          description: The table name of the entity to update
           type: string
       required:
       - table_name
-      - question
-      type: object
-    ConnectorExplorationInput:
-      properties:
-        connector_id:
-          $ref: '#/components/schemas/ConnectorId'
-        exploration_phase_id:
-          $ref: '#/components/schemas/ExplorationPhaseId'
-        exploration_run_id:
-          $ref: '#/components/schemas/ExplorationRunId'
-        strategy:
-          $ref: '#/components/schemas/ExplorationStrategy'
-      required:
-      - connector_id
-      - exploration_phase_id
-      - exploration_run_id
-      - strategy
-      type: object
-    JobResponse:
-      properties:
-        agents:
-          items:
-            $ref: '#/components/schemas/ScraperWithJobInfo'
-          type: array
-        info:
-          $ref: '#/components/schemas/ListJobsResponse'
-        saved:
-          items:
-            items:
-              allOf:
-              - $ref: '#/components/schemas/SourceEntity'
-              - $ref: '#/components/schemas/Source'
-            type: array
-          type: array
-      required:
-      - info
-      - saved
-      - agents
-      type: object
-    ImageResult:
-      properties:
-        image_bytes:
-          format: binary
-          type: string
-        ocr_text:
-          type:
-          - string
-          - 'null'
-      required:
-      - image_bytes
-      type: object
-    ConnectorDatabaseId:
-      format: uuid
-      type: string
-    ConnectorSchemaId:
-      format: uuid
-      type: string
-    PersonName:
-      properties:
-        name:
-          type: string
-      required:
-      - name
-      type: object
-    SaveDatabaseInput:
-      properties:
-        description:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-        notes:
-          type:
-          - string
-          - 'null'
-      required:
-      - name
-      type: object
-    JobStatus:
-      enum:
-      - Queued
-      - Running
-      - Completed
-      - Failed
-      type: string
-    SaveTableInput:
-      properties:
-        description:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-        notes:
-          type:
-          - string
-          - 'null'
-      required:
-      - name
-      type: object
-    MergeConfig:
-      description: The configuration for a probabilistic merge strategy
-      properties:
-        baseline_cardinality:
-          description: 'The number of unique values that are expected to be present in the complete dataset
-
-
-            This is used for merging to determine how significant a match is. (i.e. if there are
-
-            only 2 possible values, a match gives less confidence than if there are 100)'
-          format: int64
-          minimum: 0
-          type: integer
-        comparison_strategy:
-          $ref: '#/components/schemas/ComparisonStrategy'
-        match_transfer_probability:
-          description: 'The estimated probability that, given an entity match, the properties also match
-
-
-            For a person''s full name, this would be quite high. For a person''s job title, it
-
-            would be lower because people can have multiple job titles over time or at different
-
-            companies at the same time.'
-          format: float
-          type: number
-      required:
-      - baseline_cardinality
-      - match_transfer_probability
-      type: object
-    SaveSchemaInput:
-      properties:
-        description:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-        notes:
-          type:
-          - string
-          - 'null'
-      required:
-      - name
-      type: object
-    CreateConnectorInput:
-      properties:
-        connector_type:
-          type: string
-        description:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-        secrets:
-          items:
-            type: string
-          type: array
-      required:
-      - name
-      - connector_type
-      type: object
-    SaveApiResourceInput:
-      properties:
-        description:
-          type:
-          - string
-          - 'null'
-        endpoint:
-          type: string
-        name:
-          type: string
-        notes:
-          type:
-          - string
-          - 'null'
-      required:
-      - name
-      - endpoint
-      type: object
-    WebSearchInput:
-      properties:
-        query:
-          type: string
-      required:
-      - query
-      type: object
-    PropertyType:
-      oneOf:
-      - enum:
-        - String
-        type: string
-      - enum:
-        - Boolean
-        type: string
-      - properties:
-          Enum:
-            items:
-              type: string
-            type: array
-        required:
-        - Enum
-        type: object
-      - enum:
-        - Integer
-        type: string
-      - enum:
-        - Float
-        type: string
-      - enum:
-        - Date
-        type: string
-      - enum:
-        - URL
-        type: string
-      - enum:
-        - Money
-        type: string
-      - enum:
-        - Image
-        type: string
-      - enum:
-        - PersonName
-        type: string
-      - enum:
-        - Address
-        type: string
-    Message:
-      description: Our generic definition of a message to a chat agent.
-      properties:
-        content:
-          description: 'We want this to be a vec of contents so we can accurately
-
-            capture an interleaving of images and text.
-
-
-            This is meant to be a completely raw, unprocessed representation
-
-            of the text. Don''t take stuff out.'
-          items:
-            $ref: '#/components/schemas/MessageContent'
-          type: array
-        role:
-          $ref: '#/components/schemas/SpeakerTag'
-      required:
-      - role
-      - content
-      type: object
-    DecodingParamEnum:
-      oneOf:
-      - properties:
-          MaxTokens:
-            minimum: 0
-            type: integer
-        required:
-        - MaxTokens
-        type: object
-      - properties:
-          MaxCompletionTokens:
-            minimum: 0
-            type: integer
-        required:
-        - MaxCompletionTokens
-        type: object
-      - properties:
-          TopP:
-            format: float
-            type: number
-        required:
-        - TopP
-        type: object
-      - properties:
-          RepeatWindow:
-            minimum: 0
-            type: integer
-        required:
-        - RepeatWindow
-        type: object
-      - properties:
-          RepeatPenalty:
-            format: float
-            type: number
-        required:
-        - RepeatPenalty
-        type: object
-      - properties:
-          Temperature:
-            format: float
-            type: number
-        required:
-        - Temperature
-        type: object
-      - properties:
-          StopTokens:
-            items:
-              type: string
-            type: array
-        required:
-        - StopTokens
-        type: object
-      - properties:
-          LogitBias:
-            additionalProperties:
-              format: float
-              type: number
-            type: object
-        required:
-        - LogitBias
-        type: object
-      - properties:
-          Functions:
-            items:
-              additionalProperties: true
-              type: object
-              x-stainless-empty-object: true
-            type: array
-        required:
-        - Functions
-        type: object
-      - properties:
-          JsonValidator:
-            additionalProperties: true
-            type: object
-            x-stainless-empty-object: true
-        required:
-        - JsonValidator
-        type: object
-      - properties:
-          RegexValidator:
-            type: string
-        required:
-        - RegexValidator
-        type: object
-      - properties:
-          ContextFreeGrammar:
-            type: string
-        required:
-        - ContextFreeGrammar
-        type: object
-      - properties:
-          NumBeams:
-            minimum: 0
-            type: integer
-        required:
-        - NumBeams
-        type: object
-      - properties:
-          Crop:
-            type: boolean
-        required:
-        - Crop
-        type: object
-      - properties:
-          Thinking:
-            description: Thinking tokens for Claude 3.7. Contains the budget in tokens for thinking.
-            minimum: 0
-            type: integer
-        required:
-        - Thinking
-        type: object
-      - properties:
-          Verbosity:
-            $ref: '#/components/schemas/Verbosity'
-        required:
-        - Verbosity
-        type: object
-      - properties:
-          ReasoningEffort:
-            $ref: '#/components/schemas/ReasoningEffort'
-        required:
-        - ReasoningEffort
-        type: object
-    LLMEntity:
-      additionalProperties: false
-      properties:
-        id:
-          minimum: 0
-          type: integer
-        properties:
-          additionalProperties:
-            $ref: '#/components/schemas/BasicPropValue'
-          type: object
-        type:
-          type: string
-      required:
-      - id
-      - type
-      - properties
-      type: object
-    JobEventBody:
-      description: The body content of a job event
-      discriminator:
-        propertyName: event_type
-      oneOf:
-      - properties:
-          event_type:
-            enum:
-            - agent_navigated
-            type: string
-          mode:
-            $ref: '#/components/schemas/NavigationType'
-          url:
-            type: string
-        required:
-        - url
-        - mode
-        - event_type
-        type: object
-      - properties:
-          event_type:
-            enum:
-            - agent_searched
-            type: string
-          query:
-            type: string
-          results:
-            items:
-              items:
-                allOf:
-                - type: string
-                - type: string
-              type: array
-            type: array
-        required:
-        - query
-        - results
-        - event_type
-        type: object
-      - properties:
-          event_type:
-            enum:
-            - agent_saved
-            type: string
-          kg:
-            $ref: '#/components/schemas/LLMKnowledgeGraph'
-          page:
-            format: int32
-            minimum: 0
-            type:
-            - integer
-            - 'null'
-          reason:
-            type:
-            - string
-            - 'null'
-          sources:
-            items:
-              type: string
-            type: array
-        required:
-        - sources
-        - kg
-        - event_type
-        type: object
-      - properties:
-          event_type:
-            enum:
-            - agent_exited
-            type: string
-          reason:
-            type:
-            - string
-            - 'null'
-        required:
-        - event_type
-        type: object
-      - properties:
-          api_candidate_count:
-            minimum: 0
-            type: integer
-          event_type:
-            enum:
-            - api_network_captured
-            type: string
-          request_count:
-            minimum: 0
-            type: integer
-          url:
-            type: string
-        required:
-        - url
-        - request_count
-        - api_candidate_count
-        - event_type
-        type: object
-      - properties:
-          code_preview:
-            type: string
-          event_type:
-            enum:
-            - api_js_executed
-            type: string
-          success:
-            type: boolean
-        required:
-        - code_preview
-        - success
-        - event_type
-        type: object
-      - properties:
-          event_type:
-            enum:
-            - derived_property
-            type: string
-          property:
-            type: string
-          value:
-            type: string
-        required:
-        - property
-        - value
-        - event_type
-        type: object
-      - properties:
-          error:
-            type: string
-          event_type:
-            enum:
-            - failed
-            type: string
-          summary:
-            type:
-            - string
-            - 'null'
-        required:
-        - error
-        - event_type
-        type: object
-      - properties:
-          event_type:
-            enum:
-            - completed
-            type: string
-          message:
-            type:
-            - string
-            - 'null'
-        required:
-        - event_type
-        type: object
-      - properties:
-          cached_from_job_id:
-            $ref: '#/components/schemas/JobId'
-          event_type:
-            enum:
-            - cache_hit
-            type: string
-          message:
-            type:
-            - string
-            - 'null'
-        required:
-        - cached_from_job_id
-        - event_type
-        type: object
-      - properties:
-          candidate_indices:
-            items:
-              minimum: 0
-              type: integer
-            type: array
-          candidates:
-            items:
-              additionalProperties:
-                $ref: '#/components/schemas/BasicPropValue'
-              type: object
-            type: array
-          event_type:
-            enum:
-            - attempted_match
-            type: string
-          match_idx:
-            minimum: 0
-            type:
-            - integer
-            - 'null'
-          raw_text:
-            type:
-            - string
-            - 'null'
-          reason:
-            type: string
-          source_entity_index:
-            minimum: 0
-            type:
-            - integer
-            - 'null'
-          target:
-            additionalProperties:
-              $ref: '#/components/schemas/BasicPropValue'
-            type: object
-        required:
-        - reason
-        - target
-        - candidates
-        - event_type
-        type: object
-      - properties:
-          datasets_in_page:
-            minimum: 0
-            type: integer
-          event_type:
-            enum:
-            - datahub_page_fetched
-            type: string
-          page_num:
-            format: int32
-            type: integer
-          total_datasets:
-            minimum: 0
-            type: integer
-        required:
-        - page_num
-        - datasets_in_page
-        - total_datasets
-        - event_type
-        type: object
-      - properties:
-          count:
-            minimum: 0
-            type: integer
-          event_type:
-            enum:
-            - datahub_databases_created
-            type: string
-        required:
-        - count
-        - event_type
-        type: object
-      - properties:
-          count:
-            minimum: 0
-            type: integer
-          event_type:
-            enum:
-            - datahub_schemas_created
-            type: string
-        required:
-        - count
-        - event_type
-        type: object
-      - properties:
-          column_lineage_count:
-            minimum: 0
-            type: integer
-          event_type:
-            enum:
-            - datahub_tables_processed
-            type: string
-          table_lineage_count:
-            minimum: 0
-            type: integer
-          tables_created:
-            minimum: 0
-            type: integer
-          tables_failed:
-            minimum: 0
-            type: integer
-          tables_removed:
-            minimum: 0
-            type: integer
-          tables_updated:
-            minimum: 0
-            type: integer
-        required:
-        - tables_created
-        - tables_updated
-        - tables_removed
-        - tables_failed
-        - table_lineage_count
-        - column_lineage_count
-        - event_type
-        type: object
-      - properties:
-          diff_annotations_queued:
-            minimum: 0
-            type: integer
-          event_type:
-            enum:
-            - datahub_annotations_queued
-            type: string
-          full_annotations_queued:
-            minimum: 0
-            type: integer
-        required:
-        - full_annotations_queued
-        - diff_annotations_queued
-        - event_type
-        type: object
-      - properties:
-          event_type:
-            enum:
-            - datahub_ingestion_progress
-            type: string
-          records_written:
-            minimum: 0
-            type: integer
-        required:
-        - records_written
-        - event_type
-        type: object
-      - properties:
-          batch_num:
-            minimum: 0
-            type: integer
-          event_type:
-            enum:
-            - datahub_embedding_batch
-            type: string
-          tables_in_batch:
-            minimum: 0
-            type: integer
-          total_batches:
-            minimum: 0
-            type: integer
-        required:
-        - batch_num
-        - total_batches
-        - tables_in_batch
-        - event_type
-        type: object
-      - properties:
-          event_type:
-            enum:
-            - viewed_pdf_page
-            type: string
-          page_index:
-            format: int32
-            minimum: 0
-            type: integer
-        required:
-        - page_index
-        - event_type
-        type: object
-    RelationshipMergeStrategy:
-      oneOf:
-      - $ref: '#/components/schemas/RelationshipMergeProbability'
-    ExplorationStrategy:
-      enum:
-      - full
-      - diff
-      type: string
-    Verbosity:
-      enum:
-      - low
-      - medium
-      - high
-      type: string
-    ApplyPatchInput:
-      properties:
-        apply_all:
-          type: boolean
-        edits:
-          items:
-            $ref: '#/components/schemas/ApplyPatchEdit'
-          type: array
-        file:
-          type: string
-      required:
-      - file
-      - edits
-      - apply_all
-      type: object
-    DecodingParams:
-      properties:
-        parameters:
-          items:
-            $ref: '#/components/schemas/DecodingParamEnum'
-          type: array
-      required:
-      - parameters
+      - property_names
       type: object
     ToolResult:
       oneOf:
@@ -2705,34 +448,184 @@ components:
         rerun_all_steps:
           type: boolean
       type: object
-    SaveMemoryInput:
+    ComparisonStrategy:
+      enum:
+      - Default
+      - EnforceUniqueness
+      type: string
+    SourceLocation:
+      oneOf:
+      - properties:
+          Text:
+            properties:
+              byte_offset:
+                minimum: 0
+                type: integer
+            required:
+            - byte_offset
+            type: object
+        required:
+        - Text
+        type: object
+      - properties:
+          Visual:
+            properties:
+              x:
+                minimum: 0
+                type: integer
+              y:
+                minimum: 0
+                type: integer
+            required:
+            - x
+            - y
+            type: object
+        required:
+        - Visual
+        type: object
+      - properties:
+          Page:
+            properties:
+              page_number:
+                format: int32
+                minimum: 0
+                type: integer
+            required:
+            - page_number
+            type: object
+        required:
+        - Page
+        type: object
+    WebNavigateInput:
       properties:
-        key:
-          type: string
-        value:
+        output_format:
+          allOf:
+          - $ref: '#/components/schemas/WebNavigateOutput'
+        url:
           type: string
       required:
-      - key
-      - value
+      - url
       type: object
-    MergeStrategy:
+    ScraperWithJobInfo:
+      properties:
+        base_url:
+          type: string
+        chat:
+          allOf:
+          - $ref: '#/components/schemas/ChatPrompt'
+        code:
+          type:
+          - string
+          - 'null'
+        events:
+          items:
+            $ref: '#/components/schemas/ChatEvent'
+          type:
+          - array
+          - 'null'
+        is_newly_created:
+          type: boolean
+        next_page_code:
+          type:
+          - string
+          - 'null'
+        scraper_created_at:
+          format: date-time
+          type: string
+        scraper_id:
+          $ref: '#/components/schemas/ScraperId'
+        scraper_updated_at:
+          format: date-time
+          type: string
+      required:
+      - scraper_id
+      - base_url
+      - scraper_created_at
+      - scraper_updated_at
+      - is_newly_created
+      type: object
+    AddDependencyInput:
+      properties:
+        package_name:
+          type: string
+        version_spec:
+          type:
+          - string
+          - 'null'
+      required:
+      - package_name
+      type: object
+    WebSearchInput:
+      properties:
+        query:
+          type: string
+      required:
+      - query
+      type: object
+    PartialDate:
       oneOf:
-      - description: 'Property with unique 1:1 correspondence to its parent.
-
-
-          Merge based on this property 100% of the time'
-        enum:
-        - Unique
-        type: string
       - properties:
-          Probabilistic:
-            $ref: '#/components/schemas/MergeConfig'
+          day:
+            type:
+            - integer
+            - 'null'
+          month:
+            type:
+            - integer
+            - 'null'
+          original_string:
+            type: string
+          year:
+            type: integer
         required:
-        - Probabilistic
+        - year
+        - original_string
+        title: PartialDateObject
         type: object
-      - enum:
-        - NoSignal
+      - description: 'Date string in formats: ''YYYY'', ''YYYY-MM'', ''YYYY-MM-DD'', ''DD-MM-YYYY'', ''MM-DD-YYYY'', ''Jan 3, 2023'', ''3 Jan 2023'', ''2023 Apr 3'', etc.'
+        title: PartialDateString
         type: string
+      title: PartialDateProperty
+    ScraperMeta:
+      properties:
+        html_content:
+          type: string
+        url:
+          type: string
+      required:
+      - html_content
+      - url
+      type: object
+    InspectStepInput:
+      properties:
+        step_name:
+          type: string
+      required:
+      - step_name
+      type: object
+    ChatPrompt:
+      properties:
+        decoding_params:
+          $ref: '#/components/schemas/DecodingParams'
+        messages:
+          items:
+            $ref: '#/components/schemas/Message'
+          type: array
+        metadata:
+          $ref: '#/components/schemas/PromptMeta'
+      required:
+      - metadata
+      - messages
+      - decoding_params
+      type: object
+    BasicPropValue:
+      oneOf:
+      - type: string
+      - format: int64
+        type: integer
+      - type: boolean
+      - format: double
+        type: number
     ConnectorTableResult:
       properties:
         columns:
@@ -2759,64 +652,18 @@ components:
       - table_name
       - columns
       type: object
-    ConnectorTableId:
-      format: uuid
-      type: string
-    DatahubIngestionInput:
+    RequiredEntity:
+      additionalProperties: false
       properties:
-        connector_id:
-          $ref: '#/components/schemas/ConnectorId'
-        exploration_run_id:
-          $ref: '#/components/schemas/ExplorationRunId'
-        only_do_datahub:
-          type: boolean
+        entity_id:
+          allOf:
+          - $ref: '#/components/schemas/EntityId'
+        seeded_entity_id:
+          description: The integer id corresponding to an entity in the seeded entity graph (different from the global dataset entity id)
+          minimum: 0
+          type: integer
       required:
-      - connector_id
-      - exploration_run_id
-      - only_do_datahub
-      type: object
-    TimeStampedJobEvent:
-      properties:
-        body:
-          $ref: '#/components/schemas/JobEventBody'
-        created_at:
-          format: date-time
-          type: string
-      required:
-      - created_at
-      - body
-      type: object
-    WorkflowSessionNodeId:
-      format: uuid
-      type: string
-    Url:
-      oneOf:
-      - description: Url string
-        title: UrlString
-        type: string
-      - properties:
-          original_string:
-            type: string
-          url:
-            type: string
-        required:
-        - url
-        - original_string
-        title: UrlObject
-        type: object
-      title: UrlProperty
-    DocSnippet:
-      properties:
-        snippet:
-          type: string
-        title:
-          type: string
-        url:
-          type: string
-      required:
-      - title
-      - url
-      - snippet
+      - seeded_entity_id
       type: object
     ToolInvocation:
       discriminator:
@@ -3174,6 +1021,425 @@ components:
         - name
         - input
         type: object
+    SaveRequirement:
+      description: It's an OR statement across these.
+      oneOf:
+      - $ref: '#/components/schemas/RequiredRelationship'
+      - $ref: '#/components/schemas/RequiredEntity'
+      - $ref: '#/components/schemas/RequiredProperty'
+    SourceId:
+      format: uuid
+      type: string
+    PromptMeta:
+      description: All metadata required to generate a prompt for the LLM
+      properties:
+        dataset_descriptor:
+          $ref: '#/components/schemas/DatasetDescriptor'
+        extracted_entities:
+          items:
+            $ref: '#/components/schemas/LLMKnowledgeGraph'
+          type: array
+        extraction_criteria:
+          items:
+            $ref: '#/components/schemas/SaveRequirement'
+          type: array
+        formatter_specific:
+          $ref: '#/components/schemas/FormatterMeta'
+        qa_potentially_sus_response:
+          type:
+          - string
+          - 'null'
+      required:
+      - dataset_descriptor
+      - extracted_entities
+      - extraction_criteria
+      - formatter_specific
+      type: object
+    JobId:
+      format: uuid
+      type: string
+    JobType:
+      enum:
+      - Web
+      - Pdf
+      - Derive
+      - Scrape
+      - Match
+      - ConnectorExplore
+      - DatahubIngestion
+      type: string
+    MessageContent:
+      oneOf:
+      - properties:
+          Text:
+            type: string
+        required:
+        - Text
+        type: object
+      - properties:
+          Image:
+            format: binary
+            type: string
+        required:
+        - Image
+        type: object
+    SaveColumnInput:
+      properties:
+        column_name:
+          type: string
+        column_type:
+          type: string
+        notes:
+          type:
+          - string
+          - 'null'
+      required:
+      - column_name
+      - column_type
+      type: object
+    Source:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        id:
+          $ref: '#/components/schemas/SourceId'
+        is_summary:
+          type: boolean
+        link:
+          allOf:
+          - $ref: '#/components/schemas/SourceLink'
+        location:
+          allOf:
+          - $ref: '#/components/schemas/SourceLocation'
+        scraper_id:
+          allOf:
+          - $ref: '#/components/schemas/ScraperId'
+        user_specified:
+          type: boolean
+      required:
+      - id
+      - user_specified
+      - is_summary
+      - created_at
+      type: object
+    LLMImage:
+      properties:
+        flag_number:
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        image:
+          format: binary
+          type:
+          - string
+          - 'null'
+      type: object
+    PinPreviousToolInput:
+      properties:
+        path:
+          type: string
+      required:
+      - path
+      type: object
+    ExitInput:
+      properties:
+        reason:
+          type: string
+      required:
+      - reason
+      type: object
+    RelationshipMergeStrategy:
+      oneOf:
+      - $ref: '#/components/schemas/RelationshipMergeProbability'
+    SaveEntitiesInput:
+      properties:
+        entities:
+          items:
+            additionalProperties:
+              additionalProperties: true
+              type: object
+              x-stainless-empty-object: true
+            type: object
+          type: array
+        reason:
+          type: string
+        sources:
+          items:
+            type: string
+          type: array
+      required:
+      - entities
+      - sources
+      - reason
+      type: object
+    Input:
+      oneOf:
+      - properties:
+          PDF:
+            $ref: '#/components/schemas/PDFIngestor'
+        required:
+        - PDF
+        type: object
+      - properties:
+          Web:
+            $ref: '#/components/schemas/WebSearch'
+        required:
+        - Web
+        type: object
+    JobStatus:
+      enum:
+      - Queued
+      - Running
+      - Completed
+      - Failed
+      type: string
+    MergeConfig:
+      description: The configuration for a probabilistic merge strategy
+      properties:
+        baseline_cardinality:
+          description: 'The number of unique values that are expected to be present in the complete dataset
+
+
+            This is used for merging to determine how significant a match is. (i.e. if there are
+
+            only 2 possible values, a match gives less confidence than if there are 100)'
+          format: int64
+          minimum: 0
+          type: integer
+        comparison_strategy:
+          $ref: '#/components/schemas/ComparisonStrategy'
+        match_transfer_probability:
+          description: 'The estimated probability that, given an entity match, the properties also match
+
+
+            For a person''s full name, this would be quite high. For a person''s job title, it
+
+            would be lower because people can have multiple job titles over time or at different
+
+            companies at the same time.'
+          format: float
+          type: number
+      required:
+      - baseline_cardinality
+      - match_transfer_probability
+      type: object
+    Verbosity:
+      enum:
+      - low
+      - medium
+      - high
+      type: string
+    InternalErrorKind:
+      description: 'Categorizes the kind of internal error that occurred during LLM generation.
+
+        This allows the frontend to render appropriate error messages without regex matching.'
+      enum:
+      - unknown
+      - context_limit
+      - rate_limited
+      - timeout
+      - connection_error
+      type: string
+    ConnectorTableId:
+      format: uuid
+      type: string
+    SearchConnectorTablesInput:
+      properties:
+        query:
+          type: string
+        wiki_tag:
+          type:
+          - string
+          - 'null'
+      required:
+      - query
+      type: object
+    ApiExecuteInput:
+      properties:
+        code:
+          type: string
+      required:
+      - code
+      type: object
+    RequestClarificationInput:
+      properties:
+        column_name:
+          type:
+          - string
+          - 'null'
+        question:
+          type: string
+        table_name:
+          type: string
+      required:
+      - table_name
+      - question
+      type: object
+    ImageMeta:
+      properties:
+        document_name:
+          type:
+          - string
+          - 'null'
+        document_page:
+          format: int32
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        image:
+          type:
+          - string
+          - 'null'
+        ocr_content:
+          type:
+          - string
+          - 'null'
+      required:
+      - image
+      type: object
+    DatasetId:
+      format: uuid
+      type: string
+    CodeExecutionResult:
+      properties:
+        return_code:
+          format: int32
+          type: integer
+        stderr:
+          type: string
+        stdout:
+          type: string
+      required:
+      - stdout
+      - stderr
+      - return_code
+      type: object
+    ConnectorExplorationInput:
+      properties:
+        connector_id:
+          $ref: '#/components/schemas/ConnectorId'
+        exploration_phase_id:
+          $ref: '#/components/schemas/ExplorationPhaseId'
+        exploration_run_id:
+          $ref: '#/components/schemas/ExplorationRunId'
+        strategy:
+          $ref: '#/components/schemas/ExplorationStrategy'
+      required:
+      - connector_id
+      - exploration_phase_id
+      - exploration_run_id
+      - strategy
+      type: object
+    PropertyType:
+      oneOf:
+      - enum:
+        - String
+        type: string
+      - enum:
+        - Boolean
+        type: string
+      - properties:
+          Enum:
+            items:
+              type: string
+            type: array
+        required:
+        - Enum
+        type: object
+      - enum:
+        - Integer
+        type: string
+      - enum:
+        - Float
+        type: string
+      - enum:
+        - Date
+        type: string
+      - enum:
+        - URL
+        type: string
+      - enum:
+        - Money
+        type: string
+      - enum:
+        - Image
+        type: string
+      - enum:
+        - PersonName
+        type: string
+      - enum:
+        - Address
+        type: string
+    WebSearch:
+      properties:
+        banned_domains:
+          items:
+            type: string
+          type: array
+        starting_searches:
+          items:
+            type: string
+          type: array
+        starting_urls:
+          items:
+            type: string
+          type: array
+      type: object
+    SaveSchemaInput:
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        notes:
+          type:
+          - string
+          - 'null'
+      required:
+      - name
+      type: object
+    JobResponse:
+      properties:
+        agents:
+          items:
+            $ref: '#/components/schemas/ScraperWithJobInfo'
+          type: array
+        info:
+          $ref: '#/components/schemas/ListJobsResponse'
+        saved:
+          items:
+            items:
+              allOf:
+              - $ref: '#/components/schemas/SourceEntity'
+              - $ref: '#/components/schemas/Source'
+            type: array
+          type: array
+      required:
+      - info
+      - saved
+      - agents
+      type: object
+    ConnectorSchemaId:
+      format: uuid
+      type: string
+    DatahubIngestionInput:
+      properties:
+        connector_id:
+          $ref: '#/components/schemas/ConnectorId'
+        exploration_run_id:
+          $ref: '#/components/schemas/ExplorationRunId'
+        only_do_datahub:
+          type: boolean
+      required:
+      - connector_id
+      - exploration_run_id
+      - only_do_datahub
+      type: object
     ViewPageInput:
       properties:
         page_number:
@@ -3182,6 +1448,1740 @@ components:
           type: integer
       required:
       - page_number
+      type: object
+    RelationshipDescriptor:
+      additionalProperties: false
+      properties:
+        description:
+          type: string
+        merge_strategy:
+          allOf:
+          - $ref: '#/components/schemas/RelationshipMergeStrategy'
+        name:
+          type: string
+        properties:
+          items:
+            $ref: '#/components/schemas/PropertyDescriptor'
+          type: array
+        source_table:
+          type: string
+        target_table:
+          type: string
+      required:
+      - name
+      - description
+      - source_table
+      - target_table
+      type: object
+    SelectDataInput:
+      properties:
+        node_ids:
+          items:
+            type: string
+          type: array
+      required:
+      - node_ids
+      type: object
+    SourceEntityId:
+      format: uuid
+      type: string
+    ActionDef:
+      description: Action definition
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+      required:
+      - name
+      - description
+      type: object
+    ImageResult:
+      properties:
+        image_bytes:
+          format: binary
+          type: string
+        ocr_text:
+          type:
+          - string
+          - 'null'
+      required:
+      - image_bytes
+      type: object
+    GetJobEventsResponse:
+      properties:
+        events:
+          items:
+            $ref: '#/components/schemas/TimeStampedJobEvent'
+          type: array
+      required:
+      - events
+      type: object
+    NavigateToIFrameInput:
+      properties:
+        index:
+          format: int32
+          minimum: 0
+          type: integer
+      required:
+      - index
+      type: object
+    ExplorationStrategy:
+      enum:
+      - full
+      - diff
+      type: string
+    RequiredRelationship:
+      additionalProperties: false
+      properties:
+        relationship_name:
+          type: string
+      required:
+      - relationship_name
+      type: object
+    SearchConnectorTypesInput:
+      properties:
+        query:
+          type:
+          - string
+          - 'null'
+      type: object
+    Money:
+      oneOf:
+      - description: 'Money string that includes currency and amount: $10k, £100.00, 1 million CAD, ¥1e8 etc.'
+        title: MoneyString
+        type: string
+      - properties:
+          amount:
+            type: number
+          currency_code:
+            enum:
+            - USD
+            - EUR
+            - GBP
+            - JPY
+            - CNY
+            - INR
+            - RUB
+            - CAD
+            - AUD
+            - CHF
+            - ILS
+            - NZD
+            - SGD
+            - HKD
+            - NOK
+            - SEK
+            - PLN
+            - TRY
+            - DKK
+            - MXN
+            - ZAR
+            - PHP
+            - VND
+            - THB
+            - BRL
+            - KRW
+            type: string
+          original_string:
+            type: string
+        required:
+        - currency_code
+        - amount
+        - original_string
+        title: MoneyObject
+        type: object
+      title: MoneyProperty
+    WorkflowSessionNodeId:
+      format: uuid
+      type: string
+    RunPythonInput:
+      properties:
+        code:
+          type: string
+        connector:
+          type:
+          - string
+          - 'null'
+        timeout_seconds:
+          format: int64
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        working_dir:
+          type:
+          - string
+          - 'null'
+      required:
+      - code
+      type: object
+    InputType:
+      oneOf:
+      - properties:
+          Agent:
+            $ref: '#/components/schemas/Input'
+        required:
+        - Agent
+        type: object
+      - properties:
+          TransformationPrompt:
+            type: string
+        required:
+        - TransformationPrompt
+        type: object
+      - properties:
+          ScrapeFromUrlProperty:
+            $ref: '#/components/schemas/ScrapePageInput'
+        required:
+        - ScrapeFromUrlProperty
+        type: object
+      - properties:
+          ScrapeUrl:
+            $ref: '#/components/schemas/ScrapePageUrlInput'
+        required:
+        - ScrapeUrl
+        type: object
+      - properties:
+          DatahubIngestion:
+            $ref: '#/components/schemas/DatahubIngestionInput'
+        required:
+        - DatahubIngestion
+        type: object
+      - properties:
+          ConnectorExploration:
+            $ref: '#/components/schemas/ConnectorExplorationInput'
+        required:
+        - ConnectorExploration
+        type: object
+    ConnectorColumnResult:
+      properties:
+        name:
+          type: string
+        notes:
+          type:
+          - string
+          - 'null'
+        type:
+          type: string
+      required:
+      - name
+      - type
+      type: object
+    Address:
+      oneOf:
+      - properties:
+          components:
+            additionalProperties:
+              type: string
+            type: object
+          original_address:
+            type: string
+        required:
+        - original_address
+        - components
+        title: AddressObject
+        type: object
+      - description: 'Address string in formats: ''123 Main St, Springfield, IL 62701, USA'', ''1600 Amphitheatre Parkway, Mountain View, California 94043'', ''1600 Pennsylvania Ave NW, Washington, DC 20500'', ''NYC, NY'', ''Oahu, Hawaii'''
+        title: AddressString
+        type: string
+      title: AddressProperty
+    JobInput:
+      properties:
+        allow_extra_entities:
+          type: boolean
+        extraction_criteria:
+          items:
+            $ref: '#/components/schemas/SaveRequirement'
+          type: array
+        instructions:
+          type:
+          - string
+          - 'null'
+        model:
+          type:
+          - string
+          - 'null'
+        seeded_kg:
+          allOf:
+          - $ref: '#/components/schemas/LLMKnowledgeGraph'
+        structuring_input:
+          $ref: '#/components/schemas/InputType'
+      required:
+      - structuring_input
+      - extraction_criteria
+      - allow_extra_entities
+      type: object
+    ListJobsResponse:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        dataset_id:
+          allOf:
+          - $ref: '#/components/schemas/DatasetId'
+        id:
+          $ref: '#/components/schemas/JobId'
+        job_type:
+          $ref: '#/components/schemas/JobType'
+        message:
+          type:
+          - string
+          - 'null'
+        parameters:
+          allOf:
+          - $ref: '#/components/schemas/JobInput'
+        reason:
+          type:
+          - string
+          - 'null'
+        run_started_time:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        run_time_milliseconds:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        status:
+          $ref: '#/components/schemas/JobStatus'
+        user_id:
+          $ref: '#/components/schemas/UserId'
+      required:
+      - id
+      - status
+      - created_at
+      - job_type
+      - user_id
+      type: object
+    SaveDatabaseInput:
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        notes:
+          type:
+          - string
+          - 'null'
+      required:
+      - name
+      type: object
+    MergeStrategy:
+      oneOf:
+      - description: 'Property with unique 1:1 correspondence to its parent.
+
+
+          Merge based on this property 100% of the time'
+        enum:
+        - Unique
+        type: string
+      - properties:
+          Probabilistic:
+            $ref: '#/components/schemas/MergeConfig'
+        required:
+        - Probabilistic
+        type: object
+      - enum:
+        - NoSignal
+        type: string
+    TableDescriptor:
+      additionalProperties: false
+      description: The full definition of what a schema is - without duplicate information.
+      properties:
+        description:
+          type: string
+        expected_cardinality:
+          description: 'Expected number of unique values in the complete dataset.
+
+
+            This is used for our probabilistic merge strategy.'
+          format: int64
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        name:
+          description: Organized in a name, description format.
+          type: string
+        primary_column:
+          type:
+          - string
+          - 'null'
+        properties:
+          description: Organized in a name, description format.
+          items:
+            $ref: '#/components/schemas/PropertyDescriptor'
+          type: array
+      required:
+      - name
+      - description
+      - properties
+      type: object
+    SourceEntity:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        id:
+          $ref: '#/components/schemas/SourceEntityId'
+        job_id:
+          allOf:
+          - $ref: '#/components/schemas/JobId'
+        kg_entity_id:
+          allOf:
+          - $ref: '#/components/schemas/EntityId'
+        label:
+          type: string
+        llm_id:
+          format: int32
+          type: integer
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/ComplexPropValue'
+          type: object
+        source_id:
+          $ref: '#/components/schemas/SourceId'
+      required:
+      - id
+      - label
+      - llm_id
+      - created_at
+      - properties
+      - source_id
+      type: object
+    Url:
+      oneOf:
+      - description: Url string
+        title: UrlString
+        type: string
+      - properties:
+          original_string:
+            type: string
+          url:
+            type: string
+        required:
+        - url
+        - original_string
+        title: UrlObject
+        type: object
+      title: UrlProperty
+    ExplorationPhaseId:
+      description: 'Identifies the phase of connector exploration
+
+
+        This enum is used to track which phase of exploration a chat session belongs to.
+
+        It''s stored as JSONB in the database to allow for flexible phase identification.'
+      discriminator:
+        propertyName: type
+      oneOf:
+      - description: 'First phase: discovering all databases in the connector'
+        properties:
+          connector_id:
+            $ref: '#/components/schemas/ConnectorId'
+          type:
+            enum:
+            - discover_databases
+            type: string
+        required:
+        - connector_id
+        - type
+        type: object
+      - description: 'Second phase: discovering all schemas in a database'
+        properties:
+          database_id:
+            $ref: '#/components/schemas/ConnectorDatabaseId'
+          database_name:
+            type: string
+          type:
+            enum:
+            - discover_schemas
+            type: string
+        required:
+        - database_id
+        - database_name
+        - type
+        type: object
+      - description: 'Third phase: discovering all tables in a schema'
+        properties:
+          schema_id:
+            $ref: '#/components/schemas/ConnectorSchemaId'
+          schema_name:
+            type: string
+          type:
+            enum:
+            - discover_tables
+            type: string
+        required:
+        - schema_id
+        - schema_name
+        - type
+        type: object
+      - description: 'Fourth phase: discovering columns for a specific table'
+        properties:
+          table_id:
+            $ref: '#/components/schemas/ConnectorTableId'
+          table_name:
+            type: string
+          type:
+            enum:
+            - discover_columns
+            type: string
+        required:
+        - table_id
+        - table_name
+        - type
+        type: object
+      - description: 'Initial phase: discovering all API resources'
+        properties:
+          connector_id:
+            $ref: '#/components/schemas/ConnectorId'
+          type:
+            enum:
+            - discover_api_resources
+            type: string
+        required:
+        - connector_id
+        - type
+        type: object
+      - description: 'Second phase: discovering fields for a specific API resource'
+        properties:
+          resource_name:
+            type: string
+          table_id:
+            $ref: '#/components/schemas/ConnectorTableId'
+          type:
+            enum:
+            - discover_api_fields
+            type: string
+        required:
+        - table_id
+        - resource_name
+        - type
+        type: object
+    SaveApiResourceInput:
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+        endpoint:
+          type: string
+        name:
+          type: string
+        notes:
+          type:
+          - string
+          - 'null'
+      required:
+      - name
+      - endpoint
+      type: object
+    MoveFileInput:
+      properties:
+        file:
+          type: string
+        new_path:
+          type: string
+      required:
+      - file
+      - new_path
+      type: object
+    LLMRelationship:
+      additionalProperties: false
+      properties:
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/BasicPropValue'
+          type: object
+        source:
+          minimum: 0
+          type: integer
+        target:
+          minimum: 0
+          type: integer
+        type:
+          type: string
+      required:
+      - type
+      - source
+      - target
+      type: object
+    ReasoningEffort:
+      enum:
+      - low
+      - medium
+      - high
+      - minimal
+      type: string
+    ReadNodeLogsInput:
+      properties:
+        log_type:
+          type:
+          - string
+          - 'null'
+        node_function_name:
+          type: string
+      required:
+      - node_function_name
+      type: object
+    ApplyPatchInput:
+      properties:
+        apply_all:
+          type: boolean
+        edits:
+          items:
+            $ref: '#/components/schemas/ApplyPatchEdit'
+          type: array
+        file:
+          type: string
+      required:
+      - file
+      - edits
+      - apply_all
+      type: object
+    ExplorationRunId:
+      format: uuid
+      type: string
+    SaveTableInput:
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        notes:
+          type:
+          - string
+          - 'null'
+      required:
+      - name
+      type: object
+    JavascriptInput:
+      properties:
+        code:
+          type: string
+      required:
+      - code
+      type: object
+    MembershipId:
+      format: uuid
+      type: string
+    LLMKnowledgeGraph:
+      additionalProperties: false
+      description: 'Knowledge graph info structured to deserialize and display
+
+        in the same format that the LLM outputs.
+
+        Also the first representation of an LLM output in the pipeline from raw tool output to being merged into a DB'
+      properties:
+        entities:
+          items:
+            $ref: '#/components/schemas/LLMEntity'
+          type: array
+        relationships:
+          items:
+            $ref: '#/components/schemas/LLMRelationship'
+          type: array
+      required:
+      - entities
+      type: object
+    EntityId:
+      format: uuid
+      type: string
+    JobEventBody:
+      description: The body content of a job event
+      discriminator:
+        propertyName: event_type
+      oneOf:
+      - properties:
+          event_type:
+            enum:
+            - agent_navigated
+            type: string
+          mode:
+            $ref: '#/components/schemas/NavigationType'
+          url:
+            type: string
+        required:
+        - url
+        - mode
+        - event_type
+        type: object
+      - properties:
+          event_type:
+            enum:
+            - agent_searched
+            type: string
+          query:
+            type: string
+          results:
+            items:
+              items:
+                allOf:
+                - type: string
+                - type: string
+              type: array
+            type: array
+        required:
+        - query
+        - results
+        - event_type
+        type: object
+      - properties:
+          event_type:
+            enum:
+            - agent_saved
+            type: string
+          kg:
+            $ref: '#/components/schemas/LLMKnowledgeGraph'
+          page:
+            format: int32
+            minimum: 0
+            type:
+            - integer
+            - 'null'
+          reason:
+            type:
+            - string
+            - 'null'
+          sources:
+            items:
+              type: string
+            type: array
+        required:
+        - sources
+        - kg
+        - event_type
+        type: object
+      - properties:
+          event_type:
+            enum:
+            - agent_exited
+            type: string
+          reason:
+            type:
+            - string
+            - 'null'
+        required:
+        - event_type
+        type: object
+      - properties:
+          api_candidate_count:
+            minimum: 0
+            type: integer
+          event_type:
+            enum:
+            - api_network_captured
+            type: string
+          request_count:
+            minimum: 0
+            type: integer
+          url:
+            type: string
+        required:
+        - url
+        - request_count
+        - api_candidate_count
+        - event_type
+        type: object
+      - properties:
+          code_preview:
+            type: string
+          event_type:
+            enum:
+            - api_js_executed
+            type: string
+          success:
+            type: boolean
+        required:
+        - code_preview
+        - success
+        - event_type
+        type: object
+      - properties:
+          event_type:
+            enum:
+            - derived_property
+            type: string
+          property:
+            type: string
+          value:
+            type: string
+        required:
+        - property
+        - value
+        - event_type
+        type: object
+      - properties:
+          error:
+            type: string
+          event_type:
+            enum:
+            - failed
+            type: string
+          summary:
+            type:
+            - string
+            - 'null'
+        required:
+        - error
+        - event_type
+        type: object
+      - properties:
+          event_type:
+            enum:
+            - completed
+            type: string
+          message:
+            type:
+            - string
+            - 'null'
+        required:
+        - event_type
+        type: object
+      - properties:
+          cached_from_job_id:
+            $ref: '#/components/schemas/JobId'
+          event_type:
+            enum:
+            - cache_hit
+            type: string
+          message:
+            type:
+            - string
+            - 'null'
+        required:
+        - cached_from_job_id
+        - event_type
+        type: object
+      - properties:
+          candidate_indices:
+            items:
+              minimum: 0
+              type: integer
+            type: array
+          candidates:
+            items:
+              additionalProperties:
+                $ref: '#/components/schemas/BasicPropValue'
+              type: object
+            type: array
+          event_type:
+            enum:
+            - attempted_match
+            type: string
+          match_idx:
+            minimum: 0
+            type:
+            - integer
+            - 'null'
+          raw_text:
+            type:
+            - string
+            - 'null'
+          reason:
+            type: string
+          source_entity_index:
+            minimum: 0
+            type:
+            - integer
+            - 'null'
+          target:
+            additionalProperties:
+              $ref: '#/components/schemas/BasicPropValue'
+            type: object
+        required:
+        - reason
+        - target
+        - candidates
+        - event_type
+        type: object
+      - properties:
+          datasets_in_page:
+            minimum: 0
+            type: integer
+          event_type:
+            enum:
+            - datahub_page_fetched
+            type: string
+          page_num:
+            format: int32
+            type: integer
+          total_datasets:
+            minimum: 0
+            type: integer
+        required:
+        - page_num
+        - datasets_in_page
+        - total_datasets
+        - event_type
+        type: object
+      - properties:
+          count:
+            minimum: 0
+            type: integer
+          event_type:
+            enum:
+            - datahub_databases_created
+            type: string
+        required:
+        - count
+        - event_type
+        type: object
+      - properties:
+          count:
+            minimum: 0
+            type: integer
+          event_type:
+            enum:
+            - datahub_schemas_created
+            type: string
+        required:
+        - count
+        - event_type
+        type: object
+      - properties:
+          column_lineage_count:
+            minimum: 0
+            type: integer
+          event_type:
+            enum:
+            - datahub_tables_processed
+            type: string
+          table_lineage_count:
+            minimum: 0
+            type: integer
+          tables_created:
+            minimum: 0
+            type: integer
+          tables_failed:
+            minimum: 0
+            type: integer
+          tables_removed:
+            minimum: 0
+            type: integer
+          tables_updated:
+            minimum: 0
+            type: integer
+        required:
+        - tables_created
+        - tables_updated
+        - tables_removed
+        - tables_failed
+        - table_lineage_count
+        - column_lineage_count
+        - event_type
+        type: object
+      - properties:
+          diff_annotations_queued:
+            minimum: 0
+            type: integer
+          event_type:
+            enum:
+            - datahub_annotations_queued
+            type: string
+          full_annotations_queued:
+            minimum: 0
+            type: integer
+        required:
+        - full_annotations_queued
+        - diff_annotations_queued
+        - event_type
+        type: object
+      - properties:
+          event_type:
+            enum:
+            - datahub_ingestion_progress
+            type: string
+          records_written:
+            minimum: 0
+            type: integer
+        required:
+        - records_written
+        - event_type
+        type: object
+      - properties:
+          batch_num:
+            minimum: 0
+            type: integer
+          event_type:
+            enum:
+            - datahub_embedding_batch
+            type: string
+          tables_in_batch:
+            minimum: 0
+            type: integer
+          total_batches:
+            minimum: 0
+            type: integer
+        required:
+        - batch_num
+        - total_batches
+        - tables_in_batch
+        - event_type
+        type: object
+      - properties:
+          event_type:
+            enum:
+            - viewed_pdf_page
+            type: string
+          page_index:
+            format: int32
+            minimum: 0
+            type: integer
+        required:
+        - page_index
+        - event_type
+        type: object
+    DocSnippet:
+      properties:
+        snippet:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+      required:
+      - title
+      - url
+      - snippet
+      type: object
+    ConnectorDatabaseId:
+      format: uuid
+      type: string
+    Job:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        dataset_id:
+          allOf:
+          - $ref: '#/components/schemas/DatasetId'
+        exploration_run_id:
+          allOf:
+          - $ref: '#/components/schemas/ExplorationRunId'
+        id:
+          $ref: '#/components/schemas/JobId'
+        job_type:
+          $ref: '#/components/schemas/JobType'
+        max_errors:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        max_execution_time_secs:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        max_steps_without_save:
+          format: int32
+          type: integer
+        max_total_steps:
+          format: int32
+          type:
+          - integer
+          - 'null'
+        membership_id:
+          $ref: '#/components/schemas/MembershipId'
+        message:
+          description: A message about the status of the job at completion
+          type:
+          - string
+          - 'null'
+        node_id:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowSessionNodeId'
+        parameters:
+          description: Proto for JobInput
+          format: binary
+          type:
+          - string
+          - 'null'
+        reason:
+          description: A reason for the job's existence
+          type:
+          - string
+          - 'null'
+        run_started_time:
+          description: What time did the job start running?
+          format: date-time
+          type:
+          - string
+          - 'null'
+        run_time_milliseconds:
+          format: int64
+          type:
+          - integer
+          - 'null'
+        seeded_kg_search_term:
+          type:
+          - string
+          - 'null'
+        status:
+          $ref: '#/components/schemas/JobStatus'
+        updated_at:
+          format: date-time
+          type: string
+        use_proxy:
+          type: boolean
+        user_id:
+          $ref: '#/components/schemas/UserId'
+      required:
+      - id
+      - status
+      - created_at
+      - user_id
+      - membership_id
+      - job_type
+      - max_steps_without_save
+      - use_proxy
+      - updated_at
+      type: object
+    SaveMemoryInput:
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      required:
+      - key
+      - value
+      type: object
+    PersonName:
+      properties:
+        name:
+          type: string
+      required:
+      - name
+      type: object
+    Flag:
+      properties:
+        ariaLabel:
+          type: string
+        height:
+          format: double
+          type: number
+        href:
+          type:
+          - string
+          - 'null'
+        isInteractive:
+          type:
+          - boolean
+          - 'null'
+        number:
+          description: The number by which the flag is referred in image, prompt, and tool calls.
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        text:
+          type: string
+        type:
+          type: string
+        width:
+          description: 'The serde default here is to give us backwards compatibility
+
+            it''s fine for these to be anything as long as the image isn''t
+
+            given since it won''t regenerate.'
+          format: double
+          type: number
+        x:
+          format: double
+          type: number
+        y:
+          format: double
+          type: number
+      required:
+      - x
+      - y
+      - type
+      - ariaLabel
+      type: object
+    Message:
+      description: Our generic definition of a message to a chat agent.
+      properties:
+        content:
+          description: 'We want this to be a vec of contents so we can accurately
+
+            capture an interleaving of images and text.
+
+
+            This is meant to be a completely raw, unprocessed representation
+
+            of the text. Don''t take stuff out.'
+          items:
+            $ref: '#/components/schemas/MessageContent'
+          type: array
+        role:
+          $ref: '#/components/schemas/SpeakerTag'
+      required:
+      - role
+      - content
+      type: object
+    ChatEvent:
+      description: Events in a chat session timeline, including messages and unified tool calls/results
+      oneOf:
+      - properties:
+          TextMessage:
+            properties:
+              message:
+                type: string
+            required:
+            - message
+            type: object
+        required:
+        - TextMessage
+        type: object
+      - properties:
+          Thinking:
+            properties:
+              block_id:
+                format: int64
+                minimum: 0
+                type: integer
+              complete:
+                type: boolean
+              content:
+                type: string
+            required:
+            - content
+            - complete
+            - block_id
+            type: object
+        required:
+        - Thinking
+        type: object
+      - properties:
+          File:
+            description: 'The file event can''t be serialized to the database safely without the content.
+
+              When streaming, we start with the path only, then add the content as we go.'
+            properties:
+              block_id:
+                format: int64
+                minimum: 0
+                type: integer
+              complete:
+                type: boolean
+              content:
+                type:
+                - string
+                - 'null'
+              path:
+                type: string
+            required:
+            - path
+            - complete
+            - block_id
+            type: object
+        required:
+        - File
+        type: object
+      - properties:
+          Action:
+            properties:
+              actions:
+                items:
+                  $ref: '#/components/schemas/ActionDef'
+                type: array
+              block_id:
+                format: int64
+                minimum: 0
+                type: integer
+              complete:
+                type: boolean
+            required:
+            - actions
+            - complete
+            - block_id
+            type: object
+        required:
+        - Action
+        type: object
+      - properties:
+          Connector:
+            properties:
+              description:
+                type:
+                - string
+                - 'null'
+              env_vars:
+                items:
+                  type: string
+                type: array
+              name:
+                type: string
+            required:
+            - name
+            - env_vars
+            type: object
+        required:
+        - Connector
+        type: object
+      - properties:
+          ToolCall:
+            properties:
+              block_id:
+                format: int64
+                minimum: 0
+                type: integer
+              complete:
+                type: boolean
+              invocation:
+                $ref: '#/components/schemas/ToolInvocation'
+              tool_result:
+                $ref: '#/components/schemas/ToolResult'
+            required:
+            - invocation
+            - tool_result
+            - block_id
+            - complete
+            type: object
+        required:
+        - ToolCall
+        type: object
+      - properties:
+          Question:
+            properties:
+              block_id:
+                format: int64
+                minimum: 0
+                type: integer
+              complete:
+                type: boolean
+              content:
+                type: string
+              options:
+                items:
+                  type: string
+                type: array
+            required:
+            - content
+            - complete
+            - options
+            - block_id
+            type: object
+        required:
+        - Question
+        type: object
+      - properties:
+          InternalError:
+            properties:
+              error_kind:
+                $ref: '#/components/schemas/InternalErrorKind'
+              message:
+                type: string
+            required:
+            - message
+            type: object
+        required:
+        - InternalError
+        type: object
+      - properties:
+          ReviewRequest:
+            properties:
+              node_summaries:
+                items:
+                  $ref: '#/components/schemas/NodeSummary'
+                type: array
+            required:
+            - node_summaries
+            type: object
+        required:
+        - ReviewRequest
+        type: object
+      - properties:
+          AttachedFile:
+            properties:
+              image_bytes:
+                format: binary
+                type:
+                - string
+                - 'null'
+              path:
+                type: string
+            required:
+            - path
+            type: object
+        required:
+        - AttachedFile
+        type: object
+      - properties:
+          ConnectorRequest:
+            properties:
+              connector_id:
+                $ref: '#/components/schemas/ConnectorId'
+            required:
+            - connector_id
+            type: object
+        required:
+        - ConnectorRequest
+        type: object
+      - properties:
+          UserInterrupted:
+            type: object
+        required:
+        - UserInterrupted
+        type: object
+      - properties:
+          IssueFound:
+            properties:
+              admin_override:
+                type: boolean
+              description:
+                type: string
+              title:
+                type: string
+            required:
+            - title
+            - description
+            - admin_override
+            type: object
+        required:
+        - IssueFound
+        type: object
+    FormatterMeta:
+      oneOf:
+      - properties:
+          ImageMeta:
+            $ref: '#/components/schemas/ImageMeta'
+        required:
+        - ImageMeta
+        type: object
+      - properties:
+          WebMeta:
+            $ref: '#/components/schemas/WebMeta'
+        required:
+        - WebMeta
+        type: object
+      - properties:
+          TextMeta:
+            $ref: '#/components/schemas/TextMeta'
+        required:
+        - TextMeta
+        type: object
+      - properties:
+          ScraperMeta:
+            $ref: '#/components/schemas/ScraperMeta'
+        required:
+        - ScraperMeta
+        type: object
+    DecodingParamEnum:
+      oneOf:
+      - properties:
+          MaxTokens:
+            minimum: 0
+            type: integer
+        required:
+        - MaxTokens
+        type: object
+      - properties:
+          MaxCompletionTokens:
+            minimum: 0
+            type: integer
+        required:
+        - MaxCompletionTokens
+        type: object
+      - properties:
+          TopP:
+            format: float
+            type: number
+        required:
+        - TopP
+        type: object
+      - properties:
+          RepeatWindow:
+            minimum: 0
+            type: integer
+        required:
+        - RepeatWindow
+        type: object
+      - properties:
+          RepeatPenalty:
+            format: float
+            type: number
+        required:
+        - RepeatPenalty
+        type: object
+      - properties:
+          Temperature:
+            format: float
+            type: number
+        required:
+        - Temperature
+        type: object
+      - properties:
+          StopTokens:
+            items:
+              type: string
+            type: array
+        required:
+        - StopTokens
+        type: object
+      - properties:
+          LogitBias:
+            additionalProperties:
+              format: float
+              type: number
+            type: object
+        required:
+        - LogitBias
+        type: object
+      - properties:
+          Functions:
+            items:
+              additionalProperties: true
+              type: object
+              x-stainless-empty-object: true
+            type: array
+        required:
+        - Functions
+        type: object
+      - properties:
+          JsonValidator:
+            additionalProperties: true
+            type: object
+            x-stainless-empty-object: true
+        required:
+        - JsonValidator
+        type: object
+      - properties:
+          RegexValidator:
+            type: string
+        required:
+        - RegexValidator
+        type: object
+      - properties:
+          ContextFreeGrammar:
+            type: string
+        required:
+        - ContextFreeGrammar
+        type: object
+      - properties:
+          NumBeams:
+            minimum: 0
+            type: integer
+        required:
+        - NumBeams
+        type: object
+      - properties:
+          Crop:
+            type: boolean
+        required:
+        - Crop
+        type: object
+      - properties:
+          Thinking:
+            description: Thinking tokens for Claude 3.7. Contains the budget in tokens for thinking.
+            minimum: 0
+            type: integer
+        required:
+        - Thinking
+        type: object
+      - properties:
+          Verbosity:
+            $ref: '#/components/schemas/Verbosity'
+        required:
+        - Verbosity
+        type: object
+      - properties:
+          ReasoningEffort:
+            $ref: '#/components/schemas/ReasoningEffort'
+        required:
+        - ReasoningEffort
+        type: object
+    TimeStampedJobEvent:
+      properties:
+        body:
+          $ref: '#/components/schemas/JobEventBody'
+        created_at:
+          format: date-time
+          type: string
+      required:
+      - created_at
+      - body
+      type: object
+    SpeakerTag:
+      enum:
+      - user
+      - system
+      - assistant
+      type: string
+    NodeSummary:
+      properties:
+        data_preview:
+          type:
+          - string
+          - 'null'
+        image:
+          format: binary
+          type:
+          - string
+          - 'null'
+        in_dashboard:
+          type: boolean
+        name:
+          type: string
+      required:
+      - name
+      - in_dashboard
+      type: object
+    ComplexPropValue:
+      oneOf:
+      - type: string
+      - format: int64
+        type: integer
+      - type: boolean
+      - format: double
+        type: number
+      - $ref: '#/components/schemas/PartialDate'
+      - $ref: '#/components/schemas/Url'
+      - $ref: '#/components/schemas/Money'
+      - $ref: '#/components/schemas/LLMImage'
+      - $ref: '#/components/schemas/PersonName'
+      - $ref: '#/components/schemas/Address'
+    PropertyDescriptor:
+      additionalProperties: false
+      properties:
+        description:
+          type: string
+        merge_strategy:
+          $ref: '#/components/schemas/MergeStrategy'
+        name:
+          type: string
+        prop_type:
+          $ref: '#/components/schemas/PropertyType'
+      required:
+      - name
+      - description
+      type: object
+    WebNavigateOutput:
+      enum:
+      - Text
+      - Visual
+      type: string
+    NavigationType:
+      enum:
+      - visual
+      - text
+      type: string
+    DeleteFileInput:
+      properties:
+        file:
+          type: string
+      required:
+      - file
+      type: object
+    InfiniteScrollInput:
+      type: object
+    ConnectorId:
+      format: uuid
+      type: string
+    SourceLink:
+      oneOf:
+      - properties:
+          Web:
+            properties:
+              url:
+                type: string
+            required:
+            - url
+            type: object
+        required:
+        - Web
+        type: object
+      - properties:
+          Document:
+            properties:
+              name:
+                type: string
+            required:
+            - name
+            type: object
+        required:
+        - Document
+        type: object
+      - properties:
+          SecFiling:
+            properties:
+              accession_number:
+                type: string
+              cik_number:
+                type: string
+            required:
+            - accession_number
+            - cik_number
+            type: object
+        required:
+        - SecFiling
+        type: object
+    UserId:
+      format: uuid
+      type: string
+    DatasetDescriptor:
+      additionalProperties: false
+      description: 'A dataset is where you put multiple referential schemas.
+
+
+        A dataset is a complete namespace where all references between schemas
+
+        are held within the dataset.'
+      properties:
+        description:
+          type: string
+        llm_override_field:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        relationships:
+          items:
+            $ref: '#/components/schemas/RelationshipDescriptor'
+          type: array
+        tables:
+          items:
+            $ref: '#/components/schemas/TableDescriptor'
+          type: array
+      required:
+      - name
+      - description
+      - tables
+      - relationships
+      type: object
+    ScraperId:
+      format: uuid
+      type: string
+    WebMeta:
+      properties:
+        flags:
+          items:
+            $ref: '#/components/schemas/Flag'
+          type: array
+        ocr_content:
+          type:
+          - string
+          - 'null'
+        screenshot:
+          format: binary
+          type:
+          - string
+          - 'null'
+        url:
+          type: string
+      required:
+      - url
+      - flags
       type: object
   securitySchemes:
     api_key:

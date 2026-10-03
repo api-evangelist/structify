@@ -83,54 +83,55 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    RequiredProperty:
+    RelationshipDescriptor:
       additionalProperties: false
       properties:
-        property_names:
-          description: If there are multiple properties, it can match just one of them
-          items:
-            type: string
-          type: array
-        table_name:
-          description: The table name of the entity to update
+        description:
           type: string
-      required:
-      - table_name
-      - property_names
-      type: object
-    ScrapeListRequest:
-      description: Request body for scraping a list
-      properties:
-        dataset_descriptor:
-          $ref: '#/components/schemas/DatasetDescriptor'
-        dataset_name:
-          type:
-          - string
-          - 'null'
-        input:
-          $ref: '#/components/schemas/ScrapeListInput'
-        node_id:
+        merge_strategy:
           allOf:
-          - $ref: '#/components/schemas/WorkflowSessionNodeId'
-        table_name:
+          - $ref: '#/components/schemas/RelationshipMergeStrategy'
+        name:
           type: string
-        use_proxy:
-          type:
-          - boolean
-          - 'null'
+        properties:
+          items:
+            $ref: '#/components/schemas/PropertyDescriptor'
+          type: array
+        source_table:
+          type: string
+        target_table:
+          type: string
       required:
-      - dataset_descriptor
-      - table_name
-      - input
+      - name
+      - description
+      - source_table
+      - target_table
       type: object
-    BasicPropValue:
-      oneOf:
-      - type: string
-      - format: int64
-        type: integer
-      - type: boolean
-      - format: double
-        type: number
+    JobId:
+      format: uuid
+      type: string
+    LLMKnowledgeGraph:
+      additionalProperties: false
+      description: 'Knowledge graph info structured to deserialize and display
+
+        in the same format that the LLM outputs.
+
+        Also the first representation of an LLM output in the pipeline from raw tool output to being merged into a DB'
+      properties:
+        entities:
+          items:
+            $ref: '#/components/schemas/LLMEntity'
+          type: array
+        relationships:
+          items:
+            $ref: '#/components/schemas/LLMRelationship'
+          type: array
+      required:
+      - entities
+      type: object
+    EntityId:
+      format: uuid
+      type: string
     ScrapeResponse:
       description: Response body
       properties:
@@ -138,6 +139,80 @@ components:
           type: string
       required:
       - job_id
+      type: object
+    LLMEntity:
+      additionalProperties: false
+      properties:
+        id:
+          minimum: 0
+          type: integer
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/BasicPropValue'
+          type: object
+        type:
+          type: string
+      required:
+      - id
+      - type
+      - properties
+      type: object
+    RelationshipMergeProbability:
+      properties:
+        source_cardinality_given_target_match:
+          description: 'Describes the expected cardinality of the source table when a match is found in the target table
+
+
+            For example, if we have a source company and a target funding round, we expect the source company
+
+            to appear in multiple funding rounds, but not *too* many.
+
+            So if we have a funding round match, the expected number of unique companies is relatively small.
+
+            This is an estimate of that number.'
+          format: int64
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        target_cardinality_given_source_match:
+          description: 'Describes the expected cardinality of the target table when a match is found in the source table
+
+
+            For example, if we have a source company and a target funding round, we usually expect
+
+            some number of funding rounds to be associated with a single company but not *too* many.
+
+            So if we have a company match, the expected number of unique funding rounds is relatively small.
+
+            This is an estimate of that number.'
+          format: int64
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+      type: object
+    RequiredRelationship:
+      additionalProperties: false
+      properties:
+        relationship_name:
+          type: string
+      required:
+      - relationship_name
+      type: object
+    RelationshipMergeStrategy:
+      oneOf:
+      - $ref: '#/components/schemas/RelationshipMergeProbability'
+    WorkflowSessionNodeId:
+      format: uuid
+      type: string
+    ErrorResponse:
+      description: Standard error response
+      properties:
+        error:
+          type: string
+      required:
+      - error
       type: object
     MergeConfig:
       description: The configuration for a probabilistic merge strategy
@@ -169,19 +244,66 @@ components:
       - baseline_cardinality
       - match_transfer_probability
       type: object
-    SaveRequirement:
-      description: It's an OR statement across these.
-      oneOf:
-      - $ref: '#/components/schemas/RequiredRelationship'
-      - $ref: '#/components/schemas/RequiredEntity'
-      - $ref: '#/components/schemas/RequiredProperty'
-    RequiredRelationship:
+    ScrapeRequest:
+      description: Request body for scraping a single entity directly
+      properties:
+        dataset_name:
+          type: string
+        extraction_criteria:
+          items:
+            $ref: '#/components/schemas/SaveRequirement'
+          type: array
+        node_id:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowSessionNodeId'
+        seeded_kg:
+          allOf:
+          - $ref: '#/components/schemas/LLMKnowledgeGraph'
+        url:
+          type: string
+        use_proxy:
+          type:
+          - boolean
+          - 'null'
+      required:
+      - dataset_name
+      - url
+      - extraction_criteria
+      type: object
+    RequiredProperty:
       additionalProperties: false
       properties:
-        relationship_name:
+        property_names:
+          description: If there are multiple properties, it can match just one of them
+          items:
+            type: string
+          type: array
+        table_name:
+          description: The table name of the entity to update
           type: string
       required:
-      - relationship_name
+      - table_name
+      - property_names
+      type: object
+    ComparisonStrategy:
+      enum:
+      - Default
+      - EnforceUniqueness
+      type: string
+    PropertyDescriptor:
+      additionalProperties: false
+      properties:
+        description:
+          type: string
+        merge_strategy:
+          $ref: '#/components/schemas/MergeStrategy'
+        name:
+          type: string
+        prop_type:
+          $ref: '#/components/schemas/PropertyType'
+      required:
+      - name
+      - description
       type: object
     ScrapeListResponse:
       description: Response body
@@ -193,6 +315,57 @@ components:
       required:
       - job_id
       - dataset_name
+      type: object
+    MergeStrategy:
+      oneOf:
+      - description: 'Property with unique 1:1 correspondence to its parent.
+
+
+          Merge based on this property 100% of the time'
+        enum:
+        - Unique
+        type: string
+      - properties:
+          Probabilistic:
+            $ref: '#/components/schemas/MergeConfig'
+        required:
+        - Probabilistic
+        type: object
+      - enum:
+        - NoSignal
+        type: string
+    TableDescriptor:
+      additionalProperties: false
+      description: The full definition of what a schema is - without duplicate information.
+      properties:
+        description:
+          type: string
+        expected_cardinality:
+          description: 'Expected number of unique values in the complete dataset.
+
+
+            This is used for our probabilistic merge strategy.'
+          format: int64
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        name:
+          description: Organized in a name, description format.
+          type: string
+        primary_column:
+          type:
+          - string
+          - 'null'
+        properties:
+          description: Organized in a name, description format.
+          items:
+            $ref: '#/components/schemas/PropertyDescriptor'
+          type: array
+      required:
+      - name
+      - description
+      - properties
       type: object
     PropertyType:
       oneOf:
@@ -234,174 +407,14 @@ components:
       - enum:
         - Address
         type: string
-    LLMKnowledgeGraph:
-      additionalProperties: false
-      description: 'Knowledge graph info structured to deserialize and display
-
-        in the same format that the LLM outputs.
-
-        Also the first representation of an LLM output in the pipeline from raw tool output to being merged into a DB'
-      properties:
-        entities:
-          items:
-            $ref: '#/components/schemas/LLMEntity'
-          type: array
-        relationships:
-          items:
-            $ref: '#/components/schemas/LLMRelationship'
-          type: array
-      required:
-      - entities
-      type: object
-    LLMEntity:
-      additionalProperties: false
-      properties:
-        id:
-          minimum: 0
-          type: integer
-        properties:
-          additionalProperties:
-            $ref: '#/components/schemas/BasicPropValue'
-          type: object
-        type:
-          type: string
-      required:
-      - id
-      - type
-      - properties
-      type: object
-    EntityId:
-      format: uuid
-      type: string
-    RelationshipMergeProbability:
-      properties:
-        source_cardinality_given_target_match:
-          description: 'Describes the expected cardinality of the source table when a match is found in the target table
-
-
-            For example, if we have a source company and a target funding round, we expect the source company
-
-            to appear in multiple funding rounds, but not *too* many.
-
-            So if we have a funding round match, the expected number of unique companies is relatively small.
-
-            This is an estimate of that number.'
-          format: int64
-          minimum: 0
-          type:
-          - integer
-          - 'null'
-        target_cardinality_given_source_match:
-          description: 'Describes the expected cardinality of the target table when a match is found in the source table
-
-
-            For example, if we have a source company and a target funding round, we usually expect
-
-            some number of funding rounds to be associated with a single company but not *too* many.
-
-            So if we have a company match, the expected number of unique funding rounds is relatively small.
-
-            This is an estimate of that number.'
-          format: int64
-          minimum: 0
-          type:
-          - integer
-          - 'null'
-      type: object
-    ScrapeListInput:
+    BasicPropValue:
       oneOf:
-      - properties:
-          Direct:
-            properties:
-              url:
-                type: string
-            required:
-            - url
-            type: object
-        required:
-        - Direct
-        type: object
-      - properties:
-          Related:
-            properties:
-              relationship_name:
-                type: string
-              source_entity:
-                $ref: '#/components/schemas/LLMEntity'
-              source_url_column:
-                type: string
-            required:
-            - source_url_column
-            - source_entity
-            - relationship_name
-            type: object
-        required:
-        - Related
-        type: object
-    JobId:
-      format: uuid
-      type: string
-    RelationshipMergeStrategy:
-      oneOf:
-      - $ref: '#/components/schemas/RelationshipMergeProbability'
-    RelationshipDescriptor:
-      additionalProperties: false
-      properties:
-        description:
-          type: string
-        merge_strategy:
-          allOf:
-          - $ref: '#/components/schemas/RelationshipMergeStrategy'
-        name:
-          type: string
-        properties:
-          items:
-            $ref: '#/components/schemas/PropertyDescriptor'
-          type: array
-        source_table:
-          type: string
-        target_table:
-          type: string
-      required:
-      - name
-      - description
-      - source_table
-      - target_table
-      type: object
-    ErrorResponse:
-      description: Standard error response
-      properties:
-        error:
-          type: string
-      required:
-      - error
-      type: object
-    ScrapeRequest:
-      description: Request body for scraping a single entity directly
-      properties:
-        dataset_name:
-          type: string
-        extraction_criteria:
-          items:
-            $ref: '#/components/schemas/SaveRequirement'
-          type: array
-        node_id:
-          allOf:
-          - $ref: '#/components/schemas/WorkflowSessionNodeId'
-        seeded_kg:
-          allOf:
-          - $ref: '#/components/schemas/LLMKnowledgeGraph'
-        url:
-          type: string
-        use_proxy:
-          type:
-          - boolean
-          - 'null'
-      required:
-      - dataset_name
-      - url
-      - extraction_criteria
-      type: object
+      - type: string
+      - format: int64
+        type: integer
+      - type: boolean
+      - format: double
+        type: number
     DatasetDescriptor:
       additionalProperties: false
       description: 'A dataset is where you put multiple referential schemas.
@@ -433,44 +446,36 @@ components:
       - tables
       - relationships
       type: object
-    ComparisonStrategy:
-      enum:
-      - Default
-      - EnforceUniqueness
-      type: string
-    MergeStrategy:
+    ScrapeListInput:
       oneOf:
-      - description: 'Property with unique 1:1 correspondence to its parent.
-
-
-          Merge based on this property 100% of the time'
-        enum:
-        - Unique
-        type: string
       - properties:
-          Probabilistic:
-            $ref: '#/components/schemas/MergeConfig'
+          Direct:
+            properties:
+              url:
+                type: string
+            required:
+            - url
+            type: object
         required:
-        - Probabilistic
+        - Direct
         type: object
-      - enum:
-        - NoSignal
-        type: string
-    PropertyDescriptor:
-      additionalProperties: false
-      properties:
-        description:
-          type: string
-        merge_strategy:
-          $ref: '#/components/schemas/MergeStrategy'
-        name:
-          type: string
-        prop_type:
-          $ref: '#/components/schemas/PropertyType'
-      required:
-      - name
-      - description
-      type: object
+      - properties:
+          Related:
+            properties:
+              relationship_name:
+                type: string
+              source_entity:
+                $ref: '#/components/schemas/LLMEntity'
+              source_url_column:
+                type: string
+            required:
+            - source_url_column
+            - source_entity
+            - relationship_name
+            type: object
+        required:
+        - Related
+        type: object
     RequiredEntity:
       additionalProperties: false
       properties:
@@ -484,42 +489,12 @@ components:
       required:
       - seeded_entity_id
       type: object
-    TableDescriptor:
-      additionalProperties: false
-      description: The full definition of what a schema is - without duplicate information.
-      properties:
-        description:
-          type: string
-        expected_cardinality:
-          description: 'Expected number of unique values in the complete dataset.
-
-
-            This is used for our probabilistic merge strategy.'
-          format: int64
-          minimum: 0
-          type:
-          - integer
-          - 'null'
-        name:
-          description: Organized in a name, description format.
-          type: string
-        primary_column:
-          type:
-          - string
-          - 'null'
-        properties:
-          description: Organized in a name, description format.
-          items:
-            $ref: '#/components/schemas/PropertyDescriptor'
-          type: array
-      required:
-      - name
-      - description
-      - properties
-      type: object
-    WorkflowSessionNodeId:
-      format: uuid
-      type: string
+    SaveRequirement:
+      description: It's an OR statement across these.
+      oneOf:
+      - $ref: '#/components/schemas/RequiredRelationship'
+      - $ref: '#/components/schemas/RequiredEntity'
+      - $ref: '#/components/schemas/RequiredProperty'
     LLMRelationship:
       additionalProperties: false
       properties:
@@ -539,6 +514,31 @@ components:
       - type
       - source
       - target
+      type: object
+    ScrapeListRequest:
+      description: Request body for scraping a list
+      properties:
+        dataset_descriptor:
+          $ref: '#/components/schemas/DatasetDescriptor'
+        dataset_name:
+          type:
+          - string
+          - 'null'
+        input:
+          $ref: '#/components/schemas/ScrapeListInput'
+        node_id:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowSessionNodeId'
+        table_name:
+          type: string
+        use_proxy:
+          type:
+          - boolean
+          - 'null'
+      required:
+      - dataset_descriptor
+      - table_name
+      - input
       type: object
   securitySchemes:
     api_key:

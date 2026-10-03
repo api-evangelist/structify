@@ -69,190 +69,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    VizNumberControlType:
-      enum:
-      - range
-      type: string
-    VizStringControl:
-      additionalProperties: false
-      properties:
-        label:
-          type: string
-        options:
-          items:
-            $ref: '#/components/schemas/VizControlOption'
-          type: array
-        type:
-          $ref: '#/components/schemas/VizStringControlType'
-      required:
-      - type
-      - label
-      - options
-      type: object
-    VizBooleanControlType:
-      enum:
-      - checkbox
-      type: string
-    DashboardItem:
-      properties:
-        file_name:
-          description: File path relative to repository root.
-          type: string
-        spec:
-          $ref: '#/components/schemas/DashboardSpec'
-      required:
-      - file_name
-      - spec
-      type: object
-    VizParam:
-      discriminator:
-        propertyName: type
-      oneOf:
-      - properties:
-          control:
-            $ref: '#/components/schemas/VizStringControl'
-          type:
-            enum:
-            - string
-            type: string
-          value:
-            type: string
-        required:
-        - value
-        - type
-        type: object
-      - properties:
-          control:
-            $ref: '#/components/schemas/VizNumberControl'
-          type:
-            enum:
-            - number
-            type: string
-          value:
-            format: double
-            type: number
-        required:
-        - value
-        - type
-        type: object
-      - properties:
-          control:
-            $ref: '#/components/schemas/VizBooleanControl'
-          type:
-            enum:
-            - boolean
-            type: string
-          value:
-            type: boolean
-        required:
-        - value
-        - type
-        type: object
-      - properties:
-          control:
-            $ref: '#/components/schemas/VizDateControl'
-          type:
-            enum:
-            - date
-            type: string
-          value:
-            type: string
-        required:
-        - value
-        - type
-        type: object
-    VizBooleanControl:
-      additionalProperties: false
-      properties:
-        label:
-          type: string
-        type:
-          $ref: '#/components/schemas/VizBooleanControlType'
-      required:
-      - type
-      - label
-      type: object
-    ControlOption:
-      properties:
-        label:
-          type: string
-        value:
-          type: string
-      required:
-      - value
-      - label
-      type: object
-    DashboardSpec:
-      additionalProperties: false
-      properties:
-        dataset:
-          type: string
-        description:
-          type: string
-        figures:
-          items:
-            $ref: '#/components/schemas/VizFigure'
-          type: array
-        params:
-          additionalProperties:
-            $ref: '#/components/schemas/VizParam'
-          type: object
-        queries:
-          items:
-            $ref: '#/components/schemas/VizQuery'
-          type: array
-        title:
-          type: string
-        version:
-          type: string
-      required:
-      - version
-      - title
-      - description
-      - dataset
-      - params
-      - queries
-      - figures
-      type: object
-    WorkflowNodeExecutionStatus:
-      enum:
-      - Unexecuted
-      - Success
-      - Failure
-      - Running
-      - Aborted
-      - PendingConfirmation
-      type: string
-    DashboardComponent:
-      description: A component references a viz node and optional display metadata.
-      properties:
-        description:
-          description: Optional description shown under the component title.
-          type:
-          - string
-          - 'null'
-        node_name:
-          description: Function name of the viz node that outputs the chart spec.
-          type: string
-        span:
-          description: 'Grid span: 1 (quarter), 2 (half), 3 (three-quarters), 4 (full width).'
-          format: int32
-          type:
-          - integer
-          - 'null'
-        title:
-          description: Display title shown in the dashboard layout.
-          type: string
-      required:
-      - node_name
-      - title
-      type: object
-    ConnectorId:
-      format: uuid
-      type: string
-    ChatSessionId:
-      format: uuid
-      type: string
     WorkflowSessionNode:
       properties:
         cache_final_rows:
@@ -367,6 +183,15 @@ components:
       - code_md5_hash
       - reviewed
       type: object
+    WorkflowNodeExecutionStatus:
+      enum:
+      - Unexecuted
+      - Success
+      - Failure
+      - Running
+      - Aborted
+      - PendingConfirmation
+      type: string
     VizQuery:
       additionalProperties: false
       properties:
@@ -378,19 +203,9 @@ components:
       - id
       - sql
       type: object
-    VizDateControl:
-      additionalProperties: false
-      properties:
-        label:
-          type: string
-        type:
-          $ref: '#/components/schemas/VizDateControlType'
-      required:
-      - type
-      - label
-      type: object
-    WorkflowSessionId:
-      format: uuid
+    VizBooleanControlType:
+      enum:
+      - checkbox
       type: string
     Dashboard:
       description: 'A page is the top-level container with title/description
@@ -414,25 +229,51 @@ components:
       - title
       - dashboards
       type: object
-    WorkflowSessionEdge:
+    VizDateControl:
+      additionalProperties: false
       properties:
-        created_at:
-          format: date-time
+        label:
           type: string
-        id:
-          $ref: '#/components/schemas/WorkflowSessionEdgeId'
-        session_id:
-          $ref: '#/components/schemas/WorkflowSessionId'
-        source_node_id:
-          $ref: '#/components/schemas/WorkflowSessionNodeId'
-        target_node_id:
-          $ref: '#/components/schemas/WorkflowSessionNodeId'
+        type:
+          $ref: '#/components/schemas/VizDateControlType'
       required:
-      - id
-      - session_id
-      - source_node_id
-      - target_node_id
-      - created_at
+      - type
+      - label
+      type: object
+    WorkflowSessionId:
+      format: uuid
+      type: string
+    DashboardSpec:
+      additionalProperties: false
+      properties:
+        dataset:
+          type: string
+        description:
+          type: string
+        figures:
+          items:
+            $ref: '#/components/schemas/VizFigure'
+          type: array
+        params:
+          additionalProperties:
+            $ref: '#/components/schemas/VizParam'
+          type: object
+        queries:
+          items:
+            $ref: '#/components/schemas/VizQuery'
+          type: array
+        title:
+          type: string
+        version:
+          type: string
+      required:
+      - version
+      - title
+      - description
+      - dataset
+      - params
+      - queries
+      - figures
       type: object
     DashboardControl:
       discriminator:
@@ -532,6 +373,103 @@ components:
         - options
         - type
         type: object
+    WorkflowSessionNodeId:
+      format: uuid
+      type: string
+    VizStringControlType:
+      enum:
+      - dropdown
+      type: string
+    DashboardItem:
+      properties:
+        file_name:
+          description: File path relative to repository root.
+          type: string
+        spec:
+          $ref: '#/components/schemas/DashboardSpec'
+      required:
+      - file_name
+      - spec
+      type: object
+    VizFigureDefinition:
+      additionalProperties: false
+      properties:
+        expression:
+          type: string
+        kind:
+          $ref: '#/components/schemas/VizFigureKind'
+      required:
+      - kind
+      - expression
+      type: object
+    VizParam:
+      discriminator:
+        propertyName: type
+      oneOf:
+      - properties:
+          control:
+            $ref: '#/components/schemas/VizStringControl'
+          type:
+            enum:
+            - string
+            type: string
+          value:
+            type: string
+        required:
+        - value
+        - type
+        type: object
+      - properties:
+          control:
+            $ref: '#/components/schemas/VizNumberControl'
+          type:
+            enum:
+            - number
+            type: string
+          value:
+            format: double
+            type: number
+        required:
+        - value
+        - type
+        type: object
+      - properties:
+          control:
+            $ref: '#/components/schemas/VizBooleanControl'
+          type:
+            enum:
+            - boolean
+            type: string
+          value:
+            type: boolean
+        required:
+        - value
+        - type
+        type: object
+      - properties:
+          control:
+            $ref: '#/components/schemas/VizDateControl'
+          type:
+            enum:
+            - date
+            type: string
+          value:
+            type: string
+        required:
+        - value
+        - type
+        type: object
+    VizBooleanControl:
+      additionalProperties: false
+      properties:
+        label:
+          type: string
+        type:
+          $ref: '#/components/schemas/VizBooleanControlType'
+      required:
+      - type
+      - label
+      type: object
     VizFigure:
       additionalProperties: false
       properties:
@@ -550,47 +488,37 @@ components:
       - id
       - figure
       type: object
-    VizFigureKind:
-      enum:
-      - js
-      - vega-lite
-      - data-table
-      type: string
-    WorkflowSessionEdgeId:
-      format: uuid
-      type: string
-    VizStringControlType:
-      enum:
-      - dropdown
-      type: string
-    WorkflowSessionNodeId:
-      format: uuid
-      type: string
-    VizNumberControl:
-      additionalProperties: false
-      properties:
-        label:
-          type: string
-        max:
-          format: double
-          type: number
-        min:
-          format: double
-          type: number
-        step:
-          format: double
-          type: number
-        type:
-          $ref: '#/components/schemas/VizNumberControlType'
-      required:
-      - type
-      - label
-      - min
-      - max
-      type: object
     VizDateControlType:
       enum:
       - date
+      type: string
+    DashboardComponent:
+      description: A component references a viz node and optional display metadata.
+      properties:
+        description:
+          description: Optional description shown under the component title.
+          type:
+          - string
+          - 'null'
+        node_name:
+          description: Function name of the viz node that outputs the chart spec.
+          type: string
+        span:
+          description: 'Grid span: 1 (quarter), 2 (half), 3 (three-quarters), 4 (full width).'
+          format: int32
+          type:
+          - integer
+          - 'null'
+        title:
+          description: Display title shown in the dashboard layout.
+          type: string
+      required:
+      - node_name
+      - title
+      type: object
+    VizNumberControlType:
+      enum:
+      - range
       type: string
     VizControlOption:
       additionalProperties: false
@@ -603,16 +531,58 @@ components:
       - label
       - value
       type: object
-    VizFigureDefinition:
+    VizStringControl:
       additionalProperties: false
       properties:
-        expression:
+        label:
           type: string
-        kind:
-          $ref: '#/components/schemas/VizFigureKind'
+        options:
+          items:
+            $ref: '#/components/schemas/VizControlOption'
+          type: array
+        type:
+          $ref: '#/components/schemas/VizStringControlType'
       required:
-      - kind
-      - expression
+      - type
+      - label
+      - options
+      type: object
+    DashboardPage:
+      description: 'A dashboard groups components that share a common dataset.
+
+        If dataset_node_name is None, components render static viz without Mosaic cross-filtering.'
+      properties:
+        components:
+          description: Components (charts) in this dashboard
+          items:
+            $ref: '#/components/schemas/DashboardComponent'
+          type: array
+        controls:
+          description: Control filters (dropdowns, checkboxes, ranges) for this dashboard
+          items:
+            $ref: '#/components/schemas/DashboardControl'
+          type:
+          - array
+          - 'null'
+        datasetNodeName:
+          description: 'Function name of the node that returns the dataset (DataFrame/Parquet).
+
+            If None, no cross-filtering is available.'
+          type:
+          - string
+          - 'null'
+        description:
+          description: Optional description
+          type:
+          - string
+          - 'null'
+        title:
+          description: Title for this dashboard section
+          type:
+          - string
+          - 'null'
+      required:
+      - components
       type: object
     WorkflowDAG:
       properties:
@@ -658,42 +628,72 @@ components:
       - is_ready
       - dashboard_specs
       type: object
-    DashboardPage:
-      description: 'A dashboard groups components that share a common dataset.
-
-        If dataset_node_name is None, components render static viz without Mosaic cross-filtering.'
+    VizFigureKind:
+      enum:
+      - js
+      - vega-lite
+      - data-table
+      type: string
+    ConnectorId:
+      format: uuid
+      type: string
+    ControlOption:
       properties:
-        components:
-          description: Components (charts) in this dashboard
-          items:
-            $ref: '#/components/schemas/DashboardComponent'
-          type: array
-        controls:
-          description: Control filters (dropdowns, checkboxes, ranges) for this dashboard
-          items:
-            $ref: '#/components/schemas/DashboardControl'
-          type:
-          - array
-          - 'null'
-        datasetNodeName:
-          description: 'Function name of the node that returns the dataset (DataFrame/Parquet).
-
-            If None, no cross-filtering is available.'
-          type:
-          - string
-          - 'null'
-        description:
-          description: Optional description
-          type:
-          - string
-          - 'null'
-        title:
-          description: Title for this dashboard section
-          type:
-          - string
-          - 'null'
+        label:
+          type: string
+        value:
+          type: string
       required:
-      - components
+      - value
+      - label
+      type: object
+    ChatSessionId:
+      format: uuid
+      type: string
+    WorkflowSessionEdgeId:
+      format: uuid
+      type: string
+    WorkflowSessionEdge:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        id:
+          $ref: '#/components/schemas/WorkflowSessionEdgeId'
+        session_id:
+          $ref: '#/components/schemas/WorkflowSessionId'
+        source_node_id:
+          $ref: '#/components/schemas/WorkflowSessionNodeId'
+        target_node_id:
+          $ref: '#/components/schemas/WorkflowSessionNodeId'
+      required:
+      - id
+      - session_id
+      - source_node_id
+      - target_node_id
+      - created_at
+      type: object
+    VizNumberControl:
+      additionalProperties: false
+      properties:
+        label:
+          type: string
+        max:
+          format: double
+          type: number
+        min:
+          format: double
+          type: number
+        step:
+          format: double
+          type: number
+        type:
+          $ref: '#/components/schemas/VizNumberControlType'
+      required:
+      - type
+      - label
+      - min
+      - max
       type: object
   securitySchemes:
     api_key:

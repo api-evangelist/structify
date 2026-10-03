@@ -132,6 +132,13 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    StopWorkflowRequest:
+      properties:
+        workflow_session_id:
+          $ref: '#/components/schemas/WorkflowSessionId'
+      required:
+      - workflow_session_id
+      type: object
     RunWorkflowRequest:
       properties:
         chat_session_id:
@@ -146,6 +153,9 @@ components:
       - chat_session_id
       - use_node_cache
       type: object
+    WorkflowSessionNodeId:
+      format: uuid
+      type: string
     ErrorResponse:
       description: Standard error response
       properties:
@@ -154,29 +164,10 @@ components:
       required:
       - error
       type: object
-    GetNodeLogsResponse:
-      properties:
-        logs:
-          items:
-            $ref: '#/components/schemas/WorkflowNodeLog'
-          type: array
-      required:
-      - logs
-      type: object
-    StopWorkflowRequest:
-      properties:
-        workflow_session_id:
-          $ref: '#/components/schemas/WorkflowSessionId'
-      required:
-      - workflow_session_id
-      type: object
+    ChatSessionId:
+      format: uuid
+      type: string
     WorkflowSessionId:
-      format: uuid
-      type: string
-    WorkflowNodeLogId:
-      format: uuid
-      type: string
-    WorkflowSessionNodeId:
       format: uuid
       type: string
     WorkflowNodeLog:
@@ -199,7 +190,16 @@ components:
       - is_stderr
       - content
       type: object
-    ChatSessionId:
+    GetNodeLogsResponse:
+      properties:
+        logs:
+          items:
+            $ref: '#/components/schemas/WorkflowNodeLog'
+          type: array
+      required:
+      - logs
+      type: object
+    WorkflowNodeLogId:
       format: uuid
       type: string
   securitySchemes:

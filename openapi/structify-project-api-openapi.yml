@@ -280,38 +280,6 @@ components:
           allOf:
           - $ref: '#/components/schemas/ProjectVisibility'
       type: object
-    ProjectId:
-      format: uuid
-      type: string
-    CreateProjectRequest:
-      properties:
-        description:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-      required:
-      - name
-      type: object
-    ErrorResponse:
-      description: Standard error response
-      properties:
-        error:
-          type: string
-      required:
-      - error
-      type: object
-    ProjectCollaboratorInput:
-      properties:
-        email:
-          type: string
-        role:
-          $ref: '#/components/schemas/ChatSessionRole'
-      required:
-      - email
-      - role
-      type: object
     Project:
       properties:
         created_at:
@@ -340,6 +308,71 @@ components:
       - updated_at
       - visibility
       type: object
+    ProjectCollaboratorInput:
+      properties:
+        email:
+          type: string
+        role:
+          $ref: '#/components/schemas/ChatSessionRole'
+      required:
+      - email
+      - role
+      type: object
+    CreateProjectRequest:
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+      required:
+      - name
+      type: object
+    ProjectId:
+      format: uuid
+      type: string
+    UserId:
+      format: uuid
+      type: string
+    TeamId:
+      format: uuid
+      type: string
+    ProjectVisibility:
+      enum:
+      - private
+      - shared_with_team
+      type: string
+    ErrorResponse:
+      description: Standard error response
+      properties:
+        error:
+          type: string
+      required:
+      - error
+      type: object
+    DeleteProjectResponse:
+      properties:
+        success:
+          type: boolean
+      required:
+      - success
+      type: object
+    ChatSessionRole:
+      enum:
+      - viewer
+      - editor
+      - owner
+      type: string
+    ListProjectsResponse:
+      properties:
+        projects:
+          items:
+            $ref: '#/components/schemas/Project'
+          type: array
+      required:
+      - projects
+      type: object
     ProjectWithMembers:
       allOf:
       - $ref: '#/components/schemas/Project'
@@ -351,21 +384,6 @@ components:
         required:
         - members
         type: object
-    UserId:
-      format: uuid
-      type: string
-    ProjectVisibility:
-      enum:
-      - private
-      - shared_with_team
-      type: string
-    DeleteProjectResponse:
-      properties:
-        success:
-          type: boolean
-      required:
-      - success
-      type: object
     ProjectMember:
       properties:
         created_at:
@@ -386,24 +404,6 @@ components:
       - role
       - created_at
       - updated_at
-      type: object
-    TeamId:
-      format: uuid
-      type: string
-    ChatSessionRole:
-      enum:
-      - viewer
-      - editor
-      - owner
-      type: string
-    ListProjectsResponse:
-      properties:
-        projects:
-          items:
-            $ref: '#/components/schemas/Project'
-          type: array
-      required:
-      - projects
       type: object
   securitySchemes:
     api_key:

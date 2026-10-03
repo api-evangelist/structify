@@ -46,10 +46,6 @@ paths:
       - Slack
 components:
   schemas:
-    SlackApiResponse:
-      oneOf:
-      - $ref: '#/components/schemas/SlackChallengeResponse'
-      - $ref: '#/components/schemas/SlackEventResponse'
     SlackEventResponse:
       properties:
         message:
@@ -60,6 +56,93 @@ components:
           type: boolean
       required:
       - ok
+      type: object
+    SlackEvent:
+      discriminator:
+        propertyName: type
+      oneOf:
+      - properties:
+          channel:
+            type: string
+          channel_type:
+            type:
+            - string
+            - 'null'
+          client_msg_id:
+            type:
+            - string
+            - 'null'
+          event_ts:
+            type:
+            - string
+            - 'null'
+          files:
+            items:
+              $ref: '#/components/schemas/SlackFile'
+            type:
+            - array
+            - 'null'
+          team:
+            type:
+            - string
+            - 'null'
+          text:
+            type: string
+          thread_ts:
+            type:
+            - string
+            - 'null'
+          ts:
+            type: string
+          type:
+            enum:
+            - app_mention
+            type: string
+          user:
+            type: string
+        required:
+        - user
+        - text
+        - ts
+        - channel
+        - type
+        type: object
+    SlackChallengeResponse:
+      properties:
+        challenge:
+          type: string
+      required:
+      - challenge
+      type: object
+    SlackApiResponse:
+      oneOf:
+      - $ref: '#/components/schemas/SlackChallengeResponse'
+      - $ref: '#/components/schemas/SlackEventResponse'
+    SlackFile:
+      properties:
+        filetype:
+          type:
+          - string
+          - 'null'
+        id:
+          type: string
+        mimetype:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        url_private:
+          type:
+          - string
+          - 'null'
+        url_private_download:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - name
       type: object
     SlackEventPayload:
       discriminator:
@@ -117,89 +200,6 @@ components:
         - event_id
         - type
         type: object
-    SlackEvent:
-      discriminator:
-        propertyName: type
-      oneOf:
-      - properties:
-          channel:
-            type: string
-          channel_type:
-            type:
-            - string
-            - 'null'
-          client_msg_id:
-            type:
-            - string
-            - 'null'
-          event_ts:
-            type:
-            - string
-            - 'null'
-          files:
-            items:
-              $ref: '#/components/schemas/SlackFile'
-            type:
-            - array
-            - 'null'
-          team:
-            type:
-            - string
-            - 'null'
-          text:
-            type: string
-          thread_ts:
-            type:
-            - string
-            - 'null'
-          ts:
-            type: string
-          type:
-            enum:
-            - app_mention
-            type: string
-          user:
-            type: string
-        required:
-        - user
-        - text
-        - ts
-        - channel
-        - type
-        type: object
-    SlackFile:
-      properties:
-        filetype:
-          type:
-          - string
-          - 'null'
-        id:
-          type: string
-        mimetype:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-        url_private:
-          type:
-          - string
-          - 'null'
-        url_private_download:
-          type:
-          - string
-          - 'null'
-      required:
-      - id
-      - name
-      type: object
-    SlackChallengeResponse:
-      properties:
-        challenge:
-          type: string
-      required:
-      - challenge
-      type: object
   securitySchemes:
     api_key:
       in: header

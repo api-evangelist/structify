@@ -1304,791 +1304,10 @@ paths:
       - Chat
 components:
   schemas:
-    UpdateVisibilityResponse:
+    SaveInput:
       properties:
-        visibility:
-          $ref: '#/components/schemas/ChatVisibility'
-      required:
-      - visibility
-      type: object
-    ProjectId:
-      format: uuid
-      type: string
-    ScraperMeta:
-      properties:
-        html_content:
-          type: string
-        url:
-          type: string
-      required:
-      - html_content
-      - url
-      type: object
-    VizStringControl:
-      additionalProperties: false
-      properties:
-        label:
-          type: string
-        options:
-          items:
-            $ref: '#/components/schemas/VizControlOption'
-          type: array
-        type:
-          $ref: '#/components/schemas/VizStringControlType'
-      required:
-      - type
-      - label
-      - options
-      type: object
-    VizBooleanControlType:
-      enum:
-      - checkbox
-      type: string
-    ExitInput:
-      properties:
-        reason:
-          type: string
-      required:
-      - reason
-      type: object
-    VizBooleanControl:
-      additionalProperties: false
-      properties:
-        label:
-          type: string
-        type:
-          $ref: '#/components/schemas/VizBooleanControlType'
-      required:
-      - type
-      - label
-      type: object
-    SaveRequirement:
-      description: It's an OR statement across these.
-      oneOf:
-      - $ref: '#/components/schemas/RequiredRelationship'
-      - $ref: '#/components/schemas/RequiredEntity'
-      - $ref: '#/components/schemas/RequiredProperty'
-    NodeSummary:
-      properties:
-        data_preview:
-          type:
-          - string
-          - 'null'
-        image:
-          format: binary
-          type:
-          - string
-          - 'null'
-        in_dashboard:
-          type: boolean
-        name:
-          type: string
-      required:
-      - name
-      - in_dashboard
-      type: object
-    ReadNodeLogsInput:
-      properties:
-        log_type:
-          type:
-          - string
-          - 'null'
-        node_function_name:
-          type: string
-      required:
-      - node_function_name
-      type: object
-    ApiExecuteInput:
-      properties:
-        code:
-          type: string
-      required:
-      - code
-      type: object
-    CodeAddForm:
-      properties:
-        files:
-          items:
-            format: binary
-            type: string
-          type: array
-      required:
-      - files
-      type: object
-    SimulatePromptResponse:
-      properties:
-        response:
-          type: string
-      required:
-      - response
-      type: object
-    EntityId:
-      format: uuid
-      type: string
-    IssueFoundInput:
-      properties:
-        admin_override:
-          type: boolean
-        description:
-          type: string
-        title:
-          type: string
-      required:
-      - title
-      - description
-      - admin_override
-      type: object
-    GetDependenciesResponse:
-      description: Response structure for getting chat dependencies
-      properties:
-        dependencies:
-          description: List of dependencies for the chat session
-          items:
-            $ref: '#/components/schemas/ChatDependency'
-          type: array
-      required:
-      - dependencies
-      type: object
-    Flag:
-      properties:
-        ariaLabel:
-          type: string
-        height:
-          format: double
-          type: number
-        href:
-          type:
-          - string
-          - 'null'
-        isInteractive:
-          type:
-          - boolean
-          - 'null'
-        number:
-          description: The number by which the flag is referred in image, prompt, and tool calls.
-          minimum: 0
-          type:
-          - integer
-          - 'null'
-        text:
-          type: string
-        type:
-          type: string
-        width:
-          description: 'The serde default here is to give us backwards compatibility
-
-            it''s fine for these to be anything as long as the image isn''t
-
-            given since it won''t regenerate.'
-          format: double
-          type: number
-        x:
-          format: double
-          type: number
-        y:
-          format: double
-          type: number
-      required:
-      - x
-      - y
-      - type
-      - ariaLabel
-      type: object
-    ErrorResponse:
-      description: Standard error response
-      properties:
-        error:
-          type: string
-      required:
-      - error
-      type: object
-    PartialChatWithMetadata:
-      properties:
-        chat_prompt:
-          $ref: '#/components/schemas/ChatPrompt'
-        created_at:
-          format: date-time
-          type: string
-        message_id:
-          allOf:
-          - $ref: '#/components/schemas/ChatMessageId'
-      required:
-      - created_at
-      - chat_prompt
-      type: object
-    MessageContent:
-      oneOf:
-      - properties:
-          Text:
-            type: string
-        required:
-        - Text
-        type: object
-      - properties:
-          Image:
-            format: binary
-            type: string
-        required:
-        - Image
-        type: object
-    DatasetDescriptor:
-      additionalProperties: false
-      description: 'A dataset is where you put multiple referential schemas.
-
-
-        A dataset is a complete namespace where all references between schemas
-
-        are held within the dataset.'
-      properties:
-        description:
-          type: string
-        llm_override_field:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-        relationships:
-          items:
-            $ref: '#/components/schemas/RelationshipDescriptor'
-          type: array
-        tables:
-          items:
-            $ref: '#/components/schemas/TableDescriptor'
-          type: array
-      required:
-      - name
-      - description
-      - tables
-      - relationships
-      type: object
-    UpdateChatSessionFavoriteRequest:
-      properties:
-        is_favorite:
-          type: boolean
-      required:
-      - is_favorite
-      type: object
-    PinPreviousToolInput:
-      properties:
-        path:
-          type: string
-      required:
-      - path
-      type: object
-    SearchConnectorTypesInput:
-      properties:
-        query:
-          type:
-          - string
-          - 'null'
-      type: object
-    InputFilesDeleteResponse:
-      properties:
-        files_deleted:
-          minimum: 0
-          type: integer
-      required:
-      - files_deleted
-      type: object
-    TextMeta:
-      properties:
-        text:
-          type: string
-      required:
-      - text
-      type: object
-    ChatEvent:
-      description: Events in a chat session timeline, including messages and unified tool calls/results
-      oneOf:
-      - properties:
-          TextMessage:
-            properties:
-              message:
-                type: string
-            required:
-            - message
-            type: object
-        required:
-        - TextMessage
-        type: object
-      - properties:
-          Thinking:
-            properties:
-              block_id:
-                format: int64
-                minimum: 0
-                type: integer
-              complete:
-                type: boolean
-              content:
-                type: string
-            required:
-            - content
-            - complete
-            - block_id
-            type: object
-        required:
-        - Thinking
-        type: object
-      - properties:
-          File:
-            description: 'The file event can''t be serialized to the database safely without the content.
-
-              When streaming, we start with the path only, then add the content as we go.'
-            properties:
-              block_id:
-                format: int64
-                minimum: 0
-                type: integer
-              complete:
-                type: boolean
-              content:
-                type:
-                - string
-                - 'null'
-              path:
-                type: string
-            required:
-            - path
-            - complete
-            - block_id
-            type: object
-        required:
-        - File
-        type: object
-      - properties:
-          Action:
-            properties:
-              actions:
-                items:
-                  $ref: '#/components/schemas/ActionDef'
-                type: array
-              block_id:
-                format: int64
-                minimum: 0
-                type: integer
-              complete:
-                type: boolean
-            required:
-            - actions
-            - complete
-            - block_id
-            type: object
-        required:
-        - Action
-        type: object
-      - properties:
-          Connector:
-            properties:
-              description:
-                type:
-                - string
-                - 'null'
-              env_vars:
-                items:
-                  type: string
-                type: array
-              name:
-                type: string
-            required:
-            - name
-            - env_vars
-            type: object
-        required:
-        - Connector
-        type: object
-      - properties:
-          ToolCall:
-            properties:
-              block_id:
-                format: int64
-                minimum: 0
-                type: integer
-              complete:
-                type: boolean
-              invocation:
-                $ref: '#/components/schemas/ToolInvocation'
-              tool_result:
-                $ref: '#/components/schemas/ToolResult'
-            required:
-            - invocation
-            - tool_result
-            - block_id
-            - complete
-            type: object
-        required:
-        - ToolCall
-        type: object
-      - properties:
-          Question:
-            properties:
-              block_id:
-                format: int64
-                minimum: 0
-                type: integer
-              complete:
-                type: boolean
-              content:
-                type: string
-              options:
-                items:
-                  type: string
-                type: array
-            required:
-            - content
-            - complete
-            - options
-            - block_id
-            type: object
-        required:
-        - Question
-        type: object
-      - properties:
-          InternalError:
-            properties:
-              error_kind:
-                $ref: '#/components/schemas/InternalErrorKind'
-              message:
-                type: string
-            required:
-            - message
-            type: object
-        required:
-        - InternalError
-        type: object
-      - properties:
-          ReviewRequest:
-            properties:
-              node_summaries:
-                items:
-                  $ref: '#/components/schemas/NodeSummary'
-                type: array
-            required:
-            - node_summaries
-            type: object
-        required:
-        - ReviewRequest
-        type: object
-      - properties:
-          AttachedFile:
-            properties:
-              image_bytes:
-                format: binary
-                type:
-                - string
-                - 'null'
-              path:
-                type: string
-            required:
-            - path
-            type: object
-        required:
-        - AttachedFile
-        type: object
-      - properties:
-          ConnectorRequest:
-            properties:
-              connector_id:
-                $ref: '#/components/schemas/ConnectorId'
-            required:
-            - connector_id
-            type: object
-        required:
-        - ConnectorRequest
-        type: object
-      - properties:
-          UserInterrupted:
-            type: object
-        required:
-        - UserInterrupted
-        type: object
-      - properties:
-          IssueFound:
-            properties:
-              admin_override:
-                type: boolean
-              description:
-                type: string
-              title:
-                type: string
-            required:
-            - title
-            - description
-            - admin_override
-            type: object
-        required:
-        - IssueFound
-        type: object
-    InfiniteScrollInput:
-      type: object
-    WorkflowSession:
-      properties:
-        aborted:
-          type: boolean
-        chat_session_id:
-          $ref: '#/components/schemas/ChatSessionId'
-        created_at:
-          format: date-time
-          type:
-          - string
-          - 'null'
-        dag_ready:
-          type: boolean
-        dag_ready_at:
-          format: date-time
-          type:
-          - string
-          - 'null'
-        dashboard_layout_proto:
-          format: binary
-          type:
-          - string
-          - 'null'
-        error_message:
-          type:
-          - string
-          - 'null'
-        error_traceback:
-          type:
-          - string
-          - 'null'
-        id:
-          $ref: '#/components/schemas/WorkflowSessionId'
-        parent_chat_message_id:
-          allOf:
-          - $ref: '#/components/schemas/ChatMessageId'
-        updated_at:
-          format: date-time
-          type: string
-        workflow_schedule_id:
-          allOf:
-          - $ref: '#/components/schemas/WorkflowScheduleId'
-      required:
-      - id
-      - chat_session_id
-      - updated_at
-      - dag_ready
-      - aborted
-      type: object
-    ActionDef:
-      description: Action definition
-      properties:
-        description:
-          type: string
-        name:
-          type: string
-      required:
-      - name
-      - description
-      type: object
-    NavigateToIFrameInput:
-      properties:
-        index:
-          format: int32
-          minimum: 0
-          type: integer
-      required:
-      - index
-      type: object
-    ChatSession:
-      properties:
-        config_proto:
-          format: binary
-          type:
-          - string
-          - 'null'
-        created_at:
-          format: date-time
-          type: string
-        ephemeral:
-          type: boolean
-        git_application_token:
-          type: string
-        id:
-          $ref: '#/components/schemas/ChatSessionId'
-        instantiated_from_template_id:
-          allOf:
-          - $ref: '#/components/schemas/ChatTemplateId'
-        message_head:
-          allOf:
-          - $ref: '#/components/schemas/ChatMessageId'
-        name:
-          type:
-          - string
-          - 'null'
-        project_id:
-          allOf:
-          - $ref: '#/components/schemas/ProjectId'
-        review_required:
-          type: boolean
-        skip_confirmations:
-          type: boolean
-        slack_channel_id:
-          type:
-          - string
-          - 'null'
-        slack_completion_notified:
-          type: boolean
-        slack_team_id:
-          type:
-          - string
-          - 'null'
-        slack_thread_ts:
-          type:
-          - string
-          - 'null'
-        team_id:
-          $ref: '#/components/schemas/TeamId'
-        teams_channel_id:
-          type:
-          - string
-          - 'null'
-        teams_completion_notified:
-          type: boolean
-        teams_conversation_id:
-          type:
-          - string
-          - 'null'
-        teams_tenant_id:
-          type:
-          - string
-          - 'null'
-        updated_at:
-          format: date-time
-          type: string
-        user_message_needed:
-          type: boolean
-        visibility:
-          $ref: '#/components/schemas/ChatVisibility'
-      required:
-      - id
-      - created_at
-      - updated_at
-      - git_application_token
-      - visibility
-      - ephemeral
-      - slack_completion_notified
-      - team_id
-      - review_required
-      - user_message_needed
-      - skip_confirmations
-      - teams_completion_notified
-      type: object
-    ConnectorColumnResult:
-      properties:
-        name:
-          type: string
-        notes:
-          type:
-          - string
-          - 'null'
-        type:
-          type: string
-      required:
-      - name
-      - type
-      type: object
-    RequiredEntity:
-      additionalProperties: false
-      properties:
-        entity_id:
-          allOf:
-          - $ref: '#/components/schemas/EntityId'
-        seeded_entity_id:
-          description: The integer id corresponding to an entity in the seeded entity graph (different from the global dataset entity id)
-          minimum: 0
-          type: integer
-      required:
-      - seeded_entity_id
-      type: object
-    SpeakerTag:
-      enum:
-      - user
-      - system
-      - assistant
-      type: string
-    SearchConnectorTablesInput:
-      properties:
-        query:
-          type: string
-        wiki_tag:
-          type:
-          - string
-          - 'null'
-      required:
-      - query
-      type: object
-    CodeExecutionResult:
-      properties:
-        return_code:
-          format: int32
-          type: integer
-        stderr:
-          type: string
-        stdout:
-          type: string
-      required:
-      - stdout
-      - stderr
-      - return_code
-      type: object
-    VizFigureDefinition:
-      additionalProperties: false
-      properties:
-        expression:
-          type: string
-        kind:
-          $ref: '#/components/schemas/VizFigureKind'
-      required:
-      - kind
-      - expression
-      type: object
-    WebMeta:
-      properties:
-        flags:
-          items:
-            $ref: '#/components/schemas/Flag'
-          type: array
-        ocr_content:
-          type:
-          - string
-          - 'null'
-        screenshot:
-          format: binary
-          type:
-          - string
-          - 'null'
-        url:
-          type: string
-      required:
-      - url
-      - flags
-      type: object
-    CompressChatResponse:
-      properties:
-        status:
-          type: string
-      required:
-      - status
-      type: object
-    ReasoningEffort:
-      enum:
-      - low
-      - medium
-      - high
-      - minimal
-      type: string
-    SaveEntitiesInput:
-      properties:
-        entities:
-          items:
-            additionalProperties:
-              additionalProperties: true
-              type: object
-              x-stainless-empty-object: true
-            type: object
-          type: array
+        knowledge_graph:
+          $ref: '#/components/schemas/LLMKnowledgeGraph'
         reason:
           type: string
         sources:
@@ -2096,438 +1315,9 @@ components:
             type: string
           type: array
       required:
-      - entities
+      - knowledge_graph
       - sources
       - reason
-      type: object
-    VizNumberControlType:
-      enum:
-      - range
-      type: string
-    RequiredProperty:
-      additionalProperties: false
-      properties:
-        property_names:
-          description: If there are multiple properties, it can match just one of them
-          items:
-            type: string
-          type: array
-        table_name:
-          description: The table name of the entity to update
-          type: string
-      required:
-      - table_name
-      - property_names
-      type: object
-    AddGitCommitResponse:
-      description: Response structure for adding a git commit
-      properties:
-        commit:
-          $ref: '#/components/schemas/GitCommit'
-      required:
-      - commit
-      type: object
-    AdminGrantAccessResponse:
-      description: Response for granting temporary admin access
-      properties:
-        expires_at:
-          format: date-time
-          type: string
-        role:
-          $ref: '#/components/schemas/ChatSessionRole'
-      required:
-      - role
-      - expires_at
-      type: object
-    GetGitCommitByHashResponse:
-      description: Response structure for getting a git commit by hash
-      properties:
-        commit:
-          $ref: '#/components/schemas/GitCommit'
-      required:
-      - commit
-      type: object
-    WebNavigateOutput:
-      enum:
-      - Text
-      - Visual
-      type: string
-    DashboardItem:
-      properties:
-        file_name:
-          description: File path relative to repository root.
-          type: string
-        spec:
-          $ref: '#/components/schemas/DashboardSpec'
-      required:
-      - file_name
-      - spec
-      type: object
-    VizParam:
-      discriminator:
-        propertyName: type
-      oneOf:
-      - properties:
-          control:
-            $ref: '#/components/schemas/VizStringControl'
-          type:
-            enum:
-            - string
-            type: string
-          value:
-            type: string
-        required:
-        - value
-        - type
-        type: object
-      - properties:
-          control:
-            $ref: '#/components/schemas/VizNumberControl'
-          type:
-            enum:
-            - number
-            type: string
-          value:
-            format: double
-            type: number
-        required:
-        - value
-        - type
-        type: object
-      - properties:
-          control:
-            $ref: '#/components/schemas/VizBooleanControl'
-          type:
-            enum:
-            - boolean
-            type: string
-          value:
-            type: boolean
-        required:
-        - value
-        - type
-        type: object
-      - properties:
-          control:
-            $ref: '#/components/schemas/VizDateControl'
-          type:
-            enum:
-            - date
-            type: string
-          value:
-            type: string
-        required:
-        - value
-        - type
-        type: object
-    UpdateVisibilityRequest:
-      properties:
-        visibility:
-          $ref: '#/components/schemas/ChatVisibility'
-      required:
-      - visibility
-      type: object
-    TimelineItem:
-      discriminator:
-        propertyName: type
-      oneOf:
-      - allOf:
-        - $ref: '#/components/schemas/ChatMessage'
-        - properties:
-            type:
-              enum:
-              - Message
-              type: string
-          required:
-          - type
-          type: object
-      - allOf:
-        - $ref: '#/components/schemas/GitCommit'
-        - properties:
-            type:
-              enum:
-              - GitCommit
-              type: string
-          required:
-          - type
-          type: object
-    DashboardSpec:
-      additionalProperties: false
-      properties:
-        dataset:
-          type: string
-        description:
-          type: string
-        figures:
-          items:
-            $ref: '#/components/schemas/VizFigure'
-          type: array
-        params:
-          additionalProperties:
-            $ref: '#/components/schemas/VizParam'
-          type: object
-        queries:
-          items:
-            $ref: '#/components/schemas/VizQuery'
-          type: array
-        title:
-          type: string
-        version:
-          type: string
-      required:
-      - version
-      - title
-      - description
-      - dataset
-      - params
-      - queries
-      - figures
-      type: object
-    ChatSessionWithEvents:
-      properties:
-        commits:
-          items:
-            $ref: '#/components/schemas/GitCommit'
-          type: array
-        created_at:
-          format: date-time
-          type: string
-        ephemeral:
-          type: boolean
-        git_application_token:
-          type: string
-        id:
-          $ref: '#/components/schemas/ChatSessionId'
-        instantiated_from_template_id:
-          allOf:
-          - $ref: '#/components/schemas/ChatTemplateId'
-        is_favorite:
-          type: boolean
-        latest_workflow_session_id:
-          allOf:
-          - $ref: '#/components/schemas/WorkflowSessionId'
-        message_head:
-          allOf:
-          - $ref: '#/components/schemas/ChatMessageId'
-        messages:
-          items:
-            $ref: '#/components/schemas/ChatEventWithRole'
-          type: array
-        name:
-          type:
-          - string
-          - 'null'
-        project_id:
-          allOf:
-          - $ref: '#/components/schemas/ProjectId'
-        slack_channel_id:
-          type:
-          - string
-          - 'null'
-        slack_team_id:
-          type:
-          - string
-          - 'null'
-        slack_thread_ts:
-          type:
-          - string
-          - 'null'
-        team_id:
-          $ref: '#/components/schemas/TeamId'
-        teams_channel_id:
-          type:
-          - string
-          - 'null'
-        teams_conversation_id:
-          type:
-          - string
-          - 'null'
-        teams_tenant_id:
-          type:
-          - string
-          - 'null'
-        title:
-          type: string
-        updated_at:
-          format: date-time
-          type: string
-        user_message_needed:
-          type: boolean
-        user_role:
-          $ref: '#/components/schemas/ChatSessionRole'
-        visibility:
-          $ref: '#/components/schemas/ChatVisibility'
-        workflow_schedule_id:
-          allOf:
-          - $ref: '#/components/schemas/WorkflowScheduleId'
-        workflow_sessions:
-          items:
-            $ref: '#/components/schemas/WorkflowSession'
-          type: array
-      required:
-      - id
-      - title
-      - messages
-      - commits
-      - created_at
-      - updated_at
-      - git_application_token
-      - user_role
-      - visibility
-      - is_favorite
-      - team_id
-      - ephemeral
-      - user_message_needed
-      - workflow_sessions
-      type: object
-    SaveColumnInput:
-      properties:
-        column_name:
-          type: string
-        column_type:
-          type: string
-        notes:
-          type:
-          - string
-          - 'null'
-      required:
-      - column_name
-      - column_type
-      type: object
-    InputFilesUploadResponse:
-      properties:
-        file:
-          $ref: '#/components/schemas/ChatInputFile'
-      required:
-      - file
-      type: object
-    ConnectorId:
-      format: uuid
-      type: string
-    ChatSessionId:
-      format: uuid
-      type: string
-    InputFilesDownloadAllResponse:
-      properties:
-        files:
-          additionalProperties:
-            type: string
-          type: object
-        latest_timestamp:
-          format: date-time
-          type:
-          - string
-          - 'null'
-      required:
-      - files
-      type: object
-    ChatDependency:
-      description: A chat session dependency
-      properties:
-        package_name:
-          description: Name of the Python package
-          type: string
-        version_spec:
-          description: Optional version specifier (e.g., ">=1.0.0", "==2.0.0")
-          type:
-          - string
-          - 'null'
-      required:
-      - package_name
-      type: object
-    ChatCollaborator:
-      description: DTO for chat collaborator with user email information
-      properties:
-        created_at:
-          format: date-time
-          type: string
-        email:
-          type: string
-        role:
-          $ref: '#/components/schemas/ChatSessionRole'
-        updated_at:
-          format: date-time
-          type: string
-        user_id:
-          $ref: '#/components/schemas/UserId'
-      required:
-      - user_id
-      - email
-      - role
-      - created_at
-      - updated_at
-      type: object
-    ImageMeta:
-      properties:
-        document_name:
-          type:
-          - string
-          - 'null'
-        document_page:
-          format: int32
-          minimum: 0
-          type:
-          - integer
-          - 'null'
-        image:
-          type:
-          - string
-          - 'null'
-        ocr_content:
-          type:
-          - string
-          - 'null'
-      required:
-      - image
-      type: object
-    RelationshipDescriptor:
-      additionalProperties: false
-      properties:
-        description:
-          type: string
-        merge_strategy:
-          allOf:
-          - $ref: '#/components/schemas/RelationshipMergeStrategy'
-        name:
-          type: string
-        properties:
-          items:
-            $ref: '#/components/schemas/PropertyDescriptor'
-          type: array
-        source_table:
-          type: string
-        target_table:
-          type: string
-      required:
-      - name
-      - description
-      - source_table
-      - target_table
-      type: object
-    RevertToCommitApiResponse:
-      description: Response structure for reverting to a git commit
-      properties:
-        commit_hash:
-          description: The commit hash that was reverted to
-          type: string
-        reverted_at:
-          description: Timestamp when the revert occurred
-          format: date-time
-          type: string
-      required:
-      - commit_hash
-      - reverted_at
-      type: object
-    VizDateControl:
-      additionalProperties: false
-      properties:
-        label:
-          type: string
-        type:
-          $ref: '#/components/schemas/VizDateControlType'
-      required:
-      - type
-      - label
       type: object
     RunBashInput:
       properties:
@@ -2544,408 +1334,43 @@ components:
       required:
       - command
       type: object
-    WorkflowScheduleId:
-      format: uuid
-      type: string
-    ChatMessage:
-      properties:
-        chat_session_id:
-          $ref: '#/components/schemas/ChatSessionId'
-        content:
-          type: string
-        content_proto:
-          format: binary
-          type:
-          - string
-          - 'null'
-        created_at:
-          format: date-time
-          type: string
-        git_hash:
-          type:
-          - string
-          - 'null'
-        id:
-          $ref: '#/components/schemas/ChatMessageId'
-        previous_message_id:
-          allOf:
-          - $ref: '#/components/schemas/ChatMessageId'
-        role:
-          type: string
-        slack_channel_id:
-          type:
-          - string
-          - 'null'
-        slack_message_ts:
-          type:
-          - string
-          - 'null'
-        slack_thread_ts:
-          type:
-          - string
-          - 'null'
-        stream_chunks:
-          items:
-            $ref: '#/components/schemas/StreamChunkEntry'
-          type:
-          - array
-          - 'null'
-        teams_channel_id:
-          type:
-          - string
-          - 'null'
-        teams_conversation_id:
-          type:
-          - string
-          - 'null'
-        teams_message_id:
-          type:
-          - string
-          - 'null'
-        timestamp:
-          format: date-time
-          type: string
-      required:
-      - id
-      - chat_session_id
-      - role
-      - content
-      - timestamp
-      - created_at
-      type: object
-    ChatSessionWithMessages:
-      properties:
-        commits:
-          items:
-            $ref: '#/components/schemas/GitCommit'
-          type: array
-        created_at:
-          format: date-time
-          type: string
-        ephemeral:
-          type: boolean
-        git_application_token:
-          type: string
-        id:
-          $ref: '#/components/schemas/ChatSessionId'
-        instantiated_from_template_id:
-          allOf:
-          - $ref: '#/components/schemas/ChatTemplateId'
-        is_favorite:
-          type: boolean
-        latest_workflow_session_id:
-          allOf:
-          - $ref: '#/components/schemas/WorkflowSessionId'
-        message_head:
-          allOf:
-          - $ref: '#/components/schemas/ChatMessageId'
-        messages:
-          items:
-            $ref: '#/components/schemas/ChatMessage'
-          type: array
-        name:
-          type:
-          - string
-          - 'null'
-        project_id:
-          allOf:
-          - $ref: '#/components/schemas/ProjectId'
-        skip_confirmations:
-          type: boolean
-        slack_channel_id:
-          type:
-          - string
-          - 'null'
-        slack_team_id:
-          type:
-          - string
-          - 'null'
-        slack_thread_ts:
-          type:
-          - string
-          - 'null'
-        team_id:
-          $ref: '#/components/schemas/TeamId'
-        teams_channel_id:
-          type:
-          - string
-          - 'null'
-        teams_conversation_id:
-          type:
-          - string
-          - 'null'
-        teams_tenant_id:
-          type:
-          - string
-          - 'null'
-        updated_at:
-          format: date-time
-          type: string
-        user_message_needed:
-          type: boolean
-        user_role:
-          $ref: '#/components/schemas/ChatSessionRole'
-        visibility:
-          $ref: '#/components/schemas/ChatVisibility'
-      required:
-      - id
-      - messages
-      - commits
-      - created_at
-      - updated_at
-      - git_application_token
-      - user_role
-      - visibility
-      - is_favorite
-      - team_id
-      - ephemeral
-      - user_message_needed
-      - skip_confirmations
-      type: object
-    SaveInput:
-      properties:
-        knowledge_graph:
-          $ref: '#/components/schemas/LLMKnowledgeGraph'
-        reason:
-          type: string
-        sources:
-          items:
-            type: string
-          type: array
-      required:
-      - knowledge_graph
-      - sources
-      - reason
-      type: object
-    TeamId:
-      format: uuid
-      type: string
-    AdminIssueFoundRequest:
-      properties:
-        message:
-          type: string
-        title:
-          type: string
-      required:
-      - title
-      - message
-      type: object
-    PromptMeta:
-      description: All metadata required to generate a prompt for the LLM
-      properties:
-        dataset_descriptor:
-          $ref: '#/components/schemas/DatasetDescriptor'
-        extracted_entities:
-          items:
-            $ref: '#/components/schemas/LLMKnowledgeGraph'
-          type: array
-        extraction_criteria:
-          items:
-            $ref: '#/components/schemas/SaveRequirement'
-          type: array
-        formatter_specific:
-          $ref: '#/components/schemas/FormatterMeta'
-        qa_potentially_sus_response:
-          type:
-          - string
-          - 'null'
-      required:
-      - dataset_descriptor
-      - extracted_entities
-      - extraction_criteria
-      - formatter_specific
-      type: object
-    PropertyDescriptor:
+    VizDateControl:
       additionalProperties: false
       properties:
-        description:
+        label:
           type: string
-        merge_strategy:
-          $ref: '#/components/schemas/MergeStrategy'
-        name:
-          type: string
-        prop_type:
-          $ref: '#/components/schemas/PropertyType'
+        type:
+          $ref: '#/components/schemas/VizDateControlType'
       required:
-      - name
-      - description
+      - type
+      - label
       type: object
-    ListCollaboratorsResponse:
-      description: Response for listing collaborators
+    LLMEntity:
+      additionalProperties: false
       properties:
-        users:
-          items:
-            $ref: '#/components/schemas/ChatCollaborator'
-          type: array
-      required:
-      - users
-      type: object
-    InternalErrorKind:
-      description: 'Categorizes the kind of internal error that occurred during LLM generation.
-
-        This allows the frontend to render appropriate error messages without regex matching.'
-      enum:
-      - unknown
-      - context_limit
-      - rate_limited
-      - timeout
-      - connection_error
-      type: string
-    AddCollaboratorRequest:
-      properties:
-        email:
-          type: string
-        role:
-          $ref: '#/components/schemas/ChatSessionRole'
-      required:
-      - email
-      - role
-      type: object
-    InputFilesDeleteRequest:
-      properties:
-        filenames:
-          items:
-            type: string
-          type: array
-      required:
-      - filenames
-      type: object
-    UpdateChatSessionRequest:
-      properties:
-        message_head:
-          allOf:
-          - $ref: '#/components/schemas/ChatMessageId'
-        name:
-          type:
-          - string
-          - 'null'
-        project_id:
-          allOf:
-          - $ref: '#/components/schemas/ProjectId'
-        skip_confirmations:
-          type:
-          - boolean
-          - 'null'
-      type: object
-    SelectDataInput:
-      properties:
-        node_ids:
-          items:
-            type: string
-          type: array
-      required:
-      - node_ids
-      type: object
-    VizDateControlType:
-      enum:
-      - date
-      type: string
-    ChatTabCounts:
-      description: Per-tab counts for chat session listing
-      properties:
-        favorites:
-          format: int64
-          type: integer
-        from_messaging:
-          format: int64
-          type: integer
-        my_chats:
-          format: int64
-          type: integer
-        recents:
-          format: int64
-          type: integer
-        shared:
-          format: int64
-          type: integer
-        team:
-          format: int64
-          type: integer
-      required:
-      - my_chats
-      - favorites
-      - shared
-      - team
-      - recents
-      - from_messaging
-      type: object
-    DeleteFileInput:
-      properties:
-        file:
-          type: string
-      required:
-      - file
-      type: object
-    ChatSessionConfig:
-      description: Configuration for chat session with system prompt and LLM key
-      properties:
-        llm_key:
-          allOf:
-          - $ref: '#/components/schemas/LLMKey'
-        max_steps:
-          format: int32
+        id:
           minimum: 0
-          type:
-          - integer
-          - 'null'
-        reminder_message:
-          type:
-          - string
-          - 'null'
-        system_prompt:
-          type:
-          - string
-          - 'null'
-      type: object
-    AddGitCommitRequest:
-      description: Request structure for adding a git commit to a chat session
-      properties:
-        commit_hash:
-          description: The git commit hash (must be 40 characters)
+          type: integer
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/BasicPropValue'
+          type: object
+        type:
           type: string
       required:
-      - commit_hash
+      - id
+      - type
+      - properties
       type: object
-    InputFilesUploadForm:
+    DecodingParams:
       properties:
-        content:
-          format: binary
-          type: string
-        content_type:
-          type: string
-        file_name:
-          type: string
+        parameters:
+          items:
+            $ref: '#/components/schemas/DecodingParamEnum'
+          type: array
       required:
-      - file_name
-      - content_type
-      - content
+      - parameters
       type: object
-    JavascriptInput:
-      properties:
-        code:
-          type: string
-      required:
-      - code
-      type: object
-    AddDependencyInput:
-      properties:
-        package_name:
-          type: string
-        version_spec:
-          type:
-          - string
-          - 'null'
-      required:
-      - package_name
-      type: object
-    BasicPropValue:
-      oneOf:
-      - type: string
-      - format: int64
-        type: integer
-      - type: boolean
-      - format: double
-        type: number
     RevertToCommitRequest:
       description: Request structure for reverting to a git commit
       properties:
@@ -2955,87 +1380,23 @@ components:
       required:
       - commit_hash
       type: object
-    RequiredRelationship:
-      additionalProperties: false
+    CreateConnectorInput:
       properties:
-        relationship_name:
+        connector_type:
           type: string
-      required:
-      - relationship_name
-      type: object
-    ChatInputFile:
-      properties:
-        chat_session_id:
-          $ref: '#/components/schemas/ChatSessionId'
-        content_type:
+        description:
+          type:
+          - string
+          - 'null'
+        name:
           type: string
-        created_at:
-          format: date-time
-          type: string
-        file_size:
-          format: int64
-          type: integer
-        filename:
-          type: string
-      required:
-      - chat_session_id
-      - filename
-      - file_size
-      - content_type
-      - created_at
-      type: object
-    WebNavigateInput:
-      properties:
-        output_format:
-          allOf:
-          - $ref: '#/components/schemas/WebNavigateOutput'
-        url:
-          type: string
-      required:
-      - url
-      type: object
-    UserId:
-      format: uuid
-      type: string
-    LLMKnowledgeGraph:
-      additionalProperties: false
-      description: 'Knowledge graph info structured to deserialize and display
-
-        in the same format that the LLM outputs.
-
-        Also the first representation of an LLM output in the pipeline from raw tool output to being merged into a DB'
-      properties:
-        entities:
+        secrets:
           items:
-            $ref: '#/components/schemas/LLMEntity'
-          type: array
-        relationships:
-          items:
-            $ref: '#/components/schemas/LLMRelationship'
+            type: string
           type: array
       required:
-      - entities
-      type: object
-    CopyNodeOutputByCodeHashResponse:
-      properties:
-        cached_node_id:
-          allOf:
-          - $ref: '#/components/schemas/WorkflowSessionNodeId'
-      type: object
-    ChatPrompt:
-      properties:
-        decoding_params:
-          $ref: '#/components/schemas/DecodingParams'
-        messages:
-          items:
-            $ref: '#/components/schemas/Message'
-          type: array
-        metadata:
-          $ref: '#/components/schemas/PromptMeta'
-      required:
-      - metadata
-      - messages
-      - decoding_params
+      - name
+      - connector_type
       type: object
     RelationshipMergeProbability:
       properties:
@@ -3072,92 +1433,6 @@ components:
           - integer
           - 'null'
       type: object
-    GetChatSessionResponse:
-      description: Response for getting a chat session
-      properties:
-        session:
-          $ref: '#/components/schemas/ChatSessionWithEvents'
-      required:
-      - session
-      type: object
-    RunPythonInput:
-      properties:
-        code:
-          type: string
-        connector:
-          type:
-          - string
-          - 'null'
-        timeout_seconds:
-          format: int64
-          minimum: 0
-          type:
-          - integer
-          - 'null'
-        working_dir:
-          type:
-          - string
-          - 'null'
-      required:
-      - code
-      type: object
-    WorkflowSessionId:
-      format: uuid
-      type: string
-    ComparisonStrategy:
-      enum:
-      - Default
-      - EnforceUniqueness
-      type: string
-    CopyChatSessionRequest:
-      properties:
-        copy_inputs:
-          type: boolean
-        copy_name:
-          type: string
-        project_id:
-          allOf:
-          - $ref: '#/components/schemas/ProjectId'
-        source_chat_id:
-          $ref: '#/components/schemas/ChatSessionId'
-        team_id:
-          $ref: '#/components/schemas/TeamId'
-        template_id:
-          allOf:
-          - $ref: '#/components/schemas/ChatTemplateId'
-      required:
-      - source_chat_id
-      - copy_name
-      - team_id
-      type: object
-    LLMKey:
-      description: 'LLM model keys available in the system. Format: <provider>.<model-name>'
-      enum:
-      - vllm.gpt-5-mini-2025-08-07
-      - vllm.gpt-4.1-mini-2025-04-14
-      - vllm.gpt-5-nano-2025-08-07
-      - vllm.gpt-5-2025-08-07
-      - vllm.ft:gpt-4o-2024-08-06:structify::ADrF00Gq
-      - vllm.ft:gpt-4o-mini-2024-07-18:structify::ABCLHTsN
-      - vllm.action
-      - vllm.dora
-      - vllm.boring_dora
-      - vllm.claude-3-7-sonnet-20250219
-      - vllm.claude-sonnet-4-20250514
-      - vllm.qwen-3-coder-480b
-      - test_llm.test
-      - bedrock.claude-sonnet-4-bedrock
-      - bedrock.claude-sonnet-4-5-bedrock
-      - bedrock.claude-opus-4-5-bedrock
-      - bedrock.claude-opus-4-6-bedrock
-      - bedrock.claude-haiku-4-5-bedrock
-      - gemini.gemini-2.5-pro
-      - gemini.gemini-2.5-flash
-      - gemini.gemini-3-flash-preview
-      - gemini.gemini-3.1-flash-lite-preview
-      - vertex_anthropic.claude-sonnet-4-5-vertex
-      - vertex_anthropic.claude-opus-4-5-vertex
-      type: string
     ApplyPatchEdit:
       properties:
         new_string:
@@ -3168,772 +1443,43 @@ components:
       - old_string
       - new_string
       type: object
-    CodeAddResponse:
+    TextMeta:
       properties:
-        commit_hash:
-          type: string
-        files_uploaded:
-          minimum: 0
-          type: integer
-        message:
-          $ref: '#/components/schemas/ChatMessage'
-      required:
-      - message
-      - commit_hash
-      - files_uploaded
-      type: object
-    StreamChunkEntry:
-      description: Entry for stream chunk logging - stored as JSONB array on chat_message
-      properties:
-        chunk_type:
-          type: string
-        content:
+        text:
           type: string
       required:
-      - chunk_type
-      - content
+      - text
       type: object
-    LoadFilesRequest:
+    ProjectId:
+      format: uuid
+      type: string
+    IssueFoundInput:
       properties:
-        chat_id:
-          $ref: '#/components/schemas/ChatSessionId'
-        commit_hash:
-          type:
-          - string
-          - 'null'
-      required:
-      - chat_id
-      type: object
-    VizFigure:
-      additionalProperties: false
-      properties:
+        admin_override:
+          type: boolean
         description:
           type: string
-        figure:
-          $ref: '#/components/schemas/VizFigureDefinition'
-        id:
-          type: string
-        span:
-          format: int32
-          type: integer
         title:
           type: string
       required:
-      - id
-      - figure
-      type: object
-    VizFigureKind:
-      enum:
-      - js
-      - vega-lite
-      - data-table
-      type: string
-    CreateChatSessionRequest:
-      properties:
-        config:
-          allOf:
-          - $ref: '#/components/schemas/ChatSessionConfig'
-        ephemeral:
-          type:
-          - boolean
-          - 'null'
-        project_id:
-          allOf:
-          - $ref: '#/components/schemas/ProjectId'
-        team_id:
-          $ref: '#/components/schemas/TeamId'
-      required:
-      - team_id
-      type: object
-    FormatterMeta:
-      oneOf:
-      - properties:
-          ImageMeta:
-            $ref: '#/components/schemas/ImageMeta'
-        required:
-        - ImageMeta
-        type: object
-      - properties:
-          WebMeta:
-            $ref: '#/components/schemas/WebMeta'
-        required:
-        - WebMeta
-        type: object
-      - properties:
-          TextMeta:
-            $ref: '#/components/schemas/TextMeta'
-        required:
-        - TextMeta
-        type: object
-      - properties:
-          ScraperMeta:
-            $ref: '#/components/schemas/ScraperMeta'
-        required:
-        - ScraperMeta
-        type: object
-    TableDescriptor:
-      additionalProperties: false
-      description: The full definition of what a schema is - without duplicate information.
-      properties:
-        description:
-          type: string
-        expected_cardinality:
-          description: 'Expected number of unique values in the complete dataset.
-
-
-            This is used for our probabilistic merge strategy.'
-          format: int64
-          minimum: 0
-          type:
-          - integer
-          - 'null'
-        name:
-          description: Organized in a name, description format.
-          type: string
-        primary_column:
-          type:
-          - string
-          - 'null'
-        properties:
-          description: Organized in a name, description format.
-          items:
-            $ref: '#/components/schemas/PropertyDescriptor'
-          type: array
-      required:
-      - name
+      - title
       - description
-      - properties
+      - admin_override
       type: object
-    CreateChatSessionResponse:
-      description: Response for creating a chat session
-      properties:
-        session:
-          $ref: '#/components/schemas/ChatSessionWithMessages'
-      required:
-      - session
-      type: object
-    GetGitCommitsResponse:
-      description: Response structure for getting git commits
-      properties:
-        commits:
-          description: List of git commits for the session
-          items:
-            $ref: '#/components/schemas/GitCommit'
-          type: array
-      required:
-      - commits
-      type: object
-    LLMRelationship:
+    RequiredProperty:
       additionalProperties: false
       properties:
-        properties:
-          additionalProperties:
-            $ref: '#/components/schemas/BasicPropValue'
-          type: object
-        source:
-          minimum: 0
-          type: integer
-        target:
-          minimum: 0
-          type: integer
-        type:
-          type: string
-      required:
-      - type
-      - source
-      - target
-      type: object
-    InspectStepInput:
-      properties:
-        step_name:
-          type: string
-      required:
-      - step_name
-      type: object
-    ListDashboardsResponse:
-      properties:
-        commit_hash:
-          description: Commit hash used to load dashboard specs.
-          type: string
-        dashboards:
-          description: All dashboard specs in src/visualizations/*.viz.json.
+        property_names:
+          description: If there are multiple properties, it can match just one of them
           items:
-            $ref: '#/components/schemas/DashboardItem'
+            type: string
           type: array
-      required:
-      - commit_hash
-      - dashboards
-      type: object
-    RequestClarificationInput:
-      properties:
-        column_name:
-          type:
-          - string
-          - 'null'
-        question:
-          type: string
         table_name:
+          description: The table name of the entity to update
           type: string
       required:
       - table_name
-      - question
-      type: object
-    MoveFileInput:
-      properties:
-        file:
-          type: string
-        new_path:
-          type: string
-      required:
-      - file
-      - new_path
-      type: object
-    ImageResult:
-      properties:
-        image_bytes:
-          format: binary
-          type: string
-        ocr_text:
-          type:
-          - string
-          - 'null'
-      required:
-      - image_bytes
-      type: object
-    AdminIssueFoundResponse:
-      properties:
-        message_id:
-          format: uuid
-          type: string
-      required:
-      - message_id
-      type: object
-    GetSessionTimelineResponse:
-      description: Response structure for getting session timeline
-      properties:
-        timeline:
-          description: Chronologically sorted list of messages and commits
-          items:
-            $ref: '#/components/schemas/TimelineItem'
-          type: array
-      required:
-      - timeline
-      type: object
-    SaveDatabaseInput:
-      properties:
-        description:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-        notes:
-          type:
-          - string
-          - 'null'
-      required:
-      - name
-      type: object
-    SimulatePromptRequest:
-      properties:
-        chat_prompt:
-          $ref: '#/components/schemas/ChatPrompt'
-      required:
-      - chat_prompt
-      type: object
-    SaveTableInput:
-      properties:
-        description:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-        notes:
-          type:
-          - string
-          - 'null'
-      required:
-      - name
-      type: object
-    ListChatSessionsResponse:
-      description: Response for listing chat sessions
-      properties:
-        sessions:
-          items:
-            $ref: '#/components/schemas/ChatSessionSummary'
-          type: array
-        tab_counts:
-          $ref: '#/components/schemas/ChatTabCounts'
-        total_count:
-          description: Total number of chat sessions matching the query (for pagination)
-          format: int64
-          type: integer
-      required:
-      - sessions
-      - total_count
-      - tab_counts
-      type: object
-    MergeConfig:
-      description: The configuration for a probabilistic merge strategy
-      properties:
-        baseline_cardinality:
-          description: 'The number of unique values that are expected to be present in the complete dataset
-
-
-            This is used for merging to determine how significant a match is. (i.e. if there are
-
-            only 2 possible values, a match gives less confidence than if there are 100)'
-          format: int64
-          minimum: 0
-          type: integer
-        comparison_strategy:
-          $ref: '#/components/schemas/ComparisonStrategy'
-        match_transfer_probability:
-          description: 'The estimated probability that, given an entity match, the properties also match
-
-
-            For a person''s full name, this would be quite high. For a person''s job title, it
-
-            would be lower because people can have multiple job titles over time or at different
-
-            companies at the same time.'
-          format: float
-          type: number
-      required:
-      - baseline_cardinality
-      - match_transfer_probability
-      type: object
-    SaveSchemaInput:
-      properties:
-        description:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-        notes:
-          type:
-          - string
-          - 'null'
-      required:
-      - name
-      type: object
-    CreateConnectorInput:
-      properties:
-        connector_type:
-          type: string
-        description:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-        secrets:
-          items:
-            type: string
-          type: array
-      required:
-      - name
-      - connector_type
-      type: object
-    SaveApiResourceInput:
-      properties:
-        description:
-          type:
-          - string
-          - 'null'
-        endpoint:
-          type: string
-        name:
-          type: string
-        notes:
-          type:
-          - string
-          - 'null'
-      required:
-      - name
-      - endpoint
-      type: object
-    WebSearchInput:
-      properties:
-        query:
-          type: string
-      required:
-      - query
-      type: object
-    PropertyType:
-      oneOf:
-      - enum:
-        - String
-        type: string
-      - enum:
-        - Boolean
-        type: string
-      - properties:
-          Enum:
-            items:
-              type: string
-            type: array
-        required:
-        - Enum
-        type: object
-      - enum:
-        - Integer
-        type: string
-      - enum:
-        - Float
-        type: string
-      - enum:
-        - Date
-        type: string
-      - enum:
-        - URL
-        type: string
-      - enum:
-        - Money
-        type: string
-      - enum:
-        - Image
-        type: string
-      - enum:
-        - PersonName
-        type: string
-      - enum:
-        - Address
-        type: string
-    GitCommit:
-      properties:
-        chat_session_id:
-          $ref: '#/components/schemas/ChatSessionId'
-        commit_hash:
-          type: string
-        created_at:
-          format: date-time
-          type: string
-        id:
-          format: uuid
-          type: string
-      required:
-      - id
-      - chat_session_id
-      - commit_hash
-      - created_at
-      type: object
-    Message:
-      description: Our generic definition of a message to a chat agent.
-      properties:
-        content:
-          description: 'We want this to be a vec of contents so we can accurately
-
-            capture an interleaving of images and text.
-
-
-            This is meant to be a completely raw, unprocessed representation
-
-            of the text. Don''t take stuff out.'
-          items:
-            $ref: '#/components/schemas/MessageContent'
-          type: array
-        role:
-          $ref: '#/components/schemas/SpeakerTag'
-      required:
-      - role
-      - content
-      type: object
-    DecodingParamEnum:
-      oneOf:
-      - properties:
-          MaxTokens:
-            minimum: 0
-            type: integer
-        required:
-        - MaxTokens
-        type: object
-      - properties:
-          MaxCompletionTokens:
-            minimum: 0
-            type: integer
-        required:
-        - MaxCompletionTokens
-        type: object
-      - properties:
-          TopP:
-            format: float
-            type: number
-        required:
-        - TopP
-        type: object
-      - properties:
-          RepeatWindow:
-            minimum: 0
-            type: integer
-        required:
-        - RepeatWindow
-        type: object
-      - properties:
-          RepeatPenalty:
-            format: float
-            type: number
-        required:
-        - RepeatPenalty
-        type: object
-      - properties:
-          Temperature:
-            format: float
-            type: number
-        required:
-        - Temperature
-        type: object
-      - properties:
-          StopTokens:
-            items:
-              type: string
-            type: array
-        required:
-        - StopTokens
-        type: object
-      - properties:
-          LogitBias:
-            additionalProperties:
-              format: float
-              type: number
-            type: object
-        required:
-        - LogitBias
-        type: object
-      - properties:
-          Functions:
-            items:
-              additionalProperties: true
-              type: object
-              x-stainless-empty-object: true
-            type: array
-        required:
-        - Functions
-        type: object
-      - properties:
-          JsonValidator:
-            additionalProperties: true
-            type: object
-            x-stainless-empty-object: true
-        required:
-        - JsonValidator
-        type: object
-      - properties:
-          RegexValidator:
-            type: string
-        required:
-        - RegexValidator
-        type: object
-      - properties:
-          ContextFreeGrammar:
-            type: string
-        required:
-        - ContextFreeGrammar
-        type: object
-      - properties:
-          NumBeams:
-            minimum: 0
-            type: integer
-        required:
-        - NumBeams
-        type: object
-      - properties:
-          Crop:
-            type: boolean
-        required:
-        - Crop
-        type: object
-      - properties:
-          Thinking:
-            description: Thinking tokens for Claude 3.7. Contains the budget in tokens for thinking.
-            minimum: 0
-            type: integer
-        required:
-        - Thinking
-        type: object
-      - properties:
-          Verbosity:
-            $ref: '#/components/schemas/Verbosity'
-        required:
-        - Verbosity
-        type: object
-      - properties:
-          ReasoningEffort:
-            $ref: '#/components/schemas/ReasoningEffort'
-        required:
-        - ReasoningEffort
-        type: object
-    LLMEntity:
-      additionalProperties: false
-      properties:
-        id:
-          minimum: 0
-          type: integer
-        properties:
-          additionalProperties:
-            $ref: '#/components/schemas/BasicPropValue'
-          type: object
-        type:
-          type: string
-      required:
-      - id
-      - type
-      - properties
-      type: object
-    ChatSessionRole:
-      enum:
-      - viewer
-      - editor
-      - owner
-      type: string
-    RelationshipMergeStrategy:
-      oneOf:
-      - $ref: '#/components/schemas/RelationshipMergeProbability'
-    VizQuery:
-      additionalProperties: false
-      properties:
-        id:
-          type: string
-        sql:
-          type: string
-      required:
-      - id
-      - sql
-      type: object
-    Verbosity:
-      enum:
-      - low
-      - medium
-      - high
-      type: string
-    LoadFilesResponse:
-      properties:
-        commit_hash:
-          type: string
-        files:
-          additionalProperties:
-            type: string
-          type: object
-      required:
-      - files
-      - commit_hash
-      type: object
-    ChatEventWithRole:
-      description: Model-layer message representation - streamlined for LLM transmission
-      properties:
-        content:
-          $ref: '#/components/schemas/ChatEvent'
-        git_hash:
-          type:
-          - string
-          - 'null'
-        message_id:
-          $ref: '#/components/schemas/ChatMessageId'
-        previous_message_id:
-          allOf:
-          - $ref: '#/components/schemas/ChatMessageId'
-        role:
-          $ref: '#/components/schemas/SpeakerTag'
-        timestamp:
-          format: date-time
-          type: string
-      required:
-      - message_id
-      - role
-      - content
-      - timestamp
-      type: object
-    ApplyPatchInput:
-      properties:
-        apply_all:
-          type: boolean
-        edits:
-          items:
-            $ref: '#/components/schemas/ApplyPatchEdit'
-          type: array
-        file:
-          type: string
-      required:
-      - file
-      - edits
-      - apply_all
-      type: object
-    ChatSessionSummary:
-      properties:
-        created_at:
-          format: date-time
-          type: string
-        has_workflow_schedule:
-          type: boolean
-        id:
-          $ref: '#/components/schemas/ChatSessionId'
-        is_favorite:
-          type: boolean
-        name:
-          type:
-          - string
-          - 'null'
-        owner_email:
-          type:
-          - string
-          - 'null'
-        project_id:
-          allOf:
-          - $ref: '#/components/schemas/ProjectId'
-        slack_channel_id:
-          type:
-          - string
-          - 'null'
-        team_id:
-          $ref: '#/components/schemas/TeamId'
-        teams_channel_id:
-          type:
-          - string
-          - 'null'
-        teams_conversation_id:
-          type:
-          - string
-          - 'null'
-        title:
-          type: string
-        updated_at:
-          format: date-time
-          type: string
-        user_role:
-          $ref: '#/components/schemas/ChatSessionRole'
-        visibility:
-          $ref: '#/components/schemas/ChatVisibility'
-      required:
-      - id
-      - title
-      - created_at
-      - updated_at
-      - user_role
-      - visibility
-      - is_favorite
-      - team_id
-      - has_workflow_schedule
-      type: object
-    ChatSessionTab:
-      description: Tab filter for chat session listing
-      enum:
-      - my_chats
-      - favorites
-      - shared
-      - team
-      - recents
-      - from_messaging
-      type: string
-    DecodingParams:
-      properties:
-        parameters:
-          items:
-            $ref: '#/components/schemas/DecodingParamEnum'
-          type: array
-      required:
-      - parameters
+      - property_names
       type: object
     ToolResult:
       oneOf:
@@ -4006,42 +1552,256 @@ components:
         required:
         - Pinned
         type: object
-    MergeStrategy:
-      oneOf:
-      - description: 'Property with unique 1:1 correspondence to its parent.
-
-
-          Merge based on this property 100% of the time'
-        enum:
-        - Unique
-        type: string
-      - properties:
-          Probabilistic:
-            $ref: '#/components/schemas/MergeConfig'
-        required:
-        - Probabilistic
-        type: object
-      - enum:
-        - NoSignal
-        type: string
     RunPipelineInput:
       properties:
         rerun_all_steps:
           type: boolean
       type: object
-    SaveMemoryInput:
+    ComparisonStrategy:
+      enum:
+      - Default
+      - EnforceUniqueness
+      type: string
+    VizBooleanControl:
+      additionalProperties: false
       properties:
-        key:
+        label:
           type: string
-        value:
+        type:
+          $ref: '#/components/schemas/VizBooleanControlType'
+      required:
+      - type
+      - label
+      type: object
+    UpdateVisibilityResponse:
+      properties:
+        visibility:
+          $ref: '#/components/schemas/ChatVisibility'
+      required:
+      - visibility
+      type: object
+    CreateChatSessionRequest:
+      properties:
+        config:
+          allOf:
+          - $ref: '#/components/schemas/ChatSessionConfig'
+        ephemeral:
+          type:
+          - boolean
+          - 'null'
+        project_id:
+          allOf:
+          - $ref: '#/components/schemas/ProjectId'
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+      required:
+      - team_id
+      type: object
+    ListChatSessionsResponse:
+      description: Response for listing chat sessions
+      properties:
+        sessions:
+          items:
+            $ref: '#/components/schemas/ChatSessionSummary'
+          type: array
+        tab_counts:
+          $ref: '#/components/schemas/ChatTabCounts'
+        total_count:
+          description: Total number of chat sessions matching the query (for pagination)
+          format: int64
+          type: integer
+      required:
+      - sessions
+      - total_count
+      - tab_counts
+      type: object
+    DeleteResponse:
+      description: Success response for delete operations
+      properties:
+        message:
+          type: string
+        success:
+          type: boolean
+      required:
+      - success
+      - message
+      type: object
+    VizDateControlType:
+      enum:
+      - date
+      type: string
+    WorkflowSession:
+      properties:
+        aborted:
+          type: boolean
+        chat_session_id:
+          $ref: '#/components/schemas/ChatSessionId'
+        created_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        dag_ready:
+          type: boolean
+        dag_ready_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        dashboard_layout_proto:
+          format: binary
+          type:
+          - string
+          - 'null'
+        error_message:
+          type:
+          - string
+          - 'null'
+        error_traceback:
+          type:
+          - string
+          - 'null'
+        id:
+          $ref: '#/components/schemas/WorkflowSessionId'
+        parent_chat_message_id:
+          allOf:
+          - $ref: '#/components/schemas/ChatMessageId'
+        updated_at:
+          format: date-time
+          type: string
+        workflow_schedule_id:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowScheduleId'
+      required:
+      - id
+      - chat_session_id
+      - updated_at
+      - dag_ready
+      - aborted
+      type: object
+    SimulatePromptRequest:
+      properties:
+        chat_prompt:
+          $ref: '#/components/schemas/ChatPrompt'
+      required:
+      - chat_prompt
+      type: object
+    WebNavigateInput:
+      properties:
+        output_format:
+          allOf:
+          - $ref: '#/components/schemas/WebNavigateOutput'
+        url:
           type: string
       required:
-      - key
-      - value
+      - url
       type: object
-    ChatMessageId:
-      format: uuid
-      type: string
+    AddDependencyInput:
+      properties:
+        package_name:
+          type: string
+        version_spec:
+          type:
+          - string
+          - 'null'
+      required:
+      - package_name
+      type: object
+    VizStringControl:
+      additionalProperties: false
+      properties:
+        label:
+          type: string
+        options:
+          items:
+            $ref: '#/components/schemas/VizControlOption'
+          type: array
+        type:
+          $ref: '#/components/schemas/VizStringControlType'
+      required:
+      - type
+      - label
+      - options
+      type: object
+    ListCollaboratorsResponse:
+      description: Response for listing collaborators
+      properties:
+        users:
+          items:
+            $ref: '#/components/schemas/ChatCollaborator'
+          type: array
+      required:
+      - users
+      type: object
+    WebSearchInput:
+      properties:
+        query:
+          type: string
+      required:
+      - query
+      type: object
+    ScraperMeta:
+      properties:
+        html_content:
+          type: string
+        url:
+          type: string
+      required:
+      - html_content
+      - url
+      type: object
+    InspectStepInput:
+      properties:
+        step_name:
+          type: string
+      required:
+      - step_name
+      type: object
+    ChatCollaborator:
+      description: DTO for chat collaborator with user email information
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        email:
+          type: string
+        role:
+          $ref: '#/components/schemas/ChatSessionRole'
+        updated_at:
+          format: date-time
+          type: string
+        user_id:
+          $ref: '#/components/schemas/UserId'
+      required:
+      - user_id
+      - email
+      - role
+      - created_at
+      - updated_at
+      type: object
+    ChatPrompt:
+      properties:
+        decoding_params:
+          $ref: '#/components/schemas/DecodingParams'
+        messages:
+          items:
+            $ref: '#/components/schemas/Message'
+          type: array
+        metadata:
+          $ref: '#/components/schemas/PromptMeta'
+      required:
+      - metadata
+      - messages
+      - decoding_params
+      type: object
+    BasicPropValue:
+      oneOf:
+      - type: string
+      - format: int64
+        type: integer
+      - type: boolean
+      - format: double
+        type: number
     ConnectorTableResult:
       properties:
         columns:
@@ -4068,102 +1828,28 @@ components:
       - table_name
       - columns
       type: object
-    DeleteResponse:
-      description: Success response for delete operations
+    ChatSessionId:
+      format: uuid
+      type: string
+    RequiredEntity:
+      additionalProperties: false
       properties:
-        message:
-          type: string
-        success:
-          type: boolean
-      required:
-      - success
-      - message
-      type: object
-    GrantAdminAccessRequest:
-      properties:
-        duration_hours:
-          description: Duration in hours for the temporary access
-          format: int64
+        entity_id:
+          allOf:
+          - $ref: '#/components/schemas/EntityId'
+        seeded_entity_id:
+          description: The integer id corresponding to an entity in the seeded entity graph (different from the global dataset entity id)
+          minimum: 0
           type: integer
-        role:
-          $ref: '#/components/schemas/ChatSessionRole'
       required:
-      - role
-      - duration_hours
+      - seeded_entity_id
       type: object
-    VizStringControlType:
-      enum:
-      - dropdown
-      type: string
-    ChatVisibility:
-      enum:
-      - private
-      - shared_with_team
-      - shared_with_team_view
-      - public
-      type: string
-    WorkflowSessionNodeId:
-      format: uuid
-      type: string
-    VizNumberControl:
-      additionalProperties: false
-      properties:
-        label:
-          type: string
-        max:
-          format: double
-          type: number
-        min:
-          format: double
-          type: number
-        step:
-          format: double
-          type: number
-        type:
-          $ref: '#/components/schemas/VizNumberControlType'
-      required:
-      - type
-      - label
-      - min
-      - max
-      type: object
-    ChatTemplateId:
-      format: uuid
-      type: string
-    VizControlOption:
-      additionalProperties: false
-      properties:
-        label:
-          type: string
-        value:
-          type: string
-      required:
-      - label
-      - value
-      type: object
-    GetNodeByCodeHashRequest:
-      properties:
-        code_md5_hash:
-          type: string
-        new_node_id:
-          $ref: '#/components/schemas/WorkflowSessionNodeId'
-      required:
-      - code_md5_hash
-      - new_node_id
-      type: object
-    DocSnippet:
-      properties:
-        snippet:
-          type: string
-        title:
-          type: string
-        url:
-          type: string
-      required:
-      - title
-      - url
-      - snippet
-      type: object
+    SaveRequirement:
+      description: It's an OR statement across these.
+      oneOf:
+      - $ref: '#/components/schemas/RequiredRelationship'
+      - $ref: '#/components/schemas/RequiredEntity'
+      - $ref: '#/components/schemas/RequiredProperty'
     ToolInvocation:
       discriminator:
         propertyName: name
@@ -4520,6 +2206,731 @@ components:
         - name
         - input
         type: object
+    PromptMeta:
+      description: All metadata required to generate a prompt for the LLM
+      properties:
+        dataset_descriptor:
+          $ref: '#/components/schemas/DatasetDescriptor'
+        extracted_entities:
+          items:
+            $ref: '#/components/schemas/LLMKnowledgeGraph'
+          type: array
+        extraction_criteria:
+          items:
+            $ref: '#/components/schemas/SaveRequirement'
+          type: array
+        formatter_specific:
+          $ref: '#/components/schemas/FormatterMeta'
+        qa_potentially_sus_response:
+          type:
+          - string
+          - 'null'
+      required:
+      - dataset_descriptor
+      - extracted_entities
+      - extraction_criteria
+      - formatter_specific
+      type: object
+    MessageContent:
+      oneOf:
+      - properties:
+          Text:
+            type: string
+        required:
+        - Text
+        type: object
+      - properties:
+          Image:
+            format: binary
+            type: string
+        required:
+        - Image
+        type: object
+    SaveColumnInput:
+      properties:
+        column_name:
+          type: string
+        column_type:
+          type: string
+        notes:
+          type:
+          - string
+          - 'null'
+      required:
+      - column_name
+      - column_type
+      type: object
+    UpdateChatSessionFavoriteRequest:
+      properties:
+        is_favorite:
+          type: boolean
+      required:
+      - is_favorite
+      type: object
+    CopyChatSessionRequest:
+      properties:
+        copy_inputs:
+          type: boolean
+        copy_name:
+          type: string
+        project_id:
+          allOf:
+          - $ref: '#/components/schemas/ProjectId'
+        source_chat_id:
+          $ref: '#/components/schemas/ChatSessionId'
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+        template_id:
+          allOf:
+          - $ref: '#/components/schemas/ChatTemplateId'
+      required:
+      - source_chat_id
+      - copy_name
+      - team_id
+      type: object
+    InputFilesUploadForm:
+      properties:
+        content:
+          format: binary
+          type: string
+        content_type:
+          type: string
+        file_name:
+          type: string
+      required:
+      - file_name
+      - content_type
+      - content
+      type: object
+    PinPreviousToolInput:
+      properties:
+        path:
+          type: string
+      required:
+      - path
+      type: object
+    LoadFilesRequest:
+      properties:
+        chat_id:
+          $ref: '#/components/schemas/ChatSessionId'
+        commit_hash:
+          type:
+          - string
+          - 'null'
+      required:
+      - chat_id
+      type: object
+    ExitInput:
+      properties:
+        reason:
+          type: string
+      required:
+      - reason
+      type: object
+    ChatSessionTab:
+      description: Tab filter for chat session listing
+      enum:
+      - my_chats
+      - favorites
+      - shared
+      - team
+      - recents
+      - from_messaging
+      type: string
+    RelationshipMergeStrategy:
+      oneOf:
+      - $ref: '#/components/schemas/RelationshipMergeProbability'
+    ChatMessage:
+      properties:
+        chat_session_id:
+          $ref: '#/components/schemas/ChatSessionId'
+        content:
+          type: string
+        content_proto:
+          format: binary
+          type:
+          - string
+          - 'null'
+        created_at:
+          format: date-time
+          type: string
+        git_hash:
+          type:
+          - string
+          - 'null'
+        id:
+          $ref: '#/components/schemas/ChatMessageId'
+        previous_message_id:
+          allOf:
+          - $ref: '#/components/schemas/ChatMessageId'
+        role:
+          type: string
+        slack_channel_id:
+          type:
+          - string
+          - 'null'
+        slack_message_ts:
+          type:
+          - string
+          - 'null'
+        slack_thread_ts:
+          type:
+          - string
+          - 'null'
+        stream_chunks:
+          items:
+            $ref: '#/components/schemas/StreamChunkEntry'
+          type:
+          - array
+          - 'null'
+        teams_channel_id:
+          type:
+          - string
+          - 'null'
+        teams_conversation_id:
+          type:
+          - string
+          - 'null'
+        teams_message_id:
+          type:
+          - string
+          - 'null'
+        timestamp:
+          format: date-time
+          type: string
+      required:
+      - id
+      - chat_session_id
+      - role
+      - content
+      - timestamp
+      - created_at
+      type: object
+    SaveEntitiesInput:
+      properties:
+        entities:
+          items:
+            additionalProperties:
+              additionalProperties: true
+              type: object
+              x-stainless-empty-object: true
+            type: object
+          type: array
+        reason:
+          type: string
+        sources:
+          items:
+            type: string
+          type: array
+      required:
+      - entities
+      - sources
+      - reason
+      type: object
+    ErrorResponse:
+      description: Standard error response
+      properties:
+        error:
+          type: string
+      required:
+      - error
+      type: object
+    MergeConfig:
+      description: The configuration for a probabilistic merge strategy
+      properties:
+        baseline_cardinality:
+          description: 'The number of unique values that are expected to be present in the complete dataset
+
+
+            This is used for merging to determine how significant a match is. (i.e. if there are
+
+            only 2 possible values, a match gives less confidence than if there are 100)'
+          format: int64
+          minimum: 0
+          type: integer
+        comparison_strategy:
+          $ref: '#/components/schemas/ComparisonStrategy'
+        match_transfer_probability:
+          description: 'The estimated probability that, given an entity match, the properties also match
+
+
+            For a person''s full name, this would be quite high. For a person''s job title, it
+
+            would be lower because people can have multiple job titles over time or at different
+
+            companies at the same time.'
+          format: float
+          type: number
+      required:
+      - baseline_cardinality
+      - match_transfer_probability
+      type: object
+    Verbosity:
+      enum:
+      - low
+      - medium
+      - high
+      type: string
+    VizParam:
+      discriminator:
+        propertyName: type
+      oneOf:
+      - properties:
+          control:
+            $ref: '#/components/schemas/VizStringControl'
+          type:
+            enum:
+            - string
+            type: string
+          value:
+            type: string
+        required:
+        - value
+        - type
+        type: object
+      - properties:
+          control:
+            $ref: '#/components/schemas/VizNumberControl'
+          type:
+            enum:
+            - number
+            type: string
+          value:
+            format: double
+            type: number
+        required:
+        - value
+        - type
+        type: object
+      - properties:
+          control:
+            $ref: '#/components/schemas/VizBooleanControl'
+          type:
+            enum:
+            - boolean
+            type: string
+          value:
+            type: boolean
+        required:
+        - value
+        - type
+        type: object
+      - properties:
+          control:
+            $ref: '#/components/schemas/VizDateControl'
+          type:
+            enum:
+            - date
+            type: string
+          value:
+            type: string
+        required:
+        - value
+        - type
+        type: object
+    UpdateChatSessionRequest:
+      properties:
+        message_head:
+          allOf:
+          - $ref: '#/components/schemas/ChatMessageId'
+        name:
+          type:
+          - string
+          - 'null'
+        project_id:
+          allOf:
+          - $ref: '#/components/schemas/ProjectId'
+        skip_confirmations:
+          type:
+          - boolean
+          - 'null'
+      type: object
+    InternalErrorKind:
+      description: 'Categorizes the kind of internal error that occurred during LLM generation.
+
+        This allows the frontend to render appropriate error messages without regex matching.'
+      enum:
+      - unknown
+      - context_limit
+      - rate_limited
+      - timeout
+      - connection_error
+      type: string
+    ListDashboardsResponse:
+      properties:
+        commit_hash:
+          description: Commit hash used to load dashboard specs.
+          type: string
+        dashboards:
+          description: All dashboard specs in src/visualizations/*.viz.json.
+          items:
+            $ref: '#/components/schemas/DashboardItem'
+          type: array
+      required:
+      - commit_hash
+      - dashboards
+      type: object
+    GetChatSessionResponse:
+      description: Response for getting a chat session
+      properties:
+        session:
+          $ref: '#/components/schemas/ChatSessionWithEvents'
+      required:
+      - session
+      type: object
+    SearchConnectorTablesInput:
+      properties:
+        query:
+          type: string
+        wiki_tag:
+          type:
+          - string
+          - 'null'
+      required:
+      - query
+      type: object
+    ApiExecuteInput:
+      properties:
+        code:
+          type: string
+      required:
+      - code
+      type: object
+    GetNodeByCodeHashRequest:
+      properties:
+        code_md5_hash:
+          type: string
+        new_node_id:
+          $ref: '#/components/schemas/WorkflowSessionNodeId'
+      required:
+      - code_md5_hash
+      - new_node_id
+      type: object
+    VizControlOption:
+      additionalProperties: false
+      properties:
+        label:
+          type: string
+        value:
+          type: string
+      required:
+      - label
+      - value
+      type: object
+    ChatSession:
+      properties:
+        config_proto:
+          format: binary
+          type:
+          - string
+          - 'null'
+        created_at:
+          format: date-time
+          type: string
+        ephemeral:
+          type: boolean
+        git_application_token:
+          type: string
+        id:
+          $ref: '#/components/schemas/ChatSessionId'
+        instantiated_from_template_id:
+          allOf:
+          - $ref: '#/components/schemas/ChatTemplateId'
+        message_head:
+          allOf:
+          - $ref: '#/components/schemas/ChatMessageId'
+        name:
+          type:
+          - string
+          - 'null'
+        project_id:
+          allOf:
+          - $ref: '#/components/schemas/ProjectId'
+        review_required:
+          type: boolean
+        skip_confirmations:
+          type: boolean
+        slack_channel_id:
+          type:
+          - string
+          - 'null'
+        slack_completion_notified:
+          type: boolean
+        slack_team_id:
+          type:
+          - string
+          - 'null'
+        slack_thread_ts:
+          type:
+          - string
+          - 'null'
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+        teams_channel_id:
+          type:
+          - string
+          - 'null'
+        teams_completion_notified:
+          type: boolean
+        teams_conversation_id:
+          type:
+          - string
+          - 'null'
+        teams_tenant_id:
+          type:
+          - string
+          - 'null'
+        updated_at:
+          format: date-time
+          type: string
+        user_message_needed:
+          type: boolean
+        visibility:
+          $ref: '#/components/schemas/ChatVisibility'
+      required:
+      - id
+      - created_at
+      - updated_at
+      - git_application_token
+      - visibility
+      - ephemeral
+      - slack_completion_notified
+      - team_id
+      - review_required
+      - user_message_needed
+      - skip_confirmations
+      - teams_completion_notified
+      type: object
+    RequestClarificationInput:
+      properties:
+        column_name:
+          type:
+          - string
+          - 'null'
+        question:
+          type: string
+        table_name:
+          type: string
+      required:
+      - table_name
+      - question
+      type: object
+    ImageMeta:
+      properties:
+        document_name:
+          type:
+          - string
+          - 'null'
+        document_page:
+          format: int32
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        image:
+          type:
+          - string
+          - 'null'
+        ocr_content:
+          type:
+          - string
+          - 'null'
+      required:
+      - image
+      type: object
+    VizFigureKind:
+      enum:
+      - js
+      - vega-lite
+      - data-table
+      type: string
+    CodeExecutionResult:
+      properties:
+        return_code:
+          format: int32
+          type: integer
+        stderr:
+          type: string
+        stdout:
+          type: string
+      required:
+      - stdout
+      - stderr
+      - return_code
+      type: object
+    LLMKey:
+      description: 'LLM model keys available in the system. Format: <provider>.<model-name>'
+      enum:
+      - vllm.gpt-5-mini-2025-08-07
+      - vllm.gpt-4.1-mini-2025-04-14
+      - vllm.gpt-5-nano-2025-08-07
+      - vllm.gpt-5-2025-08-07
+      - vllm.ft:gpt-4o-2024-08-06:structify::ADrF00Gq
+      - vllm.ft:gpt-4o-mini-2024-07-18:structify::ABCLHTsN
+      - vllm.action
+      - vllm.dora
+      - vllm.boring_dora
+      - vllm.claude-3-7-sonnet-20250219
+      - vllm.claude-sonnet-4-20250514
+      - vllm.qwen-3-coder-480b
+      - test_llm.test
+      - bedrock.claude-sonnet-4-bedrock
+      - bedrock.claude-sonnet-4-5-bedrock
+      - bedrock.claude-opus-4-5-bedrock
+      - bedrock.claude-opus-4-6-bedrock
+      - bedrock.claude-haiku-4-5-bedrock
+      - gemini.gemini-2.5-pro
+      - gemini.gemini-2.5-flash
+      - gemini.gemini-3-flash-preview
+      - gemini.gemini-3.1-flash-lite-preview
+      - vertex_anthropic.claude-sonnet-4-5-vertex
+      - vertex_anthropic.claude-opus-4-5-vertex
+      type: string
+    PropertyType:
+      oneOf:
+      - enum:
+        - String
+        type: string
+      - enum:
+        - Boolean
+        type: string
+      - properties:
+          Enum:
+            items:
+              type: string
+            type: array
+        required:
+        - Enum
+        type: object
+      - enum:
+        - Integer
+        type: string
+      - enum:
+        - Float
+        type: string
+      - enum:
+        - Date
+        type: string
+      - enum:
+        - URL
+        type: string
+      - enum:
+        - Money
+        type: string
+      - enum:
+        - Image
+        type: string
+      - enum:
+        - PersonName
+        type: string
+      - enum:
+        - Address
+        type: string
+    ChatMessageId:
+      format: uuid
+      type: string
+    CodeAddResponse:
+      properties:
+        commit_hash:
+          type: string
+        files_uploaded:
+          minimum: 0
+          type: integer
+        message:
+          $ref: '#/components/schemas/ChatMessage'
+      required:
+      - message
+      - commit_hash
+      - files_uploaded
+      type: object
+    InputFilesDownloadAllResponse:
+      properties:
+        files:
+          additionalProperties:
+            type: string
+          type: object
+        latest_timestamp:
+          format: date-time
+          type:
+          - string
+          - 'null'
+      required:
+      - files
+      type: object
+    InputFilesDeleteResponse:
+      properties:
+        files_deleted:
+          minimum: 0
+          type: integer
+      required:
+      - files_deleted
+      type: object
+    PartialChatWithMetadata:
+      properties:
+        chat_prompt:
+          $ref: '#/components/schemas/ChatPrompt'
+        created_at:
+          format: date-time
+          type: string
+        message_id:
+          allOf:
+          - $ref: '#/components/schemas/ChatMessageId'
+      required:
+      - created_at
+      - chat_prompt
+      type: object
+    GetGitCommitByHashResponse:
+      description: Response structure for getting a git commit by hash
+      properties:
+        commit:
+          $ref: '#/components/schemas/GitCommit'
+      required:
+      - commit
+      type: object
+    UpdateVisibilityRequest:
+      properties:
+        visibility:
+          $ref: '#/components/schemas/ChatVisibility'
+      required:
+      - visibility
+      type: object
+    SaveSchemaInput:
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        notes:
+          type:
+          - string
+          - 'null'
+      required:
+      - name
+      type: object
+    VizNumberControl:
+      additionalProperties: false
+      properties:
+        label:
+          type: string
+        max:
+          format: double
+          type: number
+        min:
+          format: double
+          type: number
+        step:
+          format: double
+          type: number
+        type:
+          $ref: '#/components/schemas/VizNumberControlType'
+      required:
+      - type
+      - label
+      - min
+      - max
+      type: object
     ViewPageInput:
       properties:
         page_number:
@@ -4529,6 +2940,1595 @@ components:
       required:
       - page_number
       type: object
+    RelationshipDescriptor:
+      additionalProperties: false
+      properties:
+        description:
+          type: string
+        merge_strategy:
+          allOf:
+          - $ref: '#/components/schemas/RelationshipMergeStrategy'
+        name:
+          type: string
+        properties:
+          items:
+            $ref: '#/components/schemas/PropertyDescriptor'
+          type: array
+        source_table:
+          type: string
+        target_table:
+          type: string
+      required:
+      - name
+      - description
+      - source_table
+      - target_table
+      type: object
+    VizQuery:
+      additionalProperties: false
+      properties:
+        id:
+          type: string
+        sql:
+          type: string
+      required:
+      - id
+      - sql
+      type: object
+    SelectDataInput:
+      properties:
+        node_ids:
+          items:
+            type: string
+          type: array
+      required:
+      - node_ids
+      type: object
+    VizBooleanControlType:
+      enum:
+      - checkbox
+      type: string
+    ActionDef:
+      description: Action definition
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+      required:
+      - name
+      - description
+      type: object
+    ImageResult:
+      properties:
+        image_bytes:
+          format: binary
+          type: string
+        ocr_text:
+          type:
+          - string
+          - 'null'
+      required:
+      - image_bytes
+      type: object
+    NavigateToIFrameInput:
+      properties:
+        index:
+          format: int32
+          minimum: 0
+          type: integer
+      required:
+      - index
+      type: object
+    WorkflowSessionId:
+      format: uuid
+      type: string
+    DashboardSpec:
+      additionalProperties: false
+      properties:
+        dataset:
+          type: string
+        description:
+          type: string
+        figures:
+          items:
+            $ref: '#/components/schemas/VizFigure'
+          type: array
+        params:
+          additionalProperties:
+            $ref: '#/components/schemas/VizParam'
+          type: object
+        queries:
+          items:
+            $ref: '#/components/schemas/VizQuery'
+          type: array
+        title:
+          type: string
+        version:
+          type: string
+      required:
+      - version
+      - title
+      - description
+      - dataset
+      - params
+      - queries
+      - figures
+      type: object
+    RequiredRelationship:
+      additionalProperties: false
+      properties:
+        relationship_name:
+          type: string
+      required:
+      - relationship_name
+      type: object
+    SearchConnectorTypesInput:
+      properties:
+        query:
+          type:
+          - string
+          - 'null'
+      type: object
+    WorkflowSessionNodeId:
+      format: uuid
+      type: string
+    RevertToCommitApiResponse:
+      description: Response structure for reverting to a git commit
+      properties:
+        commit_hash:
+          description: The commit hash that was reverted to
+          type: string
+        reverted_at:
+          description: Timestamp when the revert occurred
+          format: date-time
+          type: string
+      required:
+      - commit_hash
+      - reverted_at
+      type: object
+    RunPythonInput:
+      properties:
+        code:
+          type: string
+        connector:
+          type:
+          - string
+          - 'null'
+        timeout_seconds:
+          format: int64
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        working_dir:
+          type:
+          - string
+          - 'null'
+      required:
+      - code
+      type: object
+    GrantAdminAccessRequest:
+      properties:
+        duration_hours:
+          description: Duration in hours for the temporary access
+          format: int64
+          type: integer
+        role:
+          $ref: '#/components/schemas/ChatSessionRole'
+      required:
+      - role
+      - duration_hours
+      type: object
+    DashboardItem:
+      properties:
+        file_name:
+          description: File path relative to repository root.
+          type: string
+        spec:
+          $ref: '#/components/schemas/DashboardSpec'
+      required:
+      - file_name
+      - spec
+      type: object
+    SimulatePromptResponse:
+      properties:
+        response:
+          type: string
+      required:
+      - response
+      type: object
+    ConnectorColumnResult:
+      properties:
+        name:
+          type: string
+        notes:
+          type:
+          - string
+          - 'null'
+        type:
+          type: string
+      required:
+      - name
+      - type
+      type: object
+    GetGitCommitsResponse:
+      description: Response structure for getting git commits
+      properties:
+        commits:
+          description: List of git commits for the session
+          items:
+            $ref: '#/components/schemas/GitCommit'
+          type: array
+      required:
+      - commits
+      type: object
+    AddCollaboratorRequest:
+      properties:
+        email:
+          type: string
+        role:
+          $ref: '#/components/schemas/ChatSessionRole'
+      required:
+      - email
+      - role
+      type: object
+    TeamId:
+      format: uuid
+      type: string
+    AddGitCommitResponse:
+      description: Response structure for adding a git commit
+      properties:
+        commit:
+          $ref: '#/components/schemas/GitCommit'
+      required:
+      - commit
+      type: object
+    AdminIssueFoundResponse:
+      properties:
+        message_id:
+          format: uuid
+          type: string
+      required:
+      - message_id
+      type: object
+    SaveDatabaseInput:
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        notes:
+          type:
+          - string
+          - 'null'
+      required:
+      - name
+      type: object
+    MergeStrategy:
+      oneOf:
+      - description: 'Property with unique 1:1 correspondence to its parent.
+
+
+          Merge based on this property 100% of the time'
+        enum:
+        - Unique
+        type: string
+      - properties:
+          Probabilistic:
+            $ref: '#/components/schemas/MergeConfig'
+        required:
+        - Probabilistic
+        type: object
+      - enum:
+        - NoSignal
+        type: string
+    TableDescriptor:
+      additionalProperties: false
+      description: The full definition of what a schema is - without duplicate information.
+      properties:
+        description:
+          type: string
+        expected_cardinality:
+          description: 'Expected number of unique values in the complete dataset.
+
+
+            This is used for our probabilistic merge strategy.'
+          format: int64
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        name:
+          description: Organized in a name, description format.
+          type: string
+        primary_column:
+          type:
+          - string
+          - 'null'
+        properties:
+          description: Organized in a name, description format.
+          items:
+            $ref: '#/components/schemas/PropertyDescriptor'
+          type: array
+      required:
+      - name
+      - description
+      - properties
+      type: object
+    AddGitCommitRequest:
+      description: Request structure for adding a git commit to a chat session
+      properties:
+        commit_hash:
+          description: The git commit hash (must be 40 characters)
+          type: string
+      required:
+      - commit_hash
+      type: object
+    SaveApiResourceInput:
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+        endpoint:
+          type: string
+        name:
+          type: string
+        notes:
+          type:
+          - string
+          - 'null'
+      required:
+      - name
+      - endpoint
+      type: object
+    MoveFileInput:
+      properties:
+        file:
+          type: string
+        new_path:
+          type: string
+      required:
+      - file
+      - new_path
+      type: object
+    LLMRelationship:
+      additionalProperties: false
+      properties:
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/BasicPropValue'
+          type: object
+        source:
+          minimum: 0
+          type: integer
+        target:
+          minimum: 0
+          type: integer
+        type:
+          type: string
+      required:
+      - type
+      - source
+      - target
+      type: object
+    ReasoningEffort:
+      enum:
+      - low
+      - medium
+      - high
+      - minimal
+      type: string
+    InputFilesUploadResponse:
+      properties:
+        file:
+          $ref: '#/components/schemas/ChatInputFile'
+      required:
+      - file
+      type: object
+    ReadNodeLogsInput:
+      properties:
+        log_type:
+          type:
+          - string
+          - 'null'
+        node_function_name:
+          type: string
+      required:
+      - node_function_name
+      type: object
+    ChatEventWithRole:
+      description: Model-layer message representation - streamlined for LLM transmission
+      properties:
+        content:
+          $ref: '#/components/schemas/ChatEvent'
+        git_hash:
+          type:
+          - string
+          - 'null'
+        message_id:
+          $ref: '#/components/schemas/ChatMessageId'
+        previous_message_id:
+          allOf:
+          - $ref: '#/components/schemas/ChatMessageId'
+        role:
+          $ref: '#/components/schemas/SpeakerTag'
+        timestamp:
+          format: date-time
+          type: string
+      required:
+      - message_id
+      - role
+      - content
+      - timestamp
+      type: object
+    ApplyPatchInput:
+      properties:
+        apply_all:
+          type: boolean
+        edits:
+          items:
+            $ref: '#/components/schemas/ApplyPatchEdit'
+          type: array
+        file:
+          type: string
+      required:
+      - file
+      - edits
+      - apply_all
+      type: object
+    GitCommit:
+      properties:
+        chat_session_id:
+          $ref: '#/components/schemas/ChatSessionId'
+        commit_hash:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        id:
+          format: uuid
+          type: string
+      required:
+      - id
+      - chat_session_id
+      - commit_hash
+      - created_at
+      type: object
+    CopyNodeOutputByCodeHashResponse:
+      properties:
+        cached_node_id:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowSessionNodeId'
+      type: object
+    GetSessionTimelineResponse:
+      description: Response structure for getting session timeline
+      properties:
+        timeline:
+          description: Chronologically sorted list of messages and commits
+          items:
+            $ref: '#/components/schemas/TimelineItem'
+          type: array
+      required:
+      - timeline
+      type: object
+    TimelineItem:
+      discriminator:
+        propertyName: type
+      oneOf:
+      - allOf:
+        - $ref: '#/components/schemas/ChatMessage'
+        - properties:
+            type:
+              enum:
+              - Message
+              type: string
+          required:
+          - type
+          type: object
+      - allOf:
+        - $ref: '#/components/schemas/GitCommit'
+        - properties:
+            type:
+              enum:
+              - GitCommit
+              type: string
+          required:
+          - type
+          type: object
+    SaveTableInput:
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        notes:
+          type:
+          - string
+          - 'null'
+      required:
+      - name
+      type: object
+    JavascriptInput:
+      properties:
+        code:
+          type: string
+      required:
+      - code
+      type: object
+    LLMKnowledgeGraph:
+      additionalProperties: false
+      description: 'Knowledge graph info structured to deserialize and display
+
+        in the same format that the LLM outputs.
+
+        Also the first representation of an LLM output in the pipeline from raw tool output to being merged into a DB'
+      properties:
+        entities:
+          items:
+            $ref: '#/components/schemas/LLMEntity'
+          type: array
+        relationships:
+          items:
+            $ref: '#/components/schemas/LLMRelationship'
+          type: array
+      required:
+      - entities
+      type: object
+    EntityId:
+      format: uuid
+      type: string
+    ChatSessionRole:
+      enum:
+      - viewer
+      - editor
+      - owner
+      type: string
+    CompressChatResponse:
+      properties:
+        status:
+          type: string
+      required:
+      - status
+      type: object
+    LoadFilesResponse:
+      properties:
+        commit_hash:
+          type: string
+        files:
+          additionalProperties:
+            type: string
+          type: object
+      required:
+      - files
+      - commit_hash
+      type: object
+    CodeAddForm:
+      properties:
+        files:
+          items:
+            format: binary
+            type: string
+          type: array
+      required:
+      - files
+      type: object
+    ChatSessionWithEvents:
+      properties:
+        commits:
+          items:
+            $ref: '#/components/schemas/GitCommit'
+          type: array
+        created_at:
+          format: date-time
+          type: string
+        ephemeral:
+          type: boolean
+        git_application_token:
+          type: string
+        id:
+          $ref: '#/components/schemas/ChatSessionId'
+        instantiated_from_template_id:
+          allOf:
+          - $ref: '#/components/schemas/ChatTemplateId'
+        is_favorite:
+          type: boolean
+        latest_workflow_session_id:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowSessionId'
+        message_head:
+          allOf:
+          - $ref: '#/components/schemas/ChatMessageId'
+        messages:
+          items:
+            $ref: '#/components/schemas/ChatEventWithRole'
+          type: array
+        name:
+          type:
+          - string
+          - 'null'
+        project_id:
+          allOf:
+          - $ref: '#/components/schemas/ProjectId'
+        slack_channel_id:
+          type:
+          - string
+          - 'null'
+        slack_team_id:
+          type:
+          - string
+          - 'null'
+        slack_thread_ts:
+          type:
+          - string
+          - 'null'
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+        teams_channel_id:
+          type:
+          - string
+          - 'null'
+        teams_conversation_id:
+          type:
+          - string
+          - 'null'
+        teams_tenant_id:
+          type:
+          - string
+          - 'null'
+        title:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+        user_message_needed:
+          type: boolean
+        user_role:
+          $ref: '#/components/schemas/ChatSessionRole'
+        visibility:
+          $ref: '#/components/schemas/ChatVisibility'
+        workflow_schedule_id:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowScheduleId'
+        workflow_sessions:
+          items:
+            $ref: '#/components/schemas/WorkflowSession'
+          type: array
+      required:
+      - id
+      - title
+      - messages
+      - commits
+      - created_at
+      - updated_at
+      - git_application_token
+      - user_role
+      - visibility
+      - is_favorite
+      - team_id
+      - ephemeral
+      - user_message_needed
+      - workflow_sessions
+      type: object
+    DocSnippet:
+      properties:
+        snippet:
+          type: string
+        title:
+          type: string
+        url:
+          type: string
+      required:
+      - title
+      - url
+      - snippet
+      type: object
+    SaveMemoryInput:
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      required:
+      - key
+      - value
+      type: object
+    Flag:
+      properties:
+        ariaLabel:
+          type: string
+        height:
+          format: double
+          type: number
+        href:
+          type:
+          - string
+          - 'null'
+        isInteractive:
+          type:
+          - boolean
+          - 'null'
+        number:
+          description: The number by which the flag is referred in image, prompt, and tool calls.
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        text:
+          type: string
+        type:
+          type: string
+        width:
+          description: 'The serde default here is to give us backwards compatibility
+
+            it''s fine for these to be anything as long as the image isn''t
+
+            given since it won''t regenerate.'
+          format: double
+          type: number
+        x:
+          format: double
+          type: number
+        y:
+          format: double
+          type: number
+      required:
+      - x
+      - y
+      - type
+      - ariaLabel
+      type: object
+    ChatDependency:
+      description: A chat session dependency
+      properties:
+        package_name:
+          description: Name of the Python package
+          type: string
+        version_spec:
+          description: Optional version specifier (e.g., ">=1.0.0", "==2.0.0")
+          type:
+          - string
+          - 'null'
+      required:
+      - package_name
+      type: object
+    ChatSessionWithMessages:
+      properties:
+        commits:
+          items:
+            $ref: '#/components/schemas/GitCommit'
+          type: array
+        created_at:
+          format: date-time
+          type: string
+        ephemeral:
+          type: boolean
+        git_application_token:
+          type: string
+        id:
+          $ref: '#/components/schemas/ChatSessionId'
+        instantiated_from_template_id:
+          allOf:
+          - $ref: '#/components/schemas/ChatTemplateId'
+        is_favorite:
+          type: boolean
+        latest_workflow_session_id:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowSessionId'
+        message_head:
+          allOf:
+          - $ref: '#/components/schemas/ChatMessageId'
+        messages:
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+          type: array
+        name:
+          type:
+          - string
+          - 'null'
+        project_id:
+          allOf:
+          - $ref: '#/components/schemas/ProjectId'
+        skip_confirmations:
+          type: boolean
+        slack_channel_id:
+          type:
+          - string
+          - 'null'
+        slack_team_id:
+          type:
+          - string
+          - 'null'
+        slack_thread_ts:
+          type:
+          - string
+          - 'null'
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+        teams_channel_id:
+          type:
+          - string
+          - 'null'
+        teams_conversation_id:
+          type:
+          - string
+          - 'null'
+        teams_tenant_id:
+          type:
+          - string
+          - 'null'
+        updated_at:
+          format: date-time
+          type: string
+        user_message_needed:
+          type: boolean
+        user_role:
+          $ref: '#/components/schemas/ChatSessionRole'
+        visibility:
+          $ref: '#/components/schemas/ChatVisibility'
+      required:
+      - id
+      - messages
+      - commits
+      - created_at
+      - updated_at
+      - git_application_token
+      - user_role
+      - visibility
+      - is_favorite
+      - team_id
+      - ephemeral
+      - user_message_needed
+      - skip_confirmations
+      type: object
+    Message:
+      description: Our generic definition of a message to a chat agent.
+      properties:
+        content:
+          description: 'We want this to be a vec of contents so we can accurately
+
+            capture an interleaving of images and text.
+
+
+            This is meant to be a completely raw, unprocessed representation
+
+            of the text. Don''t take stuff out.'
+          items:
+            $ref: '#/components/schemas/MessageContent'
+          type: array
+        role:
+          $ref: '#/components/schemas/SpeakerTag'
+      required:
+      - role
+      - content
+      type: object
+    ChatEvent:
+      description: Events in a chat session timeline, including messages and unified tool calls/results
+      oneOf:
+      - properties:
+          TextMessage:
+            properties:
+              message:
+                type: string
+            required:
+            - message
+            type: object
+        required:
+        - TextMessage
+        type: object
+      - properties:
+          Thinking:
+            properties:
+              block_id:
+                format: int64
+                minimum: 0
+                type: integer
+              complete:
+                type: boolean
+              content:
+                type: string
+            required:
+            - content
+            - complete
+            - block_id
+            type: object
+        required:
+        - Thinking
+        type: object
+      - properties:
+          File:
+            description: 'The file event can''t be serialized to the database safely without the content.
+
+              When streaming, we start with the path only, then add the content as we go.'
+            properties:
+              block_id:
+                format: int64
+                minimum: 0
+                type: integer
+              complete:
+                type: boolean
+              content:
+                type:
+                - string
+                - 'null'
+              path:
+                type: string
+            required:
+            - path
+            - complete
+            - block_id
+            type: object
+        required:
+        - File
+        type: object
+      - properties:
+          Action:
+            properties:
+              actions:
+                items:
+                  $ref: '#/components/schemas/ActionDef'
+                type: array
+              block_id:
+                format: int64
+                minimum: 0
+                type: integer
+              complete:
+                type: boolean
+            required:
+            - actions
+            - complete
+            - block_id
+            type: object
+        required:
+        - Action
+        type: object
+      - properties:
+          Connector:
+            properties:
+              description:
+                type:
+                - string
+                - 'null'
+              env_vars:
+                items:
+                  type: string
+                type: array
+              name:
+                type: string
+            required:
+            - name
+            - env_vars
+            type: object
+        required:
+        - Connector
+        type: object
+      - properties:
+          ToolCall:
+            properties:
+              block_id:
+                format: int64
+                minimum: 0
+                type: integer
+              complete:
+                type: boolean
+              invocation:
+                $ref: '#/components/schemas/ToolInvocation'
+              tool_result:
+                $ref: '#/components/schemas/ToolResult'
+            required:
+            - invocation
+            - tool_result
+            - block_id
+            - complete
+            type: object
+        required:
+        - ToolCall
+        type: object
+      - properties:
+          Question:
+            properties:
+              block_id:
+                format: int64
+                minimum: 0
+                type: integer
+              complete:
+                type: boolean
+              content:
+                type: string
+              options:
+                items:
+                  type: string
+                type: array
+            required:
+            - content
+            - complete
+            - options
+            - block_id
+            type: object
+        required:
+        - Question
+        type: object
+      - properties:
+          InternalError:
+            properties:
+              error_kind:
+                $ref: '#/components/schemas/InternalErrorKind'
+              message:
+                type: string
+            required:
+            - message
+            type: object
+        required:
+        - InternalError
+        type: object
+      - properties:
+          ReviewRequest:
+            properties:
+              node_summaries:
+                items:
+                  $ref: '#/components/schemas/NodeSummary'
+                type: array
+            required:
+            - node_summaries
+            type: object
+        required:
+        - ReviewRequest
+        type: object
+      - properties:
+          AttachedFile:
+            properties:
+              image_bytes:
+                format: binary
+                type:
+                - string
+                - 'null'
+              path:
+                type: string
+            required:
+            - path
+            type: object
+        required:
+        - AttachedFile
+        type: object
+      - properties:
+          ConnectorRequest:
+            properties:
+              connector_id:
+                $ref: '#/components/schemas/ConnectorId'
+            required:
+            - connector_id
+            type: object
+        required:
+        - ConnectorRequest
+        type: object
+      - properties:
+          UserInterrupted:
+            type: object
+        required:
+        - UserInterrupted
+        type: object
+      - properties:
+          IssueFound:
+            properties:
+              admin_override:
+                type: boolean
+              description:
+                type: string
+              title:
+                type: string
+            required:
+            - title
+            - description
+            - admin_override
+            type: object
+        required:
+        - IssueFound
+        type: object
+    FormatterMeta:
+      oneOf:
+      - properties:
+          ImageMeta:
+            $ref: '#/components/schemas/ImageMeta'
+        required:
+        - ImageMeta
+        type: object
+      - properties:
+          WebMeta:
+            $ref: '#/components/schemas/WebMeta'
+        required:
+        - WebMeta
+        type: object
+      - properties:
+          TextMeta:
+            $ref: '#/components/schemas/TextMeta'
+        required:
+        - TextMeta
+        type: object
+      - properties:
+          ScraperMeta:
+            $ref: '#/components/schemas/ScraperMeta'
+        required:
+        - ScraperMeta
+        type: object
+    ChatInputFile:
+      properties:
+        chat_session_id:
+          $ref: '#/components/schemas/ChatSessionId'
+        content_type:
+          type: string
+        created_at:
+          format: date-time
+          type: string
+        file_size:
+          format: int64
+          type: integer
+        filename:
+          type: string
+      required:
+      - chat_session_id
+      - filename
+      - file_size
+      - content_type
+      - created_at
+      type: object
+    ChatSessionConfig:
+      description: Configuration for chat session with system prompt and LLM key
+      properties:
+        llm_key:
+          allOf:
+          - $ref: '#/components/schemas/LLMKey'
+        max_steps:
+          format: int32
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        reminder_message:
+          type:
+          - string
+          - 'null'
+        system_prompt:
+          type:
+          - string
+          - 'null'
+      type: object
+    VizStringControlType:
+      enum:
+      - dropdown
+      type: string
+    DecodingParamEnum:
+      oneOf:
+      - properties:
+          MaxTokens:
+            minimum: 0
+            type: integer
+        required:
+        - MaxTokens
+        type: object
+      - properties:
+          MaxCompletionTokens:
+            minimum: 0
+            type: integer
+        required:
+        - MaxCompletionTokens
+        type: object
+      - properties:
+          TopP:
+            format: float
+            type: number
+        required:
+        - TopP
+        type: object
+      - properties:
+          RepeatWindow:
+            minimum: 0
+            type: integer
+        required:
+        - RepeatWindow
+        type: object
+      - properties:
+          RepeatPenalty:
+            format: float
+            type: number
+        required:
+        - RepeatPenalty
+        type: object
+      - properties:
+          Temperature:
+            format: float
+            type: number
+        required:
+        - Temperature
+        type: object
+      - properties:
+          StopTokens:
+            items:
+              type: string
+            type: array
+        required:
+        - StopTokens
+        type: object
+      - properties:
+          LogitBias:
+            additionalProperties:
+              format: float
+              type: number
+            type: object
+        required:
+        - LogitBias
+        type: object
+      - properties:
+          Functions:
+            items:
+              additionalProperties: true
+              type: object
+              x-stainless-empty-object: true
+            type: array
+        required:
+        - Functions
+        type: object
+      - properties:
+          JsonValidator:
+            additionalProperties: true
+            type: object
+            x-stainless-empty-object: true
+        required:
+        - JsonValidator
+        type: object
+      - properties:
+          RegexValidator:
+            type: string
+        required:
+        - RegexValidator
+        type: object
+      - properties:
+          ContextFreeGrammar:
+            type: string
+        required:
+        - ContextFreeGrammar
+        type: object
+      - properties:
+          NumBeams:
+            minimum: 0
+            type: integer
+        required:
+        - NumBeams
+        type: object
+      - properties:
+          Crop:
+            type: boolean
+        required:
+        - Crop
+        type: object
+      - properties:
+          Thinking:
+            description: Thinking tokens for Claude 3.7. Contains the budget in tokens for thinking.
+            minimum: 0
+            type: integer
+        required:
+        - Thinking
+        type: object
+      - properties:
+          Verbosity:
+            $ref: '#/components/schemas/Verbosity'
+        required:
+        - Verbosity
+        type: object
+      - properties:
+          ReasoningEffort:
+            $ref: '#/components/schemas/ReasoningEffort'
+        required:
+        - ReasoningEffort
+        type: object
+    VizFigureDefinition:
+      additionalProperties: false
+      properties:
+        expression:
+          type: string
+        kind:
+          $ref: '#/components/schemas/VizFigureKind'
+      required:
+      - kind
+      - expression
+      type: object
+    ChatTemplateId:
+      format: uuid
+      type: string
+    SpeakerTag:
+      enum:
+      - user
+      - system
+      - assistant
+      type: string
+    ChatSessionSummary:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        has_workflow_schedule:
+          type: boolean
+        id:
+          $ref: '#/components/schemas/ChatSessionId'
+        is_favorite:
+          type: boolean
+        name:
+          type:
+          - string
+          - 'null'
+        owner_email:
+          type:
+          - string
+          - 'null'
+        project_id:
+          allOf:
+          - $ref: '#/components/schemas/ProjectId'
+        slack_channel_id:
+          type:
+          - string
+          - 'null'
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+        teams_channel_id:
+          type:
+          - string
+          - 'null'
+        teams_conversation_id:
+          type:
+          - string
+          - 'null'
+        title:
+          type: string
+        updated_at:
+          format: date-time
+          type: string
+        user_role:
+          $ref: '#/components/schemas/ChatSessionRole'
+        visibility:
+          $ref: '#/components/schemas/ChatVisibility'
+      required:
+      - id
+      - title
+      - created_at
+      - updated_at
+      - user_role
+      - visibility
+      - is_favorite
+      - team_id
+      - has_workflow_schedule
+      type: object
+    VizFigure:
+      additionalProperties: false
+      properties:
+        description:
+          type: string
+        figure:
+          $ref: '#/components/schemas/VizFigureDefinition'
+        id:
+          type: string
+        span:
+          format: int32
+          type: integer
+        title:
+          type: string
+      required:
+      - id
+      - figure
+      type: object
+    NodeSummary:
+      properties:
+        data_preview:
+          type:
+          - string
+          - 'null'
+        image:
+          format: binary
+          type:
+          - string
+          - 'null'
+        in_dashboard:
+          type: boolean
+        name:
+          type: string
+      required:
+      - name
+      - in_dashboard
+      type: object
+    InputFilesDeleteRequest:
+      properties:
+        filenames:
+          items:
+            type: string
+          type: array
+      required:
+      - filenames
+      type: object
+    PropertyDescriptor:
+      additionalProperties: false
+      properties:
+        description:
+          type: string
+        merge_strategy:
+          $ref: '#/components/schemas/MergeStrategy'
+        name:
+          type: string
+        prop_type:
+          $ref: '#/components/schemas/PropertyType'
+      required:
+      - name
+      - description
+      type: object
+    AdminGrantAccessResponse:
+      description: Response for granting temporary admin access
+      properties:
+        expires_at:
+          format: date-time
+          type: string
+        role:
+          $ref: '#/components/schemas/ChatSessionRole'
+      required:
+      - role
+      - expires_at
+      type: object
+    WorkflowScheduleId:
+      format: uuid
+      type: string
+    VizNumberControlType:
+      enum:
+      - range
+      type: string
+    WebNavigateOutput:
+      enum:
+      - Text
+      - Visual
+      type: string
+    DeleteFileInput:
+      properties:
+        file:
+          type: string
+      required:
+      - file
+      type: object
+    StreamChunkEntry:
+      description: Entry for stream chunk logging - stored as JSONB array on chat_message
+      properties:
+        chunk_type:
+          type: string
+        content:
+          type: string
+      required:
+      - chunk_type
+      - content
+      type: object
+    AdminIssueFoundRequest:
+      properties:
+        message:
+          type: string
+        title:
+          type: string
+      required:
+      - title
+      - message
+      type: object
+    ConnectorId:
+      format: uuid
+      type: string
+    InfiniteScrollInput:
+      type: object
+    UserId:
+      format: uuid
+      type: string
+    DatasetDescriptor:
+      additionalProperties: false
+      description: 'A dataset is where you put multiple referential schemas.
+
+
+        A dataset is a complete namespace where all references between schemas
+
+        are held within the dataset.'
+      properties:
+        description:
+          type: string
+        llm_override_field:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        relationships:
+          items:
+            $ref: '#/components/schemas/RelationshipDescriptor'
+          type: array
+        tables:
+          items:
+            $ref: '#/components/schemas/TableDescriptor'
+          type: array
+      required:
+      - name
+      - description
+      - tables
+      - relationships
+      type: object
+    GetDependenciesResponse:
+      description: Response structure for getting chat dependencies
+      properties:
+        dependencies:
+          description: List of dependencies for the chat session
+          items:
+            $ref: '#/components/schemas/ChatDependency'
+          type: array
+      required:
+      - dependencies
+      type: object
+    CreateChatSessionResponse:
+      description: Response for creating a chat session
+      properties:
+        session:
+          $ref: '#/components/schemas/ChatSessionWithMessages'
+      required:
+      - session
+      type: object
+    WebMeta:
+      properties:
+        flags:
+          items:
+            $ref: '#/components/schemas/Flag'
+          type: array
+        ocr_content:
+          type:
+          - string
+          - 'null'
+        screenshot:
+          format: binary
+          type:
+          - string
+          - 'null'
+        url:
+          type: string
+      required:
+      - url
+      - flags
+      type: object
+    ChatTabCounts:
+      description: Per-tab counts for chat session listing
+      properties:
+        favorites:
+          format: int64
+          type: integer
+        from_messaging:
+          format: int64
+          type: integer
+        my_chats:
+          format: int64
+          type: integer
+        recents:
+          format: int64
+          type: integer
+        shared:
+          format: int64
+          type: integer
+        team:
+          format: int64
+          type: integer
+      required:
+      - my_chats
+      - favorites
+      - shared
+      - team
+      - recents
+      - from_messaging
+      type: object
+    ChatVisibility:
+      enum:
+      - private
+      - shared_with_team
+      - shared_with_team_view
+      - public
+      type: string
   securitySchemes:
     api_key:
       in: header

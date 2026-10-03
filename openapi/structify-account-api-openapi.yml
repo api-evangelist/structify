@@ -279,12 +279,52 @@ paths:
       - Account
 components:
   schemas:
-    UserType:
-      enum:
-      - admin
-      - public
-      - end_user
+    RefreshSessionResponse:
+      properties:
+        expires_at:
+          type: string
+        refresh_token:
+          type: string
+        refresh_token_expires_at:
+          type: string
+        session_token:
+          type: string
+      required:
+      - session_token
+      - refresh_token
+      - expires_at
+      - refresh_token_expires_at
+      type: object
+    SurveySubmissionResponse:
+      properties:
+        message:
+          type: string
+        success:
+          type: boolean
+      required:
+      - success
+      - message
+      type: object
+    CreateApiKeyResponse:
+      properties:
+        api_key:
+          $ref: '#/components/schemas/ApiKeyInfo'
+        raw_key:
+          type: string
+      required:
+      - api_key
+      - raw_key
+      type: object
+    MembershipId:
+      format: uuid
       type: string
+    SaveOnboardingAnswersResponse:
+      properties:
+        answers:
+          $ref: '#/components/schemas/OnboardingAnswers'
+      required:
+      - answers
+      type: object
     JwtToApiTokenRequest:
       properties:
         full_name:
@@ -297,7 +337,7 @@ components:
           - string
           - 'null'
       type: object
-    SaveOnboardingAnswersResponse:
+    SaveOnboardingAnswersRequest:
       properties:
         answers:
           $ref: '#/components/schemas/OnboardingAnswers'
@@ -319,23 +359,57 @@ components:
           - string
           - 'null'
       type: object
-    Permission:
-      enum:
-      - labeler
-      - qa_labeler
-      - debug
-      - human_llm
-      - none
-      type: string
-    UserId:
-      format: uuid
-      type: string
-    SaveOnboardingAnswersRequest:
+    GetOnboardingAnswersResponse:
       properties:
         answers:
           $ref: '#/components/schemas/OnboardingAnswers'
       required:
       - answers
+      type: object
+    UserType:
+      enum:
+      - admin
+      - public
+      - end_user
+      type: string
+    TeamId:
+      format: uuid
+      type: string
+    ApiKeyId:
+      format: uuid
+      type: string
+    RefreshSessionRequest:
+      properties:
+        refresh_token:
+          type: string
+        session_token:
+          type: string
+      required:
+      - session_token
+      - refresh_token
+      type: object
+    FeatureFlag:
+      enum:
+      - functional_test
+      - pdf_parsing
+      - boredm_construction_model
+      - generic_suspicious_queue
+      - new_use_case_preview
+      - bedrock_codegen
+      - cerebras_codegen
+      - gemini25pro
+      - claude_sonnet4
+      - allow_job_deletion
+      - none
+      type: string
+    ListApiKeysResponse:
+      properties:
+        api_keys:
+          items:
+            $ref: '#/components/schemas/ApiKeyInfo'
+          type: array
+      required:
+      - api_keys
       type: object
     TokenResponse:
       properties:
@@ -355,73 +429,41 @@ components:
       - refresh_token
       - session_expires_at
       type: object
-    RefreshSessionResponse:
+    OnboardingAnswers:
       properties:
-        expires_at:
-          type: string
-        refresh_token:
-          type: string
-        refresh_token_expires_at:
-          type: string
-        session_token:
-          type: string
-      required:
-      - session_token
-      - refresh_token
-      - expires_at
-      - refresh_token_expires_at
-      type: object
-    RefreshSessionRequest:
-      properties:
-        refresh_token:
-          type: string
-        session_token:
-          type: string
-      required:
-      - session_token
-      - refresh_token
-      type: object
-    GetOnboardingAnswersResponse:
-      properties:
-        answers:
-          $ref: '#/components/schemas/OnboardingAnswers'
-      required:
-      - answers
-      type: object
-    SurveySubmissionRequest:
-      properties:
-        survey_response:
-          additionalProperties: true
-          type: object
-          x-stainless-empty-object: true
-      required:
-      - survey_response
-      type: object
-    ListApiKeysResponse:
-      properties:
-        api_keys:
+        company_name:
+          type:
+          - string
+          - 'null'
+        connected_connector_ids:
           items:
-            $ref: '#/components/schemas/ApiKeyInfo'
-          type: array
-      required:
-      - api_keys
+            type: string
+          type:
+          - array
+          - 'null'
+        full_name:
+          type:
+          - string
+          - 'null'
+        primary_goal:
+          type:
+          - string
+          - 'null'
+        recommended_template_id:
+          type:
+          - string
+          - 'null'
+        role:
+          type:
+          - string
+          - 'null'
+        systems_to_connect:
+          items:
+            type: string
+          type:
+          - array
+          - 'null'
       type: object
-    CreateApiKeyResponse:
-      properties:
-        api_key:
-          $ref: '#/components/schemas/ApiKeyInfo'
-        raw_key:
-          type: string
-      required:
-      - api_key
-      - raw_key
-      type: object
-    MembershipId:
-      format: uuid
-      type: string
-    TeamId:
-      format: uuid
-      type: string
     UserInfoResponse:
       properties:
         company_description:
@@ -513,58 +555,9 @@ components:
       - completed_onboarding
       - notify_for_interaction
       type: object
-    FeatureFlag:
-      enum:
-      - functional_test
-      - pdf_parsing
-      - boredm_construction_model
-      - generic_suspicious_queue
-      - new_use_case_preview
-      - bedrock_codegen
-      - cerebras_codegen
-      - gemini25pro
-      - claude_sonnet4
-      - allow_job_deletion
-      - none
-      type: string
-    ApiKeyId:
+    UserId:
       format: uuid
       type: string
-    OnboardingAnswers:
-      properties:
-        company_name:
-          type:
-          - string
-          - 'null'
-        connected_connector_ids:
-          items:
-            type: string
-          type:
-          - array
-          - 'null'
-        full_name:
-          type:
-          - string
-          - 'null'
-        primary_goal:
-          type:
-          - string
-          - 'null'
-        recommended_template_id:
-          type:
-          - string
-          - 'null'
-        role:
-          type:
-          - string
-          - 'null'
-        systems_to_connect:
-          items:
-            type: string
-          type:
-          - array
-          - 'null'
-      type: object
     ApiKeyInfo:
       properties:
         created_at:
@@ -598,16 +591,23 @@ components:
       - membership_id
       - created_at
       type: object
-    SurveySubmissionResponse:
+    SurveySubmissionRequest:
       properties:
-        message:
-          type: string
-        success:
-          type: boolean
+        survey_response:
+          additionalProperties: true
+          type: object
+          x-stainless-empty-object: true
       required:
-      - success
-      - message
+      - survey_response
       type: object
+    Permission:
+      enum:
+      - labeler
+      - qa_labeler
+      - debug
+      - human_llm
+      - none
+      type: string
   securitySchemes:
     api_key:
       in: header

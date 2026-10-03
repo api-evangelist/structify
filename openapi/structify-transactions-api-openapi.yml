@@ -101,6 +101,11 @@ components:
       - return_url
       - team_id
       type: object
+    SubscriptionPlan:
+      enum:
+      - Pro
+      - Team
+      type: string
     CreateSessionRequest:
       properties:
         credits:
@@ -116,9 +121,6 @@ components:
       - origin
       - team_id
       type: object
-    TeamId:
-      format: uuid
-      type: string
     CreateSessionResponse:
       properties:
         url:
@@ -126,6 +128,9 @@ components:
       required:
       - url
       type: object
+    TeamId:
+      format: uuid
+      type: string
     CreateSubscriptionRequest:
       properties:
         origin:
@@ -139,11 +144,6 @@ components:
       - plan
       - team_id
       type: object
-    SubscriptionPlan:
-      enum:
-      - Pro
-      - Team
-      type: string
   securitySchemes:
     api_key:
       in: header

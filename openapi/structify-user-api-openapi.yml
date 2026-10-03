@@ -67,11 +67,57 @@ paths:
       - User
 components:
   schemas:
+    EnrichUserParams:
+      properties:
+        email:
+          type: string
+      required:
+      - email
+      type: object
     UserType:
       enum:
       - admin
       - public
       - end_user
+      type: string
+    UserId:
+      format: uuid
+      type: string
+    TeamId:
+      format: uuid
+      type: string
+    UpdateUserParams:
+      properties:
+        current_email:
+          type:
+          - string
+          - 'null'
+        updates:
+          $ref: '#/components/schemas/UserChangeset'
+      required:
+      - updates
+      type: object
+    FeatureFlag:
+      enum:
+      - functional_test
+      - pdf_parsing
+      - boredm_construction_model
+      - generic_suspicious_queue
+      - new_use_case_preview
+      - bedrock_codegen
+      - cerebras_codegen
+      - gemini25pro
+      - claude_sonnet4
+      - allow_job_deletion
+      - none
+      type: string
+    Permission:
+      enum:
+      - labeler
+      - qa_labeler
+      - debug
+      - human_llm
+      - none
       type: string
     UserChangeset:
       properties:
@@ -154,31 +200,6 @@ components:
           allOf:
           - $ref: '#/components/schemas/UserType'
       type: object
-    FeatureFlag:
-      enum:
-      - functional_test
-      - pdf_parsing
-      - boredm_construction_model
-      - generic_suspicious_queue
-      - new_use_case_preview
-      - bedrock_codegen
-      - cerebras_codegen
-      - gemini25pro
-      - claude_sonnet4
-      - allow_job_deletion
-      - none
-      type: string
-    Permission:
-      enum:
-      - labeler
-      - qa_labeler
-      - debug
-      - human_llm
-      - none
-      type: string
-    UserId:
-      format: uuid
-      type: string
     User:
       properties:
         apollo_data: {}
@@ -279,27 +300,6 @@ components:
       - feature_overrides
       - completed_onboarding
       - notify_for_interaction
-      type: object
-    TeamId:
-      format: uuid
-      type: string
-    EnrichUserParams:
-      properties:
-        email:
-          type: string
-      required:
-      - email
-      type: object
-    UpdateUserParams:
-      properties:
-        current_email:
-          type:
-          - string
-          - 'null'
-        updates:
-          $ref: '#/components/schemas/UserChangeset'
-      required:
-      - updates
       type: object
   securitySchemes:
     api_key:

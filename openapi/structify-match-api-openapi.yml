@@ -94,6 +94,30 @@ paths:
       - Match
 components:
   schemas:
+    CreateMatchJobsResponse:
+      properties:
+        count:
+          description: Number of jobs created
+          minimum: 0
+          type: integer
+        job_ids:
+          description: IDs of the created match jobs
+          items:
+            $ref: '#/components/schemas/JobId'
+          type: array
+      required:
+      - job_ids
+      - count
+      type: object
+    JobId:
+      format: uuid
+      type: string
+    WorkflowSessionNodeId:
+      format: uuid
+      type: string
+    EntityId:
+      format: uuid
+      type: string
     MatchResult:
       properties:
         confidence_score:
@@ -132,28 +156,7 @@ components:
       - match_reason
       - created_at
       type: object
-    CreateMatchJobsResponse:
-      properties:
-        count:
-          description: Number of jobs created
-          minimum: 0
-          type: integer
-        job_ids:
-          description: IDs of the created match jobs
-          items:
-            $ref: '#/components/schemas/JobId'
-          type: array
-      required:
-      - job_ids
-      - count
-      type: object
-    WorkflowSessionNodeId:
-      format: uuid
-      type: string
-    EntityId:
-      format: uuid
-      type: string
-    JobId:
+    MatchResultId:
       format: uuid
       type: string
     CreateMatchJobsRequest:
@@ -179,9 +182,6 @@ components:
       - target_table
       - conditioning
       type: object
-    MatchResultId:
-      format: uuid
-      type: string
   securitySchemes:
     api_key:
       in: header

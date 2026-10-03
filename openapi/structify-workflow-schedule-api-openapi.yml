@@ -232,48 +232,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    WorkflowScheduleInfo:
-      properties:
-        chat_session_id:
-          $ref: '#/components/schemas/ChatSessionId'
-        cron_schedule:
-          type:
-          - string
-          - 'null'
-        git_commit_hash:
-          type:
-          - string
-          - 'null'
-        id:
-          $ref: '#/components/schemas/WorkflowScheduleId'
-        name:
-          type: string
-        next_run_time:
-          type:
-          - string
-          - 'null'
-        owner_email:
-          type:
-          - string
-          - 'null'
-        paused:
-          type: boolean
-        updated_at:
-          type:
-          - string
-          - 'null'
-        visibility:
-          allOf:
-          - $ref: '#/components/schemas/ChatVisibility'
-      required:
-      - id
-      - name
-      - chat_session_id
-      - paused
-      type: object
-    WorkflowSessionId:
-      format: uuid
-      type: string
     GetWorkflowScheduleSessionsResponse:
       properties:
         sessions:
@@ -294,9 +252,6 @@ components:
       required:
       - paused
       type: object
-    WorkflowScheduleId:
-      format: uuid
-      type: string
     UpdateWorkflowScheduleRequest:
       properties:
         cron_schedule:
@@ -325,12 +280,11 @@ components:
           format: int64
           type: integer
       type: object
-    ChatVisibility:
-      enum:
-      - private
-      - shared_with_team
-      - shared_with_team_view
-      - public
+    ChatMessageId:
+      format: uuid
+      type: string
+    WorkflowScheduleId:
+      format: uuid
       type: string
     ChatSessionId:
       format: uuid
@@ -384,7 +338,7 @@ components:
       - dag_ready
       - aborted
       type: object
-    ChatMessageId:
+    WorkflowSessionId:
       format: uuid
       type: string
     CreateWorkflowScheduleRequest:
@@ -402,6 +356,52 @@ components:
       required:
       - name
       type: object
+    WorkflowScheduleInfo:
+      properties:
+        chat_session_id:
+          $ref: '#/components/schemas/ChatSessionId'
+        cron_schedule:
+          type:
+          - string
+          - 'null'
+        git_commit_hash:
+          type:
+          - string
+          - 'null'
+        id:
+          $ref: '#/components/schemas/WorkflowScheduleId'
+        name:
+          type: string
+        next_run_time:
+          type:
+          - string
+          - 'null'
+        owner_email:
+          type:
+          - string
+          - 'null'
+        paused:
+          type: boolean
+        updated_at:
+          type:
+          - string
+          - 'null'
+        visibility:
+          allOf:
+          - $ref: '#/components/schemas/ChatVisibility'
+      required:
+      - id
+      - name
+      - chat_session_id
+      - paused
+      type: object
+    ChatVisibility:
+      enum:
+      - private
+      - shared_with_team
+      - shared_with_team_view
+      - public
+      type: string
   securitySchemes:
     api_key:
       in: header

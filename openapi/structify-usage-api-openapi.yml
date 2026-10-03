@@ -65,9 +65,28 @@ components:
     TransactionId:
       format: uuid
       type: string
+    JobId:
+      format: uuid
+      type: string
     MembershipId:
       format: uuid
       type: string
+    UsageStatistics:
+      properties:
+        credits_used:
+          format: int64
+          type: integer
+        num_entities:
+          minimum: 0
+          type: integer
+        num_relationships:
+          minimum: 0
+          type: integer
+      required:
+      - num_entities
+      - num_relationships
+      - credits_used
+      type: object
     CreditGrantId:
       format: uuid
       type: string
@@ -95,25 +114,6 @@ components:
       - amount
       - timestamp
       - membership_id
-      type: object
-    JobId:
-      format: uuid
-      type: string
-    UsageStatistics:
-      properties:
-        credits_used:
-          format: int64
-          type: integer
-        num_entities:
-          minimum: 0
-          type: integer
-        num_relationships:
-          minimum: 0
-          type: integer
-      required:
-      - num_entities
-      - num_relationships
-      - credits_used
       type: object
   securitySchemes:
     api_key:

@@ -117,9 +117,6 @@ paths:
       - Documents
 components:
   schemas:
-    ProjectId:
-      format: uuid
-      type: string
     DownloadResponse:
       properties:
         content:
@@ -128,7 +125,7 @@ components:
       required:
       - content
       type: object
-    UserId:
+    JobId:
       format: uuid
       type: string
     FileType:
@@ -137,30 +134,6 @@ components:
       - PDF
       - SEC
       type: string
-    UserFileMultipart:
-      properties:
-        content:
-          format: binary
-          type: string
-        file_type:
-          $ref: '#/components/schemas/FileType'
-        path:
-          format: binary
-          type: string
-      required:
-      - path
-      - file_type
-      - content
-      title: FileMultipart
-      type: object
-    FilePath:
-      properties:
-        file_path:
-          description: The path of the file to delete
-          type: string
-      required:
-      - file_path
-      type: object
     File:
       properties:
         created_at:
@@ -194,12 +167,39 @@ components:
       - created_at
       - user_id
       type: object
+    ProjectId:
+      format: uuid
+      type: string
+    UserId:
+      format: uuid
+      type: string
+    UserFileMultipart:
+      properties:
+        content:
+          format: binary
+          type: string
+        file_type:
+          $ref: '#/components/schemas/FileType'
+        path:
+          format: binary
+          type: string
+      required:
+      - path
+      - file_type
+      - content
+      title: FileMultipart
+      type: object
     DatasetId:
       format: uuid
       type: string
-    JobId:
-      format: uuid
-      type: string
+    FilePath:
+      properties:
+        file_path:
+          description: The path of the file to delete
+          type: string
+      required:
+      - file_path
+      type: object
     DocumentId:
       format: uuid
       type: string

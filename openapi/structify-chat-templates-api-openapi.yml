@@ -70,9 +70,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    UserId:
-      format: uuid
-      type: string
     ChatTemplate:
       properties:
         chat_session_id:
@@ -131,10 +128,13 @@ components:
       required:
       - prompt
       type: object
-    ChatTemplateId:
+    UserId:
       format: uuid
       type: string
     ChatSessionId:
+      format: uuid
+      type: string
+    ChatTemplateId:
       format: uuid
       type: string
   securitySchemes:
