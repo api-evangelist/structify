@@ -94,6 +94,38 @@ paths:
       - Match
 components:
   schemas:
+    WorkflowSessionNodeId:
+      format: uuid
+      type: string
+    JobId:
+      format: uuid
+      type: string
+    EntityId:
+      format: uuid
+      type: string
+    CreateMatchJobsRequest:
+      properties:
+        conditioning:
+          description: Optional conditioning prompt for the LLM matcher
+          type: string
+        dataset:
+          description: Dataset name
+          type: string
+        node_id:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowSessionNodeId'
+        source_table:
+          description: Source table name (entities to match from)
+          type: string
+        target_table:
+          description: Target table name (entities to match to)
+          type: string
+      required:
+      - dataset
+      - source_table
+      - target_table
+      - conditioning
+      type: object
     CreateMatchJobsResponse:
       properties:
         count:
@@ -109,13 +141,7 @@ components:
       - job_ids
       - count
       type: object
-    JobId:
-      format: uuid
-      type: string
-    WorkflowSessionNodeId:
-      format: uuid
-      type: string
-    EntityId:
+    MatchResultId:
       format: uuid
       type: string
     MatchResult:
@@ -155,32 +181,6 @@ components:
       - target_entity_id
       - match_reason
       - created_at
-      type: object
-    MatchResultId:
-      format: uuid
-      type: string
-    CreateMatchJobsRequest:
-      properties:
-        conditioning:
-          description: Optional conditioning prompt for the LLM matcher
-          type: string
-        dataset:
-          description: Dataset name
-          type: string
-        node_id:
-          allOf:
-          - $ref: '#/components/schemas/WorkflowSessionNodeId'
-        source_table:
-          description: Source table name (entities to match from)
-          type: string
-        target_table:
-          description: Target table name (entities to match to)
-          type: string
-      required:
-      - dataset
-      - source_table
-      - target_table
-      - conditioning
       type: object
   securitySchemes:
     api_key:

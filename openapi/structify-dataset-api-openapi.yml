@@ -754,53 +754,35 @@ paths:
       - Dataset
 components:
   schemas:
-    SubgraphQuery:
+    TableStats:
       properties:
-        dataset:
-          description: The dataset to match against
-          type: string
-        match_threshold:
-          format: double
-          type: number
-        query_kg:
-          $ref: '#/components/schemas/LLMKnowledgeGraph'
+        entity_granularity:
+          $ref: '#/components/schemas/ConfusionMatrix'
+        per_property:
+          additionalProperties:
+            $ref: '#/components/schemas/ConfusionMatrix'
+          type: object
+        prop_granularity:
+          $ref: '#/components/schemas/ConfusionMatrix'
       required:
-      - query_kg
-      - dataset
+      - entity_granularity
+      - prop_granularity
+      - per_property
       type: object
-    JobId:
-      format: uuid
-      type: string
-    RelationshipDescriptor:
-      additionalProperties: false
+    DatasetStats:
       properties:
-        description:
-          type: string
-        merge_strategy:
-          allOf:
-          - $ref: '#/components/schemas/RelationshipMergeStrategy'
-        name:
-          type: string
-        properties:
-          items:
-            $ref: '#/components/schemas/PropertyDescriptor'
-          type: array
-        source_table:
-          type: string
-        target_table:
-          type: string
+        per_relationship:
+          additionalProperties:
+            $ref: '#/components/schemas/RelationshipStats'
+          type: object
+        per_table:
+          additionalProperties:
+            $ref: '#/components/schemas/TableStats'
+          type: object
       required:
-      - name
-      - description
-      - source_table
-      - target_table
+      - per_table
+      - per_relationship
       type: object
-    EvaluationStatus:
-      enum:
-      - Running
-      - Completed
-      - Failed
-      type: string
     JobCount:
       properties:
         completed:
@@ -825,31 +807,17 @@ components:
       - running
       - queued
       type: object
-    ComparisonNodeId:
-      format: uuid
-      type: string
-    LLMKnowledgeGraph:
-      additionalProperties: false
-      description: 'Knowledge graph info structured to deserialize and display
-
-        in the same format that the LLM outputs.
-
-        Also the first representation of an LLM output in the pipeline from raw tool output to being merged into a DB'
-      properties:
-        entities:
-          items:
-            $ref: '#/components/schemas/LLMEntity'
-          type: array
-        relationships:
-          items:
-            $ref: '#/components/schemas/LLMRelationship'
-          type: array
-      required:
-      - entities
-      type: object
     EntityId:
       format: uuid
       type: string
+    BasicPropValue:
+      oneOf:
+      - type: string
+      - format: int64
+        type: integer
+      - type: boolean
+      - format: double
+        type: number
     KgRelationship:
       properties:
         created_at:
@@ -883,138 +851,170 @@ components:
       - dataset_id
       title: Relationship
       type: object
-    LLMEntity:
-      additionalProperties: false
+    RelationshipMatches:
       properties:
-        id:
-          minimum: 0
-          type: integer
-        properties:
-          additionalProperties:
-            $ref: '#/components/schemas/BasicPropValue'
-          type: object
-        type:
-          type: string
-      required:
-      - id
-      - type
-      - properties
-      type: object
-    RelationshipMatch:
-      properties:
-        matched_properties:
+        relationship_matches:
           items:
-            $ref: '#/components/schemas/PropertyMatch'
+            $ref: '#/components/schemas/RelationshipMatch'
           type: array
-        relationship_a:
-          $ref: '#/components/schemas/KgRelationship'
-        relationship_b:
-          $ref: '#/components/schemas/KgRelationship'
+        unmatched_a:
+          items:
+            $ref: '#/components/schemas/KgRelationship'
+          type: array
+        unmatched_b:
+          items:
+            $ref: '#/components/schemas/KgRelationship'
+          type: array
       required:
-      - matched_properties
-      - relationship_a
-      - relationship_b
+      - relationship_matches
+      - unmatched_a
+      - unmatched_b
       type: object
-    LLMImage:
+    ComparisonStrategy:
+      enum:
+      - Default
+      - EnforceUniqueness
+      type: string
+    UpdatePropertyRequest:
       properties:
-        flag_number:
-          minimum: 0
-          type:
-          - integer
-          - 'null'
-        image:
-          format: binary
+        dataset_name:
+          type: string
+        new_property_description:
           type:
           - string
           - 'null'
-      type: object
-    RelationshipMergeProbability:
-      properties:
-        source_cardinality_given_target_match:
-          description: 'Describes the expected cardinality of the source table when a match is found in the target table
-
-
-            For example, if we have a source company and a target funding round, we expect the source company
-
-            to appear in multiple funding rounds, but not *too* many.
-
-            So if we have a funding round match, the expected number of unique companies is relatively small.
-
-            This is an estimate of that number.'
-          format: int64
-          minimum: 0
-          type:
-          - integer
-          - 'null'
-        target_cardinality_given_source_match:
-          description: 'Describes the expected cardinality of the target table when a match is found in the source table
-
-
-            For example, if we have a source company and a target funding round, we usually expect
-
-            some number of funding rounds to be associated with a single company but not *too* many.
-
-            So if we have a company match, the expected number of unique funding rounds is relatively small.
-
-            This is an estimate of that number.'
-          format: int64
-          minimum: 0
-          type:
-          - integer
-          - 'null'
-      type: object
-    PersonName:
-      properties:
-        name:
+        new_property_merge_strategy:
+          allOf:
+          - $ref: '#/components/schemas/MergeStrategy'
+        new_property_type:
+          allOf:
+          - $ref: '#/components/schemas/PropertyType'
+        property_name:
+          type: string
+        table_name:
           type: string
       required:
-      - name
+      - dataset_name
+      - table_name
+      - property_name
       type: object
-    EntityMatch:
+    LLMKnowledgeGraph:
+      additionalProperties: false
+      description: 'Knowledge graph info structured to deserialize and display
+
+        in the same format that the LLM outputs.
+
+        Also the first representation of an LLM output in the pipeline from raw tool output to being merged into a DB'
       properties:
-        baseline_cardinality:
+        entities:
+          items:
+            $ref: '#/components/schemas/LLMEntity'
+          type: array
+        relationships:
+          items:
+            $ref: '#/components/schemas/LLMRelationship'
+          type: array
+      required:
+      - entities
+      type: object
+    PropertyMatch:
+      properties:
+        match_prob:
+          format: double
+          type: number
+        match_transfer_prob:
+          format: double
+          type: number
+        name:
+          type: string
+        property_cardinality:
           format: int64
           minimum: 0
           type: integer
-        cardinality_override:
-          allOf:
-          - $ref: '#/components/schemas/CardinalityOverride'
-        entity_a:
-          $ref: '#/components/schemas/KgEntity'
-        entity_b:
-          $ref: '#/components/schemas/KgEntity'
-        matched_properties:
-          items:
-            $ref: '#/components/schemas/PropertyMatch'
-          type: array
-        p_match:
-          format: double
-          type: number
-        p_match_threshold:
-          format: double
-          type: number
+        unique:
+          type: boolean
       required:
-      - baseline_cardinality
-      - p_match
-      - p_match_threshold
-      - matched_properties
-      - entity_a
-      - entity_b
+      - name
+      - match_prob
+      - property_cardinality
+      - match_transfer_prob
+      - unique
       type: object
-    DatasetStats:
+    DatasetReturn:
+      allOf:
+      - $ref: '#/components/schemas/DatasetDescriptor'
+      - properties:
+          created_timestamp:
+            format: date-time
+            type: string
+          id:
+            $ref: '#/components/schemas/DatasetId'
+        required:
+        - id
+        - created_timestamp
+        type: object
+    ComplexPropValue:
+      oneOf:
+      - type: string
+      - format: int64
+        type: integer
+      - type: boolean
+      - format: double
+        type: number
+      - $ref: '#/components/schemas/PartialDate'
+      - $ref: '#/components/schemas/Url'
+      - $ref: '#/components/schemas/Money'
+      - $ref: '#/components/schemas/LLMImage'
+      - $ref: '#/components/schemas/PersonName'
+      - $ref: '#/components/schemas/Address'
+    ErrorResponse:
+      description: Standard error response
       properties:
-        per_relationship:
-          additionalProperties:
-            $ref: '#/components/schemas/RelationshipStats'
-          type: object
-        per_table:
-          additionalProperties:
-            $ref: '#/components/schemas/TableStats'
-          type: object
+        error:
+          type: string
       required:
-      - per_table
-      - per_relationship
+      - error
       type: object
+    PropertyType:
+      oneOf:
+      - enum:
+        - String
+        type: string
+      - enum:
+        - Boolean
+        type: string
+      - properties:
+          Enum:
+            items:
+              type: string
+            type: array
+        required:
+        - Enum
+        type: object
+      - enum:
+        - Integer
+        type: string
+      - enum:
+        - Float
+        type: string
+      - enum:
+        - Date
+        type: string
+      - enum:
+        - URL
+        type: string
+      - enum:
+        - Money
+        type: string
+      - enum:
+        - Image
+        type: string
+      - enum:
+        - PersonName
+        type: string
+      - enum:
+        - Address
+        type: string
     Money:
       oneOf:
       - description: 'Money string that includes currency and amount: $10k, £100.00, 1 million CAD, ¥1e8 etc.'
@@ -1061,119 +1061,61 @@ components:
         title: MoneyObject
         type: object
       title: MoneyProperty
-    RelationshipMergeStrategy:
-      oneOf:
-      - $ref: '#/components/schemas/RelationshipMergeProbability'
-    ErrorResponse:
-      description: Standard error response
+    EvaluateComparisonResult:
       properties:
-        error:
+        dataset_1:
+          $ref: '#/components/schemas/DatasetId'
+        dataset_1_name:
           type: string
-      required:
-      - error
-      type: object
-    TableMatches:
-      properties:
-        entity_matches:
-          items:
-            $ref: '#/components/schemas/EntityMatch'
-          type: array
-        unmatched_a:
-          items:
-            $ref: '#/components/schemas/EntityWithBestMatch'
-          type: array
-        unmatched_b:
-          items:
-            $ref: '#/components/schemas/EntityWithBestMatch'
-          type: array
-      required:
-      - entity_matches
-      - unmatched_a
-      - unmatched_b
-      type: object
-    MergeConfig:
-      description: The configuration for a probabilistic merge strategy
-      properties:
-        baseline_cardinality:
-          description: 'The number of unique values that are expected to be present in the complete dataset
-
-
-            This is used for merging to determine how significant a match is. (i.e. if there are
-
-            only 2 possible values, a match gives less confidence than if there are 100)'
-          format: int64
-          minimum: 0
-          type: integer
-        comparison_strategy:
-          $ref: '#/components/schemas/ComparisonStrategy'
-        match_transfer_probability:
-          description: 'The estimated probability that, given an entity match, the properties also match
-
-
-            For a person''s full name, this would be quite high. For a person''s job title, it
-
-            would be lower because people can have multiple job titles over time or at different
-
-            companies at the same time.'
+        dataset_2:
+          $ref: '#/components/schemas/DatasetId'
+        dataset_2_is_ground_truth:
+          type: boolean
+        dataset_2_name:
+          type: string
+        id:
+          $ref: '#/components/schemas/ComparisonNodeId'
+        iou:
           format: float
           type: number
-      required:
-      - baseline_cardinality
-      - match_transfer_probability
-      type: object
-    DatasetDescWithFlags:
-      allOf:
-      - $ref: '#/components/schemas/DatasetDescriptor'
-      - properties:
-          ephemeral:
-            type: boolean
-        type: object
-    RelationshipId:
-      format: uuid
-      type: string
-    SortableTableColumn:
-      oneOf:
-      - properties:
-          user_defined_column:
-            type: string
-        required:
-        - user_defined_column
-        type: object
-      - enum:
-        - creation_time
-        type: string
-    DatasetReturn:
-      allOf:
-      - $ref: '#/components/schemas/DatasetDescriptor'
-      - properties:
-          created_timestamp:
-            format: date-time
-            type: string
-          id:
-            $ref: '#/components/schemas/DatasetId'
-        required:
-        - id
-        - created_timestamp
-        type: object
-    ComparisonStrategy:
-      enum:
-      - Default
-      - EnforceUniqueness
-      type: string
-    UpdatePropertyRequest:
-      properties:
-        dataset_name:
-          type: string
-        new_property_description:
+        matched:
+          format: int32
+          type: integer
+        matches:
+          $ref: '#/components/schemas/DatasetMatches'
+        run_message:
           type:
           - string
           - 'null'
-        new_property_merge_strategy:
-          allOf:
-          - $ref: '#/components/schemas/MergeStrategy'
-        new_property_type:
-          allOf:
-          - $ref: '#/components/schemas/PropertyType'
+        started_at:
+          format: date-time
+          type: string
+        stats:
+          $ref: '#/components/schemas/DatasetStats'
+        status:
+          $ref: '#/components/schemas/EvaluationStatus'
+        unmatched:
+          format: int32
+          type: integer
+      required:
+      - id
+      - iou
+      - matched
+      - unmatched
+      - matches
+      - stats
+      - dataset_2_is_ground_truth
+      - dataset_1
+      - dataset_2
+      - dataset_1_name
+      - dataset_2_name
+      - status
+      - started_at
+      type: object
+    RemovePropertyRequest:
+      properties:
+        dataset_name:
+          type: string
         property_name:
           type: string
         table_name:
@@ -1183,151 +1125,35 @@ components:
       - table_name
       - property_name
       type: object
-    ComplexPropValue:
-      oneOf:
-      - type: string
-      - format: int64
-        type: integer
-      - type: boolean
-      - format: double
-        type: number
-      - $ref: '#/components/schemas/PartialDate'
-      - $ref: '#/components/schemas/Url'
-      - $ref: '#/components/schemas/Money'
-      - $ref: '#/components/schemas/LLMImage'
-      - $ref: '#/components/schemas/PersonName'
-      - $ref: '#/components/schemas/Address'
-    PropertyDescriptor:
-      additionalProperties: false
-      properties:
-        description:
-          type: string
-        merge_strategy:
-          $ref: '#/components/schemas/MergeStrategy'
-        name:
-          type: string
-        prop_type:
-          $ref: '#/components/schemas/PropertyType'
-      required:
-      - name
-      - description
-      type: object
-    MissingEmbeddingsCount:
-      properties:
-        count:
-          format: int64
-          type: integer
-      required:
-      - count
-      type: object
-    Address:
-      oneOf:
-      - properties:
-          components:
-            additionalProperties:
-              type: string
-            type: object
-          original_address:
-            type: string
-        required:
-        - original_address
-        - components
-        title: AddressObject
-        type: object
-      - description: 'Address string in formats: ''123 Main St, Springfield, IL 62701, USA'', ''1600 Amphitheatre Parkway, Mountain View, California 94043'', ''1600 Pennsylvania Ave NW, Washington, DC 20500'', ''NYC, NY'', ''Oahu, Hawaii'''
-        title: AddressString
-        type: string
-      title: AddressProperty
-    MatchResponse:
-      properties:
-        entity:
-          $ref: '#/components/schemas/EntityId'
-        score:
-          format: double
-          type: number
-      required:
-      - entity
-      - score
-      type: object
-    SortBy:
-      properties:
-        col_id:
-          $ref: '#/components/schemas/SortableTableColumn'
-        sort:
-          $ref: '#/components/schemas/SortDirection'
-      required:
-      - col_id
-      - sort
-      type: object
-    PropertyMatch:
-      properties:
-        match_prob:
-          format: double
-          type: number
-        match_transfer_prob:
-          format: double
-          type: number
-        name:
-          type: string
-        property_cardinality:
-          format: int64
-          minimum: 0
-          type: integer
-        unique:
-          type: boolean
-      required:
-      - name
-      - match_prob
-      - property_cardinality
-      - match_transfer_prob
-      - unique
-      type: object
-    DatasetId:
+    JobId:
       format: uuid
       type: string
-    CardinalityOverride:
+    PersonName:
       properties:
-        cardinality:
-          format: int64
-          minimum: 0
-          type: integer
-        entity_id:
-          $ref: '#/components/schemas/EntityId'
-        relationship_name:
+        name:
           type: string
       required:
-      - entity_id
-      - cardinality
-      - relationship_name
+      - name
       type: object
-    KgEntity:
+    LLMRelationship:
+      additionalProperties: false
       properties:
-        created_at:
-          format: date-time
-          type: string
-        dataset_id:
-          $ref: '#/components/schemas/DatasetId'
-        id:
-          $ref: '#/components/schemas/EntityId'
-        job_id:
-          allOf:
-          - $ref: '#/components/schemas/JobId'
-        label:
-          type: string
         properties:
           additionalProperties:
-            $ref: '#/components/schemas/ComplexPropValue'
+            $ref: '#/components/schemas/BasicPropValue'
           type: object
-        updated_at:
-          format: date-time
+        source:
+          minimum: 0
+          type: integer
+        target:
+          minimum: 0
+          type: integer
+        type:
           type: string
       required:
-      - id
-      - label
-      - created_at
-      - updated_at
-      - dataset_id
-      - properties
+      - type
+      - source
+      - target
       type: object
     ConfusionMatrix:
       properties:
@@ -1344,6 +1170,291 @@ components:
       - true_positives
       - false_positives
       - false_negatives
+      type: object
+    PropertyDescriptor:
+      additionalProperties: false
+      properties:
+        description:
+          type: string
+        merge_strategy:
+          $ref: '#/components/schemas/MergeStrategy'
+        name:
+          type: string
+        prop_type:
+          $ref: '#/components/schemas/PropertyType'
+      required:
+      - name
+      - description
+      type: object
+    Dataset:
+      allOf:
+      - $ref: '#/components/schemas/DatasetDescriptor'
+      - properties:
+          created_timestamp:
+            format: date-time
+            type: string
+          id:
+            $ref: '#/components/schemas/DatasetId'
+        required:
+        - id
+        - created_timestamp
+        type: object
+    PaginatedJointResponse:
+      properties:
+        connected_entities:
+          items:
+            $ref: '#/components/schemas/KgEntity'
+          type: array
+        entities:
+          items:
+            $ref: '#/components/schemas/KgEntity'
+          type: array
+        relationships:
+          items:
+            $ref: '#/components/schemas/KgRelationship'
+          type: array
+      required:
+      - entities
+      - relationships
+      - connected_entities
+      type: object
+    DatasetMatches:
+      properties:
+        relationship_matches:
+          additionalProperties:
+            $ref: '#/components/schemas/RelationshipMatches'
+          type: object
+        table_matches:
+          additionalProperties:
+            $ref: '#/components/schemas/TableMatches'
+          type: object
+      required:
+      - table_matches
+      - relationship_matches
+      type: object
+    SortableTableColumn:
+      oneOf:
+      - properties:
+          user_defined_column:
+            type: string
+        required:
+        - user_defined_column
+        type: object
+      - enum:
+        - creation_time
+        type: string
+    RelationshipId:
+      format: uuid
+      type: string
+    LLMEntity:
+      additionalProperties: false
+      properties:
+        id:
+          minimum: 0
+          type: integer
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/BasicPropValue'
+          type: object
+        type:
+          type: string
+      required:
+      - id
+      - type
+      - properties
+      type: object
+    PartialDate:
+      oneOf:
+      - properties:
+          day:
+            type:
+            - integer
+            - 'null'
+          month:
+            type:
+            - integer
+            - 'null'
+          original_string:
+            type: string
+          year:
+            type: integer
+        required:
+        - year
+        - original_string
+        title: PartialDateObject
+        type: object
+      - description: 'Date string in formats: ''YYYY'', ''YYYY-MM'', ''YYYY-MM-DD'', ''DD-MM-YYYY'', ''MM-DD-YYYY'', ''Jan 3, 2023'', ''3 Jan 2023'', ''2023 Apr 3'', etc.'
+        title: PartialDateString
+        type: string
+      title: PartialDateProperty
+    EvaluateListItem:
+      properties:
+        dataset_1:
+          type: string
+        dataset_2:
+          type: string
+        id:
+          type: string
+        iou:
+          format: float
+          type: number
+        matched:
+          format: int32
+          type: integer
+        run_message:
+          type:
+          - string
+          - 'null'
+        started_at:
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/EvaluationStatus'
+        unmatched:
+          format: int32
+          type: integer
+      required:
+      - id
+      - dataset_1
+      - dataset_2
+      - started_at
+      - status
+      - iou
+      - matched
+      - unmatched
+      type: object
+    SubgraphQuery:
+      properties:
+        dataset:
+          description: The dataset to match against
+          type: string
+        match_threshold:
+          format: double
+          type: number
+        query_kg:
+          $ref: '#/components/schemas/LLMKnowledgeGraph'
+      required:
+      - query_kg
+      - dataset
+      type: object
+    RelationshipDescriptor:
+      additionalProperties: false
+      properties:
+        description:
+          type: string
+        merge_strategy:
+          allOf:
+          - $ref: '#/components/schemas/RelationshipMergeStrategy'
+        name:
+          type: string
+        properties:
+          items:
+            $ref: '#/components/schemas/PropertyDescriptor'
+          type: array
+        source_table:
+          type: string
+        target_table:
+          type: string
+      required:
+      - name
+      - description
+      - source_table
+      - target_table
+      type: object
+    EntityMatch:
+      properties:
+        baseline_cardinality:
+          format: int64
+          minimum: 0
+          type: integer
+        cardinality_override:
+          allOf:
+          - $ref: '#/components/schemas/CardinalityOverride'
+        entity_a:
+          $ref: '#/components/schemas/KgEntity'
+        entity_b:
+          $ref: '#/components/schemas/KgEntity'
+        matched_properties:
+          items:
+            $ref: '#/components/schemas/PropertyMatch'
+          type: array
+        p_match:
+          format: double
+          type: number
+        p_match_threshold:
+          format: double
+          type: number
+      required:
+      - baseline_cardinality
+      - p_match
+      - p_match_threshold
+      - matched_properties
+      - entity_a
+      - entity_b
+      type: object
+    MissingEmbeddingsCount:
+      properties:
+        count:
+          format: int64
+          type: integer
+      required:
+      - count
+      type: object
+    DatasetDescWithFlags:
+      allOf:
+      - $ref: '#/components/schemas/DatasetDescriptor'
+      - properties:
+          ephemeral:
+            type: boolean
+        type: object
+    EntityWithBestMatch:
+      properties:
+        best_match:
+          allOf:
+          - $ref: '#/components/schemas/EntityMatch'
+        entity:
+          $ref: '#/components/schemas/KgEntity'
+      required:
+      - entity
+      type: object
+    DatasetId:
+      format: uuid
+      type: string
+    SortBy:
+      properties:
+        col_id:
+          $ref: '#/components/schemas/SortableTableColumn'
+        sort:
+          $ref: '#/components/schemas/SortDirection'
+      required:
+      - col_id
+      - sort
+      type: object
+    LLMImage:
+      properties:
+        flag_number:
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        image:
+          format: binary
+          type:
+          - string
+          - 'null'
+      type: object
+    SetPrimaryColumnRequest:
+      properties:
+        dataset_name:
+          type: string
+        property_name:
+          type: string
+        table_name:
+          type: string
+      required:
+      - dataset_name
+      - table_name
+      - property_name
       type: object
     MergeStrategy:
       oneOf:
@@ -1396,30 +1507,188 @@ components:
       - description
       - properties
       type: object
-    PartialDate:
+    Url:
       oneOf:
+      - description: Url string
+        title: UrlString
+        type: string
       - properties:
-          day:
-            type:
-            - integer
-            - 'null'
-          month:
-            type:
-            - integer
-            - 'null'
           original_string:
             type: string
-          year:
-            type: integer
+          url:
+            type: string
         required:
-        - year
+        - url
         - original_string
-        title: PartialDateObject
+        title: UrlObject
         type: object
-      - description: 'Date string in formats: ''YYYY'', ''YYYY-MM'', ''YYYY-MM-DD'', ''DD-MM-YYYY'', ''MM-DD-YYYY'', ''Jan 3, 2023'', ''3 Jan 2023'', ''2023 Apr 3'', etc.'
-        title: PartialDateString
-        type: string
-      title: PartialDateProperty
+      title: UrlProperty
+    KgEntity:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        dataset_id:
+          $ref: '#/components/schemas/DatasetId'
+        id:
+          $ref: '#/components/schemas/EntityId'
+        job_id:
+          allOf:
+          - $ref: '#/components/schemas/JobId'
+        label:
+          type: string
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/ComplexPropValue'
+          type: object
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - id
+      - label
+      - created_at
+      - updated_at
+      - dataset_id
+      - properties
+      type: object
+    RelationshipStats:
+      properties:
+        per_property:
+          additionalProperties:
+            $ref: '#/components/schemas/ConfusionMatrix'
+          type: object
+        prop_granularity:
+          $ref: '#/components/schemas/ConfusionMatrix'
+        relationship_granularity:
+          $ref: '#/components/schemas/ConfusionMatrix'
+      required:
+      - relationship_granularity
+      - prop_granularity
+      - per_property
+      type: object
+    MatchResponse:
+      properties:
+        entity:
+          $ref: '#/components/schemas/EntityId'
+        score:
+          format: double
+          type: number
+      required:
+      - entity
+      - score
+      type: object
+    RelationshipMatch:
+      properties:
+        matched_properties:
+          items:
+            $ref: '#/components/schemas/PropertyMatch'
+          type: array
+        relationship_a:
+          $ref: '#/components/schemas/KgRelationship'
+        relationship_b:
+          $ref: '#/components/schemas/KgRelationship'
+      required:
+      - matched_properties
+      - relationship_a
+      - relationship_b
+      type: object
+    RelationshipMergeStrategy:
+      oneOf:
+      - $ref: '#/components/schemas/RelationshipMergeProbability'
+    AddPropertyRequest:
+      properties:
+        dataset_name:
+          type: string
+        property:
+          $ref: '#/components/schemas/PropertyDescriptor'
+        table_name:
+          type: string
+      required:
+      - dataset_name
+      - table_name
+      - property
+      type: object
+    MergeConfig:
+      description: The configuration for a probabilistic merge strategy
+      properties:
+        baseline_cardinality:
+          description: 'The number of unique values that are expected to be present in the complete dataset
+
+
+            This is used for merging to determine how significant a match is. (i.e. if there are
+
+            only 2 possible values, a match gives less confidence than if there are 100)'
+          format: int64
+          minimum: 0
+          type: integer
+        comparison_strategy:
+          $ref: '#/components/schemas/ComparisonStrategy'
+        match_transfer_probability:
+          description: 'The estimated probability that, given an entity match, the properties also match
+
+
+            For a person''s full name, this would be quite high. For a person''s job title, it
+
+            would be lower because people can have multiple job titles over time or at different
+
+            companies at the same time.'
+          format: float
+          type: number
+      required:
+      - baseline_cardinality
+      - match_transfer_probability
+      type: object
+    CardinalityOverride:
+      properties:
+        cardinality:
+          format: int64
+          minimum: 0
+          type: integer
+        entity_id:
+          $ref: '#/components/schemas/EntityId'
+        relationship_name:
+          type: string
+      required:
+      - entity_id
+      - cardinality
+      - relationship_name
+      type: object
+    ComparisonNodeId:
+      format: uuid
+      type: string
+    EvaluationStatus:
+      enum:
+      - Running
+      - Completed
+      - Failed
+      type: string
+    TableMatches:
+      properties:
+        entity_matches:
+          items:
+            $ref: '#/components/schemas/EntityMatch'
+          type: array
+        unmatched_a:
+          items:
+            $ref: '#/components/schemas/EntityWithBestMatch'
+          type: array
+        unmatched_b:
+          items:
+            $ref: '#/components/schemas/EntityWithBestMatch'
+          type: array
+      required:
+      - entity_matches
+      - unmatched_a
+      - unmatched_b
+      type: object
+    StatusResponse:
+      properties:
+        status:
+          $ref: '#/components/schemas/EvaluationStatus'
+      required:
+      - status
+      type: object
     ReorderPropertiesRequest:
       properties:
         dataset_name:
@@ -1434,6 +1703,41 @@ components:
       - dataset_name
       - table_name
       - property_names
+      type: object
+    RelationshipMergeProbability:
+      properties:
+        source_cardinality_given_target_match:
+          description: 'Describes the expected cardinality of the source table when a match is found in the target table
+
+
+            For example, if we have a source company and a target funding round, we expect the source company
+
+            to appear in multiple funding rounds, but not *too* many.
+
+            So if we have a funding round match, the expected number of unique companies is relatively small.
+
+            This is an estimate of that number.'
+          format: int64
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        target_cardinality_given_source_match:
+          description: 'Describes the expected cardinality of the target table when a match is found in the source table
+
+
+            For example, if we have a source company and a target funding round, we usually expect
+
+            some number of funding rounds to be associated with a single company but not *too* many.
+
+            So if we have a company match, the expected number of unique funding rounds is relatively small.
+
+            This is an estimate of that number.'
+          format: int64
+          minimum: 0
+          type:
+          - integer
+          - 'null'
       type: object
     UpdateRelationshipRequest:
       properties:
@@ -1452,128 +1756,29 @@ components:
       - dataset_name
       - relationship_name
       type: object
-    RelationshipStats:
-      properties:
-        per_property:
-          additionalProperties:
-            $ref: '#/components/schemas/ConfusionMatrix'
-          type: object
-        prop_granularity:
-          $ref: '#/components/schemas/ConfusionMatrix'
-        relationship_granularity:
-          $ref: '#/components/schemas/ConfusionMatrix'
-      required:
-      - relationship_granularity
-      - prop_granularity
-      - per_property
-      type: object
-    PropertyType:
-      oneOf:
-      - enum:
-        - String
-        type: string
-      - enum:
-        - Boolean
-        type: string
-      - properties:
-          Enum:
-            items:
-              type: string
-            type: array
-        required:
-        - Enum
-        type: object
-      - enum:
-        - Integer
-        type: string
-      - enum:
-        - Float
-        type: string
-      - enum:
-        - Date
-        type: string
-      - enum:
-        - URL
-        type: string
-      - enum:
-        - Money
-        type: string
-      - enum:
-        - Image
-        type: string
-      - enum:
-        - PersonName
-        type: string
-      - enum:
-        - Address
-        type: string
-    AddPropertyRequest:
-      properties:
-        dataset_name:
-          type: string
-        property:
-          $ref: '#/components/schemas/PropertyDescriptor'
-        table_name:
-          type: string
-      required:
-      - dataset_name
-      - table_name
-      - property
-      type: object
-    PaginatedJointResponse:
-      properties:
-        connected_entities:
-          items:
-            $ref: '#/components/schemas/KgEntity'
-          type: array
-        entities:
-          items:
-            $ref: '#/components/schemas/KgEntity'
-          type: array
-        relationships:
-          items:
-            $ref: '#/components/schemas/KgRelationship'
-          type: array
-      required:
-      - entities
-      - relationships
-      - connected_entities
-      type: object
     SortDirection:
       enum:
       - asc
       - desc
       type: string
-    Url:
+    Address:
       oneOf:
-      - description: Url string
-        title: UrlString
-        type: string
       - properties:
-          original_string:
-            type: string
-          url:
+          components:
+            additionalProperties:
+              type: string
+            type: object
+          original_address:
             type: string
         required:
-        - url
-        - original_string
-        title: UrlObject
+        - original_address
+        - components
+        title: AddressObject
         type: object
-      title: UrlProperty
-    DatasetMatches:
-      properties:
-        relationship_matches:
-          additionalProperties:
-            $ref: '#/components/schemas/RelationshipMatches'
-          type: object
-        table_matches:
-          additionalProperties:
-            $ref: '#/components/schemas/TableMatches'
-          type: object
-      required:
-      - table_matches
-      - relationship_matches
-      type: object
+      - description: 'Address string in formats: ''123 Main St, Springfield, IL 62701, USA'', ''1600 Amphitheatre Parkway, Mountain View, California 94043'', ''1600 Pennsylvania Ave NW, Washington, DC 20500'', ''NYC, NY'', ''Oahu, Hawaii'''
+        title: AddressString
+        type: string
+      title: AddressProperty
     DatasetDescriptor:
       additionalProperties: false
       description: 'A dataset is where you put multiple referential schemas.
@@ -1604,211 +1809,6 @@ components:
       - description
       - tables
       - relationships
-      type: object
-    BasicPropValue:
-      oneOf:
-      - type: string
-      - format: int64
-        type: integer
-      - type: boolean
-      - format: double
-        type: number
-    TableStats:
-      properties:
-        entity_granularity:
-          $ref: '#/components/schemas/ConfusionMatrix'
-        per_property:
-          additionalProperties:
-            $ref: '#/components/schemas/ConfusionMatrix'
-          type: object
-        prop_granularity:
-          $ref: '#/components/schemas/ConfusionMatrix'
-      required:
-      - entity_granularity
-      - prop_granularity
-      - per_property
-      type: object
-    EntityWithBestMatch:
-      properties:
-        best_match:
-          allOf:
-          - $ref: '#/components/schemas/EntityMatch'
-        entity:
-          $ref: '#/components/schemas/KgEntity'
-      required:
-      - entity
-      type: object
-    Dataset:
-      allOf:
-      - $ref: '#/components/schemas/DatasetDescriptor'
-      - properties:
-          created_timestamp:
-            format: date-time
-            type: string
-          id:
-            $ref: '#/components/schemas/DatasetId'
-        required:
-        - id
-        - created_timestamp
-        type: object
-    LLMRelationship:
-      additionalProperties: false
-      properties:
-        properties:
-          additionalProperties:
-            $ref: '#/components/schemas/BasicPropValue'
-          type: object
-        source:
-          minimum: 0
-          type: integer
-        target:
-          minimum: 0
-          type: integer
-        type:
-          type: string
-      required:
-      - type
-      - source
-      - target
-      type: object
-    SetPrimaryColumnRequest:
-      properties:
-        dataset_name:
-          type: string
-        property_name:
-          type: string
-        table_name:
-          type: string
-      required:
-      - dataset_name
-      - table_name
-      - property_name
-      type: object
-    StatusResponse:
-      properties:
-        status:
-          $ref: '#/components/schemas/EvaluationStatus'
-      required:
-      - status
-      type: object
-    EvaluateListItem:
-      properties:
-        dataset_1:
-          type: string
-        dataset_2:
-          type: string
-        id:
-          type: string
-        iou:
-          format: float
-          type: number
-        matched:
-          format: int32
-          type: integer
-        run_message:
-          type:
-          - string
-          - 'null'
-        started_at:
-          format: date-time
-          type: string
-        status:
-          $ref: '#/components/schemas/EvaluationStatus'
-        unmatched:
-          format: int32
-          type: integer
-      required:
-      - id
-      - dataset_1
-      - dataset_2
-      - started_at
-      - status
-      - iou
-      - matched
-      - unmatched
-      type: object
-    RelationshipMatches:
-      properties:
-        relationship_matches:
-          items:
-            $ref: '#/components/schemas/RelationshipMatch'
-          type: array
-        unmatched_a:
-          items:
-            $ref: '#/components/schemas/KgRelationship'
-          type: array
-        unmatched_b:
-          items:
-            $ref: '#/components/schemas/KgRelationship'
-          type: array
-      required:
-      - relationship_matches
-      - unmatched_a
-      - unmatched_b
-      type: object
-    RemovePropertyRequest:
-      properties:
-        dataset_name:
-          type: string
-        property_name:
-          type: string
-        table_name:
-          type: string
-      required:
-      - dataset_name
-      - table_name
-      - property_name
-      type: object
-    EvaluateComparisonResult:
-      properties:
-        dataset_1:
-          $ref: '#/components/schemas/DatasetId'
-        dataset_1_name:
-          type: string
-        dataset_2:
-          $ref: '#/components/schemas/DatasetId'
-        dataset_2_is_ground_truth:
-          type: boolean
-        dataset_2_name:
-          type: string
-        id:
-          $ref: '#/components/schemas/ComparisonNodeId'
-        iou:
-          format: float
-          type: number
-        matched:
-          format: int32
-          type: integer
-        matches:
-          $ref: '#/components/schemas/DatasetMatches'
-        run_message:
-          type:
-          - string
-          - 'null'
-        started_at:
-          format: date-time
-          type: string
-        stats:
-          $ref: '#/components/schemas/DatasetStats'
-        status:
-          $ref: '#/components/schemas/EvaluationStatus'
-        unmatched:
-          format: int32
-          type: integer
-      required:
-      - id
-      - iou
-      - matched
-      - unmatched
-      - matches
-      - stats
-      - dataset_2_is_ground_truth
-      - dataset_1
-      - dataset_2
-      - dataset_1_name
-      - dataset_2_name
-      - status
-      - started_at
       type: object
   securitySchemes:
     api_key:

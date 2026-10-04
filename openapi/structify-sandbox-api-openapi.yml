@@ -205,27 +205,21 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    SandboxMetricsSandbox:
-      properties:
-        remaining_seconds:
-          format: int64
-          type: integer
-        start_time:
-          format: double
-          type: number
-        total_timeout_seconds:
-          format: int64
-          type: integer
-        uptime_seconds:
-          format: int64
-          type: integer
-      required:
-      - start_time
-      - uptime_seconds
-      - remaining_seconds
-      - total_timeout_seconds
-      type: object
-    ExplorationRunId:
+    SandboxProvider:
+      enum:
+      - modal
+      - daytona
+      type: string
+    UserSessionId:
+      format: uuid
+      type: string
+    ChatSessionId:
+      format: uuid
+      type: string
+    SandboxId:
+      format: uuid
+      type: string
+    WorkflowSessionNodeId:
       format: uuid
       type: string
     GetSandboxRequest:
@@ -236,18 +230,52 @@ components:
           - string
           - 'null'
       type: object
-    SandboxMetricsProcess:
+    TeamId:
+      format: uuid
+      type: string
+    SandboxMetricsMemory:
+      properties:
+        available_mb:
+          format: double
+          type: number
+        percent:
+          format: double
+          type: number
+        total_mb:
+          format: double
+          type: number
+        used_mb:
+          format: double
+          type: number
+      required:
+      - used_mb
+      - total_mb
+      - percent
+      - available_mb
+      type: object
+    SandboxMetricsResponse:
       properties:
         cpu_percent:
           format: double
           type: number
-        memory_mb:
-          format: double
-          type: number
+        memory:
+          $ref: '#/components/schemas/SandboxMetricsMemory'
+        process:
+          $ref: '#/components/schemas/SandboxMetricsProcess'
+        sandbox:
+          $ref: '#/components/schemas/SandboxMetricsSandbox'
       required:
-      - memory_mb
       - cpu_percent
+      - memory
+      - process
+      - sandbox
       type: object
+    SandboxStatus:
+      enum:
+      - alive
+      - paused
+      - terminated
+      type: string
     Sandbox:
       properties:
         api_url:
@@ -300,26 +328,9 @@ components:
       - updated_at
       - provider
       type: object
-    UserSessionId:
+    ExplorationRunId:
       format: uuid
       type: string
-    SandboxMetricsResponse:
-      properties:
-        cpu_percent:
-          format: double
-          type: number
-        memory:
-          $ref: '#/components/schemas/SandboxMetricsMemory'
-        process:
-          $ref: '#/components/schemas/SandboxMetricsProcess'
-        sandbox:
-          $ref: '#/components/schemas/SandboxMetricsSandbox'
-      required:
-      - cpu_percent
-      - memory
-      - process
-      - sandbox
-      type: object
     UpdateSandboxStatusRequest:
       properties:
         status:
@@ -335,49 +346,38 @@ components:
       required:
       - error
       type: object
-    SandboxMetricsMemory:
+    SandboxMetricsSandbox:
       properties:
-        available_mb:
+        remaining_seconds:
+          format: int64
+          type: integer
+        start_time:
           format: double
           type: number
-        percent:
+        total_timeout_seconds:
+          format: int64
+          type: integer
+        uptime_seconds:
+          format: int64
+          type: integer
+      required:
+      - start_time
+      - uptime_seconds
+      - remaining_seconds
+      - total_timeout_seconds
+      type: object
+    SandboxMetricsProcess:
+      properties:
+        cpu_percent:
           format: double
           type: number
-        total_mb:
-          format: double
-          type: number
-        used_mb:
+        memory_mb:
           format: double
           type: number
       required:
-      - used_mb
-      - total_mb
-      - percent
-      - available_mb
+      - memory_mb
+      - cpu_percent
       type: object
-    TeamId:
-      format: uuid
-      type: string
-    ChatSessionId:
-      format: uuid
-      type: string
-    SandboxProvider:
-      enum:
-      - modal
-      - daytona
-      type: string
-    WorkflowSessionNodeId:
-      format: uuid
-      type: string
-    SandboxStatus:
-      enum:
-      - alive
-      - paused
-      - terminated
-      type: string
-    SandboxId:
-      format: uuid
-      type: string
   securitySchemes:
     api_key:
       in: header

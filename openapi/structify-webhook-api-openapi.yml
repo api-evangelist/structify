@@ -74,9 +74,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    WorkflowScheduleId:
-      format: uuid
-      type: string
     WebhookTriggerRequest:
       properties:
         workflow_parameters:
@@ -108,6 +105,9 @@ components:
       - success
       - message
       type: object
+    WorkflowScheduleId:
+      format: uuid
+      type: string
     ErrorResponse:
       description: Standard error response
       properties:

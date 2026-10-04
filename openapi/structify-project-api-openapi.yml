@@ -260,26 +260,71 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    UpdateProjectRequest:
+    ListProjectsResponse:
       properties:
-        collaborators:
+        projects:
           items:
-            $ref: '#/components/schemas/ProjectCollaboratorInput'
-          type:
-          - array
-          - 'null'
+            $ref: '#/components/schemas/Project'
+          type: array
+      required:
+      - projects
+      type: object
+    UserId:
+      format: uuid
+      type: string
+    ProjectVisibility:
+      enum:
+      - private
+      - shared_with_team
+      type: string
+    ProjectCollaboratorInput:
+      properties:
+        email:
+          type: string
+        role:
+          $ref: '#/components/schemas/ChatSessionRole'
+      required:
+      - email
+      - role
+      type: object
+    ProjectMember:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        email:
+          type: string
+        role:
+          $ref: '#/components/schemas/ChatSessionRole'
+        updated_at:
+          format: date-time
+          type: string
+        user_id:
+          $ref: '#/components/schemas/UserId'
+      required:
+      - user_id
+      - email
+      - role
+      - created_at
+      - updated_at
+      type: object
+    ProjectId:
+      format: uuid
+      type: string
+    CreateProjectRequest:
+      properties:
         description:
           type:
           - string
           - 'null'
         name:
-          type:
-          - string
-          - 'null'
-        visibility:
-          allOf:
-          - $ref: '#/components/schemas/ProjectVisibility'
+          type: string
+      required:
+      - name
       type: object
+    TeamId:
+      format: uuid
+      type: string
     Project:
       properties:
         created_at:
@@ -308,41 +353,23 @@ components:
       - updated_at
       - visibility
       type: object
-    ProjectCollaboratorInput:
-      properties:
-        email:
-          type: string
-        role:
-          $ref: '#/components/schemas/ChatSessionRole'
-      required:
-      - email
-      - role
-      type: object
-    CreateProjectRequest:
-      properties:
-        description:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-      required:
-      - name
-      type: object
-    ProjectId:
-      format: uuid
-      type: string
-    UserId:
-      format: uuid
-      type: string
-    TeamId:
-      format: uuid
-      type: string
-    ProjectVisibility:
+    ChatSessionRole:
       enum:
-      - private
-      - shared_with_team
+      - viewer
+      - editor
+      - owner
       type: string
+    ProjectWithMembers:
+      allOf:
+      - $ref: '#/components/schemas/Project'
+      - properties:
+          members:
+            items:
+              $ref: '#/components/schemas/ProjectMember'
+            type: array
+        required:
+        - members
+        type: object
     ErrorResponse:
       description: Standard error response
       properties:
@@ -358,52 +385,25 @@ components:
       required:
       - success
       type: object
-    ChatSessionRole:
-      enum:
-      - viewer
-      - editor
-      - owner
-      type: string
-    ListProjectsResponse:
+    UpdateProjectRequest:
       properties:
-        projects:
+        collaborators:
           items:
-            $ref: '#/components/schemas/Project'
-          type: array
-      required:
-      - projects
-      type: object
-    ProjectWithMembers:
-      allOf:
-      - $ref: '#/components/schemas/Project'
-      - properties:
-          members:
-            items:
-              $ref: '#/components/schemas/ProjectMember'
-            type: array
-        required:
-        - members
-        type: object
-    ProjectMember:
-      properties:
-        created_at:
-          format: date-time
-          type: string
-        email:
-          type: string
-        role:
-          $ref: '#/components/schemas/ChatSessionRole'
-        updated_at:
-          format: date-time
-          type: string
-        user_id:
-          $ref: '#/components/schemas/UserId'
-      required:
-      - user_id
-      - email
-      - role
-      - created_at
-      - updated_at
+            $ref: '#/components/schemas/ProjectCollaboratorInput'
+          type:
+          - array
+          - 'null'
+        description:
+          type:
+          - string
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        visibility:
+          allOf:
+          - $ref: '#/components/schemas/ProjectVisibility'
       type: object
   securitySchemes:
     api_key:

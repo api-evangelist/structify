@@ -105,6 +105,12 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    ConnectorAuthMethodScopeId:
+      format: uuid
+      type: string
+    ConnectorAuthMethodId:
+      format: uuid
+      type: string
     CreateNangoSessionRequest:
       description: Request body for creating a Nango session with optional scope selection
       properties:
@@ -122,12 +128,6 @@ components:
       required:
       - connector_auth_method_id
       type: object
-    ConnectorAuthMethodId:
-      format: uuid
-      type: string
-    ConnectorAuthMethodScopeId:
-      format: uuid
-      type: string
   securitySchemes:
     api_key:
       in: header

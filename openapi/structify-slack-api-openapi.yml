@@ -46,16 +46,12 @@ paths:
       - Slack
 components:
   schemas:
-    SlackEventResponse:
+    SlackChallengeResponse:
       properties:
-        message:
-          type:
-          - string
-          - 'null'
-        ok:
-          type: boolean
+        challenge:
+          type: string
       required:
-      - ok
+      - challenge
       type: object
     SlackEvent:
       discriminator:
@@ -107,43 +103,6 @@ components:
         - channel
         - type
         type: object
-    SlackChallengeResponse:
-      properties:
-        challenge:
-          type: string
-      required:
-      - challenge
-      type: object
-    SlackApiResponse:
-      oneOf:
-      - $ref: '#/components/schemas/SlackChallengeResponse'
-      - $ref: '#/components/schemas/SlackEventResponse'
-    SlackFile:
-      properties:
-        filetype:
-          type:
-          - string
-          - 'null'
-        id:
-          type: string
-        mimetype:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-        url_private:
-          type:
-          - string
-          - 'null'
-        url_private_download:
-          type:
-          - string
-          - 'null'
-      required:
-      - id
-      - name
-      type: object
     SlackEventPayload:
       discriminator:
         propertyName: type
@@ -200,6 +159,47 @@ components:
         - event_id
         - type
         type: object
+    SlackApiResponse:
+      oneOf:
+      - $ref: '#/components/schemas/SlackChallengeResponse'
+      - $ref: '#/components/schemas/SlackEventResponse'
+    SlackEventResponse:
+      properties:
+        message:
+          type:
+          - string
+          - 'null'
+        ok:
+          type: boolean
+      required:
+      - ok
+      type: object
+    SlackFile:
+      properties:
+        filetype:
+          type:
+          - string
+          - 'null'
+        id:
+          type: string
+        mimetype:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+        url_private:
+          type:
+          - string
+          - 'null'
+        url_private_download:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - name
+      type: object
   securitySchemes:
     api_key:
       in: header

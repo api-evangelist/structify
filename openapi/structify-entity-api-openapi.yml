@@ -509,35 +509,71 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    EntityViewResponse:
+    DeriveAllEntityParams:
       properties:
-        connected_entities:
-          items:
-            $ref: '#/components/schemas/KgEntity'
-          type: array
-        entity:
-          $ref: '#/components/schemas/KgEntity'
-        last_updated:
+        dataset:
           type: string
-        relationships:
-          items:
-            $ref: '#/components/schemas/KgRelationship'
-          type: array
-        similar_entities:
-          items:
-            $ref: '#/components/schemas/KgEntity'
-          type: array
-        sources:
-          items:
-            $ref: '#/components/schemas/Source'
-          type: array
+        derived_property:
+          type: string
+        instructions:
+          type: string
+        model:
+          type:
+          - string
+          - 'null'
+        node_id:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowSessionNodeId'
+        table_name:
+          type: string
       required:
-      - entity
-      - sources
-      - relationships
-      - connected_entities
-      - similar_entities
-      - last_updated
+      - dataset
+      - table_name
+      - derived_property
+      - instructions
+      type: object
+    DeleteParams:
+      additionalProperties: false
+      properties:
+        dataset:
+          type: string
+        entity_id:
+          $ref: '#/components/schemas/EntityId'
+      required:
+      - dataset
+      - entity_id
+      type: object
+    SourceEntity:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        id:
+          $ref: '#/components/schemas/SourceEntityId'
+        job_id:
+          allOf:
+          - $ref: '#/components/schemas/JobId'
+        kg_entity_id:
+          allOf:
+          - $ref: '#/components/schemas/EntityId'
+        label:
+          type: string
+        llm_id:
+          format: int32
+          type: integer
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/ComplexPropValue'
+          type: object
+        source_id:
+          $ref: '#/components/schemas/SourceId'
+      required:
+      - id
+      - label
+      - llm_id
+      - created_at
+      - properties
+      - source_id
       type: object
     ManualSource:
       oneOf:
@@ -572,76 +608,31 @@ components:
         required:
         - SecFiling
         type: object
-    JobId:
-      format: uuid
-      type: string
-    ExplorationRunId:
-      format: uuid
-      type: string
-    JobType:
-      enum:
-      - Web
-      - Pdf
-      - Derive
-      - Scrape
-      - Match
-      - ConnectorExplore
-      - DatahubIngestion
-      type: string
-    SourceEntityId:
-      format: uuid
-      type: string
-    LLMKnowledgeGraph:
-      additionalProperties: false
-      description: 'Knowledge graph info structured to deserialize and display
-
-        in the same format that the LLM outputs.
-
-        Also the first representation of an LLM output in the pipeline from raw tool output to being merged into a DB'
-      properties:
-        entities:
-          items:
-            $ref: '#/components/schemas/LLMEntity'
-          type: array
-        relationships:
-          items:
-            $ref: '#/components/schemas/LLMRelationship'
-          type: array
-      required:
-      - entities
-      type: object
-    MembershipId:
-      format: uuid
-      type: string
-    AddParams:
+    SearchEntityParams:
       additionalProperties: false
       properties:
         dataset:
           type: string
-        entity_graph:
-          $ref: '#/components/schemas/LLMKnowledgeGraph'
-        source:
-          $ref: '#/components/schemas/ManualSource'
+        query:
+          type: string
+        table_name:
+          type: string
       required:
       - dataset
-      - entity_graph
-      type: object
-    MergeParams:
-      additionalProperties: false
-      properties:
-        debug:
-          type: boolean
-        entity_1_id:
-          $ref: '#/components/schemas/EntityId'
-        entity_2_id:
-          $ref: '#/components/schemas/EntityId'
-      required:
-      - entity_1_id
-      - entity_2_id
+      - table_name
+      - query
       type: object
     EntityId:
       format: uuid
       type: string
+    BasicPropValue:
+      oneOf:
+      - type: string
+      - format: int64
+        type: integer
+      - type: boolean
+      - format: double
+        type: number
     KgRelationship:
       properties:
         created_at:
@@ -675,84 +666,220 @@ components:
       - dataset_id
       title: Relationship
       type: object
-    LLMEntity:
+    MembershipId:
+      format: uuid
+      type: string
+    LLMKnowledgeGraph:
       additionalProperties: false
+      description: 'Knowledge graph info structured to deserialize and display
+
+        in the same format that the LLM outputs.
+
+        Also the first representation of an LLM output in the pipeline from raw tool output to being merged into a DB'
       properties:
-        id:
+        entities:
+          items:
+            $ref: '#/components/schemas/LLMEntity'
+          type: array
+        relationships:
+          items:
+            $ref: '#/components/schemas/LLMRelationship'
+          type: array
+      required:
+      - entities
+      type: object
+    PropertyMatch:
+      properties:
+        match_prob:
+          format: double
+          type: number
+        match_transfer_prob:
+          format: double
+          type: number
+        name:
+          type: string
+        property_cardinality:
+          format: int64
           minimum: 0
           type: integer
+        unique:
+          type: boolean
+      required:
+      - name
+      - match_prob
+      - property_cardinality
+      - match_transfer_prob
+      - unique
+      type: object
+    ComplexPropValue:
+      oneOf:
+      - type: string
+      - format: int64
+        type: integer
+      - type: boolean
+      - format: double
+        type: number
+      - $ref: '#/components/schemas/PartialDate'
+      - $ref: '#/components/schemas/Url'
+      - $ref: '#/components/schemas/Money'
+      - $ref: '#/components/schemas/LLMImage'
+      - $ref: '#/components/schemas/PersonName'
+      - $ref: '#/components/schemas/Address'
+    MergeResponse:
+      properties:
+        match_object:
+          allOf:
+          - $ref: '#/components/schemas/EntityMatch'
+        merged_entity_id:
+          allOf:
+          - $ref: '#/components/schemas/EntityId'
+      type: object
+    FileType:
+      enum:
+      - Text
+      - PDF
+      - SEC
+      type: string
+    Money:
+      oneOf:
+      - description: 'Money string that includes currency and amount: $10k, £100.00, 1 million CAD, ¥1e8 etc.'
+        title: MoneyString
+        type: string
+      - properties:
+          amount:
+            type: number
+          currency_code:
+            enum:
+            - USD
+            - EUR
+            - GBP
+            - JPY
+            - CNY
+            - INR
+            - RUB
+            - CAD
+            - AUD
+            - CHF
+            - ILS
+            - NZD
+            - SGD
+            - HKD
+            - NOK
+            - SEK
+            - PLN
+            - TRY
+            - DKK
+            - MXN
+            - ZAR
+            - PHP
+            - VND
+            - THB
+            - BRL
+            - KRW
+            type: string
+          original_string:
+            type: string
+        required:
+        - currency_code
+        - amount
+        - original_string
+        title: MoneyObject
+        type: object
+      title: MoneyProperty
+    FileUpload:
+      properties:
+        content:
+          format: binary
+          type: string
+      required:
+      - content
+      type: object
+    JobType:
+      enum:
+      - Web
+      - Pdf
+      - Derive
+      - Scrape
+      - Match
+      - ConnectorExplore
+      - DatahubIngestion
+      type: string
+    JobId:
+      format: uuid
+      type: string
+    LLMRelationship:
+      additionalProperties: false
+      properties:
         properties:
           additionalProperties:
             $ref: '#/components/schemas/BasicPropValue'
           type: object
+        source:
+          minimum: 0
+          type: integer
+        target:
+          minimum: 0
+          type: integer
         type:
           type: string
       required:
-      - id
       - type
-      - properties
+      - source
+      - target
       type: object
-    Source:
+    PersonName:
       properties:
-        created_at:
-          format: date-time
+        name:
           type: string
-        id:
-          $ref: '#/components/schemas/SourceId'
-        is_summary:
-          type: boolean
-        link:
-          allOf:
-          - $ref: '#/components/schemas/SourceLink'
-        location:
-          allOf:
-          - $ref: '#/components/schemas/SourceLocation'
-        scraper_id:
-          allOf:
-          - $ref: '#/components/schemas/ScraperId'
-        user_specified:
-          type: boolean
       required:
-      - id
-      - user_specified
-      - is_summary
-      - created_at
+      - name
       type: object
-    LLMImage:
-      properties:
-        flag_number:
-          minimum: 0
-          type:
-          - integer
-          - 'null'
-        image:
-          format: binary
-          type:
-          - string
-          - 'null'
-      type: object
-    DeriveAllEntityParams:
+    AddBatchParams:
+      additionalProperties: false
       properties:
         dataset:
           type: string
-        derived_property:
-          type: string
-        instructions:
-          type: string
-        model:
-          type:
-          - string
-          - 'null'
-        node_id:
-          allOf:
-          - $ref: '#/components/schemas/WorkflowSessionNodeId'
-        table_name:
-          type: string
+        entity_graphs:
+          items:
+            $ref: '#/components/schemas/LLMKnowledgeGraph'
+          type: array
+        skip_malformed_entities:
+          type: boolean
+        source:
+          $ref: '#/components/schemas/ManualSource'
       required:
       - dataset
-      - table_name
-      - derived_property
-      - instructions
+      - entity_graphs
+      type: object
+    EntityViewResponse:
+      properties:
+        connected_entities:
+          items:
+            $ref: '#/components/schemas/KgEntity'
+          type: array
+        entity:
+          $ref: '#/components/schemas/KgEntity'
+        last_updated:
+          type: string
+        relationships:
+          items:
+            $ref: '#/components/schemas/KgRelationship'
+          type: array
+        similar_entities:
+          items:
+            $ref: '#/components/schemas/KgEntity'
+          type: array
+        sources:
+          items:
+            $ref: '#/components/schemas/Source'
+          type: array
+      required:
+      - entity
+      - sources
+      - relationships
+      - connected_entities
+      - similar_entities
+      - last_updated
       type: object
     Job:
       properties:
@@ -843,12 +970,106 @@ components:
       - use_proxy
       - updated_at
       type: object
-    PersonName:
+    SummarizeEntityParams:
+      additionalProperties: false
       properties:
-        name:
+        dataset:
+          type: string
+        entity_id:
+          $ref: '#/components/schemas/EntityId'
+        extra_instructions:
+          description: A list of instructions for each property to guide the summarization process
+          items:
+            type: string
+          type:
+          - array
+          - 'null'
+        properties:
+          items:
+            type: string
+          type: array
+      required:
+      - dataset
+      - entity_id
+      - properties
+      type: object
+    MergeParams:
+      additionalProperties: false
+      properties:
+        debug:
+          type: boolean
+        entity_1_id:
+          $ref: '#/components/schemas/EntityId'
+        entity_2_id:
+          $ref: '#/components/schemas/EntityId'
+      required:
+      - entity_1_id
+      - entity_2_id
+      type: object
+    RelationshipId:
+      format: uuid
+      type: string
+    LLMEntity:
+      additionalProperties: false
+      properties:
+        id:
+          minimum: 0
+          type: integer
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/BasicPropValue'
+          type: object
+        type:
           type: string
       required:
-      - name
+      - id
+      - type
+      - properties
+      type: object
+    PartialDate:
+      oneOf:
+      - properties:
+          day:
+            type:
+            - integer
+            - 'null'
+          month:
+            type:
+            - integer
+            - 'null'
+          original_string:
+            type: string
+          year:
+            type: integer
+        required:
+        - year
+        - original_string
+        title: PartialDateObject
+        type: object
+      - description: 'Date string in formats: ''YYYY'', ''YYYY-MM'', ''YYYY-MM-DD'', ''DD-MM-YYYY'', ''MM-DD-YYYY'', ''Jan 3, 2023'', ''3 Jan 2023'', ''2023 Apr 3'', etc.'
+        title: PartialDateString
+        type: string
+      title: PartialDateProperty
+    AddRelationshipParams:
+      additionalProperties: false
+      properties:
+        dataset:
+          type: string
+        from_id:
+          $ref: '#/components/schemas/EntityId'
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/BasicPropValue'
+          type: object
+        relationship_type:
+          type: string
+        to_id:
+          $ref: '#/components/schemas/EntityId'
+      required:
+      - dataset
+      - from_id
+      - to_id
+      - relationship_type
       type: object
     EntityMatch:
       properties:
@@ -881,224 +1102,9 @@ components:
       - entity_a
       - entity_b
       type: object
-    MergeResponse:
-      properties:
-        match_object:
-          allOf:
-          - $ref: '#/components/schemas/EntityMatch'
-        merged_entity_id:
-          allOf:
-          - $ref: '#/components/schemas/EntityId'
-      type: object
-    GetLocalSubgraphResponse:
-      properties:
-        neighbors:
-          items:
-            $ref: '#/components/schemas/KgEntity'
-          type: array
-        relationships:
-          items:
-            $ref: '#/components/schemas/KgRelationship'
-          type: array
-      required:
-      - neighbors
-      - relationships
-      type: object
-    DeleteRelationshipParams:
-      additionalProperties: false
-      properties:
-        dataset:
-          type: string
-        relationship_id:
-          $ref: '#/components/schemas/RelationshipId'
-      required:
-      - dataset
-      - relationship_id
-      type: object
-    Money:
-      oneOf:
-      - description: 'Money string that includes currency and amount: $10k, £100.00, 1 million CAD, ¥1e8 etc.'
-        title: MoneyString
-        type: string
-      - properties:
-          amount:
-            type: number
-          currency_code:
-            enum:
-            - USD
-            - EUR
-            - GBP
-            - JPY
-            - CNY
-            - INR
-            - RUB
-            - CAD
-            - AUD
-            - CHF
-            - ILS
-            - NZD
-            - SGD
-            - HKD
-            - NOK
-            - SEK
-            - PLN
-            - TRY
-            - DKK
-            - MXN
-            - ZAR
-            - PHP
-            - VND
-            - THB
-            - BRL
-            - KRW
-            type: string
-          original_string:
-            type: string
-        required:
-        - currency_code
-        - amount
-        - original_string
-        title: MoneyObject
-        type: object
-      title: MoneyProperty
-    WorkflowSessionNodeId:
+    UserId:
       format: uuid
       type: string
-    DeleteParams:
-      additionalProperties: false
-      properties:
-        dataset:
-          type: string
-        entity_id:
-          $ref: '#/components/schemas/EntityId'
-      required:
-      - dataset
-      - entity_id
-      type: object
-    JobStatus:
-      enum:
-      - Queued
-      - Running
-      - Completed
-      - Failed
-      type: string
-    RelationshipId:
-      format: uuid
-      type: string
-    FileUpload:
-      properties:
-        content:
-          format: binary
-          type: string
-      required:
-      - content
-      type: object
-    ComplexPropValue:
-      oneOf:
-      - type: string
-      - format: int64
-        type: integer
-      - type: boolean
-      - format: double
-        type: number
-      - $ref: '#/components/schemas/PartialDate'
-      - $ref: '#/components/schemas/Url'
-      - $ref: '#/components/schemas/Money'
-      - $ref: '#/components/schemas/LLMImage'
-      - $ref: '#/components/schemas/PersonName'
-      - $ref: '#/components/schemas/Address'
-    DeriveEntityParams:
-      additionalProperties: false
-      properties:
-        dataset:
-          type: string
-        derived_property:
-          type: string
-        entity_id:
-          $ref: '#/components/schemas/EntityId'
-        instructions:
-          type: string
-        model:
-          type:
-          - string
-          - 'null'
-        node_id:
-          allOf:
-          - $ref: '#/components/schemas/WorkflowSessionNodeId'
-      required:
-      - dataset
-      - entity_id
-      - derived_property
-      - instructions
-      type: object
-    FileType:
-      enum:
-      - Text
-      - PDF
-      - SEC
-      type: string
-    AddRelationshipParams:
-      additionalProperties: false
-      properties:
-        dataset:
-          type: string
-        from_id:
-          $ref: '#/components/schemas/EntityId'
-        properties:
-          additionalProperties:
-            $ref: '#/components/schemas/BasicPropValue'
-          type: object
-        relationship_type:
-          type: string
-        to_id:
-          $ref: '#/components/schemas/EntityId'
-      required:
-      - dataset
-      - from_id
-      - to_id
-      - relationship_type
-      type: object
-    Address:
-      oneOf:
-      - properties:
-          components:
-            additionalProperties:
-              type: string
-            type: object
-          original_address:
-            type: string
-        required:
-        - original_address
-        - components
-        title: AddressObject
-        type: object
-      - description: 'Address string in formats: ''123 Main St, Springfield, IL 62701, USA'', ''1600 Amphitheatre Parkway, Mountain View, California 94043'', ''1600 Pennsylvania Ave NW, Washington, DC 20500'', ''NYC, NY'', ''Oahu, Hawaii'''
-        title: AddressString
-        type: string
-      title: AddressProperty
-    PropertyMatch:
-      properties:
-        match_prob:
-          format: double
-          type: number
-        match_transfer_prob:
-          format: double
-          type: number
-        name:
-          type: string
-        property_cardinality:
-          format: int64
-          minimum: 0
-          type: integer
-        unique:
-          type: boolean
-      required:
-      - name
-      - match_prob
-      - property_cardinality
-      - match_transfer_prob
-      - unique
-      type: object
     SourceLocation:
       oneOf:
       - properties:
@@ -1142,63 +1148,103 @@ components:
         required:
         - Page
         type: object
-    SearchEntityParams:
-      additionalProperties: false
-      properties:
-        dataset:
-          type: string
-        query:
-          type: string
-        table_name:
-          type: string
-      required:
-      - dataset
-      - table_name
-      - query
-      type: object
-    SummarizeEntityParams:
-      additionalProperties: false
-      properties:
-        dataset:
-          type: string
-        entity_id:
-          $ref: '#/components/schemas/EntityId'
-        extra_instructions:
-          description: A list of instructions for each property to guide the summarization process
-          items:
-            type: string
-          type:
-          - array
-          - 'null'
-        properties:
-          items:
-            type: string
-          type: array
-      required:
-      - dataset
-      - entity_id
-      - properties
-      type: object
+    WorkflowSessionNodeId:
+      format: uuid
+      type: string
     DatasetId:
       format: uuid
       type: string
-    UpdateParams:
+    SourceId:
+      format: uuid
+      type: string
+    LLMImage:
+      properties:
+        flag_number:
+          minimum: 0
+          type:
+          - integer
+          - 'null'
+        image:
+          format: binary
+          type:
+          - string
+          - 'null'
+      type: object
+    Url:
+      oneOf:
+      - description: Url string
+        title: UrlString
+        type: string
+      - properties:
+          original_string:
+            type: string
+          url:
+            type: string
+        required:
+        - url
+        - original_string
+        title: UrlObject
+        type: object
+      title: UrlProperty
+    SourceEntityId:
+      format: uuid
+      type: string
+    Source:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        id:
+          $ref: '#/components/schemas/SourceId'
+        is_summary:
+          type: boolean
+        link:
+          allOf:
+          - $ref: '#/components/schemas/SourceLink'
+        location:
+          allOf:
+          - $ref: '#/components/schemas/SourceLocation'
+        scraper_id:
+          allOf:
+          - $ref: '#/components/schemas/ScraperId'
+        user_specified:
+          type: boolean
+      required:
+      - id
+      - user_specified
+      - is_summary
+      - created_at
+      type: object
+    ScraperId:
+      format: uuid
+      type: string
+    VerifyParams:
       additionalProperties: false
       properties:
         dataset:
           type: string
-        entity_id:
-          $ref: '#/components/schemas/EntityId'
-        properties:
-          additionalProperties:
-            $ref: '#/components/schemas/BasicPropValue'
-          type: object
-        source:
-          $ref: '#/components/schemas/ManualSource'
+        entity_graph:
+          $ref: '#/components/schemas/LLMKnowledgeGraph'
+        fix:
+          description: Whether to apply fixes to the dataset
+          type: boolean
       required:
       - dataset
-      - entity_id
-      - properties
+      - entity_graph
+      type: object
+    GetLocalSubgraphResponse:
+      properties:
+        neighbors:
+          items:
+            $ref: '#/components/schemas/KgEntity'
+          type: array
+        relationships:
+          items:
+            $ref: '#/components/schemas/KgRelationship'
+          type: array
+      required:
+      - neighbors
+      - relationships
       type: object
     KgEntity:
       properties:
@@ -1229,6 +1275,17 @@ components:
       - dataset_id
       - properties
       type: object
+    DeleteRelationshipParams:
+      additionalProperties: false
+      properties:
+        dataset:
+          type: string
+        relationship_id:
+          $ref: '#/components/schemas/RelationshipId'
+      required:
+      - dataset
+      - relationship_id
+      type: object
     CardinalityOverride:
       properties:
         cardinality:
@@ -1244,79 +1301,52 @@ components:
       - cardinality
       - relationship_name
       type: object
-    PartialDate:
-      oneOf:
-      - properties:
-          day:
-            type:
-            - integer
-            - 'null'
-          month:
-            type:
-            - integer
-            - 'null'
-          original_string:
-            type: string
-          year:
-            type: integer
-        required:
-        - year
-        - original_string
-        title: PartialDateObject
-        type: object
-      - description: 'Date string in formats: ''YYYY'', ''YYYY-MM'', ''YYYY-MM-DD'', ''DD-MM-YYYY'', ''MM-DD-YYYY'', ''Jan 3, 2023'', ''3 Jan 2023'', ''2023 Apr 3'', etc.'
-        title: PartialDateString
-        type: string
-      title: PartialDateProperty
-    AddBatchParams:
+    JobStatus:
+      enum:
+      - Queued
+      - Running
+      - Completed
+      - Failed
+      type: string
+    UpdateParams:
       additionalProperties: false
       properties:
         dataset:
           type: string
-        entity_graphs:
-          items:
-            $ref: '#/components/schemas/LLMKnowledgeGraph'
-          type: array
-        skip_malformed_entities:
-          type: boolean
+        entity_id:
+          $ref: '#/components/schemas/EntityId'
+        properties:
+          additionalProperties:
+            $ref: '#/components/schemas/BasicPropValue'
+          type: object
         source:
           $ref: '#/components/schemas/ManualSource'
       required:
       - dataset
-      - entity_graphs
-      type: object
-    SourceEntity:
-      properties:
-        created_at:
-          format: date-time
-          type: string
-        id:
-          $ref: '#/components/schemas/SourceEntityId'
-        job_id:
-          allOf:
-          - $ref: '#/components/schemas/JobId'
-        kg_entity_id:
-          allOf:
-          - $ref: '#/components/schemas/EntityId'
-        label:
-          type: string
-        llm_id:
-          format: int32
-          type: integer
-        properties:
-          additionalProperties:
-            $ref: '#/components/schemas/ComplexPropValue'
-          type: object
-        source_id:
-          $ref: '#/components/schemas/SourceId'
-      required:
-      - id
-      - label
-      - llm_id
-      - created_at
+      - entity_id
       - properties
-      - source_id
       type: object
+    ExplorationRunId:
+      format: uuid
+      type: string
+    Address:
+      oneOf:
+      - properties:
+          components:
+            additionalProperties:
+              type: string
+            type: object
+          original_address:
+            type: string
+        required:
+        - original_address
+        - components
+        title: AddressObject
+        type: object
+      - description: 'Address string in formats: ''123 Main St, Springfield, IL 62701, USA'', ''1600 Amphitheatre Parkway, Mountain View, California 94043'', ''1600 Pennsylvania Ave NW, Washington, DC 20500'', ''NYC, NY'', ''Oahu, Hawaii'''
+        title: AddressString
+        type: string
+      title: AddressProperty
     SourceLink:
       oneOf:
       - properties:
@@ -1355,50 +1385,30 @@ components:
         required:
         - SecFiling
         type: object
-    Url:
-      oneOf:
-      - description: Url string
-        title: UrlString
-        type: string
-      - properties:
-          original_string:
-            type: string
-          url:
-            type: string
-        required:
-        - url
-        - original_string
-        title: UrlObject
-        type: object
-      title: UrlProperty
-    UserId:
-      format: uuid
-      type: string
-    BasicPropValue:
-      oneOf:
-      - type: string
-      - format: int64
-        type: integer
-      - type: boolean
-      - format: double
-        type: number
-    VerifyParams:
+    DeriveEntityParams:
       additionalProperties: false
       properties:
         dataset:
           type: string
-        entity_graph:
-          $ref: '#/components/schemas/LLMKnowledgeGraph'
-        fix:
-          description: Whether to apply fixes to the dataset
-          type: boolean
+        derived_property:
+          type: string
+        entity_id:
+          $ref: '#/components/schemas/EntityId'
+        instructions:
+          type: string
+        model:
+          type:
+          - string
+          - 'null'
+        node_id:
+          allOf:
+          - $ref: '#/components/schemas/WorkflowSessionNodeId'
       required:
       - dataset
-      - entity_graph
+      - entity_id
+      - derived_property
+      - instructions
       type: object
-    ScraperId:
-      format: uuid
-      type: string
     GetSourceEntitiesResponse:
       properties:
         source_entities:
@@ -1412,29 +1422,19 @@ components:
       required:
       - source_entities
       type: object
-    LLMRelationship:
+    AddParams:
       additionalProperties: false
       properties:
-        properties:
-          additionalProperties:
-            $ref: '#/components/schemas/BasicPropValue'
-          type: object
-        source:
-          minimum: 0
-          type: integer
-        target:
-          minimum: 0
-          type: integer
-        type:
+        dataset:
           type: string
+        entity_graph:
+          $ref: '#/components/schemas/LLMKnowledgeGraph'
+        source:
+          $ref: '#/components/schemas/ManualSource'
       required:
-      - type
-      - source
-      - target
+      - dataset
+      - entity_graph
       type: object
-    SourceId:
-      format: uuid
-      type: string
   securitySchemes:
     api_key:
       in: header

@@ -597,52 +597,32 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    MembershipId:
-      format: uuid
-      type: string
-    UpdateMemberRoleResponse:
+    UpdateMemberRoleRequest:
       properties:
-        success:
-          type: boolean
+        role:
+          $ref: '#/components/schemas/TeamRole'
       required:
-      - success
+      - role
       type: object
-    GetTeamResponse:
+    CreateTeamResponse:
       properties:
-        max_seats:
-          format: int32
-          type: integer
-        subscription_status:
-          $ref: '#/components/schemas/TeamSubscriptionStatus'
         team:
           $ref: '#/components/schemas/Team'
       required:
       - team
-      - subscription_status
-      - max_seats
       type: object
-    DaytonaCredentials:
-      properties:
-        api_key:
-          type:
-          - string
-          - 'null'
-        api_url:
-          type:
-          - string
-          - 'null'
-      type: object
-    CreateTeamRequest:
-      properties:
-        description:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
-      required:
-      - name
-      type: object
+    SubscriptionTier:
+      description: Represents the different subscription tiers available
+      enum:
+      - free
+      - free_trial
+      - pro
+      - team
+      - enterprise
+      type: string
+    MembershipId:
+      format: uuid
+      type: string
     Membership:
       description: Contains membership information and API token value
       properties:
@@ -693,18 +673,20 @@ components:
       - role
       - pending
       type: object
-    AcceptInvitationResponse:
+    AcceptInvitationRequest:
+      properties:
+        token:
+          format: uuid
+          type: string
+      required:
+      - token
+      type: object
+    UpdateMemberRoleResponse:
       properties:
         success:
           type: boolean
-        team_id:
-          type: string
-        team_name:
-          type: string
       required:
       - success
-      - team_id
-      - team_name
       type: object
     TeamSubscriptionStatus:
       properties:
@@ -731,6 +713,64 @@ components:
       - is_trial
       - has_active_subscription
       - remaining_credits
+      type: object
+    ListMembersResponse:
+      properties:
+        members:
+          items:
+            $ref: '#/components/schemas/TeamMember'
+          type: array
+      required:
+      - members
+      type: object
+    ErrorResponse:
+      description: Standard error response
+      properties:
+        error:
+          type: string
+      required:
+      - error
+      type: object
+    TeamRole:
+      enum:
+      - read_only
+      - member
+      - admin
+      - owner
+      type: string
+    TeamWithRole:
+      allOf:
+      - $ref: '#/components/schemas/Team'
+      - properties:
+          max_seats:
+            format: int32
+            type: integer
+          role:
+            $ref: '#/components/schemas/TeamRole'
+          subscription_status:
+            $ref: '#/components/schemas/TeamSubscriptionStatus'
+        required:
+        - role
+        - subscription_status
+        - max_seats
+        type: object
+    CreateTeamRequest:
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+      required:
+      - name
+      type: object
+    UpdateTeamResponse:
+      properties:
+        team:
+          $ref: '#/components/schemas/Team'
+      required:
+      - team
       type: object
     Team:
       properties:
@@ -793,35 +833,28 @@ components:
       - created_at
       - updated_at
       type: object
-    ErrorResponse:
-      description: Standard error response
+    AddMemberRequest:
       properties:
-        error:
+        email:
           type: string
-      required:
-      - error
-      type: object
-    SandboxProvider:
-      enum:
-      - modal
-      - daytona
-      type: string
-    AddMemberResponse:
-      properties:
-        invitation_sent:
-          type: boolean
-        membership:
-          $ref: '#/components/schemas/Membership'
-      required:
-      - membership
-      - invitation_sent
-      type: object
-    UpdateMemberRoleRequest:
-      properties:
         role:
           $ref: '#/components/schemas/TeamRole'
       required:
+      - email
       - role
+      type: object
+    InvitationDetailsResponse:
+      properties:
+        invitee_email:
+          type: string
+        team_name:
+          type: string
+        user_exists:
+          type: boolean
+      required:
+      - team_name
+      - invitee_email
+      - user_exists
       type: object
     CreditsUsageTimeseriesPoint:
       properties:
@@ -837,28 +870,6 @@ components:
       - bucket_start
       - groups
       type: object
-    ListTeamsResponse:
-      properties:
-        teams:
-          items:
-            $ref: '#/components/schemas/TeamWithRole'
-          type: array
-      required:
-      - teams
-      type: object
-    SelectTeamResponse:
-      properties:
-        refresh_token:
-          type: string
-        session_token:
-          type: string
-        success:
-          type: boolean
-      required:
-      - success
-      - session_token
-      - refresh_token
-      type: object
     RemoveMemberResponse:
       properties:
         success:
@@ -866,103 +877,15 @@ components:
       required:
       - success
       type: object
-    SubscriptionTier:
-      description: Represents the different subscription tiers available
+    SandboxProvider:
       enum:
-      - free
-      - free_trial
-      - pro
-      - team
-      - enterprise
+      - modal
+      - daytona
       type: string
-    UpdateTeamResponse:
-      properties:
-        team:
-          $ref: '#/components/schemas/Team'
-      required:
-      - team
-      type: object
-    TeamId:
+    UserId:
       format: uuid
       type: string
-    TeamMember:
-      properties:
-        created_at:
-          format: date-time
-          type: string
-        email:
-          type: string
-        pending:
-          type: boolean
-        role:
-          $ref: '#/components/schemas/TeamRole'
-        team_id:
-          $ref: '#/components/schemas/TeamId'
-        user_id:
-          allOf:
-          - $ref: '#/components/schemas/UserId'
-      required:
-      - team_id
-      - role
-      - created_at
-      - email
-      - pending
-      type: object
-    InvitationDetailsResponse:
-      properties:
-        invitee_email:
-          type: string
-        team_name:
-          type: string
-        user_exists:
-          type: boolean
-      required:
-      - team_name
-      - invitee_email
-      - user_exists
-      type: object
-    CreditsUsageResponse:
-      properties:
-        timeseries:
-          items:
-            $ref: '#/components/schemas/CreditsUsageTimeseriesPoint'
-          type: array
-        total_credits_added:
-          format: int64
-          type: integer
-        total_spent:
-          format: int64
-          type: integer
-      required:
-      - total_spent
-      - total_credits_added
-      - timeseries
-      type: object
-    TeamRole:
-      enum:
-      - read_only
-      - member
-      - admin
-      - owner
-      type: string
-    ListMembersResponse:
-      properties:
-        members:
-          items:
-            $ref: '#/components/schemas/TeamMember'
-          type: array
-      required:
-      - members
-      type: object
-    AcceptInvitationRequest:
-      properties:
-        token:
-          format: uuid
-          type: string
-      required:
-      - token
-      type: object
-    UserId:
+    TeamId:
       format: uuid
       type: string
     UpdateTeamRequest:
@@ -1013,38 +936,52 @@ components:
           allOf:
           - $ref: '#/components/schemas/WorkflowBucket'
       type: object
-    AddMemberRequest:
+    GetTeamResponse:
       properties:
-        email:
-          type: string
-        role:
-          $ref: '#/components/schemas/TeamRole'
-      required:
-      - email
-      - role
-      type: object
-    TeamWithRole:
-      allOf:
-      - $ref: '#/components/schemas/Team'
-      - properties:
-          max_seats:
-            format: int32
-            type: integer
-          role:
-            $ref: '#/components/schemas/TeamRole'
-          subscription_status:
-            $ref: '#/components/schemas/TeamSubscriptionStatus'
-        required:
-        - role
-        - subscription_status
-        - max_seats
-        type: object
-    CreateTeamResponse:
-      properties:
+        max_seats:
+          format: int32
+          type: integer
+        subscription_status:
+          $ref: '#/components/schemas/TeamSubscriptionStatus'
         team:
           $ref: '#/components/schemas/Team'
       required:
       - team
+      - subscription_status
+      - max_seats
+      type: object
+    ListTeamsResponse:
+      properties:
+        teams:
+          items:
+            $ref: '#/components/schemas/TeamWithRole'
+          type: array
+      required:
+      - teams
+      type: object
+    SelectTeamResponse:
+      properties:
+        refresh_token:
+          type: string
+        session_token:
+          type: string
+        success:
+          type: boolean
+      required:
+      - success
+      - session_token
+      - refresh_token
+      type: object
+    DaytonaCredentials:
+      properties:
+        api_key:
+          type:
+          - string
+          - 'null'
+        api_url:
+          type:
+          - string
+          - 'null'
       type: object
     WorkflowBucket:
       properties:
@@ -1064,6 +1001,69 @@ components:
       - week
       - month
       type: string
+    CreditsUsageResponse:
+      properties:
+        timeseries:
+          items:
+            $ref: '#/components/schemas/CreditsUsageTimeseriesPoint'
+          type: array
+        total_credits_added:
+          format: int64
+          type: integer
+        total_spent:
+          format: int64
+          type: integer
+      required:
+      - total_spent
+      - total_credits_added
+      - timeseries
+      type: object
+    TeamMember:
+      properties:
+        created_at:
+          format: date-time
+          type: string
+        email:
+          type: string
+        pending:
+          type: boolean
+        role:
+          $ref: '#/components/schemas/TeamRole'
+        team_id:
+          $ref: '#/components/schemas/TeamId'
+        user_id:
+          allOf:
+          - $ref: '#/components/schemas/UserId'
+      required:
+      - team_id
+      - role
+      - created_at
+      - email
+      - pending
+      type: object
+    AcceptInvitationResponse:
+      properties:
+        success:
+          type: boolean
+        team_id:
+          type: string
+        team_name:
+          type: string
+      required:
+      - success
+      - team_id
+      - team_name
+      type: object
+    AddMemberResponse:
+      properties:
+        invitation_sent:
+          type: boolean
+        membership:
+          $ref: '#/components/schemas/Membership'
+      required:
+      - membership
+      - invitation_sent
+      type: object
   securitySchemes:
     api_key:
       in: header

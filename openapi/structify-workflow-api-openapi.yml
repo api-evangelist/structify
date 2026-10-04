@@ -132,6 +132,12 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    ChatSessionId:
+      format: uuid
+      type: string
+    WorkflowSessionId:
+      format: uuid
+      type: string
     StopWorkflowRequest:
       properties:
         workflow_session_id:
@@ -139,6 +145,12 @@ components:
       required:
       - workflow_session_id
       type: object
+    WorkflowSessionNodeId:
+      format: uuid
+      type: string
+    WorkflowNodeLogId:
+      format: uuid
+      type: string
     RunWorkflowRequest:
       properties:
         chat_session_id:
@@ -153,23 +165,6 @@ components:
       - chat_session_id
       - use_node_cache
       type: object
-    WorkflowSessionNodeId:
-      format: uuid
-      type: string
-    ErrorResponse:
-      description: Standard error response
-      properties:
-        error:
-          type: string
-      required:
-      - error
-      type: object
-    ChatSessionId:
-      format: uuid
-      type: string
-    WorkflowSessionId:
-      format: uuid
-      type: string
     WorkflowNodeLog:
       properties:
         content:
@@ -190,6 +185,14 @@ components:
       - is_stderr
       - content
       type: object
+    ErrorResponse:
+      description: Standard error response
+      properties:
+        error:
+          type: string
+      required:
+      - error
+      type: object
     GetNodeLogsResponse:
       properties:
         logs:
@@ -199,9 +202,6 @@ components:
       required:
       - logs
       type: object
-    WorkflowNodeLogId:
-      format: uuid
-      type: string
   securitySchemes:
     api_key:
       in: header

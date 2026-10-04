@@ -84,6 +84,62 @@ components:
       required:
       - contentType
       type: object
+    TeamsEventResponse:
+      properties:
+        message:
+          type:
+          - string
+          - 'null'
+        ok:
+          type: boolean
+      required:
+      - ok
+      type: object
+    TeamsActivityType:
+      enum:
+      - message
+      - invoke
+      - conversationUpdate
+      - other
+      type: string
+    TeamsConversationAccount:
+      properties:
+        conversationType:
+          type:
+          - string
+          - 'null'
+        id:
+          type: string
+        isGroup:
+          type:
+          - boolean
+          - 'null'
+        name:
+          type:
+          - string
+          - 'null'
+        tenantId:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      type: object
+    TeamsChannelAccount:
+      properties:
+        aadObjectId:
+          type:
+          - string
+          - 'null'
+        id:
+          type: string
+        name:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      type: object
     TeamsActivity:
       properties:
         attachments:
@@ -136,62 +192,6 @@ components:
         value: {}
       required:
       - type
-      type: object
-    TeamsChannelAccount:
-      properties:
-        aadObjectId:
-          type:
-          - string
-          - 'null'
-        id:
-          type: string
-        name:
-          type:
-          - string
-          - 'null'
-      required:
-      - id
-      type: object
-    TeamsConversationAccount:
-      properties:
-        conversationType:
-          type:
-          - string
-          - 'null'
-        id:
-          type: string
-        isGroup:
-          type:
-          - boolean
-          - 'null'
-        name:
-          type:
-          - string
-          - 'null'
-        tenantId:
-          type:
-          - string
-          - 'null'
-      required:
-      - id
-      type: object
-    TeamsActivityType:
-      enum:
-      - message
-      - invoke
-      - conversationUpdate
-      - other
-      type: string
-    TeamsEventResponse:
-      properties:
-        message:
-          type:
-          - string
-          - 'null'
-        ok:
-          type: boolean
-      required:
-      - ok
       type: object
   securitySchemes:
     api_key:

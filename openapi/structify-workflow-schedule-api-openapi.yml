@@ -232,6 +232,70 @@ paths:
       x-summary-source: derived
 components:
   schemas:
+    GetWorkflowScheduleSessionsRequest:
+      properties:
+        limit:
+          format: int64
+          type: integer
+        offset:
+          format: int64
+          type: integer
+      type: object
+    ChatSessionId:
+      format: uuid
+      type: string
+    ChatMessageId:
+      format: uuid
+      type: string
+    WorkflowSessionId:
+      format: uuid
+      type: string
+    PauseWorkflowScheduleRequest:
+      properties:
+        paused:
+          type: boolean
+      required:
+      - paused
+      type: object
+    WorkflowScheduleInfo:
+      properties:
+        chat_session_id:
+          $ref: '#/components/schemas/ChatSessionId'
+        cron_schedule:
+          type:
+          - string
+          - 'null'
+        git_commit_hash:
+          type:
+          - string
+          - 'null'
+        id:
+          $ref: '#/components/schemas/WorkflowScheduleId'
+        name:
+          type: string
+        next_run_time:
+          type:
+          - string
+          - 'null'
+        owner_email:
+          type:
+          - string
+          - 'null'
+        paused:
+          type: boolean
+        updated_at:
+          type:
+          - string
+          - 'null'
+        visibility:
+          allOf:
+          - $ref: '#/components/schemas/ChatVisibility'
+      required:
+      - id
+      - name
+      - chat_session_id
+      - paused
+      type: object
     GetWorkflowScheduleSessionsResponse:
       properties:
         sessions:
@@ -245,50 +309,6 @@ components:
       - sessions
       - total_count
       type: object
-    PauseWorkflowScheduleRequest:
-      properties:
-        paused:
-          type: boolean
-      required:
-      - paused
-      type: object
-    UpdateWorkflowScheduleRequest:
-      properties:
-        cron_schedule:
-          type:
-          - string
-          - 'null'
-        git_commit_hash:
-          type:
-          - string
-          - 'null'
-        name:
-          type:
-          - string
-          - 'null'
-        paused:
-          type:
-          - boolean
-          - 'null'
-      type: object
-    GetWorkflowScheduleSessionsRequest:
-      properties:
-        limit:
-          format: int64
-          type: integer
-        offset:
-          format: int64
-          type: integer
-      type: object
-    ChatMessageId:
-      format: uuid
-      type: string
-    WorkflowScheduleId:
-      format: uuid
-      type: string
-    ChatSessionId:
-      format: uuid
-      type: string
     WorkflowSession:
       properties:
         aborted:
@@ -338,8 +358,12 @@ components:
       - dag_ready
       - aborted
       type: object
-    WorkflowSessionId:
-      format: uuid
+    ChatVisibility:
+      enum:
+      - private
+      - shared_with_team
+      - shared_with_team_view
+      - public
       type: string
     CreateWorkflowScheduleRequest:
       properties:
@@ -356,10 +380,8 @@ components:
       required:
       - name
       type: object
-    WorkflowScheduleInfo:
+    UpdateWorkflowScheduleRequest:
       properties:
-        chat_session_id:
-          $ref: '#/components/schemas/ChatSessionId'
         cron_schedule:
           type:
           - string
@@ -368,39 +390,17 @@ components:
           type:
           - string
           - 'null'
-        id:
-          $ref: '#/components/schemas/WorkflowScheduleId'
         name:
-          type: string
-        next_run_time:
-          type:
-          - string
-          - 'null'
-        owner_email:
           type:
           - string
           - 'null'
         paused:
-          type: boolean
-        updated_at:
           type:
-          - string
+          - boolean
           - 'null'
-        visibility:
-          allOf:
-          - $ref: '#/components/schemas/ChatVisibility'
-      required:
-      - id
-      - name
-      - chat_session_id
-      - paused
       type: object
-    ChatVisibility:
-      enum:
-      - private
-      - shared_with_team
-      - shared_with_team_view
-      - public
+    WorkflowScheduleId:
+      format: uuid
       type: string
   securitySchemes:
     api_key:

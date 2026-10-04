@@ -117,17 +117,6 @@ paths:
       - Documents
 components:
   schemas:
-    DownloadResponse:
-      properties:
-        content:
-          format: binary
-          type: string
-      required:
-      - content
-      type: object
-    JobId:
-      format: uuid
-      type: string
     FileType:
       enum:
       - Text
@@ -167,12 +156,29 @@ components:
       - created_at
       - user_id
       type: object
-    ProjectId:
-      format: uuid
-      type: string
     UserId:
       format: uuid
       type: string
+    DocumentId:
+      format: uuid
+      type: string
+    ProjectId:
+      format: uuid
+      type: string
+    JobId:
+      format: uuid
+      type: string
+    DatasetId:
+      format: uuid
+      type: string
+    FilePath:
+      properties:
+        file_path:
+          description: The path of the file to delete
+          type: string
+      required:
+      - file_path
+      type: object
     UserFileMultipart:
       properties:
         content:
@@ -189,20 +195,14 @@ components:
       - content
       title: FileMultipart
       type: object
-    DatasetId:
-      format: uuid
-      type: string
-    FilePath:
+    DownloadResponse:
       properties:
-        file_path:
-          description: The path of the file to delete
+        content:
+          format: binary
           type: string
       required:
-      - file_path
+      - content
       type: object
-    DocumentId:
-      format: uuid
-      type: string
   securitySchemes:
     api_key:
       in: header

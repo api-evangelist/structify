@@ -62,15 +62,6 @@ paths:
       - Usage
 components:
   schemas:
-    TransactionId:
-      format: uuid
-      type: string
-    JobId:
-      format: uuid
-      type: string
-    MembershipId:
-      format: uuid
-      type: string
     UsageStatistics:
       properties:
         credits_used:
@@ -87,6 +78,15 @@ components:
       - num_relationships
       - credits_used
       type: object
+    JobId:
+      format: uuid
+      type: string
+    MembershipId:
+      format: uuid
+      type: string
+    TransactionId:
+      format: uuid
+      type: string
     CreditGrantId:
       format: uuid
       type: string

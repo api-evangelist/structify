@@ -67,21 +67,36 @@ paths:
       - User
 components:
   schemas:
-    EnrichUserParams:
-      properties:
-        email:
-          type: string
-      required:
-      - email
-      type: object
+    UserId:
+      format: uuid
+      type: string
+    FeatureFlag:
+      enum:
+      - functional_test
+      - pdf_parsing
+      - boredm_construction_model
+      - generic_suspicious_queue
+      - new_use_case_preview
+      - bedrock_codegen
+      - cerebras_codegen
+      - gemini25pro
+      - claude_sonnet4
+      - allow_job_deletion
+      - none
+      type: string
     UserType:
       enum:
       - admin
       - public
       - end_user
       type: string
-    UserId:
-      format: uuid
+    Permission:
+      enum:
+      - labeler
+      - qa_labeler
+      - debug
+      - human_llm
+      - none
       type: string
     TeamId:
       format: uuid
@@ -97,28 +112,13 @@ components:
       required:
       - updates
       type: object
-    FeatureFlag:
-      enum:
-      - functional_test
-      - pdf_parsing
-      - boredm_construction_model
-      - generic_suspicious_queue
-      - new_use_case_preview
-      - bedrock_codegen
-      - cerebras_codegen
-      - gemini25pro
-      - claude_sonnet4
-      - allow_job_deletion
-      - none
-      type: string
-    Permission:
-      enum:
-      - labeler
-      - qa_labeler
-      - debug
-      - human_llm
-      - none
-      type: string
+    EnrichUserParams:
+      properties:
+        email:
+          type: string
+      required:
+      - email
+      type: object
     UserChangeset:
       properties:
         apollo_data: {}
