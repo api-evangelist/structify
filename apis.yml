@@ -519,6 +519,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Pricing
+  url: https://docs.structify.ai/concepts/api-overview
 - type: CapabilityMap
   url: capabilities/structify-capability-edges.yml
   name: Structify Business Capability Map
