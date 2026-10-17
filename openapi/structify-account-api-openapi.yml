@@ -279,9 +279,22 @@ paths:
       - Account
 components:
   schemas:
-    MembershipId:
-      format: uuid
-      type: string
+    RefreshSessionResponse:
+      properties:
+        expires_at:
+          type: string
+        refresh_token:
+          type: string
+        refresh_token_expires_at:
+          type: string
+        session_token:
+          type: string
+      required:
+      - session_token
+      - refresh_token
+      - expires_at
+      - refresh_token_expires_at
+      type: object
     SaveOnboardingAnswersRequest:
       properties:
         answers:
@@ -289,33 +302,21 @@ components:
       required:
       - answers
       type: object
-    ListApiKeysResponse:
+    JwtToApiTokenRequest:
       properties:
-        api_keys:
-          items:
-            $ref: '#/components/schemas/ApiKeyInfo'
-          type: array
-      required:
-      - api_keys
+        full_name:
+          type:
+          - string
+          - 'null'
+        invitation_token:
+          format: uuid
+          type:
+          - string
+          - 'null'
       type: object
-    TokenResponse:
-      properties:
-        permissions:
-          items:
-            $ref: '#/components/schemas/Permission'
-          type: array
-        refresh_token:
-          type: string
-        session_expires_at:
-          type: string
-        session_token:
-          type: string
-      required:
-      - permissions
-      - session_token
-      - refresh_token
-      - session_expires_at
-      type: object
+    ApiKeyId:
+      format: uuid
+      type: string
     FeatureFlag:
       enum:
       - functional_test
@@ -330,7 +331,74 @@ components:
       - allow_job_deletion
       - none
       type: string
-    ApiKeyId:
+    ListApiKeysResponse:
+      properties:
+        api_keys:
+          items:
+            $ref: '#/components/schemas/ApiKeyInfo'
+          type: array
+      required:
+      - api_keys
+      type: object
+    CreateApiKeyResponse:
+      properties:
+        api_key:
+          $ref: '#/components/schemas/ApiKeyInfo'
+        raw_key:
+          type: string
+      required:
+      - api_key
+      - raw_key
+      type: object
+    SurveySubmissionResponse:
+      properties:
+        message:
+          type: string
+        success:
+          type: boolean
+      required:
+      - success
+      - message
+      type: object
+    OnboardingAnswers:
+      properties:
+        company_name:
+          type:
+          - string
+          - 'null'
+        connected_connector_ids:
+          items:
+            type: string
+          type:
+          - array
+          - 'null'
+        full_name:
+          type:
+          - string
+          - 'null'
+        primary_goal:
+          type:
+          - string
+          - 'null'
+        recommended_template_id:
+          type:
+          - string
+          - 'null'
+        role:
+          type:
+          - string
+          - 'null'
+        systems_to_connect:
+          items:
+            type: string
+          type:
+          - array
+          - 'null'
+      type: object
+    MembershipId:
+      format: uuid
+      type: string
+    TeamId:
       format: uuid
       type: string
     UserInfoResponse:
@@ -431,26 +499,21 @@ components:
       required:
       - answers
       type: object
-    GetOnboardingAnswersResponse:
+    CreateApiKeyRequest:
       properties:
-        answers:
-          $ref: '#/components/schemas/OnboardingAnswers'
-      required:
-      - answers
+        expires_at:
+          format: date-time
+          type:
+          - string
+          - 'null'
+        membership_id:
+          allOf:
+          - $ref: '#/components/schemas/MembershipId'
+        name:
+          type:
+          - string
+          - 'null'
       type: object
-    CreateApiKeyResponse:
-      properties:
-        api_key:
-          $ref: '#/components/schemas/ApiKeyInfo'
-        raw_key:
-          type: string
-      required:
-      - api_key
-      - raw_key
-      type: object
-    UserId:
-      format: uuid
-      type: string
     ApiKeyInfo:
       properties:
         created_at:
@@ -484,64 +547,23 @@ components:
       - membership_id
       - created_at
       type: object
-    SurveySubmissionResponse:
+    TokenResponse:
       properties:
-        message:
-          type: string
-        success:
-          type: boolean
-      required:
-      - success
-      - message
-      type: object
-    RefreshSessionRequest:
-      properties:
+        permissions:
+          items:
+            $ref: '#/components/schemas/Permission'
+          type: array
         refresh_token:
+          type: string
+        session_expires_at:
           type: string
         session_token:
           type: string
       required:
+      - permissions
       - session_token
       - refresh_token
-      type: object
-    RefreshSessionResponse:
-      properties:
-        expires_at:
-          type: string
-        refresh_token:
-          type: string
-        refresh_token_expires_at:
-          type: string
-        session_token:
-          type: string
-      required:
-      - session_token
-      - refresh_token
-      - expires_at
-      - refresh_token_expires_at
-      type: object
-    TeamId:
-      format: uuid
-      type: string
-    Permission:
-      enum:
-      - labeler
-      - qa_labeler
-      - debug
-      - human_llm
-      - none
-      type: string
-    JwtToApiTokenRequest:
-      properties:
-        full_name:
-          type:
-          - string
-          - 'null'
-        invitation_token:
-          format: uuid
-          type:
-          - string
-          - 'null'
+      - session_expires_at
       type: object
     SurveySubmissionRequest:
       properties:
@@ -558,55 +580,33 @@ components:
       - public
       - end_user
       type: string
-    CreateApiKeyRequest:
+    RefreshSessionRequest:
       properties:
-        expires_at:
-          format: date-time
-          type:
-          - string
-          - 'null'
-        membership_id:
-          allOf:
-          - $ref: '#/components/schemas/MembershipId'
-        name:
-          type:
-          - string
-          - 'null'
+        refresh_token:
+          type: string
+        session_token:
+          type: string
+      required:
+      - session_token
+      - refresh_token
       type: object
-    OnboardingAnswers:
+    UserId:
+      format: uuid
+      type: string
+    Permission:
+      enum:
+      - labeler
+      - qa_labeler
+      - debug
+      - human_llm
+      - none
+      type: string
+    GetOnboardingAnswersResponse:
       properties:
-        company_name:
-          type:
-          - string
-          - 'null'
-        connected_connector_ids:
-          items:
-            type: string
-          type:
-          - array
-          - 'null'
-        full_name:
-          type:
-          - string
-          - 'null'
-        primary_goal:
-          type:
-          - string
-          - 'null'
-        recommended_template_id:
-          type:
-          - string
-          - 'null'
-        role:
-          type:
-          - string
-          - 'null'
-        systems_to_connect:
-          items:
-            type: string
-          type:
-          - array
-          - 'null'
+        answers:
+          $ref: '#/components/schemas/OnboardingAnswers'
+      required:
+      - answers
       type: object
   securitySchemes:
     api_key:

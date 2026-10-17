@@ -205,23 +205,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    SandboxProvider:
-      enum:
-      - modal
-      - daytona
-      type: string
-    UserSessionId:
-      format: uuid
-      type: string
-    ChatSessionId:
-      format: uuid
-      type: string
-    SandboxId:
-      format: uuid
-      type: string
-    WorkflowSessionNodeId:
-      format: uuid
-      type: string
     GetSandboxRequest:
       properties:
         modal_control_service_url_override:
@@ -230,52 +213,6 @@ components:
           - string
           - 'null'
       type: object
-    TeamId:
-      format: uuid
-      type: string
-    SandboxMetricsMemory:
-      properties:
-        available_mb:
-          format: double
-          type: number
-        percent:
-          format: double
-          type: number
-        total_mb:
-          format: double
-          type: number
-        used_mb:
-          format: double
-          type: number
-      required:
-      - used_mb
-      - total_mb
-      - percent
-      - available_mb
-      type: object
-    SandboxMetricsResponse:
-      properties:
-        cpu_percent:
-          format: double
-          type: number
-        memory:
-          $ref: '#/components/schemas/SandboxMetricsMemory'
-        process:
-          $ref: '#/components/schemas/SandboxMetricsProcess'
-        sandbox:
-          $ref: '#/components/schemas/SandboxMetricsSandbox'
-      required:
-      - cpu_percent
-      - memory
-      - process
-      - sandbox
-      type: object
-    SandboxStatus:
-      enum:
-      - alive
-      - paused
-      - terminated
-      type: string
     Sandbox:
       properties:
         api_url:
@@ -328,24 +265,6 @@ components:
       - updated_at
       - provider
       type: object
-    ExplorationRunId:
-      format: uuid
-      type: string
-    UpdateSandboxStatusRequest:
-      properties:
-        status:
-          type: string
-      required:
-      - status
-      type: object
-    ErrorResponse:
-      description: Standard error response
-      properties:
-        error:
-          type: string
-      required:
-      - error
-      type: object
     SandboxMetricsSandbox:
       properties:
         remaining_seconds:
@@ -366,6 +285,9 @@ components:
       - remaining_seconds
       - total_timeout_seconds
       type: object
+    ChatSessionId:
+      format: uuid
+      type: string
     SandboxMetricsProcess:
       properties:
         cpu_percent:
@@ -377,6 +299,84 @@ components:
       required:
       - memory_mb
       - cpu_percent
+      type: object
+    SandboxProvider:
+      enum:
+      - modal
+      - daytona
+      type: string
+    SandboxStatus:
+      enum:
+      - alive
+      - paused
+      - terminated
+      type: string
+    SandboxMetricsMemory:
+      properties:
+        available_mb:
+          format: double
+          type: number
+        percent:
+          format: double
+          type: number
+        total_mb:
+          format: double
+          type: number
+        used_mb:
+          format: double
+          type: number
+      required:
+      - used_mb
+      - total_mb
+      - percent
+      - available_mb
+      type: object
+    UpdateSandboxStatusRequest:
+      properties:
+        status:
+          type: string
+      required:
+      - status
+      type: object
+    ErrorResponse:
+      description: Standard error response
+      properties:
+        error:
+          type: string
+      required:
+      - error
+      type: object
+    TeamId:
+      format: uuid
+      type: string
+    SandboxId:
+      format: uuid
+      type: string
+    UserSessionId:
+      format: uuid
+      type: string
+    ExplorationRunId:
+      format: uuid
+      type: string
+    WorkflowSessionNodeId:
+      format: uuid
+      type: string
+    SandboxMetricsResponse:
+      properties:
+        cpu_percent:
+          format: double
+          type: number
+        memory:
+          $ref: '#/components/schemas/SandboxMetricsMemory'
+        process:
+          $ref: '#/components/schemas/SandboxMetricsProcess'
+        sandbox:
+          $ref: '#/components/schemas/SandboxMetricsSandbox'
+      required:
+      - cpu_percent
+      - memory
+      - process
+      - sandbox
       type: object
   securitySchemes:
     api_key:

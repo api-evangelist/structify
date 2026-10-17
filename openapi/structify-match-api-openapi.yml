@@ -94,15 +94,27 @@ paths:
       - Match
 components:
   schemas:
-    WorkflowSessionNodeId:
-      format: uuid
-      type: string
     JobId:
       format: uuid
       type: string
-    EntityId:
+    WorkflowSessionNodeId:
       format: uuid
       type: string
+    CreateMatchJobsResponse:
+      properties:
+        count:
+          description: Number of jobs created
+          minimum: 0
+          type: integer
+        job_ids:
+          description: IDs of the created match jobs
+          items:
+            $ref: '#/components/schemas/JobId'
+          type: array
+      required:
+      - job_ids
+      - count
+      type: object
     CreateMatchJobsRequest:
       properties:
         conditioning:
@@ -126,22 +138,10 @@ components:
       - target_table
       - conditioning
       type: object
-    CreateMatchJobsResponse:
-      properties:
-        count:
-          description: Number of jobs created
-          minimum: 0
-          type: integer
-        job_ids:
-          description: IDs of the created match jobs
-          items:
-            $ref: '#/components/schemas/JobId'
-          type: array
-      required:
-      - job_ids
-      - count
-      type: object
     MatchResultId:
+      format: uuid
+      type: string
+    EntityId:
       format: uuid
       type: string
     MatchResult:

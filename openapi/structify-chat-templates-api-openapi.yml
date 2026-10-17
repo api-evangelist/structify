@@ -73,23 +73,10 @@ components:
     UserId:
       format: uuid
       type: string
-    ChatSessionId:
+    ChatTemplateId:
       format: uuid
       type: string
-    TemplateQuestion:
-      properties:
-        options:
-          items:
-            type: string
-          type:
-          - array
-          - 'null'
-        prompt:
-          type: string
-      required:
-      - prompt
-      type: object
-    ChatTemplateId:
+    ChatSessionId:
       format: uuid
       type: string
     ChatTemplate:
@@ -136,6 +123,19 @@ components:
       - created_at
       - updated_at
       - questions
+      type: object
+    TemplateQuestion:
+      properties:
+        options:
+          items:
+            type: string
+          type:
+          - array
+          - 'null'
+        prompt:
+          type: string
+      required:
+      - prompt
       type: object
   securitySchemes:
     api_key:

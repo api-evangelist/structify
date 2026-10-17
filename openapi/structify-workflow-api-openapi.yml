@@ -132,25 +132,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    ChatSessionId:
-      format: uuid
-      type: string
-    WorkflowSessionId:
-      format: uuid
-      type: string
-    StopWorkflowRequest:
-      properties:
-        workflow_session_id:
-          $ref: '#/components/schemas/WorkflowSessionId'
-      required:
-      - workflow_session_id
-      type: object
-    WorkflowSessionNodeId:
-      format: uuid
-      type: string
-    WorkflowNodeLogId:
-      format: uuid
-      type: string
     RunWorkflowRequest:
       properties:
         chat_session_id:
@@ -164,6 +145,42 @@ components:
       required:
       - chat_session_id
       - use_node_cache
+      type: object
+    WorkflowSessionId:
+      format: uuid
+      type: string
+    ChatSessionId:
+      format: uuid
+      type: string
+    WorkflowNodeLogId:
+      format: uuid
+      type: string
+    WorkflowSessionNodeId:
+      format: uuid
+      type: string
+    ErrorResponse:
+      description: Standard error response
+      properties:
+        error:
+          type: string
+      required:
+      - error
+      type: object
+    GetNodeLogsResponse:
+      properties:
+        logs:
+          items:
+            $ref: '#/components/schemas/WorkflowNodeLog'
+          type: array
+      required:
+      - logs
+      type: object
+    StopWorkflowRequest:
+      properties:
+        workflow_session_id:
+          $ref: '#/components/schemas/WorkflowSessionId'
+      required:
+      - workflow_session_id
       type: object
     WorkflowNodeLog:
       properties:
@@ -184,23 +201,6 @@ components:
       - timestamp
       - is_stderr
       - content
-      type: object
-    ErrorResponse:
-      description: Standard error response
-      properties:
-        error:
-          type: string
-      required:
-      - error
-      type: object
-    GetNodeLogsResponse:
-      properties:
-        logs:
-          items:
-            $ref: '#/components/schemas/WorkflowNodeLog'
-          type: array
-      required:
-      - logs
       type: object
   securitySchemes:
     api_key:

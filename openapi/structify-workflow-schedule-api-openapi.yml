@@ -232,31 +232,6 @@ paths:
       x-summary-source: derived
 components:
   schemas:
-    GetWorkflowScheduleSessionsRequest:
-      properties:
-        limit:
-          format: int64
-          type: integer
-        offset:
-          format: int64
-          type: integer
-      type: object
-    ChatSessionId:
-      format: uuid
-      type: string
-    ChatMessageId:
-      format: uuid
-      type: string
-    WorkflowSessionId:
-      format: uuid
-      type: string
-    PauseWorkflowScheduleRequest:
-      properties:
-        paused:
-          type: boolean
-      required:
-      - paused
-      type: object
     WorkflowScheduleInfo:
       properties:
         chat_session_id:
@@ -309,6 +284,46 @@ components:
       - sessions
       - total_count
       type: object
+    ChatSessionId:
+      format: uuid
+      type: string
+    CreateWorkflowScheduleRequest:
+      properties:
+        cron_schedule:
+          type:
+          - string
+          - 'null'
+        git_commit_hash:
+          type:
+          - string
+          - 'null'
+        name:
+          type: string
+      required:
+      - name
+      type: object
+    ChatMessageId:
+      format: uuid
+      type: string
+    WorkflowSessionId:
+      format: uuid
+      type: string
+    GetWorkflowScheduleSessionsRequest:
+      properties:
+        limit:
+          format: int64
+          type: integer
+        offset:
+          format: int64
+          type: integer
+      type: object
+    ChatVisibility:
+      enum:
+      - private
+      - shared_with_team
+      - shared_with_team_view
+      - public
+      type: string
     WorkflowSession:
       properties:
         aborted:
@@ -358,27 +373,12 @@ components:
       - dag_ready
       - aborted
       type: object
-    ChatVisibility:
-      enum:
-      - private
-      - shared_with_team
-      - shared_with_team_view
-      - public
-      type: string
-    CreateWorkflowScheduleRequest:
+    PauseWorkflowScheduleRequest:
       properties:
-        cron_schedule:
-          type:
-          - string
-          - 'null'
-        git_commit_hash:
-          type:
-          - string
-          - 'null'
-        name:
-          type: string
+        paused:
+          type: boolean
       required:
-      - name
+      - paused
       type: object
     UpdateWorkflowScheduleRequest:
       properties:
