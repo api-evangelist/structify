@@ -16,3 +16,65 @@
   relationship: platform-app
   status: not-a-workflow
   arazzo: null
+- slug: structify-npm-registry
+  label: npm registry
+  partner: npm
+  partner_name: npm registry
+  category: official SDK (JavaScript/TypeScript)
+  type: register
+  channel: package-registry
+  evidence: https://www.npmjs.com/package/structifyai
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: npm registry (public registry JSON)
+    spec_file: null
+    language: JavaScript/TypeScript
+    packages:
+    - name: structifyai
+      version: 1.173.0
+      released: '2026-01-30'
+      released_field: modified
+      lapsed: false
+      page: https://www.npmjs.com/package/structifyai
+      repo_leg: github-org:structifyai
+      publisher_leg: email:structify.ai
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
+- slug: structify-pypi
+  label: PyPI
+  partner: pypi
+  partner_name: PyPI
+  category: official SDK (Python)
+  type: register
+  channel: package-registry
+  evidence: https://pypi.org/project/structifyai/
+  source: edge
+  relationship: distribution-channel
+  contract_reference:
+    register: PyPI (public registry JSON)
+    spec_file: null
+    language: Python
+    packages:
+    - name: structifyai
+      version: 1.183.0
+      released: '2026-02-11'
+      released_field: upload_time
+      lapsed: false
+      page: https://pypi.org/project/structifyai/
+      repo_leg: github-org:structifyai
+      publisher_leg: email:structify.ai
+      matched_by: domain
+    current: true
+    signal_note: 'an official package on the registry: distribution, not an integration; lapsed = no release in
+      24 months'
+    detected_by: sweep-official-sdks.py
+    detected: '2026-10-18'
+  status: not-a-workflow
+  arazzo: null
